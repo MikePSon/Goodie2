@@ -55,3 +55,6 @@ gem 'bootstrap-sass', '3.3.4.1'
 
 # Font-awesome: https://github.com/FortAwesome/font-awesome-sass
 gem 'font-awesome-sass', '4.3.2.1'
+
+# Cocoon for nested forms
+gem 'cocoon'
