@@ -43,3 +43,15 @@ group :development do
   gem 'spring'
 end
 
+#Mongo DB
+gem 'mongoid', '~> 5.1', '>= 5.1.3'
+gem 'bson_ext'
+
+# User Authentication
+gem 'devise'
+
+# Bootstrap 3: https://github.com/twbs/bootstrap-sass
+gem 'bootstrap-sass', '3.3.4.1'
+
+# Font-awesome: https://github.com/FortAwesome/font-awesome-sass
+gem 'font-awesome-sass', '4.3.2.1'
