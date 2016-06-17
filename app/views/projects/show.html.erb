@@ -6,6 +6,13 @@
 </p>
 
 <p>
+  <strong>Cycles:</strong><br>
+  <% @cycles.each do |thisCycle| %>
+  	<%= thisCycle.name %><br>
+  <% end %>
+</p>
+
+<p>
   <strong>Questions:</strong><br>
   <% @projectQuestions.each do |thisQ| %>
   	<%= thisQ.label %><br>

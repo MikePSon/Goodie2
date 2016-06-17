@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @cycles = Cycle.where(:project_id => @project.id)
     @projectQuestions = Question.where(:project_id => @project.id)
   end
 
@@ -72,7 +73,8 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(
         :name,
-        question_attributes: [ :label, :id, :_destroy ]
+        question_attributes: [ :label, :id, :_destroy ],
+        cycle_attributes: [ :name, :id, :_destroy ]
         )
     end
 end

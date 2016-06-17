@@ -3,6 +3,7 @@ class Cycle
   # Associations
   has_many :question
   accepts_nested_attributes_for :question, :reject_if => :all_blank, :allow_destroy => true
+  belongs_to :project
 
   # Data
   field :name, type: String

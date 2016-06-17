@@ -10,7 +10,9 @@ class CyclesController < ApplicationController
   # GET /cycles/1
   # GET /cycles/1.json
   def show
+    @project = @cycle.project
     @cycleQuestions = Question.where(:cycle_id => @cycle.id)
+    @projectQuestions = Question.where(:project_id => @project.id)
   end
 
   # GET /cycles/new
