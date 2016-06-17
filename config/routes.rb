@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :cycles
+  resources :projects
   devise_for :users
   root "pages#home"
   get "home", to: "pages#home", as: "home"

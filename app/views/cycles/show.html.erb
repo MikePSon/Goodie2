@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cycle.name %>
+</p>
+
+<p>
+  <strong>Cycle Questions:</strong><br>
+  <% @cycleQuestions.each do |thisQ| %>
+  	<%= thisQ.label %><br>
+  <% end %>
+</p>
+
+<p>
+  <strong>Project Questions:</strong><br>
+  <% @projectQuestions.each do |thisQ| %>
+  	<%= thisQ.label %><br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_cycle_path(@cycle) %> |
+<%= link_to 'Back', cycles_path %>

@@ -31,9 +31,13 @@ module Goodie2
 
     # Precompile Assets
     config.assets.precompile += %w( pages.js )
+    config.assets.precompile += %w( projects.js )
+    config.assets.precompile += %w( cycles.js )
     config.assets.precompile += %w( devise/*.js )
 
     config.assets.precompile += %w( pages.css )
+    config.assets.precompile += %w( projects.css )
+    config.assets.precompile += %w( cycles.css )
     config.assets.precompile += %w( devise/*.css )
   end
 end
