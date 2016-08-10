@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+	<strong>Project</strong>
+	<div><%= @request.project %></div>
+</p>
+
+<p>
+	<strong>Cycle</strong>
+	<div><%= @request.cycle %></div>
+</p>
+
+<p>
+	<strong>Amount Requested</strong>
+	<div><%= @request.amount_requested %></div>
+</p>
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>
