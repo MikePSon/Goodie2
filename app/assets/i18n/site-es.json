@@ -1,0 +1,87 @@
+{
+  "dashboard": {
+    "WELCOME": "Bienvenido a Angle"
+  },
+  "sidebar": {
+    "WELCOME": "Bienvenido",
+    "heading": {
+      "HEADER": "Navegacion principal",
+      "COMPONENTS": "Componentes",
+      "MORE": "Aun Mas"
+    },
+    "nav": {
+      "DASHBOARD": "Panel",
+      "PROJECTS": "Proyectos",
+      "CYCLES": "Ciclos",
+      "ORGANIZATION": "Organización",
+      "REQUESTS": "Aplicaciónes",
+      "VIEWALL": "Ver Todo",
+      "NEWCYCLE": "Nuevo Ciclo",
+      "WIDGETS": "Widgets",
+      "DOCUMENTATION": "Documentación",
+      "element": {
+        "ELEMENTS": "Elementos",
+        "BUTTON": "Boton",
+        "COLOR": "Colores",
+        "NOTIFICATION": "Notificaciones",
+        "CAROUSEL": "Carousel",
+        "SPINNER": "Indicadores",
+        "ANIMATION": "Animacion",
+        "DROPDOWN": "Desplegables",
+        "PANEL": "Paneles",
+        "PORTLET": "Portlet",
+        "GRID": "Grilla",
+        "GRID_MASONRY": "Grilla Masonry",
+        "TYPO": "Tipografia",
+        "FONT_ICON": "Iconos",
+        "WEATHER_ICON": "Iconos de clima"
+      },
+      "form": {
+        "FORM": "Formularios",
+        "STANDARD": "Standard",
+        "EXTENDED": "Extendido",
+        "VALIDATION": "Validacion"
+      },
+      "subtitles": {
+        "PROJECT": "Todos sus proyectos"
+      },
+      "pagetitle": {
+        "PROJECT": "Proyectos"
+      },
+      "chart": {
+        "CHART": "Graficos",
+        "FLOT": "Flot",
+        "RADIAL": "Radiales"
+      },
+      "table": {
+        "TABLE": "Tablas",
+        "STANDARD": "Standard",
+        "EXTENDED": "Extendida",
+        "DATATABLE": "Datatable"
+      },
+      "map": {
+        "MAP": "Maps",
+        "GOOGLE": "Mapa Google",
+        "VECTOR": "Mapa Vectorial"
+      },
+      "extra": {
+        "EXTRA": "Extras",
+        "MAILBOX": "Email",
+        "TIMELINE": "Linea de Tiempo",
+        "CALENDAR": "Calendario",
+        "INVOICE": "Factura",
+        "SEARCH": "Busqueda",
+        "TODO": "Lista Todo",
+        "PROFILE": "Perfil"
+      },
+      "pages": {
+        "PAGES": "Paginas",
+        "LOGIN": "Ingreso",
+        "REGISTER": "Registro",
+        "RECOVER": "Recuperar contraseña",
+        "LOCK": "Bloqueo",
+        "STARTER": "Plantilla en blanco"
+      }
+    }
+  }
+}

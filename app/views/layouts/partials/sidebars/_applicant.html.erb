@@ -1,0 +1,27 @@
+<!-- START Sidebar (left)-->
+<div class="aside-inner">
+   <nav class="sidebar" data-sidebar-anyclick-close="">
+      <!-- START sidebar nav-->
+      <ul class="nav">
+         <!-- START user info-->
+         <%= render partial: "layouts/partials/userinfo" %>
+         <!-- END user info-->
+         <!-- Iterates over all sidebar items-->
+         <li class="nav-heading">
+            <span>Applicant</span>
+         </li>
+
+         <li class="<%= 'active' if controller?('requests') %>">
+            <%= link_to requests_path do %>
+               <em class="icon-note"></em>
+               <span data-localize="sidebar.nav.REQUESTS">Requests</span>
+            <% end %>
+         </li>
+         <!-- End Sidebar Item -->
+
+
+      </ul>
+      <!-- END sidebar nav-->
+   </nav>
+</div>
+<!-- END Sidebar (left)-->

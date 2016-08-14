@@ -28,18 +28,51 @@ module Goodie2
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    # turn off warnings triggered by friendly_id
+    I18n.enforce_available_locales = false
+
+
+    # setup bower components folder for lookup
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    
+    # autoload lib path
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
+    # fonts
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    # images
+    config.assets.precompile << /\.(?:png|jpg)$/
+    # precompile vendor assets
+    config.assets.precompile += %w( angle.js )
 
     # Precompile Assets
+    config.assets.precompile += %w( base.js )
     config.assets.precompile += %w( pages.js )
     config.assets.precompile += %w( projects.js )
     config.assets.precompile += %w( cycles.js )
     config.assets.precompile += %w( requests.js )
+    config.assets.precompile += %w( organizations.js ) 
     config.assets.precompile += %w( devise/*.js )
 
+    config.assets.precompile += %w( base.css )
     config.assets.precompile += %w( pages.css )
     config.assets.precompile += %w( projects.css )
     config.assets.precompile += %w( cycles.css )
     config.assets.precompile += %w( requests.css )
+    config.assets.precompile += %w( organizations.css ) 
     config.assets.precompile += %w( devise/*.css )
+
+
+    # precompile themes
+    config.assets.precompile += ['angle/themes/theme-a.css',
+                                 'angle/themes/theme-b.css',
+                                 'angle/themes/theme-c.css',
+                                 'angle/themes/theme-d.css',
+                                 'angle/themes/theme-e.css',
+                                 'angle/themes/theme-f.css',
+                                 'angle/themes/theme-g.css',
+                                 'angle/themes/theme-h.css'
+                                ]
   end
 end
