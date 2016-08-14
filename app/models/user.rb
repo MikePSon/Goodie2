@@ -36,6 +36,13 @@ class User
 
   ## Data
   field :admin,             type: Boolean, default: false
+  field :goodie_support,    type: Boolean, default: false
+  field :program_admin,     type: Boolean, default: false
+  field :program_manager,   type: Boolean, default: false
+  field :applicant,         type: Boolean, default: false
+
+
+
   field :first_name,        type: String, default: ""
   field :last_name,         type: String, default: ""
 

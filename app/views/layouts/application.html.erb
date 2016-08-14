@@ -33,7 +33,19 @@
       <!-- sidebar-->
       <% if user_signed_in? %>
          <aside class="aside">
-            <%= render partial: "layouts/partials/sidebars/base" %>   
+            <% if current_user.admin? %>
+               <%= render partial: "layouts/partials/sidebars/base" %> 
+            <% elsif current_user.goodie_support? %>
+               <%= render partial: "layouts/partials/sidebars/goodie_support" %> 
+            <% elsif current_user.program_admin? %>
+               <%= render partial: "layouts/partials/sidebars/program_admin" %> 
+            <% elsif current_user.program_manager? %>
+               <%= render partial: "layouts/partials/sidebars/program_manager" %> 
+            <% elsif current_user.applicant? %>
+               <%= render partial: "layouts/partials/sidebars/applicant" %> 
+            <% else %>
+               <%= render partial: "layouts/partials/sidebars/base" %> 
+            <% end %>
          </aside>
       <% end %>
       <!-- offsidebar-->
