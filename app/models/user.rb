@@ -38,4 +38,6 @@ class User
   field :admin,             type: Boolean, default: false
   field :first_name,        type: String, default: ""
   field :last_name,         type: String, default: ""
+
+  field :job_title,        type: String, default: ""
 end

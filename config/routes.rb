@@ -20,4 +20,16 @@ Rails.application.routes.draw do
     get "posts/dashboard", to: "posts#dashboard", as: "posts_dashboard"
     resources :posts
   end
+
+  # api routes
+  get '/api/documentation' => 'api#documentation'
+  get '/api/datatable' => 'api#datatable'
+  get '/api/jqgrid' => 'api#jqgrid'
+  get '/api/jqgridtree' => 'api#jqgridtree'
+  get '/assets/i18n/:locale' => 'api#i18n'
+  post '/api/xeditable' => 'api#xeditable'
+  get '/api/xeditable-groups' => 'api#xeditablegroups'
+
+  #Lock Screen
+  get 'pages/lock'
 end

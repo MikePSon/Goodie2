@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require bootstrap 
+// Turbo links removed for Cocoon, registering multiple clicks
+// require turbolinks
+//= require bootstrap
+//= require analytics
 //= require common
+//= require ./angle

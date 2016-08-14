@@ -1,0 +1,12 @@
+<div class="content-heading">
+   <% if @primaryAction %>
+
+   <div class="pull-right">
+      <%= link_to @primaryActionText.html_safe, @primaryActionPath, :class => "btn btn-primary btn-sm" %>
+   </div>
+
+   <% end %>
+   <!-- END Language list    -->
+   <span data-localize="pagetitle.<%= @thisPage %>"><%= @title %></span>
+   <small data-localize="subtitles.<%= @thisPage %>"><%= @subtitle %></small>
+</div>
