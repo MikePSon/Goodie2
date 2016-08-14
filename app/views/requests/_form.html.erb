@@ -1,0 +1,85 @@
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.text_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :organization_id %><br>
+    <%= f.text_field :organization_id, value: current_user.id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :project %><br>
+
+    <% projectOptions = options_from_collection_for_select(Project.all, :id, :name) %>
+    <%= f.select(:project_id, {class: 'form-control'}, id: "select2-1", required: "true") do %>
+      <%= options_for_select(projectOptions) %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cycle %><br>
+    <% cycleOptions = options_from_collection_for_select(Cycle.all, :id, :name) %>
+    <%= f.select(:cycle_id, {class: 'form-control'}, id: "select2-1", required: "true") do %>
+      <%= options_for_select(cycleOptions) %>
+    <% end %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :summary %><br>
+    <%= f.text_field :summary %>
+  </div>
+
+  <div class="field">
+    <%= f.label :amount_requested %><br>
+    <%= f.text_field :amount_requested %>
+  </div>
+
+  <div class="field">
+    <%= f.label :other_funding %><br>
+    <%= f.check_box :other_funding %>
+  </div>
+
+  <div class="field">
+    <%= f.label :total_budget %><br>
+    <%= f.text_field :total_budget %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :begin_date %><br>
+    <%= f.date_select :begin_date %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div> 
+
+  <div class="actions" style="margin-top:15px">
+    <%= f.submit 'Submit', :class => 'btn btn-success btn-sm' %>
+  </div>
+<% end %>

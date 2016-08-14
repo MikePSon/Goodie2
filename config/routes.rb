@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :organizations
+  resources :requests
   resources :cycles
   resources :projects
   devise_for :users

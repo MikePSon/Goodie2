@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+	<strong>Project</strong>
+	<div><%= @request.project.name %></div>
+</p>
+
+<p>
+	<strong>Cycle</strong>
+	<div><%= @request.cycle.name %></div>
+</p>
+
+<br><hr><br>
+
+<p>
+	<strong>Amount Requested</strong>
+	<div><%= @request.amount_requested %></div>
+</p>
+
+<p>
+	<strong>Title</strong>
+	<div><%= @request.title %></div>
+</p>
+
+<p>
+	<strong>other_funding</strong>
+	<div><%= @request.other_funding %></div>
+</p>
+
+<p>
+	<strong>total_budget</strong>
+	<div><%= @request.total_budget %></div>
+</p>
+
+<p>
+	<strong>description</strong>
+	<div><%= @request.description %></div>
+</p>
+
+<p>
+	<strong>summary</strong>
+	<div><%= @request.summary %></div>
+</p>
+
+<p>
+	<strong>begin_date</strong>
+	<div><%= @request.begin_date %></div>
+</p>
+
+<p>
+	<strong>end_date</strong>
+	<div><%= @request.end_date %></div>
+</p>
+
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>

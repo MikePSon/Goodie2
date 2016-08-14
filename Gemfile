@@ -58,3 +58,6 @@ gem 'font-awesome-sass', '4.3.2.1'
 
 # Cocoon for nested forms
 gem 'cocoon'
+
+#Sadstory for Date Selects
+gem 'mongoid-sadstory'
