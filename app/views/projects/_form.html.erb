@@ -16,20 +16,11 @@
     <%= f.text_field :name %>
   </div>
 
-  <div class="" id="question">
-    <fieldset>
-      <h4>
-        Questions
-      </h4>
-      <%= f.fields_for :question do |question| %>
-        <%= render 'question_fields', f: question %>
-      <% end %>
-            
-      <div class="links">
-        <%= link_to_add_association 'Add Questions', f, :question, :class => "btn btn-default" %>
-      </div>
-    </fieldset>
+  <div class="field">
+    <%= f.label :organization %><br>
+    <%= f.text_field :organization_id %>
   </div>
+
 
   <div class="" id="cycle" style="margin-top:15px;">
     <fieldset>

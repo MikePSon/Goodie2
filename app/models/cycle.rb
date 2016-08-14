@@ -5,6 +5,7 @@ class Cycle
   accepts_nested_attributes_for :question, :reject_if => :all_blank, :allow_destroy => true
   belongs_to :project
   has_many :request
+  belongs_to :organization
 
   # Data
   field :name, type: String
