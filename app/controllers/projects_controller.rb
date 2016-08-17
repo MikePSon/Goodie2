@@ -73,6 +73,7 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(
         :name,
+        :organization_id,
         question_attributes: [ :label, :id, :_destroy ],
         cycle_attributes: [ :name, :id, :_destroy ]
         )

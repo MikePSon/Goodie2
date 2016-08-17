@@ -24,7 +24,8 @@ class ApplicationController < ActionController::Base
       :admin,
       :password,
       :password_confirmation,
-      :current_password)
+      :current_password,
+      :organization_id)
     }
   end
 

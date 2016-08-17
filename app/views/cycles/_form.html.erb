@@ -1,3 +1,5 @@
+<% @myOrgID = Organization.where(:_id => current_user.organization_id).first.id %>
+
 <%= form_for(@cycle) do |f| %>
   <% if @cycle.errors.any? %>
     <div id="error_explanation">
@@ -11,14 +13,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, :class => "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :organization %><br>
-    <%= f.text_field :organization_id %>
+
+
+
+
+      <div class="field">
+        <% @projectOptions = options_from_collection_for_select(Project.where(:organization_id => @myOrgID), :id, :name) %>
+        
+        <%= f.select(:project_id, {class: 'form-control'}, id: "select2-1") do %>
+          <%= options_for_select(@projectOptions) %>
+        <% end %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :organization %><br>
+
+        <%= f.text_field :organization_id, :class => "form-control", :value => @myOrgID %>
+      </div>
+    </div>
   </div>
 
   <div class="actions" style="margin-top:15px;">

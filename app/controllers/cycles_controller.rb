@@ -11,8 +11,6 @@ class CyclesController < ApplicationController
   # GET /cycles/1.json
   def show
     @project = @cycle.project
-    @cycleQuestions = Question.where(:cycle_id => @cycle.id)
-    @projectQuestions = Question.where(:project_id => @project.id)
   end
 
   # GET /cycles/new
@@ -74,6 +72,8 @@ class CyclesController < ApplicationController
     def cycle_params
       params.require(:cycle).permit(
         :name,
+        :organization_id,
+        :project_id,
         question_attributes: [ :label, :id, :_destroy ]
         )
     end
