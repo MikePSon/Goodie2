@@ -75,10 +75,21 @@
       </div>
     </div>
 
+    <% if params[:action] == "edit" %>
+      <div class="form-group">
+        <% f.label :organization %>
+        
+        <% orgOptions = options_from_collection_for_select(Organization.all, :id, :name) %>
+        <%= f.select(:organization_id, {class: 'form-control'}) do %>
+          <%= options_for_select(orgOptions) %>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="row">
       <div class="col-sm-6">
         <%= f.submit "Submit", class: "btn btn-primary" %>
       </div>
     </div>
 
-    <% end %>
+<% end %>

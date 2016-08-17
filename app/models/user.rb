@@ -35,6 +35,8 @@ class User
   # field :locked_at,       type: Time
 
   ## Data
+  belongs_to :organization
+  
   field :admin,             type: Boolean, default: false
   field :goodie_support,    type: Boolean, default: false
   field :program_admin,     type: Boolean, default: false

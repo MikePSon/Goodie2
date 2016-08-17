@@ -10,12 +10,21 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, :class => "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :user %><br>
+        <!-- Possibly buggy -->
+        <%= f.text_field :user_ids, :class => "form-control", :value => current_user.id %>
+      </div>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  
+  <div class="actions" style="margin-top:15px">
+    <%= f.submit :class => 'btn btn-success' %>
   </div>
 <% end %>
