@@ -5,6 +5,16 @@ module ApplicationHelper
     end
   end
 
+  def cycle_statuses
+    [
+        ['Planned', '1', 'Planned'],
+        ['Open', '2', 'Open'],
+        ['Closed', '3', 'Closed'],
+        ['Re-Opened', '4', 'Re-Opened'],
+        ['Paused', '5', 'Paused']
+    ]
+  end
+
   def us_states
   	[
     	['Alabama', 'AL'],

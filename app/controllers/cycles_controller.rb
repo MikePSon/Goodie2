@@ -74,7 +74,7 @@ class CyclesController < ApplicationController
         :name,
         :organization_id,
         :project_id,
-        question_attributes: [ :label, :id, :_destroy ]
-        )
+        :status,
+        question_attributes: [ :label, :id, :_destroy ])
     end
 end
