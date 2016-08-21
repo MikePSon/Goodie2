@@ -8,5 +8,8 @@ class Cycle
   belongs_to :organization
 
   # Data
-  field :name, type: String
+  field :name, 					type: String
+  field :status,				type: String
+  
+
 end

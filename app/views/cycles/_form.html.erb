@@ -21,7 +21,12 @@
       </div>
 
 
-
+      <div class="field">
+        
+        <%= f.select(:status, {class: 'form-control'}, id: "select2-1") do %>
+          <%= options_for_select(cycle_statuses) %>
+        <% end %>
+      </div>
 
 
       <div class="field">

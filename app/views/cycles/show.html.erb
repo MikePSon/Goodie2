@@ -16,6 +16,12 @@
   <%= @cycle.organization.name %>
 </p>
 
+<p>
+  <strong>Status:</strong>
+  <%= @cycle.status %>
+</p>
+
 
 <%= link_to 'Edit', edit_cycle_path(@cycle) %> |
-<%= link_to 'Back', cycles_path %>
+<%= link_to 'Back', cycles_path %> | 
+<%= render 'alter_status' %>
