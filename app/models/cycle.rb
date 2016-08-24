@@ -10,6 +10,8 @@ class Cycle
   # Data
   field :name, 					type: String
   field :status,				type: String
+  field :open,          type: DateTime
+  field :close,          type: DateTime
   
 
 end

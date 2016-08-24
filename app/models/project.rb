@@ -9,5 +9,6 @@ class Project
   has_many :request
   
   # Data
-  field :name, type: String
+  field :name,              type: String
+  field :mission,           type: String
 end

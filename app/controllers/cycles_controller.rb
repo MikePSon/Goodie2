@@ -41,6 +41,9 @@ class CyclesController < ApplicationController
   # PATCH/PUT /cycles/1
   # PATCH/PUT /cycles/1.json
   def update
+    openDate = @cycle.open
+    outputString = "OPEN1: " + openDate.to_s
+
     respond_to do |format|
       if @cycle.update(cycle_params)
         format.html { redirect_to @cycle, notice: 'Cycle was successfully updated.' }
@@ -75,6 +78,8 @@ class CyclesController < ApplicationController
         :organization_id,
         :project_id,
         :status,
+        :open,
+        :close,
         question_attributes: [ :label, :id, :_destroy ])
     end
 end

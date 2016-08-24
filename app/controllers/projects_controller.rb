@@ -4,23 +4,41 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    myOrg = current_user.organization_id
+    @projects = Project.where(:organization_id => myOrg)
+    @thisPage = "PROJECT"
+    @title = "Projects"
+    @subtitle = "All of your projects"
+    @primaryAction = true
+    @primaryActionText = "New Project!"
+    @primaryActionPath = new_project_path
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
     @cycles = Cycle.where(:project_id => @project.id)
-    @projectQuestions = Question.where(:project_id => @project.id)
+    @thisPage = "PROJECT"
+    @title = @project.name
+    @subtitle = @project.mission
+    @primaryAction = true
+    @primaryActionText = "Edit Project <i class='icon-settings' style='margin-left:3px;'></i>"
+    @primaryActionPath = edit_project_path(@project)
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+    @thisPage = "PROJECT"
+    @title = "New Project"
+    @subtitle = "Create a new grant project here!"
   end
 
   # GET /projects/1/edit
   def edit
+    @thisPage = "PROJECT"
+    @title = "Edit: " + @project.name
+    @subtitle = @project.mission
   end
 
   # POST /projects
@@ -74,6 +92,7 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(
         :name,
         :organization_id,
+        :mission,
         question_attributes: [ :label, :id, :_destroy ],
         cycle_attributes: [ :name, :id, :_destroy ]
         )
