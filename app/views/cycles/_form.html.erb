@@ -38,8 +38,20 @@
       <div class="field">
         <div class="form-group mb">
            <%= f.label :open %>
-          <div id="datetimepicker1" class="input-group date">
-             <%= f.datetime_select :open, :class => "form-control m-b" %>
+          <div id="openTimePicker" class="input-group date">
+             <%= f.text_field :open, :class => "form-control m-b", :placeholder => "dd/mm/yyyy hh:mm" %>
+             <span class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+             </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="form-group mb">
+           <%= f.label :close %>
+          <div id="closeTimePicker" class="input-group date">
+             <%= f.text_field :close, :class => "form-control m-b", :placeholder => "dd/mm/yyyy hh:mm" %>
              <span class="input-group-addon">
                 <span class="fa fa-calendar"></span>
              </span>
@@ -59,39 +71,10 @@
   </div>
 
   <div class="actions" style="margin-top:15px;">
-    <%= f.submit 'Create Cycle', :class => 'btn btn-success' %>
+    <% if params[:action] != "edit" %>
+      <%= f.submit 'Create Cycle', :class => 'btn btn-success' %>
+    <% else %>
+      <%= f.submit 'Edit Cycle', :class => 'btn btn-success' %>
+    <% end %>
   </div>
 <% end %>
-
-<script>
-// Forms Demo
-// ----------------------------------- 
-
-
-(function(window, document, $, undefined){
-
-  $(function(){
-
-    // DATETIMEPICKER
-    // ----------------------------------- 
-
-    if($.fn.datetimepicker) {
-
-      $('#datetimepicker1').datetimepicker({
-        icons: {
-            time: 'fa fa-clock-o',
-            date: 'fa fa-calendar',
-            up: 'fa fa-chevron-up',
-            down: 'fa fa-chevron-down',
-            previous: 'fa fa-chevron-left',
-            next: 'fa fa-chevron-right',
-            today: 'fa fa-crosshairs',
-            clear: 'fa fa-trash'
-          }
-      });
-    }
-
-  });
-
-})(window, document, window.jQuery);
-</script>

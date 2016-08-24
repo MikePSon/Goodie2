@@ -44,3 +44,34 @@
 //= require cropper/dist/cropper.js
 // --- Select2
 //= require select2/dist/js/select2
+
+
+
+// --- Datepicjer styles
+(function(window, document, $, undefined){
+
+  $(function(){
+
+    // DATETIMEPICKER
+    // ----------------------------------- 
+
+    if($.fn.datetimepicker) {
+
+      $('#openTimePicker, #closeTimePicker').datetimepicker({
+      	format: "DD/MM/YYYY HH:mm",
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-crosshairs',
+            clear: 'fa fa-trash'
+          }
+      });
+    }
+
+  });
+
+})(window, document, window.jQuery);
