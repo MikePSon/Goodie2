@@ -64,3 +64,6 @@ gem 'mongoid-sadstory'
 
 # Bower, for Angle Theme
 gem "bower-rails", "~> 0.9.2"
+
+# Wheneverise for CronJobs
+gem 'whenever', require: false
