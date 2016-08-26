@@ -19,7 +19,6 @@ set :output, "/Users/mikepatterson/GitHub/goodie2/log/cron_log.log"
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.minutes do
-	rake "cycles:open_cycles", :environment => "development"
-	#runner "Cycle:open_cycles", :environment => "development"
+every 15.minutes do
+	rake "cycles:open_close_cycles", :environment => "development"
 end

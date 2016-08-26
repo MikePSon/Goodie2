@@ -14,18 +14,22 @@ class Cycle
   field :close,         type: DateTime
 
 
-  def self.open_cycles
+  def self.open_close_cycles
     date_time_now = Time.now
+
     Cycle.all.each do |thisCycle|
       thisOpenDate = thisCycle.open
+      thisCloseDate = thisCycle.close
       thisStatus = thisCycle.status
-      if (thisOpenDate < date_time_now) && (thisStatus == 'Planned')
-        Rails.logger.debug '***************************Open has passed***************************'
+
+      if (thisStatus == 'Planned') && (thisOpenDate < date_time_now)
         thisCycle.update(status:"Open")
-      elsif thisStatus == 'Planned'
-        Rails.logger.debug '***************************Cycle is planned***************************'
-      else
-        Rails.logger.debug '***************************Open is coming***************************'
+        #FIXME: Need better debug message
+        Rails.logger.debug "Cycle has been opened"
+      elsif (thisStatus == 'Open') && (thisCloseDate < date_time_now)
+        thisCycle.update(status:"Closed")
+        #FIXME: Need better debug message
+        Rails.logger.debug "Cycle has been closed"
       end
     end
   end
