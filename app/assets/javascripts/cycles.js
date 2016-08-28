@@ -58,7 +58,7 @@
     if($.fn.datetimepicker) {
 
       $('#openTimePicker, #closeTimePicker').datetimepicker({
-      	format: "DD/MM/YYYY HH:mm",
+      	timeFormat: "DD/MM/YYYY HH:mm A",
         icons: {
             time: 'fa fa-clock-o',
             date: 'fa fa-calendar',
