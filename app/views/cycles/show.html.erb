@@ -23,12 +23,12 @@
 
 <p>
   <strong>Open:</strong>
-  <%= @cycle.open %>
+  <%= @cycle.open.strftime("%e %b %Y %l:%M %p").to_s %>
 </p>
 
 <p>
   <strong>Close:</strong>
-  <%= @cycle.close %>
+  <%= @cycle.close.strftime("%e %b %Y %l:%M %p").to_s %>
 </p>
 
 

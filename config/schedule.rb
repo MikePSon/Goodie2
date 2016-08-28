@@ -1,3 +1,4 @@
+require 'logger'
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -5,7 +6,11 @@
 
 # Example:
 #
-set :output, "/Users/mikepatterson/GitHub/goodie2/log/cron_log.log"
+
+set :output, {
+	:standard => 'log/cron_log.log'
+}
+require File.expand_path(File.dirname(__FILE__) + "/environment")
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -20,5 +25,7 @@ set :output, "/Users/mikepatterson/GitHub/goodie2/log/cron_log.log"
 # Learn more: http://github.com/javan/whenever
 
 every 15.minutes do
-	rake "cycles:open_close_cycles", :environment => "development"
+	Rails.logger = Logger.new(STDOUT)
+	Rails.logger.debug "===== OPEN/CLOSE RUNNING ====="
+	rake "cycles:open_close_cycles", :environment => "development", :output => "log/cron_log.log"
 end

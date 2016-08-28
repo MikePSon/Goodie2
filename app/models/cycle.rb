@@ -15,6 +15,7 @@ class Cycle
 
 
   def self.open_close_cycles
+    Rails.logger.debug "*********** OPEN/CLOSE CYCLES AUTO RUN ***********"
     date_time_now = Time.now
 
     Cycle.all.each do |thisCycle|
