@@ -1,0 +1,21 @@
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% display.each do |display| %>
+      <tr>
+        <td><%= display.name %></td>
+        <td><%= link_to 'Show', display %></td>
+        <td>
+          <% thisProject = Project.where(:id => display.project_id).first.id %>
+          <%= link_to 'Apply', new_request_path(:cycle_id => display.id, :project_id => thisProject) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

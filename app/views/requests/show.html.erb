@@ -1,60 +1,62 @@
+<%= render 'layouts/partials/page_header' %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
-	<strong>Project</strong>
-	<div><%= @request.project.name %></div>
+	<strong>Applicant: </strong><%= @applicant.first_name %> <%= @applicant.last_name %>
 </p>
 
 <p>
-	<strong>Cycle</strong>
-	<div><%= @request.cycle.name %></div>
+	<strong>Organization: </strong><%= @organization.name %>
 </p>
 
 <p>
-	<strong>Organization</strong>
-	<div><%= @request.organization_id %></div>
+	<strong>Project: </strong><%= @project.name %>
 </p>
+
+<p>
+	<strong>Cycle: </strong><%= @cycle.name %>
+</p>
+<p>
+	<strong>Status: </strong><%= @request.status %>
+</p>
+
 
 <br><hr><br>
 
 <p>
-	<strong>Amount Requested</strong>
-	<div><%= @request.amount_requested %></div>
+	<strong>Amount Requested: </strong><%= @request.amount_requested %>
 </p>
 
 <p>
-	<strong>Title</strong>
-	<div><%= @request.title %></div>
+	<strong>Title: </strong><%= @request.title %>
 </p>
 
 <p>
-	<strong>other_funding</strong>
-	<div><%= @request.other_funding %></div>
+	<strong>other_funding: </strong><%= @request.other_funding %>
 </p>
 
 <p>
-	<strong>total_budget</strong>
-	<div><%= @request.total_budget %></div>
+	<strong>total_budget: </strong><%= @request.total_budget %>
 </p>
 
 <p>
-	<strong>description</strong>
-	<div><%= @request.description %></div>
+	<strong>description: </strong><%= @request.description %>
 </p>
 
 <p>
-	<strong>summary</strong>
-	<div><%= @request.summary %></div>
+	<strong>summary: </strong><%= @request.summary %>
 </p>
 
 <p>
-	<strong>begin_date</strong>
-	<div><%= @request.begin_date %></div>
+	<strong>begin_date: </strong><%= @request.begin_date %>
 </p>
 
 <p>
-	<strong>end_date</strong>
-	<div><%= @request.end_date %></div>
+	<strong>end_date: </strong><%= @request.end_date %>
+</p>
+<p>
+	<strong>app_complete: </strong><%= @request.app_complete %>
 </p>
 
 

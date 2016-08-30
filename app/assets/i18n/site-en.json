@@ -2,6 +2,13 @@
   "dashboard": {
     "WELCOME": "Welcome to Angle!"
   },
+  "request": {
+    "index": {
+      "APPLICANTS": "Applicants",
+      "OPENCYCLES": "Open Cycles",
+      "REQUESTS": "Requests"
+    }  
+  },
   "sidebar": {
     "WELCOME": "Welcome",
     "heading": {

@@ -36,6 +36,7 @@ class User
 
   ## Data
   belongs_to :organization
+  has_many :request
   
   field :admin,             type: Boolean, default: false
   field :goodie_support,    type: Boolean, default: false
