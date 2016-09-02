@@ -1,31 +1,27 @@
 <%= render 'layouts/partials/page_header' %>
 
-<div class="row">
-  <div class="col-xs-12 col-sm-7">
-    <% if @openCycles.count > 0 %>
-      <span class="text-success">Open Cycles</span>
-      <%= render 'cycle_table', :display => @openCycles %>
-    <% end %>
-
-  </div>
-  <div class="col-xs-12 col-sm-5">
-    <div class="row">
-      <div class="col-xs-12">
-        <%= render 'your_request_stats' %>
+<% if !@current_user.applicant? %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-7">
+      <% if @openCycles.count > 0 %>
+        <span class="text-success">Open Cycles</span>
+        <%= render 'cycle_table', :display => @openCycles %>
+      <% elsif @plannedCycles.count > 0 %>
+        <span class="text-success">Upcoming Cycles</span>
+        <%= render 'cycle_table', :display => @plannedCycles %>
+      <% end %>
+  
+    </div>
+    <div class="col-xs-12 col-sm-5">
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render 'your_request_stats' %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  
+  <h1>Listing Requests</h1>
+  <%= render 'request_table', :display => @requests %>
+<% end %>
 
-
-
-
-
-
-
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Requests</h1>
-<strong class="text-warning"><%= current_user.id %></strong>
-<strong class="text-warning"><%= @yourRequests.count %></strong>
-<%= render 'request_table', :display => @yourRequests %>

@@ -38,16 +38,16 @@
 //= require jquery-validation/dist/jquery.validate
 //--- Steps
 //= require jquery.steps/build/jquery.steps
-// --- ColorPicker
-//= require mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js
-// --- Cropper
-//= require cropper/dist/cropper.js
 // --- Select2
 //= require select2/dist/js/select2
+//--- Sparklines
+//= require sparkline/index
+//--- Morris
+//= require raphael/raphael
+//= require morris.js/morris
 
 
-
-// --- Datepicjer styles
+// --- Datepicker styles
 (function(window, document, $, undefined){
 
   $(function(){
@@ -75,3 +75,22 @@
   });
 
 })(window, document, window.jQuery);
+
+// --- Bullshti Morris Chart
+
+var donutdata = [
+  {label: "Created", value: 12},
+  {label: "Submitted",value: 30},
+  {label: "Incomplete", value: 45},
+  {label: "Under Review", value: 5},
+  {label: "Closed", value: 2},
+];
+// ----------------------------------- 
+if( document.getElementById('status-donut') )
+  new Morris.Donut({
+    element: 'status-donut',
+    data: donutdata,
+    colors: [ '#5d9cec', '#27c24c', '#f05050', '#ff902b', '#000' ],
+    resize: true
+  });
+

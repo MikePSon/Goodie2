@@ -2,6 +2,9 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>
+        Date
+      </th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -10,10 +13,19 @@
     <% display.each do |display| %>
       <tr>
         <td><%= display.name %></td>
+        <td>
+          <% if display.status == "Open" %>
+            <%= display.close.strftime("%e %b %Y %l:%M %p").to_s %>
+          <% elsif display.status == "Planned" %>
+            <%= display.open.strftime("%e %b %Y %l:%M %p").to_s %>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', display %></td>
         <td>
           <% thisProject = Project.where(:id => display.project_id).first.id %>
-          <%= link_to 'Apply', new_request_path(:cycle_id => display.id, :project_id => thisProject) %>
+          <% if display.status == "Open" %>
+            <%= link_to 'Apply', new_request_path(:cycle_id => display.id, :project_id => thisProject) %>
+          <% end %>
         </td>
       </tr>
     <% end %>

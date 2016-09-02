@@ -5,14 +5,16 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @yourStartedRequests = Request.where(:user_id => current_user.id).where(:status => ["Created", "In Progress"])
-    @yourRequests = Request.where(:user_id => current_user.id)
+    @orgCycles = Cycle.where(:organization_id => current_user.organization_id)
+    @yourStartedRequests = Request.where(:user_id => current_user.id.to_s).where(:status => "Created")
+    #@yourRequests = Request.all
+    @yourRequests = Request.where(:user_id => current_user.id.to_s)
 
     @totalApplicants = User.where(:organization_id => current_user.organization_id).where(:applicant => true).count
     @openCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Open")
-    @totalRequests = Request.where(:user_id => current_user.id).count
+    @plannedCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Planned")
 
-    @orgCycles = Cycle.where(:organization_id => current_user.organization_id)
+    
 
 
 
@@ -46,8 +48,13 @@ class RequestsController < ApplicationController
     end
 
     @primaryAction = true
-    @primaryActionText = "Edit!"
+    @primaryActionText = "Review"
     @primaryActionPath = edit_request_path(@request)
+    
+    if @request.status == "Submitted"
+      #@rejectAction = true
+    end
+
   end
 
   # GET /requests/new

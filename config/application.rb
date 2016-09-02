@@ -31,6 +31,8 @@ module Goodie2
     # turn off warnings triggered by friendly_id
     I18n.enforce_available_locales = false
 
+    config.time_zone = 'Eastern Time (US & Canada)'
+
 
     # setup bower components folder for lookup
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')

@@ -8,6 +8,7 @@ class Cycle
   belongs_to :organization
 
   # Data
+  field :admin_note,    type: String
   field :name, 					type: String
   field :status,				type: String
   field :open,          type: DateTime

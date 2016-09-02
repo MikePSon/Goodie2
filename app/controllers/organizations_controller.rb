@@ -4,7 +4,17 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = Organization.all
+    if current_user.admin?
+      thisPage = "ORGANIZATION"
+      @title = "All Organizations"
+      @subtitle = "All information"
+      @organizations = Organization.all
+    elsif current_user.program_admin?
+      thisPage = "ORGANIZATION"
+      @title = "Your Organization"
+      @subtitle = "Your organizations information"
+      @organizations = Organization.where(:id => current_user.organization_id.to_s).first
+    end
   end
 
   # GET /organizations/1

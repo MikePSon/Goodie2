@@ -1,4 +1,4 @@
-<%= render 'layouts/partials/page_header' %>
+<%= render 'status_change_header' %>
 
 <p id="notice"><%= notice %></p>
 
@@ -49,12 +49,17 @@
 </p>
 
 <p>
-	<strong>begin_date: </strong><%= @request.begin_date %>
+	<strong>begin_date: </strong><%= @request.begin_date.strftime("%e %b %Y %l:%M %p").to_s %>
 </p>
 
 <p>
-	<strong>end_date: </strong><%= @request.end_date %>
+	<strong>end_date: </strong><%= @request.end_date.strftime("%e %b %Y %l:%M %p").to_s %>
 </p>
+
+<p>
+	<strong>submitted_date: </strong><%= @request.submitted_date.strftime("%e %b %Y %l:%M %p").to_s %>
+</p>
+
 <p>
 	<strong>app_complete: </strong><%= @request.app_complete %>
 </p>

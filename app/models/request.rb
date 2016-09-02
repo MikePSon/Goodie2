@@ -19,14 +19,39 @@ class Request
   field :end_date,                type: Date
   field :app_complete,            type: Boolean
 
+  field :submitted_date,          type: DateTime
+
   # Validate Submitted Status
   before_save :check_submitted
 
-  protected
-  def check_submitted
-    if self.app_complete?
-      self.status = "Submitted"
+
+  def self.close_incomplete_apps
+    # May need refactoring...
+    Cycle.where(:status => "Closed").each do |thisCycle|
+      all_created_requests = Request.where(:cycle_id => thisCycle.id.to_s).where(:status => "Created")
+      all_created_requests.each do |thisCreated|
+        thisCreated.update(status:"Incomplete")
+      end
     end
   end
+
+  def self.review_complete_apps
+    # May need refactoring...
+    Cycle.where(:status => "Closed").each do |thisCycle|
+      all_created_requests = Request.where(:cycle_id => thisCycle.id.to_s).where(:status => "Submitted")
+      all_created_requests.each do |thisCreated|
+        thisCreated.update(status:"Under Review")
+      end
+    end
+  end
+
+  protected
+  def check_submitted
+    if self.app_complete? && self.status == "Submitted"
+      self.status = "Submitted"
+      self.submitted_date = DateTime.now.in_time_zone
+    end
+  end
+
 
 end
