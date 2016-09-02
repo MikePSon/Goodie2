@@ -38,16 +38,16 @@
 //= require jquery-validation/dist/jquery.validate
 //--- Steps
 //= require jquery.steps/build/jquery.steps
-// --- ColorPicker
-//= require mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js
-// --- Cropper
-//= require cropper/dist/cropper.js
 // --- Select2
 //= require select2/dist/js/select2
+//--- Sparklines
+//= require sparkline/index
+//--- Morris
+//= require raphael/raphael
+//= require morris.js/morris
 
 
-
-// --- Datepicjer styles
+// --- Datepicker styles
 (function(window, document, $, undefined){
 
   $(function(){

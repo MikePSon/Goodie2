@@ -1,0 +1,27 @@
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <td>Request</td>
+      <td>Status</td>
+      <td>Cycle</td>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% display.each do |display| %>
+      <tr>
+        <td><%= display.title %></td>
+        <td><%= display.status %></td>
+        <td><%= display.cycle.name %></td>
+        <td><%= link_to 'Show', display %></td>
+        <td>
+          <% if display.status == "Created" %>
+            <%= link_to 'Edit', edit_request_path(display) %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Destroy', display, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

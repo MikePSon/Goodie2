@@ -1,25 +1,27 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/partials/page_header' %>
 
-<h1>Listing Requests</h1>
+<% if !@current_user.applicant? %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-7">
+      <% if @openCycles.count > 0 %>
+        <span class="text-success">Open Cycles</span>
+        <%= render 'cycle_table', :display => @openCycles %>
+      <% elsif @plannedCycles.count > 0 %>
+        <span class="text-success">Upcoming Cycles</span>
+        <%= render 'cycle_table', :display => @plannedCycles %>
+      <% end %>
+  
+    </div>
+    <div class="col-xs-12 col-sm-5">
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render 'your_request_stats' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <h1>Listing Requests</h1>
+  <%= render 'request_table', :display => @requests %>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @requests.each do |request| %>
-      <tr>
-        <td><%= link_to 'Show', request %></td>
-        <td><%= link_to 'Edit', edit_request_path(request) %></td>
-        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Request', new_request_path %>

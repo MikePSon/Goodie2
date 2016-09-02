@@ -1,24 +1,96 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :get_relations, only: [:show]
 
   # GET /requests
   # GET /requests.json
   def index
+    @orgCycles = Cycle.where(:organization_id => current_user.organization_id)
+    @yourStartedRequests = Request.where(:user_id => current_user.id.to_s).where(:status => "Created")
+    #@yourRequests = Request.all
+    @yourRequests = Request.where(:user_id => current_user.id.to_s)
+
+    @totalApplicants = User.where(:organization_id => current_user.organization_id).where(:applicant => true).count
+    @openCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Open")
+    @plannedCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Planned")
+
+    
+
+
+
+    @thisPage = "REQUEST"
+    @title = "Your Requests"
+    @subtitle = "All of your requests"
+
+    if @yourRequests.count == 0
+      @primaryAction = true
+      @primaryActionText = "New Request!"
+      @primaryActionPath = new_request_path
+    end
+
+
     @requests = Request.all
   end
 
   # GET /requests/1
   # GET /requests/1.json
   def show
+    @thisPage = "REQUEST"
+    if @request.title != ""
+      @title = @request.title.to_s
+    else
+      @title = "Your Request"
+    end
+    if @request.summary != ""
+      @subtitle = @request.summary.to_s
+    else
+      @subtitle = "Edit this request, make it awesome"
+    end
+
+    @primaryAction = true
+    @primaryActionText = "Review"
+    @primaryActionPath = edit_request_path(@request)
+    
+    if @request.status == "Submitted"
+      #@rejectAction = true
+    end
+
   end
 
   # GET /requests/new
   def new
     @request = Request.new
+
+    @primaryAction = true
+    @primaryActionText = "Back"
+    @primaryActionPath = requests_path
+
+    @thisPage = "REQUEST"
+    @title = "New request"
+    @subtitle = "Get started on a new project!"
+
+    if params[:cycle_id]
+      @cycleID = params[:cycle_id]
+    end
+    if params[:project_id]
+      @projectID = params[:project_id]
+    end
   end
 
   # GET /requests/1/edit
   def edit
+    @thisPage = "REQUEST"
+    if @request.title != ""
+      @title = "Edit: " + @request.title.to_s
+    else
+      @title = "Your Request"
+    end
+    if @request.summary != ""
+      @subtitle = @request.summary.to_s
+    else
+      @subtitle = "Edit this request, make it awesome"
+    end
+
   end
 
   # POST /requests
@@ -71,6 +143,13 @@ class RequestsController < ApplicationController
     def request_params
       #To whoever fixes this, I know it's not ideal, but I'm hacking...
       params.require(:request).permit!
+    end
+
+    def get_relations
+      @organization = Organization.where(:id => @request.organization_id).first
+      @applicant = User.where(:id => @request.user_id).first
+      @project = Project.where(:id => @request.project_id).first
+      @cycle = Cycle.where(:id => @request.cycle_id).first
     end
 
 end

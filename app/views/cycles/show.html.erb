@@ -1,37 +1,195 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/partials/page_header' %>
 
-<p>
-  <strong>Project:</strong>
-  <%= @project.name %>
-</p>
+<div class="row">
+   <div class="col-lg-8">
+      <!-- Main panel-->
+      <div class="panel b">
+         <div class="panel-heading">
+            <div class="pull-right mt">
+               <div class="label label-<%= status_color(@cycle.status) %>"><%= @cycle.status %></div>
+            </div>
+            <h4 class="mv">
+               <span><%= @cycle.name %></span>
+            </h4>
+         </div>
+         <div class="panel-body bb bt">
+            <a href="#" class="inline">
+               <img src="<%= image_path('angle/user/05.jpg') %>" alt="program admin" class="img-circle thumb48" />
+            </a>
+            <a href="#" class="inline">
+               <img src="<%= image_path('angle/user/06.jpg') %>" alt="program manager" class="img-circle thumb24" />
+            </a>
+            <a href="#" class="inline">
+               <img src="<%= image_path('angle/user/07.jpg') %>" alt="program manager" class="img-circle thumb24" />
+            </a>
+            <a href="#" class="inline">
+               <img src="<%= image_path('angle/user/08.jpg') %>" alt="program manager" class="img-circle thumb24" />
+            </a>
+            <a href="#" class="inline">
+               <img src="<%= image_path('angle/user/09.jpg') %>" alt="program manager" class="img-circle thumb24" />
+            </a>
+            <div class="pull-right mt">
+               <button type="button" class="btn btn-default">Add Member</button>
+            </div>
+         </div>
+         <div class="panel-body">
+            <h4>Project Description</h4>
+            <%= @cycle.admin_note %>
+            <!--<p class="text-right">
+               <button type="button" class="btn btn-default">View all documents</button>
+            </p>-->
+         </div>
+         <div class="panel-body">
+            <!--<p>
+               <small class="pull-left">Submissions over time</small>
+               <div data-sparkline="" data-type="line" data-height="100" data-width="100%" data-line-width="3" data-line-color="#23b7e5" data-chart-range-min="0" data-spot-color="#888" data-min-spot-color="#23b7e5" data-max-spot-color="#23b7e5"
+               data-fill-color="#e5f2fa" data-highlight-line-color="#fff" data-spot-radius="5" values="2,4,5,6,10,7,8,5,7,7,11,8,6,9,11,9,13,14,12,16" data-resize="true" class="sparkline text-center"></div>
+            </p>-->
+         </div>
+         <!--<div class="panel-body">
+            <div class="row text-center">
+               <div class="col-xs-4">
+                  <div class="inline">
+                     <div data-sparkline="" values="20,80" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#23b7e5&quot;]" class="sparkline"></div>
+                  </div>
+                  <p class="mt-lg">Created</p>
+               </div>
+               <div class="col-xs-4">
+                  <div class="inline">
+                     <div data-sparkline="" values="60,40" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#27c24c&quot;]" class="sparkline"></div>
+                  </div>
+                  <p class="mt-lg">Commits</p>
+               </div>
+               <div class="col-xs-4">
+                  <div class="inline">
+                     <div data-sparkline="" values="90,10" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#ff902b&quot;]" class="sparkline"></div>
+                  </div>
+                  <p class="mt-lg">Files</p>
+               </div>
+            </div>
+         </div>-->
+      </div>
+      <!-- End Main panel-->
 
-<p>
-  <strong>Name:</strong>
-  <%= @cycle.name %>
-</p>
+      <!-- Team messages-->
+      <div class="panel b">
+         <div class="panel-heading">
+            <div class="pull-right label label-success"><%= @submittedRequests.count %> Submitted</div>
+            <div class="panel-title">Recent Requests</div>
+         </div>
+         <!-- START list group-->
+         <div data-height="180" data-scrollable="" class="list-group">
+            <% @recentRequests.each do |thisReq| %>
+            <!-- START list group item-->
+               <%= link_to request_path(thisReq), :class => "list-group-item" do %>
+                  <div class="media-box">
+                     <div class="pull-left">
+                        <img src="<%= image_path('angle/user/02.jpg') %>" alt="Image" class="media-box-object img-circle thumb32"    />
+                     </div>
+                     <div class="media-box-body clearfix">
+                        <small class="pull-right"><%= thisReq.submitted_date.try(:strftime,"%e %b %Y %l:%M %p") %></small>
+                        <strong class="media-box-heading text-primary">
+                           <span class="circle circle-<%= app_status_indicator(thisReq.status) %> circle-lg text-left"></span>
+                              <% thisReqUser = User.where(:id => thisReq.user_id.to_s).first %>
+                              <%= thisReqUser.first_name %> <%= thisReqUser.last_name %>
+                        </strong>
+                        <p class="mb-sm">
+                           <small><strong>$<%= thisReq.amount_requested %></strong> <%= thisReq.summary %></small>
+                        </p>
+                     </div>
+                  </div>
+               <!-- END list group item-->
+               <% end %>
+            <% end %>
+         </div>
+         <!-- END list group-->
+         <!-- START panel footer-->
+         <div class="panel-footer clearfix">
+            <div class="input-group">
+               <input type="text" placeholder="Type message .." class="form-control input-sm" />
+               <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-paperclip"></i>
+                  </button>
+               </span>
+            </div>
+         </div>
+         <!-- END panel-footer-->
+      </div>
+      <!-- End Team messages-->
+   </div>
+   <div class="col-lg-4">
+      <!-- Aside panel-->
+      <div class="panel b">
+         <div class="panel-body bb">
+            <div class="clearfix">
+               <div class="pull-left">
+                  <%= render 'alter_status', :@cycle => @cycle %>
+               </div>
+               <div class="pull-right">
+                <%= link_to 'Delete', @cycle, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-xs" %>
+               </div>
+            </div>
+         </div>
+         <div class="panel-body bb">
+            <div class="table-grid table-grid-align-middle mv">
+               <span>Status Breakdown</span>
+               <%= content_tag :div, "", id: "status_donut" %> 
+            </div>
+         </div>
+         <!--<div class="panel-body"></div>-->
+         <table class="table bb">
+            <tbody>
+               <tr>
+                  <td>
+                     <strong>Open date</strong>
+                  </td>
+                  <td><%= @cycle.open.strftime("%e %b %Y %l:%M %p").to_s %></td>
+               </tr>
+               <tr>
+                  <td>
+                     <strong>Close date</strong>
+                  </td>
+                  <td><%= @cycle.close.strftime("%e %b %Y %l:%M %p").to_s %></td>
+               </tr>
+               <tr>
+                  <td>
+                     <strong>Total Applications</strong>
+                  </td>
+                  <td><%= Request.where(:cycle_id => @cycle.id.to_s).count %></td>
+               </tr>
+            </tbody>
+         </table>
+         <p class="text-right">
+          <%= link_to 'View Project', project_path(@cycle.project), :class => "btn btn-link" %>
+         </p>
+      </div>
+      <!-- end Aside panel-->
+   </div>
+</div>
 
-
-<p>
-  <strong>Organization:</strong>
-  <%= @cycle.organization.name %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @cycle.status %>
-</p>
-
-<p>
-  <strong>Open:</strong>
-  <%= @cycle.open.strftime("%e %b %Y %l:%M %p").to_s %>
-</p>
-
-<p>
-  <strong>Close:</strong>
-  <%= @cycle.close.strftime("%e %b %Y %l:%M %p").to_s %>
-</p>
-
-
-<%= link_to 'Edit', edit_cycle_path(@cycle) %> |
-<%= link_to 'Back', cycles_path %> | 
-<%= render 'alter_status' %>
+<script>
+<% if @cycle.status == "Open" %>
+   var donutData = [
+      {label: "Created", value: <%= @createdRequests.count %>},
+      {label: "Submitted",value: <%= @submittedRequests.count %>}
+   ];
+<% elsif @cycle.status == "Closed" %>
+   var donutData = [
+      {label: "Submitted",value: <%= @submittedRequests.count %>},
+      {label: "Incomplete", value: <%= @incompleteRequests.count %>},
+      {label: "Under Review", value: <%= @underReviewRequests.count %>},
+      {label: "Closed", value: <%= @closedRequests.count %>},
+      {label: "Awarded", value: <%= @awardedRequests.count %>},
+      {label: "Payment", value: <%= @paymentRequests.count %>},
+      {label: "Complete", value: <%= @projectCompleteRequests.count %>}
+   ];
+<% end %>
+$(document).ready(function(){
+   new Morris.Donut({
+      element: 'status_donut',
+      data: donutData,
+      colors: [ '#5d9cec', '#27c24c', '#f05050', '#ff902b', '#000' ],
+      resize: true
+   });
+})
+</script>

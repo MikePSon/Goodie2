@@ -5,12 +5,47 @@ class CyclesController < ApplicationController
   # GET /cycles.json
   def index
     @cycles = Cycle.all
+    @thisPage = "CYCLES"
+    @title = "Your Cycles"
+    @subtitle = "All of your Cycles"
+
+    @primaryAction = true
+    @primaryActionText = "New cycle!"
+    @primaryActionPath = new_cycle_path
   end
 
   # GET /cycles/1
   # GET /cycles/1.json
   def show
     @project = @cycle.project
+    @allRequests = Request.where(:cycle_id => @cycle.id.to_s)
+    @createdRequests = @allRequests.where(:status => "Created")
+    @submittedRequests = @allRequests.where(:status => "Submitted")
+    @incompleteRequests = @allRequests.where(:status => "Incomplete")
+    @reopenedRequests = @allRequests.where(:status => "Re-Opened")
+    @underReviewRequests = @allRequests.where(:status => "Under Review")
+    @closedRequests = @allRequests.where(:status => "Closed")
+    @awardedRequests = @allRequests.where(:status => "Awarded")
+    @paymentRequests = @allRequests.where(:status => "Payment")
+    @projectCompleteRequests = @allRequests.where(:status => "Project Complete")
+
+    @statusCounts = 
+
+    @thisPage = "CYCLES"
+    @title = @cycle.name
+    @subtitle = @cycle.project.name
+
+    if @cycle.status == "Open"
+      @created_incomplete = @createdRequests
+    else
+      @created_incomplete = @incompleteRequests
+    end
+
+    #Need to figure out DateTime Math
+    @recentRequests = Request.where(:cycle_id => @cycle.id.to_s).where(submitted_date: (DateTime.now - 48.hours)..DateTime.now)
+
+
+
   end
 
   # GET /cycles/new
@@ -77,6 +112,7 @@ class CyclesController < ApplicationController
         :status,
         :open,
         :close,
+        :admin_note,
         question_attributes: [ :label, :id, :_destroy ])
     end
 end

@@ -15,6 +15,21 @@ module ApplicationHelper
     ]
   end
 
+  def request_statuses
+    [
+        ['Created','1', 'Created'],
+        ['In Progress','2', 'In Progress'],
+        ['Submitted','3', 'Submitted'],
+        ['Incomplete','4', 'Incomplete'],
+        ['Re-Opened','5', 'Re-Opened'],
+        ['Under Review','6', 'Under Review'],
+        ['Closed','7', 'Closed'],
+        ['Awarded','8', 'Awarded'],
+        ['Payment','9', 'Payment'],
+        ['Project Complete','10', 'Project Complete']
+    ]
+  end
+
   def us_states
   	[
     	['Alabama', 'AL'],

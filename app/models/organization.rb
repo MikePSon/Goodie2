@@ -7,6 +7,6 @@ class Organization
   has_many :cycle
 
   # Data
-  field :name, type: String
+  field :name, 			type: String
 
 end

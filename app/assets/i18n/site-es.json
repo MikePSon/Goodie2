@@ -2,6 +2,13 @@
   "dashboard": {
     "WELCOME": "Bienvenido a Angle"
   },
+  "request": {
+    "index": {
+      "APPLICANTS": "Solicitantes",
+      "OPENCYCLES": "Ciclos abiertos",
+      "REQUESTS": "Aplicaciónes"
+    }  
+  },
   "sidebar": {
     "WELCOME": "Bienvenido",
     "heading": {

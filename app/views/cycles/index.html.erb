@@ -1,30 +1,76 @@
+<%= render 'layouts/partials/page_header' %>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Cycles</h1>
-
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th colspan="4">Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cycles.each do |cycle| %>
-      <tr>
-        <td><%= cycle.name %></td>
-        <td><%= cycle.status %></td>
-        <td><%= link_to 'Show', cycle %></td>
-        <td><%= link_to 'Edit', edit_cycle_path(cycle) %></td>
-        <td><%= link_to 'Destroy', cycle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= render 'alter_status', :@cycle => cycle %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Cycle', new_cycle_path %>
+<div class="row">
+  <% @cycles.each do |cycle| %>
+  <div class="col-lg-4 col-md-6">
+    <div class="panel b">
+       <div class="panel-heading">
+          <div class="pull-right">
+             <div class="label label-<%= status_color(cycle.status) %>"><%= cycle.status %></div>
+          </div>
+          <h4 class="m0"><%= cycle.name %></h4>
+          <small class="text-muted"><%= cycle.project.name %></small>
+       </div>
+       <div class="panel-body">
+          <!--<div class="table-grid table-grid-align-middle">
+             <div class="col">
+                <div class="visible-xs visible-sm text-bold text-muted text-right">22%</div>
+                <div data-toggle="tooltip" data-title="Health">
+                   <div class="progress progress-xs m0">
+                      <div style="width:22%" class="progress-bar progress-bar-warning">22%</div>
+                   </div>
+                </div>
+             </div>
+             <div class="col wd-xxs text-right hidden-xs hidden-sm">
+                <div class="text-bold text-muted">22%</div>
+             </div>
+          </div>-->
+       </div>
+       <table class="table">
+          <tbody>
+             <tr>
+                <td>
+                   <strong>Open Date</strong>
+                </td>
+                <td>
+                  <%= cycle.open.strftime("%e %b %Y %l:%M %p").to_s %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                   <strong>Close Date</strong>
+                </td>
+                <td>
+                  <%= cycle.close.strftime("%e %b %Y %l:%M %p").to_s %>
+                </td>
+             </tr>
+             <tr>
+                <td>
+                   <strong>Applications</strong>
+                </td>
+                <td>
+                  <%= Request.where(:cycle_id => cycle.id.to_s).count %>
+                </td>
+             </tr>
+             <tr>
+                <td>
+                   <strong>Total Amt. Requested</strong>
+                </td>
+                <td>
+                   <%=Request.where(:cycle_id => cycle.id.to_s).sum(:amount_requested) %>
+                </td>
+             </tr>
+          </tbody>
+       </table>
+       <div class="panel-footer text-center">
+          <%= render 'alter_status', :@cycle => cycle %>
+          <%= link_to 'Show', cycle, :class => "btn btn-xs btn-default" %>
+          <%= link_to 'Edit', edit_cycle_path(cycle), :class => "btn btn-xs btn-default" %>
+          <%= link_to 'Destroy', cycle, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-default" %>
+       </div>
+    </div>
+  </div>
+  <% end %>
+</div>
