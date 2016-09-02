@@ -1,18 +1,5 @@
 <%= render 'layouts/partials/page_header' %>
 
-<% if @cycle.status == "Planned" %>
-Planned
-<% elsif @cycle.status == "Open" %>
-Open
-<% elsif @cycle.status == "Closed" %>
-Closed
-<% elsif @cycle.status == "Re-Opened" %>
-Re-Opened
-<% else  %>
-Paused
-<% end %>
-
-
 <div class="row">
    <div class="col-lg-8">
       <!-- Main panel-->
@@ -53,11 +40,11 @@ Paused
             </p>-->
          </div>
          <div class="panel-body">
-            <p>
+            <!--<p>
                <small class="pull-left">Submissions over time</small>
                <div data-sparkline="" data-type="line" data-height="100" data-width="100%" data-line-width="3" data-line-color="#23b7e5" data-chart-range-min="0" data-spot-color="#888" data-min-spot-color="#23b7e5" data-max-spot-color="#23b7e5"
                data-fill-color="#e5f2fa" data-highlight-line-color="#fff" data-spot-radius="5" values="2,4,5,6,10,7,8,5,7,7,11,8,6,9,11,9,13,14,12,16" data-resize="true" class="sparkline text-center"></div>
-            </p>
+            </p>-->
          </div>
          <!--<div class="panel-body">
             <div class="row text-center">
@@ -84,18 +71,9 @@ Paused
       </div>
       <!-- End Main panel-->
 
-
       <!-- Team messages-->
       <div class="panel b">
          <div class="panel-heading">
-            <% if @cycle.status == "Open" %>
-               <div class="pull-right label label-info">
-               <%= @created_incomplete.count %> Created
-            <% else %>
-               <div class="pull-right label label-danger">
-               <%= @created_incomplete.count %> Incomplete
-            <% end %>
-            </div>
             <div class="pull-right label label-success"><%= @submittedRequests.count %> Submitted</div>
             <div class="panel-title">Recent Requests</div>
          </div>
@@ -155,7 +133,7 @@ Paused
          <div class="panel-body bb">
             <div class="table-grid table-grid-align-middle mv">
                <span>Status Breakdown</span>
-               <div id="status-donut"></div>
+               <%= content_tag :div, "", id: "status_donut" %> 
             </div>
          </div>
          <!--<div class="panel-body"></div>-->
@@ -188,3 +166,30 @@ Paused
       <!-- end Aside panel-->
    </div>
 </div>
+
+<script>
+<% if @cycle.status == "Open" %>
+   var donutData = [
+      {label: "Created", value: <%= @createdRequests.count %>},
+      {label: "Submitted",value: <%= @submittedRequests.count %>}
+   ];
+<% elsif @cycle.status == "Closed" %>
+   var donutData = [
+      {label: "Submitted",value: <%= @submittedRequests.count %>},
+      {label: "Incomplete", value: <%= @incompleteRequests.count %>},
+      {label: "Under Review", value: <%= @underReviewRequests.count %>},
+      {label: "Closed", value: <%= @closedRequests.count %>},
+      {label: "Awarded", value: <%= @awardedRequests.count %>},
+      {label: "Payment", value: <%= @paymentRequests.count %>},
+      {label: "Complete", value: <%= @projectCompleteRequests.count %>}
+   ];
+<% end %>
+$(document).ready(function(){
+   new Morris.Donut({
+      element: 'status_donut',
+      data: donutData,
+      colors: [ '#5d9cec', '#27c24c', '#f05050', '#ff902b', '#000' ],
+      resize: true
+   });
+})
+</script>

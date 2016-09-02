@@ -19,15 +19,17 @@ class CyclesController < ApplicationController
   def show
     @project = @cycle.project
     @allRequests = Request.where(:cycle_id => @cycle.id.to_s)
-    @createdRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Created")
-    @submittedRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Submitted")
-    @incompleteRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Incomplete")
-    @reopenedRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Re-Opened")
-    @underReviewRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Under Review")
-    @closedRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Closed")
-    @awardedRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Awarded")
-    @paymentRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Payment")
-    @projectCompleteRequests = Request.where(:cycle_id => @cycle.id.to_s).where(:status => "Project Complete")
+    @createdRequests = @allRequests.where(:status => "Created")
+    @submittedRequests = @allRequests.where(:status => "Submitted")
+    @incompleteRequests = @allRequests.where(:status => "Incomplete")
+    @reopenedRequests = @allRequests.where(:status => "Re-Opened")
+    @underReviewRequests = @allRequests.where(:status => "Under Review")
+    @closedRequests = @allRequests.where(:status => "Closed")
+    @awardedRequests = @allRequests.where(:status => "Awarded")
+    @paymentRequests = @allRequests.where(:status => "Payment")
+    @projectCompleteRequests = @allRequests.where(:status => "Project Complete")
+
+    @statusCounts = 
 
     @thisPage = "CYCLES"
     @title = @cycle.name
