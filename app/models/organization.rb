@@ -8,5 +8,6 @@ class Organization
 
   # Data
   field :name, 			type: String
+  field :motto,			type: String
 
 end

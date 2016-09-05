@@ -1,5 +1,6 @@
 class CyclesController < ApplicationController
   before_action :set_cycle, only: [:show, :edit, :update, :destroy]
+  before_filter :require_noapplicant!
 
   # GET /cycles
   # GET /cycles.json

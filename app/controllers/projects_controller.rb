@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_filter :require_noapplicant!
 
   # GET /projects
   # GET /projects.json
@@ -9,9 +10,12 @@ class ProjectsController < ApplicationController
     @thisPage = "PROJECT"
     @title = "Projects"
     @subtitle = "All of your projects"
-    @primaryAction = true
-    @primaryActionText = "New Project!"
-    @primaryActionPath = new_project_path
+
+    if current_user.program_admin || current_user.admin
+      @primaryAction = true
+      @primaryActionText = "New Project!"
+      @primaryActionPath = new_project_path
+    end
   end
 
   # GET /projects/1
@@ -21,9 +25,12 @@ class ProjectsController < ApplicationController
     @thisPage = "PROJECT"
     @title = @project.name
     @subtitle = @project.mission
-    @primaryAction = true
-    @primaryActionText = "Edit Project <i class='icon-settings' style='margin-left:3px;'></i>"
-    @primaryActionPath = edit_project_path(@project)
+
+    if current_user.program_admin || current_user.admin
+      @primaryAction = true
+      @primaryActionText = "Edit Project <i class='icon-settings' style='margin-left:3px;'></i>"
+      @primaryActionPath = edit_project_path(@project)
+    end
   end
 
   # GET /projects/new
@@ -93,6 +100,8 @@ class ProjectsController < ApplicationController
         :name,
         :organization_id,
         :mission,
+        :repeat_type,
+        :cycle_budget,
         question_attributes: [ :label, :id, :_destroy ],
         cycle_attributes: [ :name, :id, :_destroy ]
         )

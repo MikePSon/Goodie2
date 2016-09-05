@@ -21,6 +21,14 @@
       <%= f.label :mission %> <%= mission_helper %><br>
       <%= f.text_field :mission, :class => "form-control" %>
     </div>
+    <div class="field">
+      <%= f.label :cycle_budget %> <%= cycle_budget_helper %><br>
+      <%= f.number_field :cycle_budget, :class => "form-control", :step =>'any' %>
+    </div>
+    <div class="field">
+      <%= f.label :repeat_type %> <%= repeat_helper %>
+          <%= f.select(:repeat_type, project_repeat, {}, { :class => 'form-control' }) %>
+    </div>
   
     <div class="field hidden" style="">
       <%= f.label :organization %><br>

@@ -14,6 +14,18 @@ class ApplicationController < ActionController::Base
       :first_name,
       :last_name,
       :admin,
+      :program_admin,
+      :program_manager,
+      :applicant,
+      :address_1,
+      :address_2,
+      :city,
+      :state,
+      :zip,
+      :phone,
+      :office_open,
+      :office_close,
+      :job_title,
       :password,
       :password_confirmation)
     }
@@ -22,6 +34,18 @@ class ApplicationController < ActionController::Base
       :first_name,
       :last_name,
       :admin,
+      :program_admin,
+      :program_manager,
+      :applicant,
+      :address_1,
+      :address_2,
+      :city,
+      :state,
+      :zip,
+      :phone,
+      :office_open,
+      :office_close,
+      :job_title,
       :password,
       :password_confirmation,
       :current_password,
@@ -30,8 +54,19 @@ class ApplicationController < ActionController::Base
   end
 
   # Redirects on successful sign in
+  # Redirects on successful sign in
   def after_sign_in_path_for(resource)
-    inside_path
+    if resource.admin?
+      inside_path
+    elsif resource.program_admin?
+      programadmin_dash_path
+    elsif resource.program_manager?
+      programmanager_dash_path
+    elsif resource.applicant?
+      applicant_dash_path
+    else
+      inside_path
+    end
   end
 
   # Only permits admin users
@@ -43,5 +78,28 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :require_admin!
+
+  def require_programadmin!
+    authenticate_user!
+  end
+  helper_method :require_programadmin!
+
+  def require_programmanager!
+    authenticate_user!
+  end
+  helper_method :require_programmanager!
+
+  def require_applicant!
+    authenticate_user!
+  end
+  helper_method :require_applicant!
+
+  def require_noapplicant!
+    authenticate_user!
+    if current_user && current_user.applicant?
+      redirect_to applicant_dash_path
+    end
+  end
+  helper_method :require_noapplicant!
 
 end
