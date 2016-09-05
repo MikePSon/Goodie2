@@ -51,10 +51,10 @@ $wizard-subheading-color:     $text-muted;
         }
     }
     & > .content {
-        background: #fff;
+        /*background: #fff;*/
         display: block;
         margin: 0.5em;
-        min-height: 300px;
+        min-height: 450px;
         overflow: hidden;
         position: relative;
         width: auto;
@@ -170,7 +170,7 @@ $wizard-subheading-color:     $text-muted;
     }
 }
 .wizard >.steps .disabled a,.wizard >.steps .disabled a:hover,.wizard >.steps .disabled a:active {
-    background: $wizard-steps-bg;
+    /*background: $wizard-steps-bg;*/
     color: $wizard-heading-color;
     cursor: default;
 }
