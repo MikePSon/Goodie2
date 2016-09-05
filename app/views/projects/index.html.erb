@@ -1,29 +1,82 @@
 <%= render 'layouts/partials/page_header' %>
 
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <% @projects.each do |project| %>
+  <% @projectCycles = Cycle.where(:project_id => project.id.to_s) %>
+  <% openCycles = @projectCycles.where(:status => "Open") %>
+  <% submittedRequests = Request.where(:organization_id => current_user.organization_id).where(:app_complete => true) %>
+  <% amountGiven = submittedRequests.sum(:amount_awarded).to_f %>
 
-<h1>Listing Projects</h1>
 
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+  <div class="col-lg-4 col-md-6">
+      <div class="panel b">
+         <div class="panel-heading">
+            <div class="pull-right">
+              <% if openCycles.count > 0 %>
+                  <div class="label label-info">
+                    <%= openCycles.count %> Open
+                  </div>
+                <% else %>
+                  <div class="label label-danger">
+                    0 Open
+                  </div>
+                <% end %>
+                <span style="position:relative;top:2px;right:-2px;">
+                  <%= link_to '<i class="icon-trash"></i>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, :style => "color:#f05050" %>
+                </span>
+            </div>
+            <h4 class="m0"><%= project.name %></h4>
+            <small class="text-muted"><%= project.mission %></small>
+         </div>
+         <!--<div class="panel-body">
+            <div class="table-grid table-grid-align-middle">
+               <div class="col">
+                  <div class="visible-xs visible-sm text-bold text-muted text-right">22%</div>
+                  <div data-toggle="tooltip" data-title="Health">
+                     <div class="progress progress-xs m0">
+                        <div style="width:22%" class="progress-bar progress-bar-warning">22%</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col wd-xxs text-right hidden-xs hidden-sm">
+                  <div class="text-bold text-muted">22%</div>
+               </div>
+            </div>
+         </div>-->
+         <table class="table">
+            <tbody>
+               <tr>
+                  <td>
+                     <strong>Repeat Type</strong>
+                  </td>
+                  <td><%= project.repeat_type %></td>
+               </tr>
+               <tr>
+                  <td>
+                     <strong>Cycle budget</strong>
+                  </td>
+                  <td>$<%= project.cycle_budget %></td>
+               </tr>
+               <tr>
+                  <td>
+                     <strong>Previous Cycles</strong>
+                  </td>
+                  <td><%= @projectCycles.count %></td>
+               </tr>
+               <tr>
+                  <td>
+                     <strong>Amount Given</strong>
+                  </td>
+                  <td>$<%= amountGiven %></td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="panel-footer text-center">
+            <%= link_to 'View Project', project, :class => "btn btn-primary" %>
+            <%= link_to 'Manage Project', edit_project_path(project), :class => "btn btn-default" %>
+         </div>
+      </div>
+   </div>
+  <% end %>
+</div>

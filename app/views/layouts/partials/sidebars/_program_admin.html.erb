@@ -11,10 +11,21 @@
             <span>Program Admin</span>
          </li>
 
+         <li class="<%= 'active' if controller?('programadmin/base') %>">
+            <%= link_to programadmin_dash_path do %>
+               <em class="icon-speedometer"></em>
+               <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+            <% end %>
+         </li>
+         <!-- End Sidebar Item -->
+
+
+
          <li class="<%= 'active' if controller?('organizations') %>">
             <%= link_to organizations_path do %>
                <em class="fa fa-building-o"></em>
-               <span data-localize="sidebar.nav.ORGANIZATION">Organizations</span>
+               <% userOrg = Organization.where(:id => current_user.organization_id).first.name %>
+               <span><%= userOrg %></span>
             <% end %>
          </li>
          <!-- End Sidebar Item -->

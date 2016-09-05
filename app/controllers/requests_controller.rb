@@ -7,29 +7,37 @@ class RequestsController < ApplicationController
   def index
     @orgCycles = Cycle.where(:organization_id => current_user.organization_id)
     @yourStartedRequests = Request.where(:user_id => current_user.id.to_s).where(:status => "Created")
-    #@yourRequests = Request.all
     @yourRequests = Request.where(:user_id => current_user.id.to_s)
 
     @totalApplicants = User.where(:organization_id => current_user.organization_id).where(:applicant => true).count
     @openCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Open")
     @plannedCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Planned")
 
-    
+    #All Views
+    @requests = Request.all
 
+    #Program Admin
+    if current_user.program_admin?
+      @primaryAction = true
+      @primaryActionText = "Your Cycles"
+      @primaryActionPath = cycles_path
 
+      @all_cycles = Cycle.where(:organization_id => current_user.organization_id)
+      @open_cycles = @all_cycles.where(:status => "Open")
+      @closed_cycles = @all_cycles.where(:status => "Closed")
+    end
 
-    @thisPage = "REQUEST"
-    @title = "Your Requests"
-    @subtitle = "All of your requests"
+    if current_user.program_manager || current_user.applicant?
+      @thisPage = "REQUEST"
+      @title = "Your requests"
+      @subtitle = "All requests"
+    end
 
-    if @yourRequests.count == 0
+    if current_user.applicant? && @yourRequests.count == 0
       @primaryAction = true
       @primaryActionText = "New Request!"
       @primaryActionPath = new_request_path
     end
-
-
-    @requests = Request.all
   end
 
   # GET /requests/1

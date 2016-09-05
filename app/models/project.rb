@@ -11,4 +11,6 @@ class Project
   # Data
   field :name,              type: String
   field :mission,           type: String
+  field :repeat_type,       type: String
+  field :cycle_budget,      type: Float
 end

@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
+  before_filter :require_noapplicant!
 
   # GET /organizations
   # GET /organizations.json
@@ -20,6 +21,27 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
+    #Page Standards
+    @thisPage = "ORGANIZATION"
+    @title = @organization.name
+    @subtitle = "What are you about?"
+
+    if current_user.program_admin?
+      @primaryAction = true
+      @primaryActionText = "Edit Organization <i class='icon-settings' style='margin-left:3px;'></i>"
+      @primaryActionPath = edit_organization_path(@organization)
+    end
+
+    @programAdmin = User.where(:organization_id => @organization.id).where(:program_admin => true).first
+    @organizationApplicants = User.where(:organization_id => @organization.id).where(:applicant => true)
+    @organizationRequests = Request.where(:organization_id => @organization.id)
+    @organizationProjects = Project.where(:organization_id => @organization.id)
+    @organizationTeam = User.where(:organization_id => @organization.id).where(:applicant => false)
+    @openCycles = Cycle.where(:organization_id => @organization.id).where(:status => "Open")
+
+    @totalAmountAwarded = @organizationRequests.sum(:amount_awarded)
+
+
   end
 
   # GET /organizations/new
@@ -79,6 +101,9 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :user_id)
+      params.require(:organization).permit(
+        :name,
+        :motto,
+        :user_id)
     end
 end

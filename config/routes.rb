@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :projects
   devise_for :users
   root "pages#home"
+
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
   
@@ -13,12 +14,21 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    root "base#index"
     resources :users, :cycles
 
     get "posts/drafts", to: "posts#drafts", as: "posts_drafts"
     get "posts/dashboard", to: "posts#dashboard", as: "posts_dashboard"
     resources :posts
+  end
+
+  namespace :programadmin do
+    root :to => 'base#index', as: :dash
+  end
+  namespace :programmanager do
+    root :to => 'base#index', as: :dash
+  end
+  namespace :applicant do
+    root :to => 'base#index', as: :dash
   end
 
   # api routes

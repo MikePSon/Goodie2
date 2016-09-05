@@ -1,27 +1,10 @@
 <%= render 'layouts/partials/page_header' %>
 
-<% if !@current_user.applicant? %>
-  <div class="row">
-    <div class="col-xs-12 col-sm-7">
-      <% if @openCycles.count > 0 %>
-        <span class="text-success">Open Cycles</span>
-        <%= render 'cycle_table', :display => @openCycles %>
-      <% elsif @plannedCycles.count > 0 %>
-        <span class="text-success">Upcoming Cycles</span>
-        <%= render 'cycle_table', :display => @plannedCycles %>
-      <% end %>
-  
-    </div>
-    <div class="col-xs-12 col-sm-5">
-      <div class="row">
-        <div class="col-xs-12">
-          <%= render 'your_request_stats' %>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <h1>Listing Requests</h1>
-  <%= render 'request_table', :display => @requests %>
+
+
+<% if @current_user.applicant? %>
+  <%= render 'applicant' %>
+<% elsif current_user.program_admin? %>
+  <%= render 'program_admin_view' %>
 <% end %>
 

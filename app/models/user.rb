@@ -48,6 +48,14 @@ class User
 
   field :first_name,        type: String, default: ""
   field :last_name,         type: String, default: ""
+  field :phone,             type: String
+  field :job_title,         type: String, default: ""
+  field :address_1,         type: String
+  field :address_2,         type: String
+  field :city,              type: String
+  field :state,             type: String
+  field :zip,               type: String
+  field :office_open,       type: String
+  field :office_close,      type: String
 
-  field :job_title,        type: String, default: ""
 end

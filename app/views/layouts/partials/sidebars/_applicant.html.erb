@@ -11,6 +11,14 @@
             <span>Applicant</span>
          </li>
 
+         <li class="<%= 'active' if controller?('applicant/base') %>">
+            <%= link_to applicant_dash_path do %>
+               <em class="icon-speedometer"></em>
+               <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+            <% end %>
+         </li>
+         <!-- End Sidebar Item -->
+
          <li class="<%= 'active' if controller?('requests') %>">
             <%= link_to requests_path do %>
                <em class="icon-note"></em>

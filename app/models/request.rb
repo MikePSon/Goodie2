@@ -18,8 +18,9 @@ class Request
   field :begin_date,              type: Date
   field :end_date,                type: Date
   field :app_complete,            type: Boolean
-
   field :submitted_date,          type: DateTime
+
+  field :amount_awarded,          type: Float
 
   # Validate Submitted Status
   before_save :check_submitted
