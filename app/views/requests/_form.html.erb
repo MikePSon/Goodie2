@@ -30,7 +30,7 @@
   <% else %>
     <div class="field">
       <%= f.label :project %><br>
-      <% @projectOptions = options_from_collection_for_select(Project.all, :id, :name) %>
+      <% @projectOptions = options_from_collection_for_select(Project.where(:organization_id => current_user.organization_id.to_s), :id, :name) %>
       <%= f.select(:project_id, @projectOptions, {}, { :class => 'form-control', :required => true }) %>
     </div>
   <% end %>
@@ -43,7 +43,7 @@
   <% else %>
     <div class="field">
       <%= f.label :cycle %><br>
-      <% @cycleOptions = options_from_collection_for_select(Cycle.all, :id, :name) %>
+      <% @cycleOptions = options_from_collection_for_select(Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open"), :id, :name) %>
       <%= f.select(:cycle_id, @cycleOptions, {}, { :class => 'form-control', :required => true }) %>
     </div> 
   <% end %>

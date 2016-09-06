@@ -55,14 +55,11 @@ class Admin::UsersController < Admin::BaseController
 
   def user_params
     params.require(:user).permit(
-    :email,
-    :first_name,
-    :last_name,
-    :password,
-    :password_confirmation,
-    :admin,
-    :locked,
-    address_attributes: [:address1, :address2, :city, :zip, :state_id, :phone]
+    :email, :first_name, :last_name, :phone, :office_open, :office_close, :job_title,
+    :admin, :program_admin, :program_manager, :applicant,
+    :address1, :address2, :city, :zip, :state, :phone,
+    :password, :password_confirmation, :locked,
+    organizations_attributes: [:name]
     )
   end
 

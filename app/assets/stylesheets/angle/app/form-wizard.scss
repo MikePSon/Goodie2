@@ -183,7 +183,7 @@ $wizard-subheading-color:     $text-muted;
     }
 }
 .wizard >.steps .done a,.wizard >.steps .done a:hover,.wizard >.steps .done a:active {
-    background: $wizard-steps-bg;
+    /*background: $wizard-steps-bg;*/
     color: $wizard-heading-color;
 }
 .wizard >.steps .error a,.wizard >.steps .error a:hover,.wizard >.steps .error a:active {

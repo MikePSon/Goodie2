@@ -30,8 +30,6 @@
 //= require blueimp-file-upload/js/jquery.fileupload-video
 //= require blueimp-file-upload/js/jquery.fileupload-validate
 //= require blueimp-file-upload/js/jquery.fileupload-ui
-//--- xEditable
-//= require x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min
 //--- Validate
 //= require jquery-validation/dist/jquery.validate
 //--- Steps
@@ -42,63 +40,15 @@
 //= require cropper/dist/cropper.js
 // --- Select2
 //= require select2/dist/js/select2
+// --- Cocoon
+//= require cocoon
 
-// --- Datepicker styles
+
 (function(window, document, $, undefined){
-
   $(function(){
-
-  	    if ( ! $.fn.validate || ! $.fn.steps ) return;
-
-    // FORM EXAMPLE
-    // ----------------------------------- 
-    var form = $("#registration_form");
-    form.validate({
-        errorPlacement: function errorPlacement(error, element) { element.before(error); },
-        rules: {
-            confirm: {
-                equalTo: "#password"
-            }
-        }
-    });
-    form.children("div").steps({
-        headerTag: "h4",
-        bodyTag: "fieldset",
-        transitionEffect: "slideLeft",
-        onStepChanging: function (event, currentIndex, newIndex)
-        {
-            form.validate().settings.ignore = ":disabled,:hidden";
-            return form.valid();
-        },
-        onFinishing: function (event, currentIndex)
-        {
-            form.validate().settings.ignore = ":disabled";
-            return form.valid();
-        },
-        onFinished: function (event, currentIndex)
-        {
-            alert("Submitted!");
-
-            // Submit form
-            $(this).submit();
-        }
-    });
-
-    // VERTICAL
-    // ----------------------------------- 
-
-    $("#registration_form").steps({
-        headerTag: "h4",
-        bodyTag: "section",
-        transitionEffect: "slideLeft",
-        stepsOrientation: "vertical"
-    });
-
     // DATETIMEPICKER
     // ----------------------------------- 
-
     if($.fn.datetimepicker) {
-
       $('#openTimePicker, #closeTimePicker').datetimepicker({
       	format: "HH:mm A",
         icons: {
@@ -113,9 +63,106 @@
           }
       });
     }
-
-
-
   });
 
+
+    // FORM
+    // ----------------------------------- 
+  $(function(){
+    if ( ! $.fn.steps ) return;
+
+    var regForm = $("#new_user");
+    regForm.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+        }
+    });
+    regForm.steps({
+        headerTag: "h4",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        stepsOrientation: "vertical",
+        onStepChanging: function (event, currentIndex, newIndex)
+        {
+            regForm.validate().settings.ignore = ":disabled,:hidden";
+            return regForm.valid();
+        },
+        onStepChanged: function (event, currentIndex, newIndex)
+        {
+            checkFinalBtn(currentIndex);
+        },
+        onFinishing: function (event, currentIndex)
+        {
+            regForm.validate().settings.ignore = ":disabled";
+            return regForm.valid();
+        },
+        onFinished: function (event, currentIndex)
+        {
+            alert("Submitted!");
+
+            // Submit form
+            $(this).submit();
+        }
+    });
+    var editForm = $('#edit_user');
+    editForm.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+        }
+    });
+    editForm.steps({
+        headerTag: "h4",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        stepsOrientation: "vertical",
+        onStepChanging: function (event, currentIndex, newIndex)
+        {
+            editForm.validate().settings.ignore = ":disabled,:hidden";
+            return editForm.valid();
+        },
+        onStepChanged: function (event, currentIndex, newIndex)
+        {
+            checkFinalBtn(currentIndex);
+        },
+        onFinishing: function (event, currentIndex)
+        {
+            editForm.validate().settings.ignore = ":disabled";
+            return editForm.valid();
+        },
+        onFinished: function (event, currentIndex)
+        {
+            alert("Submitted!");
+
+            // Submit form
+            $(this).submit();
+        }
+    });
+    function checkFinalBtn(param){
+        var submitBtn = $('#submit_button')
+        if(param == 3){
+            //Hide old Btn
+            $('[role="menu"]').children().eq(2).hide();
+            //Show submit Btn
+            submitBtn.appendTo($('[role="menu"]'));
+            submitBtn.css("margin-left", "1em");
+            submitBtn.show();
+        } else {
+            submitBtn.hide();
+        }
+    };
+    $(document).ready(function(){
+        $('#submit_button').hide();
+        $('[role="menu"]').children().eq(0).children().addClass("btn btn-primary");
+        $('[role="menu"]').children().eq(1).children().addClass("btn btn-default");
+    });
+
+});
+
 })(window, document, window.jQuery);
+

@@ -2,7 +2,7 @@
 
 
 
-<% if @current_user.applicant? %>
+<% if @current_user.admin? %>
   <%= render 'applicant' %>
 <% elsif current_user.program_admin? %>
   <%= render 'program_admin_view' %>

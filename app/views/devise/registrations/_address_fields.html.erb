@@ -22,7 +22,7 @@
 <div class="form-group">
   <%= f.label :state, :class => "col-lg-2 control-label" %>
   <div class="col-lg-10">
-    <%= f.select :state, options_for_select(us_states), {required: 'true', class: 'form-control', :selected => params[:id]} %>
+    <%= f.select :state, options_for_select(us_states), {:selected => params[:id]}, :class => "form-control" %>
   </div>
 </div>
 
