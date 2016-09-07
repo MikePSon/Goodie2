@@ -1,6 +1,7 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
   before_filter :require_noapplicant!
+  after_action :create_admin_user, only: [:create]
 
   # GET /organizations
   # GET /organizations.json
@@ -58,6 +59,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
 
+
     respond_to do |format|
       if @organization.save
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
@@ -104,6 +106,11 @@ class OrganizationsController < ApplicationController
       params.require(:organization).permit(
         :name,
         :motto,
-        :user_id)
+        :created_by)
+    end
+
+    def create_admin_user
+      thisUser = User.where(:id => @organization.created_by).first
+      thisUser.update(organization_id: @organization.id)
     end
 end

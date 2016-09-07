@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resources :cycles
   resources :projects
   devise_for :users
+
+  devise_scope :user do
+    get 'new_applicant', :to => 'devise/registrations#new_applicant'
+  end
+
   root "pages#home"
 
   get "home", to: "pages#home", as: "home"

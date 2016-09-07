@@ -13,6 +13,8 @@ class CyclesController < ApplicationController
     @primaryAction = true
     @primaryActionText = "New cycle!"
     @primaryActionPath = new_cycle_path
+
+    @yourCycles = Cycle.where(:organization_id => current_user.organization_id.to_s);
   end
 
   # GET /cycles/1

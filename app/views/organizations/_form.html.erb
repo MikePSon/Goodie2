@@ -17,9 +17,13 @@
         <%= f.text_field :name, :class => "form-control" %>
       </div>
       <div class="field">
-        <%= f.label :user %><br>
+        <%= f.label :motto %><br>
+        <%= f.text_field :motto, :class => "form-control" %>
+      </div>
+      <div class="field" style="display:none;">
+        <%= f.label :created_by %><br>
         <!-- Possibly buggy -->
-        <%= f.text_field :user_ids, :class => "form-control", :value => current_user.id %>
+        <%= f.text_field :created_by, :class => "form-control", :value => current_user.id %>
       </div>
     </div>
   </div>

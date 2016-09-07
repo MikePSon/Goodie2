@@ -8,6 +8,7 @@ class RequestsController < ApplicationController
     @orgCycles = Cycle.where(:organization_id => current_user.organization_id)
     @yourStartedRequests = Request.where(:user_id => current_user.id.to_s).where(:status => "Created")
     @yourRequests = Request.where(:user_id => current_user.id.to_s)
+    @yourOrg = Organization.where(:id => current_user.organization_id.to_s).first
 
     @totalApplicants = User.where(:organization_id => current_user.organization_id).where(:applicant => true).count
     @openCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Open")
@@ -18,9 +19,17 @@ class RequestsController < ApplicationController
 
     #Program Admin
     if current_user.program_admin?
+      @thisPage = "REQUEST"
+      @title = "Requests"
+      @subtitle = "Requests for " + @yourOrg.name
       @primaryAction = true
-      @primaryActionText = "Your Cycles"
-      @primaryActionPath = cycles_path
+      if @yourRequests.count == 0
+        @primaryActionText = "New Request"
+        @primaryActionPath = new_request_path
+      else
+        @primaryActionText = "Your cycles"
+        @primaryActionPath = cycles_path
+      end
 
       @all_cycles = Cycle.where(:organization_id => current_user.organization_id)
       @open_cycles = @all_cycles.where(:status => "Open")
@@ -77,6 +86,9 @@ class RequestsController < ApplicationController
     @title = "New request"
     @subtitle = "Get started on a new project!"
 
+    @yourProjects = Project.where(:organization_id => current_user.organization_id.to_s)
+    @yourOpenCycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open")
+
     if params[:cycle_id]
       @cycleID = params[:cycle_id]
     end
@@ -98,6 +110,8 @@ class RequestsController < ApplicationController
     else
       @subtitle = "Edit this request, make it awesome"
     end
+    @yourProjects = Project.where(:organization_id => current_user.organization_id.to_s)
+    @yourOpenCycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open")
 
   end
 

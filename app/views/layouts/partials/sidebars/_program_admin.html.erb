@@ -19,40 +19,47 @@
          </li>
          <!-- End Sidebar Item -->
 
-
-
          <li class="<%= 'active' if controller?('organizations') %>">
-            <%= link_to organizations_path do %>
-               <em class="fa fa-building-o"></em>
-               <% userOrg = Organization.where(:id => current_user.organization_id).first.name %>
-               <span><%= userOrg %></span>
+            <% if current_user.organization_id %>
+               <%= link_to organizations_path do %>
+                  <em class="fa fa-building-o"></em>
+                  <% userOrg = Organization.where(:id => current_user.organization_id).first.name %>
+                  <span><%= userOrg %></span>
+               <% end %>
+            <% else %>
+               <%= link_to new_organization_path do %>
+                  <em class="fa fa-building-o"></em>
+                  <span>New Organization</span>
+               <% end %>
             <% end %>
          </li>
          <!-- End Sidebar Item -->
 
-         <li class="<%= 'active' if controller?('projects') %>">
-            <%= link_to projects_path do %>
-               <em class="fa fa-file-text-o"></em>
-               <span data-localize="sidebar.nav.PROJECTS">Projects</span>
-            <% end %>
-         </li>
-         <!-- End Sidebar Item -->
-
-         <li class="<%= 'active' if controller?('cycles') %>">
-            <%= link_to cycles_path do %>
-               <em class="icon-refresh"></em>
-               <span data-localize="sidebar.nav.CYCLES">Cycles</span>
-            <% end %>
-         </li>
-         <!-- End Sidebar Item -->
-
-         <li class="<%= 'active' if controller?('requests') %>">
-            <%= link_to requests_path do %>
-               <em class="icon-note"></em>
-               <span data-localize="sidebar.nav.REQUESTS">Requests</span>
-            <% end %>
-         </li>
-         <!-- End Sidebar Item -->
+         <% if current_user.organization_id %>
+            <li class="<%= 'active' if controller?('projects') %>">
+               <%= link_to projects_path do %>
+                  <em class="fa fa-file-text-o"></em>
+                  <span data-localize="sidebar.nav.PROJECTS">Projects</span>
+               <% end %>
+            </li>
+            <!-- End Sidebar Item -->
+   
+            <li class="<%= 'active' if controller?('cycles') %>">
+               <%= link_to cycles_path do %>
+                  <em class="icon-refresh"></em>
+                  <span data-localize="sidebar.nav.CYCLES">Cycles</span>
+               <% end %>
+            </li>
+            <!-- End Sidebar Item -->
+   
+            <li class="<%= 'active' if controller?('requests') %>">
+               <%= link_to requests_path do %>
+                  <em class="icon-note"></em>
+                  <span data-localize="sidebar.nav.REQUESTS">Requests</span>
+               <% end %>
+            </li>
+            <!-- End Sidebar Item -->
+         <% end %>
 
 
       </ul>

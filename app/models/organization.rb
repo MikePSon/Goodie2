@@ -9,5 +9,5 @@ class Organization
   # Data
   field :name, 			type: String
   field :motto,			type: String
-
+  field :created_by,	type: String
 end
