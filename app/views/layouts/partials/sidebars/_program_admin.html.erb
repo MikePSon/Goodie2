@@ -21,10 +21,10 @@
 
          <li class="<%= 'active' if controller?('organizations') %>">
             <% if current_user.organization_id %>
-               <%= link_to organizations_path do %>
+               <% userOrg = Organization.where(:id => current_user.organization_id).first %>
+               <%= link_to organization_path(userOrg) do %>
                   <em class="fa fa-building-o"></em>
-                  <% userOrg = Organization.where(:id => current_user.organization_id).first.name %>
-                  <span><%= userOrg %></span>
+                  <span><%= userOrg.name %></span>
                <% end %>
             <% else %>
                <%= link_to new_organization_path do %>
