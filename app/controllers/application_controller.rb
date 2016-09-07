@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       :address_1, :address_2, :city, :state, :zip,
       :phone, :office_open, :office_close, :job_title,
       :password, :password_confirmation,
-      organizations_attributes:[:name])
+      :organization_id)
     }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
       :email, :first_name, :last_name,
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
       :address_1, :address_2, :city, :state, :zip,
       :phone, :office_open, :office_close, :job_title,
       :password, :password_confirmation, :current_password,
-      organizations_attributes:[:name])
+      :organization_id)
     }
   end
 
