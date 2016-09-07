@@ -17,4 +17,5 @@
 //= require bootstrap
 //= require analytics
 //= require common
-//= require ./angle
+// Removed ./angle for aside-collapsed bug. Not sure why I had to
+// require ./angle
