@@ -64,9 +64,15 @@ class RequestsController < ApplicationController
       @subtitle = "Edit this request, make it awesome"
     end
 
-    @primaryAction = true
-    @primaryActionText = "Review"
-    @primaryActionPath = edit_request_path(@request)
+    if !current_user.applicant?
+      @primaryAction = true
+      @primaryActionText = "Review"
+      @primaryActionPath = edit_request_path(@request)
+    elsif current_user.applicant? && (@request.status == "Created" || @request.status == "Re-Opened")
+      @primaryAction = true
+      @primaryActionText = "Edit"
+      @primaryActionPath = edit_request_path(@request)
+    end
     
     if @request.status == "Submitted"
       #@rejectAction = true
@@ -110,8 +116,9 @@ class RequestsController < ApplicationController
     else
       @subtitle = "Edit this request, make it awesome"
     end
-    @yourProjects = Project.where(:organization_id => current_user.organization_id.to_s)
-    @yourOpenCycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open")
+    @myProject = Project.where(:id => @request.project_id).first.id
+    @myCycle = Cycle.where(:id => @request.cycle_id).first.id
+
 
   end
 

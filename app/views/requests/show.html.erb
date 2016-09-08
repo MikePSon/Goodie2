@@ -56,9 +56,11 @@
 	<strong>end_date: </strong><%= @request.end_date.strftime("%e %b %Y %l:%M %p").to_s %>
 </p>
 
+<% if @request.submitted_date? %>
 <p>
 	<strong>submitted_date: </strong><%= @request.submitted_date.strftime("%e %b %Y %l:%M %p").to_s %>
 </p>
+<% end %>
 
 <p>
 	<strong>app_complete: </strong><%= @request.app_complete %>

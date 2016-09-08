@@ -6,5 +6,7 @@
   <%= render 'applicant' %>
 <% elsif current_user.program_admin? %>
   <%= render 'program_admin_view' %>
+<% elsif current_user.applicant? %>
+  <%= render 'applicant' %>
 <% end %>
 
