@@ -6,13 +6,20 @@
 <div class="content-heading">
    <% if @primaryAction %>
    <div class="pull-right">
-      <%= link_to @primaryActionText.html_safe, @primaryActionPath, :class => "btn btn-primary btn-sm" %>
+
+      <% if !@acceptReject %>
+         <%= link_to @primaryActionText.html_safe, @primaryActionPath, :class => "btn btn-primary btn-sm" %>
+      <% end %>
       
       <div class='status_actions'>
-         <% if @rejectAction %>
+         <% if @acceptReject %>
             <%= form_for(@request) do |f| %>
                <%= f.hidden_field :status, value: "Closed" %>
                <%= f.submit "Reject", :class => "btn btn-danger" %>
+            <% end %>
+            <%= form_for(@request) do |f| %>
+               <%= f.hidden_field :status, value: "Awarded" %>
+               <%= f.submit "Accept", :class => "btn btn-success" %>
             <% end %>
          <% end %>
       </div>

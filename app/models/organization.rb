@@ -5,6 +5,7 @@ class Organization
   has_many :request
   has_many :project
   has_many :cycle
+  has_many :review
 
   # Data
   field :name, 			type: String

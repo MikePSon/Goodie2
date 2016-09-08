@@ -1,4 +1,20 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+	<strong>Organization: </strong><%= @review.organization.name %>
+</p>
+<p>
+	<strong>project: </strong><%= @review.project.name %>
+</p>
+<p>
+	<strong>cycle: </strong><%= @review.cycle.name %>
+</p>
+<p>
+	<strong>request: </strong><%= @review.request.title %>
+</p>
+<p>
+	<strong>user: </strong><%= @review.user.first_name %> <%= @review.user.last_name %>
+</p>
+
 <%= link_to 'Edit', edit_review_path(@review) %> |
 <%= link_to 'Back', reviews_path %>

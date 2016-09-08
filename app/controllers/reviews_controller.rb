@@ -15,10 +15,28 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
+
+    #Auto Fill fields
+    if params[:cycle_id]
+      @cycleID = params[:cycle_id]
+    end
+    if params[:project_id]
+      @projectID = params[:project_id]
+    end
+    if params[:organization_id]
+      @organizationID = params[:organization_id]
+    end
+    if params[:request_id]
+      @requestID = params[:request_id]
+    end
   end
 
   # GET /reviews/1/edit
   def edit
+    @organizationID = @review.organization_id
+    @projectID = @review.project_id
+    @cycleID = @review.cycle_id
+    @requestID = @review.request_id
   end
 
   # POST /reviews
@@ -69,6 +87,7 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.fetch(:review, {})
+      #To whoever fixes this, I know it's not ideal, but I'm hacking. Same thing is in requests.
+      params.require(:review).permit!
     end
 end

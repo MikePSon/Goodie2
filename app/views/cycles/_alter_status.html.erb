@@ -18,15 +18,17 @@
 			<%= f.submit "Re-Open", :class => "btn btn-success btn-xs" %>
 		<% end %>
 	
-	<% elsif @cycle.status == "Re-Opened" %>
+	<% elsif @cycle.status == "Re-Opened" && 1==2 %>
 		<%= form_for(@cycle) do |f| %>
 			<%= f.hidden_field :status, value: "Closed" %>
 			<%= f.submit "Close", :class => "btn btn-danger btn-xs" %>
 		<% end %>
 	<% else %>
-		<%= form_for(@cycle) do |f| %>
-			<%= f.hidden_field :status, value: "Re-Opened" %>
-			<%= f.submit "Re-Open", :class => "btn btn-success btn-xs" %>
+		<% if 1 == 2 # Commenting out cycle re-open pending development %>
+			<%= form_for(@cycle) do |f| %>
+				<%= f.hidden_field :status, value: "Re-Opened" %>
+				<%= f.submit "Re-Open", :class => "btn btn-success btn-xs" %>
+			<% end %>
 		<% end %>
 	<% end %>
 </div>

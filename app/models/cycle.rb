@@ -6,6 +6,7 @@ class Cycle
   belongs_to :project
   has_many :request
   belongs_to :organization
+  has_many :review
 
   # Data
   field :admin_note,    type: String

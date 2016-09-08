@@ -65,11 +65,7 @@ class RequestsController < ApplicationController
       @subtitle = "Edit this request, make it awesome"
     end
 
-    if !current_user.applicant?
-      @primaryAction = true
-      @primaryActionText = "Review"
-      @primaryActionPath = edit_request_path(@request)
-    elsif current_user.applicant? && (@request.status == "Created" || @request.status == "Re-Opened")
+    if current_user.applicant? && (@request.status == "Created" || @request.status == "Re-Opened")
       @primaryAction = true
       @primaryActionText = "Edit"
       @primaryActionPath = edit_request_path(@request)
@@ -77,6 +73,23 @@ class RequestsController < ApplicationController
     
     if @request.status == "Submitted"
       #@rejectAction = true
+    end
+
+    if @request.status == "Under Review"
+      requestReviews = Review.where(:request_id => @request.id).where(:review_complete => true)
+      myReview = requestReviews.where(:user_id => current_user.id)
+      if myReview.count == 0
+        @primaryAction = true
+        @primaryActionText = "Review"
+        @primaryActionPath = new_review_path #Needs to include params for review form
+      elsif myReview.count == 1 && !myReview.first.review_complete
+        @primaryAction = true
+        @primaryActionText = "Review"
+        @primaryActionPath = edit_review_path(myReview.first)
+      elsif myReview.count == 1 && myReview.first.review_complete && current_user.program_admin?
+        @primaryAction = true
+        @acceptReject = true
+      end
     end
 
   end
@@ -181,7 +194,7 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      #To whoever fixes this, I know it's not ideal, but I'm hacking...
+      #To whoever fixes this, I know it's not ideal, but I'm hacking. Same thing is in reviews.
       params.require(:request).permit!
     end
 

@@ -48,6 +48,10 @@ class CyclesController < ApplicationController
       @created_incomplete = @incompleteRequests
     end
 
+    if @cycle.status == "Closed" && (current_user.program_admin? || current_user.program_manager?)
+      @toBeReviewed = Request.where(:cycle_id => @cycle.id).where(:status => "Under Review")
+    end
+
 
     #Need to figure out DateTime Math
     @recentRequests = Request.where(:cycle_id => @cycle.id.to_s).where(submitted_date: (DateTime.now - 48.hours)..DateTime.now)

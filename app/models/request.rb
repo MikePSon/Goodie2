@@ -6,6 +6,7 @@ class Request
   belongs_to :cycle
   has_one :user
   has_one :organization
+  has_many :review
   
   # Data
   field :status,                  type: String,   default: "Created"
