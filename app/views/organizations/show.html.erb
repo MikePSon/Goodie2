@@ -332,7 +332,7 @@
                         <em class="fa fa-wechat fa-fw mr-lg"></em><%= @programAdmin.office_open %> - <%= @programAdmin.office_close %></li>
                      <% if !current_user.applicant? %>
                      <li>
-                        <em class="fa fa-wechat fa-fw mr-lg"></em>
+                        <em class="icon-link fa-fw mr-lg"></em>
                         <% if Rails.env.development? %>
                            http://localhost:3000/new_applicant?organization_id=<%=current_user.organization_id %>
                         <% else %>

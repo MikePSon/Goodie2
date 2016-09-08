@@ -42,7 +42,8 @@ class RequestsController < ApplicationController
       @subtitle = "All requests"
     end
 
-    if current_user.applicant? && @yourRequests.count == 0
+
+    if current_user.applicant? && @yourRequests.count == 0 && @openCycles.count > 0
       @primaryAction = true
       @primaryActionText = "New Request!"
       @primaryActionPath = new_request_path
@@ -126,6 +127,11 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @request = Request.new(request_params)
+    puts "CREATED FUNCTION ABOUT TO RUN"
+    isSubmitted = application_submitted(request_params)
+    if isSubmitted
+      @request[:status] = "Submitted"
+    end
 
     respond_to do |format|
       if @request.save
@@ -141,6 +147,11 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1
   # PATCH/PUT /requests/1.json
   def update
+    isSubmitted = application_submitted(request_params)
+    if isSubmitted
+      @request[:status] = "Submitted"
+    end
+
     respond_to do |format|
       if @request.update(request_params)
         format.html { redirect_to @request, notice: 'Request was successfully updated.' }
@@ -179,6 +190,22 @@ class RequestsController < ApplicationController
       @applicant = User.where(:id => @request.user_id).first
       @project = Project.where(:id => @request.project_id).first
       @cycle = Cycle.where(:id => @request.cycle_id).first
+    end
+
+    def application_submitted request
+      puts "========== THE FUNCTION ACTUALLY RAN =========="
+      puts '***** request.app_complete: ' + request[:app_complete].to_s + " *****"
+      requestComplete = request[:app_complete]
+      puts "APP_Complete: " + requestComplete.to_s
+
+      if requestComplete == "1"
+        puts "WORKS"
+        return true
+      else
+        puts "BROKE"
+        return false
+      end
+
     end
 
 end

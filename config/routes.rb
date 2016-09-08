@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   resources :organizations
   resources :requests
   resources :cycles
