@@ -32,17 +32,26 @@ class CyclesController < ApplicationController
     @paymentRequests = @allRequests.where(:status => "Payment")
     @projectCompleteRequests = @allRequests.where(:status => "Project Complete")
 
-    @statusCounts = 
-
     @thisPage = "CYCLES"
     @title = @cycle.name
     @subtitle = @cycle.project.name
+
+    if @cycle.status == "Planned"
+      @primaryAction = true
+      @primaryActionText = "Edit Cycle"
+      @primaryActionPath = edit_cycle_path(@cycle)
+    end
 
     if @cycle.status == "Open"
       @created_incomplete = @createdRequests
     else
       @created_incomplete = @incompleteRequests
     end
+
+    if @cycle.status == "Closed" && (current_user.program_admin? || current_user.program_manager?)
+      @toBeReviewed = Request.where(:cycle_id => @cycle.id).where(:status => "Under Review")
+    end
+
 
     #Need to figure out DateTime Math
     @recentRequests = Request.where(:cycle_id => @cycle.id.to_s).where(submitted_date: (DateTime.now - 48.hours)..DateTime.now)

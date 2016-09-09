@@ -1,0 +1,53 @@
+<%= form_for(@review) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="display: none;">
+    <div class="field">
+      <%= f.label :organization_id %><br>
+      <%= f.text_field :organization_id, :class => "form-control", :required => true, :value => @organizationID %>
+    </div>
+    <div class="field">
+      <%= f.label :project_id %><br>
+      <%= f.text_field :project_id, :class => "form-control", :required => true, :value => @projectID %>
+    </div>
+    <div class="field">
+      <%= f.label :cycle_id %><br>
+      <%= f.text_field :cycle_id, :class => "form-control", :required => true, :value => @cycleID %>
+    </div>
+    <div class="field">
+      <%= f.label :request_id %><br>
+      <%= f.text_field :request_id, :class => "form-control", :required => true, :value => @requestID %>
+    </div>
+    <div class="field">
+      <%= f.label :user %><br>
+      <%= f.text_field :user_id, :class => "form-control", :required => true, :value => current_user.id %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :decision %><br>
+    <%= f.select(:decision, decision_options, {}, { :class => 'form-control' }) %>
+  </div>
+  <div class="field">
+    <%= f.label :explanation %><br>
+    <%= f.text_field :explanation, :class => "form-control", :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :review_complete %><br>
+    <%= f.check_box :review_complete %>
+  </div>
+
+  <div class="actions" style="margin-top:15px;">
+    <%= f.submit 'Submit', :class => 'btn btn-success btn-sm' %>
+  </div>
+<% end %>

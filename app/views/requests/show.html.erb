@@ -2,6 +2,29 @@
 
 <p id="notice"><%= notice %></p>
 
+<% if @request.status == "Under Review" %>
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <td>Review</td>
+      <td>Decision</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requestReviews.each do |display| %>
+      <tr>
+        <td><%= display.user.first_name %> <%= display.user.last_name %></td>
+        <td><%= display.decision %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br><hr><br>
+
+<% end %>
+
 <p>
 	<strong>Applicant: </strong><%= @applicant.first_name %> <%= @applicant.last_name %>
 </p>
