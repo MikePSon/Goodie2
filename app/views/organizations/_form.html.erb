@@ -20,6 +20,10 @@
         <%= f.label :motto %><br>
         <%= f.text_field :motto, :class => "form-control" %>
       </div>
+      <div class="field">
+        <%= f.label :manager_decision %><br>
+        <%= f.check_box :manager_decision %>
+      </div>
       <div class="field" style="display:none;">
         <%= f.label :created_by %><br>
         <!-- Possibly buggy -->

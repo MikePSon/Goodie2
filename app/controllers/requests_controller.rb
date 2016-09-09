@@ -75,9 +75,11 @@ class RequestsController < ApplicationController
       #@rejectAction = true
     end
 
+
     if @request.status == "Under Review"
-      requestReviews = Review.where(:request_id => @request.id).where(:review_complete => true)
-      myReview = requestReviews.where(:user_id => current_user.id)
+      @requestReviews = Review.where(:request_id => @request.id).where(:review_complete => true)
+      mgrDecision = Organization.where(:id => @request.organization_id).first.manager_decision
+      myReview = @requestReviews.where(:user_id => current_user.id)
       if myReview.count == 0
         @primaryAction = true
         @primaryActionText = "Review"
@@ -86,9 +88,11 @@ class RequestsController < ApplicationController
         @primaryAction = true
         @primaryActionText = "Review"
         @primaryActionPath = edit_review_path(myReview.first)
-      elsif myReview.count == 1 && myReview.first.review_complete && current_user.program_admin?
-        @primaryAction = true
-        @acceptReject = true
+      elsif myReview.count == 1 && myReview.first.review_complete
+        if (current_user.program_admin? || mgrDecision)
+          @primaryAction = true
+          @acceptReject = true
+        end
       end
     end
 
