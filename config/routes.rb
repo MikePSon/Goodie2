@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   resources :reviews
   resources :organizations
   resources :requests
@@ -48,4 +49,7 @@ Rails.application.routes.draw do
 
   #Lock Screen
   get 'pages/lock'
+
+  # CKEditor, WYSIWYG
+
 end

@@ -67,3 +67,7 @@ gem "bower-rails", "~> 0.9.2"
 
 # Wheneverise for CronJobs
 gem 'whenever', require: false
+
+#WYSIWYG Editor
+gem 'ckeditor'
+gem 'mongoid-paperclip', require: 'mongoid_paperclip'
