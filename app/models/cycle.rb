@@ -12,6 +12,11 @@ class Cycle
   field :status,				type: String
   field :open,          type: DateTime
   field :close,         type: DateTime
+  field :created_at,    type: DateTime, default: DateTime.now
+
+  # Field for timeline. Array contains multiple objects
+  field :is_cycle,      type: Boolean, default: true
+  field :is_project,    type: Boolean, default: false
 
 
   def self.open_close_cycles

@@ -76,6 +76,7 @@ class CyclesController < ApplicationController
   # POST /cycles
   # POST /cycles.json
   def create
+    cycle_params[:created_at] = DateTime.now
     @cycle = Cycle.new(cycle_params)
 
     respond_to do |format|

@@ -12,4 +12,8 @@ class Project
   field :mission,           type: String
   field :repeat_type,       type: String
   field :cycle_budget,      type: Float
+  # Field for timeline. Array contains multiple objects
+  field :is_project,        type: Boolean, default: true
+  field :is_cycle,          type: Boolean, default: false
+  field :created_at,        type: DateTime, default: DateTime.now
 end

@@ -1,0 +1,47 @@
+<% if this_cycle.status == "Planned" %>
+<div class="timeline-badge success">
+<% else %>
+<div class="timeline-badge warning">
+<% end %>
+   <em class="icon-refresh"></em>
+</div>
+
+
+<div class="timeline-panel">
+   <% if index_inverted %>
+   <div class="popover right">
+   <% else %>
+   <div class="popover left">
+   <% end %>
+      <div class="arrow"></div>
+      <div class="popover-content">
+         <div class="table-grid table-grid-align-middle mb">
+            <div class="col col-xs">
+               <img src="<%= image_path('angle/user/05.jpg') %>" alt="Image" class="media-object img-circle thumb48  " />
+            </div>
+            <div class="col">
+               <p class="m0">
+                  <%= link_to cycle_path(this_cycle) do %>
+                  <span class="text-muted">
+                     <strong><%= this_cycle.name %> </strong>
+                     <% if this_cycle.status == "Planned" %>
+                     opening soon!
+                     <% else %>
+                     closing soon!
+                     <% end %>
+                  </span>
+                  <% end %>
+            </div>
+         </div>
+         <p>
+            <em>
+               <% if this_cycle.status == "Planned" %>
+                  Opens: <%= this_cycle.open.strftime("%e %b %Y %l:%M %p").to_s %>
+               <% else %>
+                  Closes: <%= this_cycle.close.strftime("%e %b %Y %l:%M %p").to_s %>
+               <% end %>
+            </em>
+         </p>
+      </div>
+   </div>
+</div>

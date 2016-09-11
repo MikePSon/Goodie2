@@ -100,7 +100,6 @@ class ApplicationController < ActionController::Base
   def require_myproject viewing_project_id
     viewing_project = viewing_project_id.to_s
     org_projects = Project.where(:organization_id => current_user.organization_id)
-
     allowed = false
     org_projects.each do |this_project|
       this_ID = this_project.id.to_s
@@ -108,7 +107,6 @@ class ApplicationController < ActionController::Base
         allowed = true
       end
     end
-
     if !allowed
       redirect_to projects_path
     end
@@ -120,7 +118,6 @@ class ApplicationController < ActionController::Base
     puts "***** VERIFYING Cycle"
     viewing_cycle = viewing_cycle_id.to_s
     org_cycles = Cycle.where(:organization_id => current_user.organization_id)
-
     allowed = false
     org_cycles.each do |this_project|
       this_ID = this_project.id.to_s
@@ -128,7 +125,6 @@ class ApplicationController < ActionController::Base
         allowed = true
       end
     end
-
     if !allowed
       redirect_to cycles_path
     end
