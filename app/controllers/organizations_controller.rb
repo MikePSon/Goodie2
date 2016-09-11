@@ -46,7 +46,7 @@ class OrganizationsController < ApplicationController
 
     @totalAmountAwarded = @organizationRequests.sum(:amount_awarded)
 
-
+    @timelineItems = get_timeline(@organization)
   end
 
   # GET /organizations/new
@@ -99,6 +99,35 @@ class OrganizationsController < ApplicationController
     end
   end
 
+
+  def get_timeline this_organization
+
+    opened_cycles = Cycle.where(:organization_id => current_user.organization_id).where(open: (Time.now..(Time.now + 24.hours)))
+    closing_cycles = Cycle.where(:organization_id => current_user.organization_id).where(close: (Time.now - 24.hours)..Time.now)
+    new_projects = Project.where(:organization_id => current_user.organization_id).order(created_at: :desc).limit(5)
+
+    @timeline = []
+
+    if opened_cycles.count > 0
+      opened_cycles.each do |this_cycle|
+        @timeline << this_cycle
+      end
+    end
+    if closing_cycles.count > 0
+      closing_cycles.each do |this_cycle|
+        @timeline << this_cycle
+      end
+    end
+    if new_projects.count > 0
+      new_projects.each do |thisProject|
+        @timeline << thisProject
+      end
+    end
+    @timeline.sort_by{|e| e[:created_at]}
+
+    return @timeline
+  end 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization

@@ -1,0 +1,32 @@
+<div class="timeline-badge purple">
+   <em class="fa fa-file-text-o"></em>
+</div>
+
+<div class="timeline-panel">
+   <% if index_inverted %>
+      <div class="popover right">
+   <% else %>
+      <div class="popover left">
+   <% end %>
+      <div class="arrow"></div>
+      <div class="popover-content">
+         <div class="table-grid table-grid-align-middle mb">
+            <div class="col col-xs">
+               <img src="<%= image_path('angle/user/05.jpg') %>" alt="Image" class="media-object img-circle thumb48  " />
+            </div>
+            <div class="col">
+               <p class="m0">
+                  <%= link_to cycle_path(this_project) do %>
+                  <span class="text-muted">
+                     <strong><%= this_project.name %> </strong>
+                     created!
+                  </span>
+                  <% end %>
+            </div>
+         </div>
+         <p>
+            <em><%= this_project.created_at.strftime("%e %b %Y %l:%M %p").to_s %></em>
+         </p>
+      </div>
+   </div>
+</div>
