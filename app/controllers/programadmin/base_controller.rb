@@ -8,5 +8,6 @@ class Programadmin::BaseController < ApplicationController
 
     @requests = Request.where(:organization_id => current_user.organization_id.to_s)
     @amtGiven = @requests.sum(:amount_awarded)
+    @awarded = @requests.where(:status => "Awarded")
   end
 end

@@ -120,6 +120,23 @@
                         </div>
                      <% end %>
 
+                     <% current_organization = Organization.where(:id => current_user.organization_id.to_s) %>
+                     <% if current_user.program_admin? && current_organization.count > 0 %>
+                        <%= link_to edit_organization_path(current_organization.first), :class => "list-group-item" do %>
+                           <div class="media-box">
+                              <div class="pull-left">
+                                 <em class="fa fa-building-o fa-2x text-primary"></em>
+                              </div>
+                              <div class="media-box-body clearfix">
+                                 <p class="m0">Edit Organization</p>
+                                 <p class="m0 text-muted">
+                                    <small>Preferences</small>
+                                 </p>
+                              </div>
+                           </div>
+                        <% end %>
+                     <% end %>
+                     
                      <%= link_to destroy_user_session_path, data:{method: :delete}, :class => "list-group-item" do %>
                         <div class="media-box">
                            <div class="pull-left">
@@ -133,6 +150,7 @@
                            </div>
                         </div>
                      <% end %>
+
                   </div>
                   <!-- END list group-->
                </li>

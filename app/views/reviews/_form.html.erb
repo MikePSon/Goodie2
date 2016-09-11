@@ -1,3 +1,4 @@
+<% cycleDestination = Cycle.where(:id => @cycleID).first %>
 <%= form_for(@review) do |f| %>
   <% if @review.errors.any? %>
     <div id="error_explanation">

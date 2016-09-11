@@ -2,10 +2,10 @@
 
 <div class="row">
   <% @projects.each do |project| %>
-  <% @projectCycles = Cycle.where(:project_id => project.id.to_s) %>
-  <% openCycles = @projectCycles.where(:status => "Open") %>
-  <% submittedRequests = Request.where(:organization_id => current_user.organization_id).where(:app_complete => true) %>
-  <% amountGiven = submittedRequests.sum(:amount_awarded).to_f %>
+    <% @projectCycles = Cycle.where(:project_id => project.id.to_s) %>
+    <% openCycles = @projectCycles.where(:status => "Open") %>
+    <% submittedRequests = Request.where(:organization_id => current_user.organization_id).where(:app_complete => true) %>
+    <% amountGiven = submittedRequests.sum(:amount_awarded).to_f %>
 
 
 
@@ -22,9 +22,11 @@
                     0 Open
                   </div>
                 <% end %>
-                <span style="position:relative;top:2px;right:-2px;">
-                  <%= link_to '<i class="icon-trash"></i>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, :style => "color:#f05050" %>
-                </span>
+                <% if @myOrg.manager_project_edit? %>
+                  <span style="position:relative;top:2px;right:-2px;">
+                    <%= link_to '<i class="icon-trash"></i>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, :style => "color:#f05050" %>
+                  </span>
+                <% end %>
             </div>
             <h4 class="m0"><%= project.name %></h4>
             <small class="text-muted"><%= project.mission %></small>
@@ -74,7 +76,9 @@
          </table>
          <div class="panel-footer text-center">
             <%= link_to 'View Project', project, :class => "btn btn-primary" %>
-            <%= link_to 'Manage Project', edit_project_path(project), :class => "btn btn-default" %>
+            <% if @myOrg.manager_project_edit? %>
+              <%= link_to 'Manage Project', edit_project_path(project), :class => "btn btn-default" %>
+            <% end %>
          </div>
       </div>
    </div>

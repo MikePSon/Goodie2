@@ -1,20 +1,20 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
   before_filter :require_noapplicant!
+  before_filter :only => :show do |thisOrg|
+    if !current_user.admin?
+      thisOrg.require_myorganization(params[:id])
+    end
+  end
   after_action :create_admin_user, only: [:create]
 
   # GET /organizations
   # GET /organizations.json
   def index
     if current_user.admin?
-      thisPage = "ORGANIZATION"
-      @title = "All Organizations"
-      @subtitle = "All information"
+      @test = "HELLOW"
       @organizations = Organization.all
     elsif current_user.program_admin?
-      thisPage = "ORGANIZATION"
-      @title = "Your Organization"
-      @subtitle = "Your organizations information"
       @organizations = Organization.where(:id => current_user.organization_id.to_s).first
     end
   end
@@ -33,7 +33,11 @@ class OrganizationsController < ApplicationController
       @primaryActionPath = edit_organization_path(@organization)
     end
 
-    @programAdmin = User.where(:organization_id => @organization.id).where(:program_admin => true).first
+    if !current_user.admin?
+      @programAdmin = User.where(:organization_id => @organization.id).where(:program_admin => true).first
+    else
+      @programAdmin = User.where(:organization_id => @organization.id).where(:id => @organization.created_by).first
+    end
     @organizationApplicants = User.where(:organization_id => @organization.id).where(:applicant => true)
     @organizationRequests = Request.where(:organization_id => @organization.id)
     @organizationProjects = Project.where(:organization_id => @organization.id)
@@ -106,6 +110,8 @@ class OrganizationsController < ApplicationController
       params.require(:organization).permit(
         :name,
         :motto,
+        :manager_decision,
+        :manager_project_edit,
         :created_by)
     end
 
