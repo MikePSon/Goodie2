@@ -14,7 +14,9 @@
 
    </div>
    <div class="col-lg-4">
-      <%= render 'cycle_breakdown' %>
+      <% if @cycle.status != "Planned" %>
+         <%= render 'cycle_breakdown' %>
+      <% end %>
    </div>
 </div>
 

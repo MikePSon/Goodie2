@@ -19,3 +19,4 @@
 //= require common
 // Removed ./angle for aside-collapsed bug. Not sure why I had to
 // require ./angle
+//= require ckeditor/init

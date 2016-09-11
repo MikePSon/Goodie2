@@ -34,6 +34,8 @@ module Goodie2
     config.time_zone = 'Eastern Time (US & Canada)'
 
 
+    # CKEditor, WYSIWYG
+    config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
     # setup bower components folder for lookup
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
     
