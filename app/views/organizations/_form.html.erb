@@ -22,9 +22,19 @@
       </div>
       <div class="field">
         <%= f.label :manager_decision %><br>
-        <%= f.check_box :manager_decision %>
+        <label class="switch">
+          <%= f.check_box :manager_decision %>
+          <span></span>
+        </label>
       </div>
-      <div class="field" style="display:none;">
+      <div class="field">
+        <%= f.label :manager_project_edit %><br>
+        <label class="switch">
+          <%= f.check_box :manager_project_edit %>
+          <span></span>
+        </label>
+      </div>
+      <div class="field" style="">
         <%= f.label :created_by %><br>
         <!-- Possibly buggy -->
         <%= f.text_field :created_by, :class => "form-control", :value => current_user.id %>

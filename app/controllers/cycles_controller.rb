@@ -1,6 +1,11 @@
 class CyclesController < ApplicationController
   before_action :set_cycle, only: [:show, :edit, :update, :destroy]
   before_filter :require_noapplicant!
+  before_filter :only => :show do |this_cycle|
+    if !current_user.admin?
+      this_cycle.require_mycycle(params[:id])
+    end
+  end
 
   # GET /cycles
   # GET /cycles.json
@@ -49,9 +54,8 @@ class CyclesController < ApplicationController
     end
 
     if @cycle.status == "Closed" && (current_user.program_admin? || current_user.program_manager?)
-      @toBeReviewed = Request.where(:cycle_id => @cycle.id).where(:status => "Under Review")
+      @toBeReviewed = @underReviewRequests
     end
-
 
     #Need to figure out DateTime Math
     @recentRequests = Request.where(:cycle_id => @cycle.id.to_s).where(submitted_date: (DateTime.now - 48.hours)..DateTime.now)

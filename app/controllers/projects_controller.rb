@@ -1,12 +1,17 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_filter :require_noapplicant!
+  before_filter :only => :show do |this_project|
+    if !current_user.admin?
+      this_project.require_myproject(params[:id])
+    end
+  end
 
   # GET /projects
   # GET /projects.json
   def index
-    myOrg = current_user.organization_id
-    @projects = Project.where(:organization_id => myOrg)
+    @myOrg = Organization.where(:id => current_user.organization_id.to_s).first
+    @projects = Project.where(:organization_id => @myOrg.id)
     @thisPage = "PROJECT"
     @title = "Projects"
     @subtitle = "All of your projects"
@@ -15,6 +20,14 @@ class ProjectsController < ApplicationController
       @primaryAction = true
       @primaryActionText = "New Project!"
       @primaryActionPath = new_project_path
+    end
+
+    if current_user.program_manager?
+      if @myOrg.manager_project_edit?
+        @primaryAction = true
+        @primaryActionText = "New Project!"
+        @primaryActionPath = new_project_path
+      end
     end
   end
 
@@ -102,7 +115,6 @@ class ProjectsController < ApplicationController
         :mission,
         :repeat_type,
         :cycle_budget,
-        question_attributes: [ :label, :id, :_destroy ],
         cycle_attributes: [ :name, :id, :_destroy ]
         )
     end

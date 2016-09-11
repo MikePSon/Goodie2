@@ -46,7 +46,6 @@ class ApplicationController < ActionController::Base
   # Only permits admin users
   def require_admin!
     authenticate_user!
-
     if current_user && !current_user.admin?
       redirect_to root_path
     end
@@ -55,16 +54,25 @@ class ApplicationController < ActionController::Base
 
   def require_programadmin!
     authenticate_user!
+    if current_user && !current_user.program_admin?
+      redirect_to root_path
+    end
   end
   helper_method :require_programadmin!
 
   def require_programmanager!
     authenticate_user!
+    if current_user && !current_user.program_manager?
+      redirect_to root_path
+    end
   end
   helper_method :require_programmanager!
 
   def require_applicant!
     authenticate_user!
+    if current_user && !current_user.applicant?
+      redirect_to root_path
+    end
   end
   helper_method :require_applicant!
 
@@ -75,5 +83,56 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :require_noapplicant!
+
+
+  # Validates that non-admins can only view their organization
+  def require_myorganization viewing_org_ID
+    viewing_org = viewing_org_ID.to_s
+    user_organization = Organization.where(:id => current_user.organization_id).first
+    if viewing_org != user_organization.id.to_s
+      puts "===== USER ATTEMPTED TO ACCESS INCORRECT ORGANIZATION ====="
+      redirect_to organization_path(user_organization)
+    end
+  end
+  helper_method :require_myorganization
+
+  #Validates that non admins can only see projects for their organization
+  def require_myproject viewing_project_id
+    viewing_project = viewing_project_id.to_s
+    org_projects = Project.where(:organization_id => current_user.organization_id)
+
+    allowed = false
+    org_projects.each do |this_project|
+      this_ID = this_project.id.to_s
+      if this_ID == viewing_project
+        allowed = true
+      end
+    end
+
+    if !allowed
+      redirect_to projects_path
+    end
+  end
+  helper_method :require_myproject
+
+  #Validates that non admins can only see projects for their organization
+  def require_mycycle viewing_cycle_id
+    puts "***** VERIFYING Cycle"
+    viewing_cycle = viewing_cycle_id.to_s
+    org_cycles = Cycle.where(:organization_id => current_user.organization_id)
+
+    allowed = false
+    org_cycles.each do |this_project|
+      this_ID = this_project.id.to_s
+      if this_ID == viewing_cycle
+        allowed = true
+      end
+    end
+
+    if !allowed
+      redirect_to cycles_path
+    end
+  end
+  helper_method :require_mycycle
 
 end

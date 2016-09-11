@@ -1,5 +1,3 @@
-//--- Sparklines
-//= require sparkline/index
 //--- Flot
 //= require Flot/jquery.flot
 //= require flot.tooltip/js/jquery.flot.tooltip.min
@@ -8,6 +6,8 @@
 //= require Flot/jquery.flot.time
 //= require Flot/jquery.flot.categories
 //= require flot-spline/js/jquery.flot.spline.min
+//--- Classyloader
+//= require angle/custom/jquery.classyloader.min
 //--- Moment
 //= require moment/min/moment-with-locales.min
 //--- jQuery Vector map (only dashboard v3)
