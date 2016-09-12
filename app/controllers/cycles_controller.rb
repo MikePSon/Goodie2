@@ -37,7 +37,7 @@ class CyclesController < ApplicationController
     @paymentRequests = @allRequests.where(:status => "Payment")
     @projectCompleteRequests = @allRequests.where(:status => "Project Complete")
 
-    @thisPage = "CYCLES"
+    @thisPage = "NULL"
     @title = @cycle.name
     @subtitle = @cycle.project.name
 
@@ -67,6 +67,7 @@ class CyclesController < ApplicationController
   # GET /cycles/new
   def new
     @cycle = Cycle.new
+    @thisPage = "NEWCYCLE"
   end
 
   # GET /cycles/1/edit

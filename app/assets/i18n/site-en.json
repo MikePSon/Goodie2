@@ -11,11 +11,6 @@
   },
   "sidebar": {
     "WELCOME": "Welcome",
-    "heading": {
-      "HEADER": "Main Navigation",
-      "COMPONENTS": "Components",
-      "MORE": "More"
-    },
     "nav": {
       "HELLO": "Hello",
       "DASHBOARD": "Dashboard",
@@ -27,70 +22,23 @@
       "NEWCYCLE": "New Cycle",
       "WIDGETS": "Widgets",
       "DOCUMENTATION": "Documentation",
-      "element": {
-        "ELEMENTS": "Elements",
-        "BUTTON": "Button",
-        "COLOR": "Colors",
-        "NOTIFICATION": "Notification",
-        "CAROUSEL": "Carousel",
-        "SPINNER": "Spinner",
-        "ANIMATION": "Animation",
-        "DROPDOWN": "Dropdown",
-        "PANEL": "Panel",
-        "PORTLET": "Portlet",
-        "GRID": "Grid",
-        "GRID_MASONRY": "Grid Masonry",
-        "TYPO": "Typography",
-        "FONT_ICON": "Font Icons",
-        "WEATHER_ICON": "Weather Icons"
-      },
-      "form": {
-        "FORM": "Forms",
-        "STANDARD": "Standard",
-        "EXTENDED": "Extended",
-        "VALIDATION": "Validation"
-      },
       "subtitles": {
         "PROJECT": "All of your projects"
-      },
-      "pagetitle": {
-        "PROJECT": "Projects"
-      },
-      "chart": {
-        "CHART": "Charts",
-        "FLOT": "Flot",
-        "RADIAL": "Radial"
-      },
-      "table": {
-        "TABLE": "Table",
-        "STANDARD": "Standard",
-        "EXTENDED": "Extended",
-        "DATATABLE": "Datatable"
-      },
-      "map": {
-        "MAP": "Maps",
-        "GOOGLE": "Google Map",
-        "VECTOR": "Vector Map"
-      },
-      "extra": {
-        "EXTRA": "Extras",
-        "MAILBOX": "Mailbox",
-        "TIMELINE": "Timeline",
-        "CALENDAR": "Calendar",
-        "INVOICE": "Invoice",
-        "SEARCH": "Search",
-        "TODO": "Todo List",
-        "PROFILE": "Profile"
-      },
-      "pages": {
-        "PAGES": "Pages",
-        "LOGIN": "Login",
-        "REGISTER": "Register",
-        "RECOVER": "Recover password",
-        "PROFILE": "Profile",
-        "LOCK": "Lock",
-        "STARTER": "Starter Template"
       }
     }
+  },
+  "pagetitle": {
+    "DASHBOARD": "Dashboard",
+    "PROJECT": "Projects",
+    "NEWPROJECT": "New Project",
+    "CYCLES": "Cycles",
+    "NEWCYCLE": "New Cycle"
+  },
+  "subtitle": {
+    "DASHBOARD": "Dashboard",
+    "PROJECT": "All of your projects",
+    "NEWPROJECT": "Start going good",
+    "CYCLES": "All of your cycles",
+    "NEWCYCLE": "The next cycle"
   }
 }

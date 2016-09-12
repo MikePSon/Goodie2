@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @cycles = Cycle.where(:project_id => @project.id)
-    @thisPage = "PROJECT"
+    @thisPage = "SHOWPROJECT"
     @title = @project.name
     @subtitle = @project.mission
 
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
-    @thisPage = "PROJECT"
+    @thisPage = "NEWPROJECT"
     @title = "New Project"
     @subtitle = "Create a new grant project here!"
   end
