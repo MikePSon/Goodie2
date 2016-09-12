@@ -20,8 +20,6 @@
       "REQUESTS": "Requests",
       "VIEWALL": "View All",
       "NEWCYCLE": "New Cycle",
-      "WIDGETS": "Widgets",
-      "DOCUMENTATION": "Documentation",
       "subtitles": {
         "PROJECT": "All of your projects"
       }
@@ -32,13 +30,35 @@
     "PROJECT": "Projects",
     "NEWPROJECT": "New Project",
     "CYCLES": "Cycles",
-    "NEWCYCLE": "New Cycle"
+    "NEWCYCLE": "New Cycle",
+    "EDITORGANIZATION": "Edit your organization"
   },
   "subtitle": {
     "DASHBOARD": "Dashboard",
     "PROJECT": "All of your projects",
     "NEWPROJECT": "Start going good",
     "CYCLES": "All of your cycles",
-    "NEWCYCLE": "The next cycle"
+    "NEWCYCLE": "The next cycle",
+    "EDITORGANIZATION": "Your preferences and settings"
+  },
+  "organization_form": {
+    "headers":{
+      "BASIC": "Basic",
+      "CONTACT": "Contact",
+      "ADVANCED": "Advanced",
+      "SETTINGS": "Settings",
+      "CREATE": "Create Organization",
+      "UPDATE": "Update Organization"
+    },
+    "fields": {
+      "NAME": "Name",
+      "MOTTO": "Motto",
+      "ADDRESS": "Address",
+      "CITY": "City",
+      "STATE": "State",
+      "ZIP": "Zip Code",
+      "MGRDECISION": "Manager Decision",
+      "MGREDIT": "Manager Project Edit"
+    }
   }
 }

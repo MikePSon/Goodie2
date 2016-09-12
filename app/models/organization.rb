@@ -8,9 +8,16 @@ class Organization
   has_many :review
 
   # Data
-  field :name,                     type: String
-  field :motto,                    type: String
-  field :created_by,               type: String
-  field :manager_decision,         type: Boolean
-  field :manager_project_edit,     type: Boolean
+  field :name,                      type: String
+  field :motto,                     type: String
+  field :url,                       type: String
+  field :address_1,                 type: String
+  field :address_2,                 type: String
+  field :city,                      type: String
+  field :state,                     type: String
+  field :zip,                       type: String
+
+  field :created_by,                type: String
+  field :manager_decision,          type: Boolean
+  field :manager_project_edit,      type: Boolean
 end
