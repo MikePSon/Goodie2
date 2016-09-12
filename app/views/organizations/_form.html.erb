@@ -10,39 +10,182 @@
       </ul>
     </div>
   <% end %>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <div class="field">
-        <%= f.label :name %><br>
-        <%= f.text_field :name, :class => "form-control" %>
+
+
+<div class="container-md">
+   <div class="row">
+      <div class="col-md-3">
+         <div class="panel b">
+            <div class="panel-heading bg-gray-lighter text-bold">
+               <span data-localize="organization_form.headers.SETTINGS">Settings</span>
+            </div>
+            <div class="list-group">
+               <a href="#basic" data-toggle="tab" class="list-group-item">
+                  <span data-localize="organization_form.headers.BASIC">Basic</span>
+               </a>
+               <a href="#contact" data-toggle="tab" class="list-group-item">
+                  <span data-localize="organization_form.headers.CONTACT">Contact</span>
+               </a>
+               <a href="#advanced" data-toggle="tab" class="list-group-item">
+                  <span data-localize="organization_form.headers.ADVANCED">Advanced</span>
+               </a>
+               <!--<a href="#tabSetting3" data-toggle="tab" class="list-group-item">Team</a>-->
+            </div>
+         </div>
+         <div class="row">
+          <div class="col-xs-12">
+            <div class="actions">
+               <%= button_tag(type: 'submit', class: "btn btn-success form-control") do %>
+               <% if params[:action] == "edit" %>
+                  <span data-localize="organization_form.headers.UPDATE">Update Organization</span>
+               <% else %>
+                  <span data-localize="organization_form.headers.CREATE">Create Organization</span>
+               <% end %>
+               <% end %>
+            </div>
+          </div>
+         </div>
       </div>
-      <div class="field">
-        <%= f.label :motto %><br>
-        <%= f.text_field :motto, :class => "form-control" %>
+      <div class="col-md-9">
+         <div class="tab-content p0 b0">
+            <div id="basic" class="tab-pane active">
+               <div class="panel b">
+                  <div class="panel-heading bg-gray-lighter text-bold">
+                     <span data-localize="organization_form.headers.BASIC">Basic</span>
+                  </div>
+                  <div class="panel-body">
+                     <form action="">
+                        <!--<div class="form-group">
+                           <label>Picture</label>
+                           <input type="file" data-input="false" data-classbutton="btn btn-default" data-classinput="form-control inline" data-buttontext="Upload new picture" data-iconname="fa fa-upload mr" class="form-control filestyle"
+                           />
+                        </div>-->
+                        <div class="form-group">
+                           <label>
+                              <span data-localize="organization_form.fields.NAME">Name</span>
+                           </label>
+                           <%= f.text_field :name, :class => "form-control", :required => true %>
+                        </div>
+                        <div class="form-group">
+                           <label>
+                              <span data-localize="organization_form.fields.MOTTO">Motto</span>
+                           </label>
+                           <%= f.text_field :motto, :class => "form-control" %>
+                        </div>
+                        <div class="form-group">
+                           <label>URL</label>
+                           <%= f.text_field :url, :class => "form-control" %>
+                        </div>
+                        <div class="form-group" style="display:none;">
+                           <%= f.label :created_by %><br>
+                           <!-- Possibly buggy -->
+                           <%= f.text_field :created_by, :class => "form-control", :value => current_user.id %>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <div id="contact" class="tab-pane">
+               <div class="panel b">
+                  <div class="panel-heading bg-gray-lighter text-bold">
+                     <span data-localize="organization_form.headers.CONTACT">Contact</span>
+                  </div>
+                  <div class="panel-body">
+                     <form action="">
+                        <div class="form-group">
+                           <label>
+                              <span data-localize="organization_form.fields.ADDRESS">Address</span> 1
+                           </label>
+                           <%= f.text_field :address_1, :class => "form-control" %>
+                        </div>
+                        <div class="form-group">
+                           <label>
+                              <span data-localize="organization_form.fields.ADDRESS">Address</span> 2
+                           </label>
+                           <%= f.text_field :address_2, :class => "form-control" %>
+                        </div>
+                        <div class="form-group">
+                           <label>
+                              <span data-localize="organization_form.fields.CITY">City</span>
+                           </label>
+                           <%= f.text_field :city, :class => "form-control" %>
+                        </div>
+                        <div class="form-group">
+                           <label>
+                              <span data-localize="organization_form.fields.STATE">State</span>
+                           </label>
+                           <%= f.select :state, options_for_select(us_states), {:selected => params[:id]}, :class => "form-control" %>
+                        </div>
+                        <div class="form-group">
+                           <label>
+                              <span data-localize="organization_form.fields.ZIP">Zip Code</span>
+                           </label>
+                           <%= f.text_field :zip, :class => "form-control" %>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <div id="advanced" class="tab-pane">
+               <div class="panel b">
+                  <div class="panel-heading bg-gray-lighter text-bold">
+                     <span data-localize="organization_form.headers.ADVANCED">Advanced</span>
+                  </div>
+                  <div class="panel-body">
+                     <form action="">
+                        <div class="field">
+                           <label>
+                              <span data-localize="organization_form.fields.MGRDECISION">Manager Decision</span>  <%= manager_decision_helper %>
+                           </label><br>
+                           <label class="switch">
+                              <%= f.check_box :manager_decision %>
+                              <span></span>
+                           </label>
+                        </div>
+                        <div class="field">
+                           <label>
+                              <span data-localize="organization_form.fields.MGREDIT">Manager Project Edit</span>  <%= manager_project_edit_helper %>
+                           </label><br>
+                           <label class="switch">
+                              <%= f.check_box :manager_project_edit %>
+                              <span></span>
+                           </label>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+               <!--<div class="panel b">
+                  <div class="panel-heading bg-danger text-bold">Delete account</div>
+                  <div class="panel-body bt">
+                     <p>You will be asked for confirmation before delete account.</p>
+                     <button type="button" class="btn btn-default">
+                        <span class="text-danger">Delete account</span>
+                     </button>
+                  </div>
+               </div>-->
+            </div>
+            <!--<div id="tabSetting3" class="tab-pane">
+               <div class="panel b">
+                  <div class="panel-heading bg-gray-lighter text-bold">Emails</div>
+                  <div class="panel-body">
+                     <p>Etiam eros nibh, condimentum in auctor et, aliquam quis elit. Donec id libero eros. Ut fringilla, justo id fringilla pretium, nibh nunc suscipit mauris, et suscipit nulla nisl ac dolor. Nam egestas, leo eu gravida tincidunt, sem ipsum
+                        pellentesque quam, vel iaculis est quam et eros.</p>
+                     <p>
+                        <strong>Your email addresses</strong>
+                     </p>
+                     <p>
+                        <span class="mr">email@someaddress.com</span>
+                        <span class="label label-success">primary</span>
+                     </p>
+                     <p>
+                        <span class="mr">another.email@someaddress.com</span>
+                        <span class="label bg-gray">private</span>
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>-->
       </div>
-      <div class="field">
-        <%= f.label :manager_decision %><br>
-        <label class="switch">
-          <%= f.check_box :manager_decision %>
-          <span></span>
-        </label>
-      </div>
-      <div class="field">
-        <%= f.label :manager_project_edit %><br>
-        <label class="switch">
-          <%= f.check_box :manager_project_edit %>
-          <span></span>
-        </label>
-      </div>
-      <div class="field" style="">
-        <%= f.label :created_by %><br>
-        <!-- Possibly buggy -->
-        <%= f.text_field :created_by, :class => "form-control", :value => current_user.id %>
-      </div>
-    </div>
-  </div>
-  
-  <div class="actions" style="margin-top:15px">
-    <%= f.submit :class => 'btn btn-success' %>
-  </div>
+   </div>
+</div>
 <% end %>

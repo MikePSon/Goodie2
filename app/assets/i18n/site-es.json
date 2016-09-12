@@ -20,8 +20,6 @@
       "REQUESTS": "Aplicaciónes",
       "VIEWALL": "Ver Todo",
       "NEWCYCLE": "Nuevo Ciclo",
-      "WIDGETS": "Widgets",
-      "DOCUMENTATION": "Documentación",
       "subtitles": {
         "PROJECT": "Todos sus proyectos"
       }
@@ -32,13 +30,35 @@
     "PROJECT": "Proyectos",
     "NEWPROJECT": "Nuevo proyecto",
     "CYCLES": "Ciclos",
-    "NEWCYCLE": "Nuevo ciclo"
+    "NEWCYCLE": "Nuevo ciclo",
+    "EDITORGANIZATION": "Editar su organización"
   },
   "subtitle": {
     "DASHBOARD": "Instrumentos de administración",
     "PROJECT": "Todos sus proyectos",
     "NEWPROJECT": "Empezar a hacer buen",
     "CYCLES": "Todos sus ciclos",
-    "NEWCYCLE": "El siguiente ciclo"
+    "NEWCYCLE": "El siguiente ciclo",
+    "EDITORGANIZATION": "Sus preferencias y ajustes"
+  },
+  "organization_form": {
+    "headers":{
+      "BASIC": "Básico",
+      "CONTACT": "Contacto",
+      "ADVANCED": "Superior",
+      "SETTINGS": "Configuración",
+      "CREATE": "Crear Organización",
+      "UPDATE": "Actualizar Organization"
+    },
+    "fields": {
+      "NAME": "Nombre",
+      "MOTTO": "Lema",
+      "ADDRESS": "Dirección",
+      "CITY": "Ciudad",
+      "STATE": "Estado",
+      "ZIP": "Código postal",
+      "MGRDECISION": "Administrador decisión",
+      "MGREDIT": "Proyecto administrador de edición"
+    }
   }
 }

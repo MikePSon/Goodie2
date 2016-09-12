@@ -56,6 +56,7 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1/edit
   def edit
+    @thisPage = "EDITORGANIZATION"
   end
 
   # POST /organizations
@@ -139,6 +140,8 @@ class OrganizationsController < ApplicationController
       params.require(:organization).permit(
         :name,
         :motto,
+        :url,
+        :address_1, :address_2, :city, :state, :zip, 
         :manager_decision,
         :manager_project_edit,
         :created_by)
