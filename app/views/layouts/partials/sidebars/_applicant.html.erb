@@ -19,8 +19,8 @@
          </li>
          <!-- End Sidebar Item -->
 
-         <li class="<%= 'active' if controller?('requests') %>">
-            <%= link_to requests_path do %>
+         <li class="<%= 'active' if controller?('applicant/requests') %>">
+            <%= link_to applicant_requests_path do %>
                <em class="icon-note"></em>
                <span data-localize="sidebar.nav.REQUESTS">Requests</span>
             <% end %>

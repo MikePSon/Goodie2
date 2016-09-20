@@ -7,12 +7,13 @@ class Cycle
   has_many :review
 
   # Data
-  field :admin_note,    type: String
-  field :name, 					type: String
-  field :status,				type: String
-  field :open,          type: DateTime
-  field :close,         type: DateTime
-  field :created_at,    type: DateTime, default: DateTime.now
+  field :admin_note,        type: String
+  field :name, 					    type: String
+  field :status,				    type: String
+  field :open,              type: DateTime
+  field :close,             type: DateTime
+  field :created_at,        type: DateTime, default: DateTime.now
+  field :one_application,   type: Boolean, default: true
 
   # Field for timeline. Array contains multiple objects
   field :is_cycle,      type: Boolean, default: true

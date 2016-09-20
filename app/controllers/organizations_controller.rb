@@ -144,6 +144,7 @@ class OrganizationsController < ApplicationController
         :address_1, :address_2, :city, :state, :zip, 
         :manager_decision,
         :manager_project_edit,
+        :annual_giving_goal,
         :created_by)
     end
 

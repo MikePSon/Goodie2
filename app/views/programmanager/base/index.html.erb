@@ -1,69 +1,131 @@
 <%= render 'layouts/partials/page_header' %>
 
 <div class="row">
-   <div class="col-lg-3 col-sm-6">
-      <!-- START widget-->
-      <div class="panel widget bg-primary">
-         <div class="row row-table">
-            <div class="col-xs-4 text-center bg-primary-dark pv-lg">
-               <em class="icon-cloud-upload fa-3x"></em>
-            </div>
-            <div class="col-xs-8 pv-lg">
-               <div class="h2 mt0"><%= @requests.count %></div>
-               <div class="text-uppercase">Applicaitons</div>
-            </div>
-         </div>
-      </div>
+   <%= render 'programmanager/base/partials/header_panels' %>
+</div>
+
+<div class="row">
+   <div class="col-lg-8 col-md-12">
+      <%= render 'programmanager/base/partials/completion_history' %>
    </div>
-   <div class="col-lg-3 col-sm-6">
-      <!-- START widget-->
-      <div class="panel widget bg-purple">
-         <div class="row row-table">
-            <div class="col-xs-4 text-center bg-purple-dark pv-lg">
-               <em class="fa fa-money fa-3x"></em>
-            </div>
-            <div class="col-xs-8 pv-lg">
-               <div class="h2 mt0"><%= @amtGiven %>
-                  <small>YTD</small>
-               </div>
-               <div class="text-uppercase">Given</div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <div class="col-lg-3 col-md-6 col-sm-12">
-      <!-- START widget-->
-      <div class="panel widget bg-green">
-         <div class="row row-table">
-            <div class="col-xs-4 text-center bg-green-dark pv-lg">
-               <em class="icon-bubbles fa-3x"></em>
-            </div>
-            <div class="col-xs-8 pv-lg">
-               <div class="h2 mt0"><%= @awards %></div>
-               <div class="text-uppercase">Grants</div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <div class="col-lg-3 col-md-6 col-sm-12">
-      <!-- START date widget-->
-      <div class="panel widget">
-         <div class="row row-table">
-            <div class="col-xs-4 text-center bg-green pv-lg">
-               <!-- See formats: https://docs.angularjs.org/api/ng/filter/date-->
-               <div data-now="" data-format="MMMM" class="text-sm"></div>
-               <br/>
-               <div data-now="" data-format="D" class="h2 mt0"></div>
-            </div>
-            <div class="col-xs-8 pv-lg">
-               <div data-now="" data-format="dddd" class="text-uppercase"></div>
-               <br/>
-               <div data-now="" data-format="h:mm" class="h2 mt0"></div>
-               <div data-now="" data-format="a" class="text-muted text-sm"></div>
-            </div>
-         </div>
-      </div>
-      <!-- END date widget    -->
+   <div class="col-lg-4 col-md-12">
+    <%= render "programmanager/base/partials/info_bank" %>
    </div>
 </div>
-<!-- END widgets box-->
+
+<div class="row">
+   <div class="col-lg-4">
+    <%= render "programmanager/base/partials/request_history" %>
+   </div>
+   <div class="col-lg-3">
+    <div class="row">
+      <div class="col-lg-12 col-md-6 col-sm-6">
+        <%= render 'programmanager/base/partials/monthly_completes' %>
+      </div>
+      <div class="col-lg-12 col-md-6 col-sm-6">
+        <%= render 'programmanager/base/partials/completion_rate' %>
+      </div>
+    </div>
+   </div>
+   <div class="col-lg-5">
+    <%= render "programmanager/base/partials/application_dispersion" %>
+   </div>
+</div>
+<script>
+// Morris
+// ----------------------------------- 
+
+(function(window, document, $, undefined){
+
+  $(function(){
+
+    if ( typeof Morris === 'undefined' ) return;
+
+    var cycle_data = [
+      <% @abbrev_cycles.each do |this_cycle| %>
+        <% this_requests = Request.where(:cycle_id => this_cycle.id) %>
+        { y: "<%= this_cycle.name %>", inc:<%=this_requests.where(:status=>"Incomplete").count%> , rej: <%=this_requests.where(:rejected=>true).count%>, acc: <%=this_requests.where(:accepted=>true).count%>, tot: <%=this_requests.count%>},
+      <% end %>
+    ];
+
+
+    // Bar Chart
+    // ----------------------------------- 
+    if( document.getElementById('cycle_chart') )
+      new Morris.Bar({
+        element: 'cycle_chart',
+        data: cycle_data,
+        xkey: 'y',
+        ykeys: ["inc", "rej", "acc"],
+        labels: ["Incomplete", "Rejected", "Accepted"],
+        xLabelMargin: 2,
+        barColors: [ 'rgba(0, 0, 0, 1)', 'rgba(240, 80, 80, 1)', 'rgba(39, 194, 76, 1)' ],
+        resize: true
+      });
+  
+    if( document.getElementById('request_timeline') )
+      new Morris.Line({
+        element: 'request_timeline',
+        data: cycle_data,
+        xkey: 'y',
+        ykeys: ["tot"],
+        labels: ["Requests"],
+        lineColors: ["#23b7e5"],
+        resize: true
+      });
+  });
+
+})(window, document, window.jQuery);
+
+
+
+
+
+
+
+(function(window, document, $, undefined){
+
+  $(function(){
+  
+    var element = $('[data-vector-map]');
+    
+    new VectorMap(element, seriesData, markersData);
+    
+  });
+
+  var seriesData = {
+    'CA': 11100,   // Canada
+    'DE': 2510,    // Germany
+    'FR': 3710,    // France
+    'AU': 5710,    // Australia
+    'GB': 8310,    // Great Britain
+    'RU': 9310,    // Russia
+    'BR': 6610,    // Brazil
+    'IN': 7810,    // India
+    'CN': 4310,    // China
+    'US': 839,     // USA
+    'SA': 410      // Saudi Arabia
+  };
+  
+  var markersData = [
+    { latLng:[41.90, 12.45],  name:'Vatican City'          },
+    { latLng:[43.73, 7.41],   name:'Monaco'                },
+    { latLng:[-0.52, 166.93], name:'Nauru'                 },
+    { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+    { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+    { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+    { latLng:[3.2,73.22],     name:'Maldives'              },
+    { latLng:[35.88,14.5],    name:'Malta'                 },
+    { latLng:[41.0,-71.06],   name:'New England'           },
+    { latLng:[12.05,-61.75],  name:'Grenada'               },
+    { latLng:[13.16,-59.55],  name:'Barbados'              },
+    { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+    { latLng:[-4.61,55.45],   name:'Seychelles'            },
+    { latLng:[7.35,134.46],   name:'Palau'                 },
+    { latLng:[42.5,1.51],     name:'Andorra'               }
+  ];
+
+
+})(window, document, window.jQuery);
+
+</script>

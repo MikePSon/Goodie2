@@ -20,4 +20,6 @@ class Organization
   field :created_by,                type: String
   field :manager_decision,          type: Boolean
   field :manager_project_edit,      type: Boolean
+
+  field :annual_giving_goal,        type: Integer
 end

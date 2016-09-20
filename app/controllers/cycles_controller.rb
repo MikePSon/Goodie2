@@ -131,6 +131,7 @@ class CyclesController < ApplicationController
         :open,
         :close,
         :admin_note,
+        :one_application,
         question_attributes: [ :label, :id, :_destroy ])
     end
 end

@@ -1,0 +1,34 @@
+<div class="col-lg-3 col-md-6 col-sm-12">
+
+   <%= render 'applicant/partials/panel', :bg_color => 'bg-primary', :icon => 'icon-refresh', :data => @org_cycles.count, :title => 'Open Cycles' %>
+   
+</div>
+<div class="col-lg-3 col-md-6 col-sm-12">
+   <% if @total_requested > 0 %>
+      <%= render 'applicant/partials/panel', :bg_color => 'bg-success', :icon => 'fa fa-money', :data => @total_requested, :title => 'Requested' %>
+   <% else %>
+   <% end %>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-12">
+   <%= render 'applicant/partials/panel', :bg_color => 'bg-warning', :icon => 'icon-star', :data => @total_awards.count, :title => 'Awards' %>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-12">
+   <!-- START date widget-->
+   <div class="panel widget">
+      <div class="row row-table">
+         <div class="col-xs-4 text-center bg-green pv-lg">
+            <!-- See formats: https://docs.angularjs.org/api/ng/filter/date-->
+            <div data-now="" data-format="MMMM" class="text-sm"></div>
+            <br/>
+            <div data-now="" data-format="D" class="h2 mt0"></div>
+         </div>
+         <div class="col-xs-8 pv-lg">
+            <div data-now="" data-format="dddd" class="text-uppercase"></div>
+            <br/>
+            <div data-now="" data-format="h:mm" class="h2 mt0"></div>
+            <div data-now="" data-format="a" class="text-muted text-sm"></div>
+         </div>
+      </div>
+   </div>
+   <!-- END date widget -->
+</div>
