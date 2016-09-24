@@ -31,7 +31,9 @@
     "NEWPROJECT": "Nuevo proyecto",
     "CYCLES": "Ciclos",
     "NEWCYCLE": "Nuevo ciclo",
-    "EDITORGANIZATION": "Editar su organización"
+    "EDITORGANIZATION": "Editar su organización",
+    "YOUR_REQUESTS": "Sus aplicaciónes",
+    "ORGREQUESTS": "Aplicaciónes"
   },
   "subtitle": {
     "DASHBOARD": "Instrumentos de administración",
@@ -39,7 +41,9 @@
     "NEWPROJECT": "Empezar a hacer buen",
     "CYCLES": "Todos sus ciclos",
     "NEWCYCLE": "El siguiente ciclo",
-    "EDITORGANIZATION": "Sus preferencias y ajustes"
+    "EDITORGANIZATION": "Sus preferencias y ajustes",
+    "YOUR_REQUESTS": "El bien que quiere hacer",
+    "ORGREQUESTS": "Su historial de aplicaciones"
   },
   "organization_form": {
     "headers":{
@@ -58,7 +62,8 @@
       "STATE": "Estado",
       "ZIP": "Código postal",
       "MGRDECISION": "Administrador decisión",
-      "MGREDIT": "Proyecto administrador de edición"
+      "MGREDIT": "Proyecto administrador de edición",
+      "GIVINGGOAL": "Donación meta anual"
     }
   }
 }

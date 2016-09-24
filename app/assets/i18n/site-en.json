@@ -31,7 +31,9 @@
     "NEWPROJECT": "New Project",
     "CYCLES": "Cycles",
     "NEWCYCLE": "New Cycle",
-    "EDITORGANIZATION": "Edit your organization"
+    "EDITORGANIZATION": "Edit your organization",
+    "YOUR_REQUESTS": "Your Requests",
+    "ORGREQUESTS": "Requests"
   },
   "subtitle": {
     "DASHBOARD": "Dashboard",
@@ -39,7 +41,9 @@
     "NEWPROJECT": "Start going good",
     "CYCLES": "All of your cycles",
     "NEWCYCLE": "The next cycle",
-    "EDITORGANIZATION": "Your preferences and settings"
+    "EDITORGANIZATION": "Your preferences and settings",
+    "YOUR_REQUESTS": "The good you want to do",
+    "ORGREQUESTS": "Your request history"
   },
   "organization_form": {
     "headers":{
@@ -58,7 +62,8 @@
       "STATE": "State",
       "ZIP": "Zip Code",
       "MGRDECISION": "Manager Decision",
-      "MGREDIT": "Manager Project Edit"
+      "MGREDIT": "Manager Project Edit",
+      "GIVINGGOAL": "Annual Giving Goal"
     }
   }
 }

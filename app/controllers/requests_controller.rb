@@ -5,49 +5,22 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @orgCycles = Cycle.where(:organization_id => current_user.organization_id)
-    @yourStartedRequests = Request.where(:user_id => current_user.id.to_s).where(:status => "Created")
-    @yourRequests = Request.where(:user_id => current_user.id.to_s)
-    @yourOrg = Organization.where(:id => current_user.organization_id.to_s).first
-
-    @totalApplicants = User.where(:organization_id => current_user.organization_id).where(:applicant => true).count
-    @openCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Open")
-    @plannedCycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Planned")
-
-    #All Views
-    @requests = Request.all
-
-    #Program Admin
-    if current_user.program_admin?
-      @thisPage = "REQUEST"
-      @title = "Requests"
-      @subtitle = "Requests for " + @yourOrg.name
-      @primaryAction = true
-      if @yourRequests.count == 0
-        @primaryActionText = "New Request"
-        @primaryActionPath = new_request_path
-      else
-        @primaryActionText = "Your cycles"
-        @primaryActionPath = cycles_path
-      end
-
-      @all_cycles = Cycle.where(:organization_id => current_user.organization_id)
-      @open_cycles = @all_cycles.where(:status => "Open")
-      @closed_cycles = @all_cycles.where(:status => "Closed")
-    end
-
-    if current_user.program_manager || current_user.applicant?
-      @thisPage = "REQUEST"
-      @title = "Your requests"
-      @subtitle = "All requests"
-    end
+    @thisPage = "ORGREQUESTS"
+    
+    if !current_user.admin || !current_user.applicant
+      @thisPage = "ORGREQUESTS"
+      @organization_requests = Request.where(:organization_id => current_user.organization_id.to_s)
+      @all_projects = Project.where(:organization_id => current_user.organization_id.to_s)
+      @planned_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Planned").order(created_at: :desc)
+      @open_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open").order(open: :asc)
+      @closed_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Closed").order(close: :desc) 
 
 
-    if current_user.applicant? && @yourRequests.count == 0 && @openCycles.count > 0
-      @primaryAction = true
-      @primaryActionText = "New Request!"
-      @primaryActionPath = new_request_path
-    end
+
+
+    end #End Program Admin/Mgr Stuff
+
+
   end
 
   # GET /requests/1
@@ -185,7 +158,11 @@ class RequestsController < ApplicationController
   def destroy
     @request.destroy
     respond_to do |format|
-      format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
+      if current_user.applicant?
+        format.html { redirect_to applicant_requests_path, notice: 'Request was successfully destroyed.' }
+      else
+        format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
+      end
       format.json { head :no_content }
     end
   end
@@ -222,7 +199,15 @@ class RequestsController < ApplicationController
         puts "BROKE"
         return false
       end
+    end
 
+    def get_completion_rate cycle
+      requests_all = @organization_requests.where(:cycle_id => cycle.id)
+      requests_incomplete = requests_all.where(:status => "Incomplete").count
+      requests_all_count = requests_all.count
+      completion_rate = ((requests_all_count - requests_incomplete).to_f / requests_all_count.to_f).round(2)
+      completion_rate = (completion_rate * 100).to_i
+      return completion_rate
     end
 
 end

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   end
   namespace :applicant do
     root :to => 'base#index', as: :dash
+    resources :requests
   end
 
   # api routes

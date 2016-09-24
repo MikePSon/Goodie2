@@ -12,7 +12,10 @@
    <div class="panel-body bb">
       <div class="table-grid table-grid-align-middle mv">
          <span>Status Breakdown</span>
-         <%= content_tag :div, "", id: "status_donut" %> 
+         <%= content_tag :div, "", :class => "status_graph", id: "name" %>
+         <script>
+            $(document).ready(function(){ $('.status_graph').attr('id', '<%= name %>')})
+         </script> 
       </div>
    </div>
    <!--<div class="panel-body"></div>-->

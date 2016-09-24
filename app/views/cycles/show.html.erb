@@ -14,8 +14,12 @@
 
    </div>
    <div class="col-lg-4">
-      <% if @cycle.status != "Planned" %>
-         <%= render 'cycle_breakdown' %>
+      <% if @cycle.status == "Open" %>
+         <% @donut_name = "open_donut" %>
+         <%= render 'cycle_breakdown', :name => @donut_name %>
+      <% elsif @cycle.status = "Closed" %>
+         <% @donut_name = "closed_donut" %>
+         <%= render 'cycle_breakdown', :name => @donut_name %>
       <% end %>
    </div>
 </div>
@@ -28,7 +32,7 @@
    ];
    $(document).ready(function(){
    new Morris.Donut({
-      element: 'status_donut',
+      element: 'open_donut',
       data: donutData,
       colors: [ '#5d9cec', '#27c24c' ],
       resize: true
@@ -48,7 +52,7 @@
 <% end %>
 $(document).ready(function(){
    new Morris.Donut({
-      element: 'status_donut',
+      element: 'closed_donut',
       data: donutData,
       colors: [ '#5d9cec', '#000', '#ff902b', '#f05050', '#27c24c', '#F62459', '#6C7A89' ],
       resize: true

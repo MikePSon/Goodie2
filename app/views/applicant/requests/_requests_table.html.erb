@@ -1,0 +1,34 @@
+
+<div id="panelDemo8" class="panel panel-primary">
+	<div class="panel-heading">Your Requests</div>
+	<div class="panel-body">
+		<table class="table table-striped table-hover table-condensed" id="my_cycle_table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Deadline</th>
+					<th>Status</th>
+					<th colspan="1">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% requests.each do |request| %>
+				<tr>
+					<td><%= request.title %></td>
+					<td>
+						<%= Cycle.where(:id => request.cycle_id.to_s).first.close.strftime("%e %b %Y %l:%M %p").to_s %>
+					</td>
+					<td>
+						<div class="label label-<%= request_color(request.status) %>">
+							<%= request.status %>
+						</div>
+					</td>
+					<td>
+						<%= render 'request_actions', :request => request %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

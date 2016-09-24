@@ -1,4 +1,8 @@
 module CyclesHelper
+	def one_application_helper
+		raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="One Application?" data-content="Does your program only allow an applicant to apply once per cycle?"> </i>')
+	end
+
 	def status_color status
 		if status == "planned"
 			outputColor = "info"

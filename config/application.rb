@@ -51,6 +51,7 @@ module Goodie2
     config.assets.precompile += %w( angle.js )
 
     # Precompile Assets
+    config.assets.precompile += %w( jquery.min.js )
     config.assets.precompile += %w( base.js )
     config.assets.precompile += %w( pages.js )
     config.assets.precompile += %w( projects.js )
@@ -60,6 +61,7 @@ module Goodie2
     config.assets.precompile += %w( organizations.js ) 
     config.assets.precompile += %w( devise/*.js )
     config.assets.precompile += %w( applicant/base.js )
+    config.assets.precompile += %w( applicant/requests.js )
     config.assets.precompile += %w( programadmin/base.js )
     config.assets.precompile += %w( programmanager/base.js )
 
@@ -72,6 +74,7 @@ module Goodie2
     config.assets.precompile += %w( organizations.css ) 
     config.assets.precompile += %w( devise/*.css )
     config.assets.precompile += %w( applicant/base.css )
+    config.assets.precompile += %w( applicant/requests.css )
     config.assets.precompile += %w( programadmin/base.css )
     config.assets.precompile += %w( programmanager/base.css )
 

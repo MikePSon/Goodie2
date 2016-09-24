@@ -22,6 +22,8 @@ class Request
   field :submitted_date,          type: DateTime
 
   field :amount_awarded,          type: Float
+  field :awarded,                 type: Boolean
+  field :rejected,                type: Boolean
 
   # Validate Submitted Status
   before_save :check_submitted

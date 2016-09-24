@@ -1,12 +1,30 @@
 <%= render 'layouts/partials/page_header' %>
 
+<table class="table table-condensed" id="request_index_table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Requested</th>
+      <th>Cycle</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-
-<% if @current_user.admin? %>
-  <%= render 'applicant' %>
-<% elsif current_user.program_admin? %>
-  <%= render 'program_admin_view' %>
-<% elsif current_user.applicant? %>
-  <%= render 'applicant' %>
-<% end %>
+  <tbody>
+    <% @organization_requests.each do |request| %>
+      <tr>
+        <td><%= request.title %></td>
+        <td><%= request.status %></td>
+        <td><%= request.amount_requested %></td>
+        <td><%= Cycle.where(:id => request.cycle_id.to_s).first.name %></td>
+        <td><%= link_to 'Show', request %></td>
+        <td><%= link_to 'Edit', edit_request_path(request) %></td>
+        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 

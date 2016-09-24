@@ -49,4 +49,18 @@ module ApplicationHelper
   def action?(*action)
     action.include?(params[:action])
   end
+
+  def progress_indicator(amount)
+    if amount <= 59
+      outputColor = "danger"
+    elsif amount > 59 && amount <= 69
+      outputColor = "warning"
+    elsif amount > 69 && amount <= 79
+      outputColor = "primary"
+    elsif amount > 79 && amount <= 89
+      outputColor = "info"
+    else
+      outputColor = "success"
+    end
+  end
 end

@@ -1,0 +1,15 @@
+<% if request.status == "Created" %>
+	<%= link_to edit_request_path(request) do %>
+		<i class="icon-pencil"></i>
+	<% end %>
+	<%= link_to request_path(request) do %>
+		<i class="icon-magnifier"></i>
+	<% end %>
+	<%= link_to request, method: :delete, data: { sweetalert: 'Are you sure?' } do %>
+		<i class="icon-trash"></i>
+	<% end %>
+<% else %>
+	<%= link_to request_path(request) do %>
+		<i class="icon-magnifier"></i>
+	<% end %>
+<% end %>
