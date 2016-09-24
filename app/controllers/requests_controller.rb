@@ -13,9 +13,14 @@ class RequestsController < ApplicationController
       @all_projects = Project.where(:organization_id => current_user.organization_id.to_s)
       @planned_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Planned").order(created_at: :desc)
       @open_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open").order(open: :asc)
-      @closed_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Closed").order(close: :desc)
-    elsif current_user.applicant
-    end
+      @closed_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Closed").order(close: :desc) 
+
+
+
+
+    end #End Program Admin/Mgr Stuff
+
+
   end
 
   # GET /requests/1
