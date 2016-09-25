@@ -4,6 +4,9 @@
   <thead>
     <tr>
       <th>Name</th>
+      <% if current_user.admin? %>
+      <th>Organization</th>
+      <% end %>
       <th>Status</th>
       <th>Requested</th>
       <th>Cycle</th>
@@ -17,6 +20,9 @@
     <% @organization_requests.each do |request| %>
       <tr>
         <td><%= request.title %></td>
+        <% if current_user.admin? %>
+        <td><%= Organization.where(:id => request.organization_id).first.name %></td>
+        <% end %>
         <td><%= request.status %></td>
         <td><%= request.amount_requested %></td>
         <td><%= Cycle.where(:id => request.cycle_id.to_s).first.name %></td>

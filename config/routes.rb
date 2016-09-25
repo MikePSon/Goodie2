@@ -11,8 +11,6 @@ Rails.application.routes.draw do
     get 'new_applicant', :to => 'devise/registrations#new_applicant'
   end
 
-  root "pages#home"
-
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
   
@@ -22,6 +20,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, :cycles
+    root :to => 'base#index', as: :dash
 
     get "posts/drafts", to: "posts#drafts", as: "posts_drafts"
     get "posts/dashboard", to: "posts#dashboard", as: "posts_dashboard"
@@ -38,6 +37,8 @@ Rails.application.routes.draw do
     root :to => 'base#index', as: :dash
     resources :requests
   end
+
+  root "pages#home"
 
   # api routes
   get '/api/documentation' => 'api#documentation'

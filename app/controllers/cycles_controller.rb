@@ -33,7 +33,7 @@ class CyclesController < ApplicationController
     @reopenedRequests = @allRequests.where(:status => "Re-Opened")
     @underReviewRequests = @allRequests.where(:status => "Under Review")
     @closedRequests = @allRequests.where(:status => "Closed")
-    @awardedRequests = @allRequests.where(:status => "Awarded")
+    @awardedRequests = @allRequests.where(:accepted => true)
     @paymentRequests = @allRequests.where(:status => "Payment")
     @projectCompleteRequests = @allRequests.where(:status => "Project Complete")
 
@@ -54,7 +54,12 @@ class CyclesController < ApplicationController
     end
 
     if @cycle.status == "Closed" && (current_user.program_admin? || current_user.program_manager?)
-      @toBeReviewed = @underReviewRequests
+      if @underReviewRequests.count > 0
+        @requests_for_cycle = @underReviewRequests
+      else
+        @requests_for_cycle = @awardedRequests
+      end
+
     end
 
     #Need to figure out DateTime Math
@@ -95,6 +100,9 @@ class CyclesController < ApplicationController
   # PATCH/PUT /cycles/1.json
   def update
     respond_to do |format|
+      if cycle_params[:status] == "Closed"
+        close_requests(@cycle)
+      end
       if @cycle.update(cycle_params)
         format.html { redirect_to @cycle, notice: 'Cycle was successfully updated.' }
         format.json { render :show, status: :ok, location: @cycle }
@@ -133,5 +141,17 @@ class CyclesController < ApplicationController
         :admin_note,
         :one_application,
         question_attributes: [ :label, :id, :_destroy ])
+    end
+
+    def close_requests cycle
+      puts "***** THIS IS RUNNING *****"
+      requests = Request.where(:cycle_id => cycle.id.to_s)
+      requests.each do |this_request|
+        if this_request.app_complete?
+          this_request.update(:status => "Under Review")
+        else
+          this_request.update(:status => "Incomplete")
+        end
+      end
     end
 end

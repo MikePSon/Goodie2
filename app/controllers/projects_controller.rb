@@ -10,25 +10,34 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @myOrg = Organization.where(:id => current_user.organization_id.to_s).first
-    @projects = Project.where(:organization_id => @myOrg.id)
     @thisPage = "PROJECT"
-    @title = "Projects"
-    @subtitle = "All of your projects"
 
-    if current_user.program_admin || current_user.admin
+    if current_user.admin?
       @primaryAction = true
       @primaryActionText = "New Project!"
       @primaryActionPath = new_project_path
-    end
+      @projects = Project.all
+    end #End Sysadmin functions
 
-    if current_user.program_manager?
-      if @myOrg.manager_project_edit?
+    if current_user.program_admin? || current_user.program_manager?
+      @myOrg = Organization.where(:id => current_user.organization_id.to_s).first
+      @projects = Project.where(:organization_id => @myOrg.id)
+      submittedRequests = Request.where(:organization_id => current_user.organization_id).where(:app_complete => true)
+
+      if current_user.program_admin?
         @primaryAction = true
         @primaryActionText = "New Project!"
         @primaryActionPath = new_project_path
-      end
-    end
+      end #End Program Admin
+
+      if current_user.program_manager?
+        if @myOrg.manager_project_edit?
+          @primaryAction = true
+          @primaryActionText = "New Project!"
+          @primaryActionPath = new_project_path
+        end
+      end #End Program Manager
+    end #End nonsys admin functions
   end
 
   # GET /projects/1

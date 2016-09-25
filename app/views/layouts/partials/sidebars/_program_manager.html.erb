@@ -13,7 +13,7 @@
 
          <li class="<%= 'active' if controller?('programmanager/base') %>">
             <%= link_to programmanager_dash_path do %>
-               <em class="icon-speedometer"></em>
+               <em class="<%= get_icon('dashboard') %>"></em>
                <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
             <% end %>
          </li>
@@ -22,7 +22,7 @@
          <li class="<%= 'active' if controller?('organizations') %>">
             <% userOrg = Organization.where(:id => current_user.organization_id).first %>
             <%= link_to organization_path(userOrg.id) do %>
-               <em class="fa fa-building-o"></em>
+               <em class="<%= get_icon('organization') %>"></em>
                <span><%= userOrg.name %></span>
             <% end %>
          </li>
@@ -30,7 +30,7 @@
 
          <li class="<%= 'active' if controller?('projects') %>">
             <%= link_to projects_path do %>
-               <em class="fa fa-file-text-o"></em>
+               <em class="<%= get_icon('project') %>"></em>
                <span data-localize="sidebar.nav.PROJECTS">Projects</span>
             <% end %>
          </li>
@@ -38,7 +38,7 @@
 
          <li class="<%= 'active' if controller?('cycles') %>">
             <%= link_to cycles_path do %>
-               <em class="icon-refresh"></em>
+               <em class="<%= get_icon('Cycle') %>"></em>
                <span data-localize="sidebar.nav.CYCLES">Cycles</span>
             <% end %>
          </li>
@@ -46,7 +46,7 @@
 
          <li class="<%= 'active' if controller?('requests') %>">
             <%= link_to requests_path do %>
-               <em class="icon-note"></em>
+               <em class="<%= get_icon('Request') %>"></em>
                <span data-localize="sidebar.nav.REQUESTS">Requests</span>
             <% end %>
          </li>

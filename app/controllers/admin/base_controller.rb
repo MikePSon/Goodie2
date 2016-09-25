@@ -2,9 +2,17 @@ class Admin::BaseController < ApplicationController
   before_filter :require_admin!
 
   def index
-    @last_signups = User.last_signups(10)
-    @last_signins = User.last_signins(10)
-    @count = User.users_count
-    @post_count = Post.count
+    @test = "Hello"
+    @requests = Request.all
+    @thisPage = "ADMINDASH"
+
+    @total_amt_given = 0.0
+    @total_awards = 0
+    @requests.each do |thisRequest|
+    	@total_amt_given += thisRequest.amount_awarded
+    	if thisRequest.awarded?
+    		@total_awards += 1
+    	end
+    end #End all requests loop
   end
 end

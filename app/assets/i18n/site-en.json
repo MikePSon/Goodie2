@@ -33,7 +33,9 @@
     "NEWCYCLE": "New Cycle",
     "EDITORGANIZATION": "Edit your organization",
     "YOUR_REQUESTS": "Your Requests",
-    "ORGREQUESTS": "Requests"
+    "ORGREQUESTS": "Requests",
+    "ADMINORGANIZATION": "Organizations",
+    "ADMINDASH": "Goodie 2"
   },
   "subtitle": {
     "DASHBOARD": "Dashboard",
@@ -43,7 +45,9 @@
     "NEWCYCLE": "The next cycle",
     "EDITORGANIZATION": "Your preferences and settings",
     "YOUR_REQUESTS": "The good you want to do",
-    "ORGREQUESTS": "Your request history"
+    "ORGREQUESTS": "Your request history",
+    "ADMINORGANIZATION": "Who's doing good?",
+    "ADMINDASH": "What's good?"
   },
   "organization_form": {
     "headers":{
@@ -64,6 +68,9 @@
       "MGRDECISION": "Manager Decision",
       "MGREDIT": "Manager Project Edit",
       "GIVINGGOAL": "Annual Giving Goal"
+    },
+    "buttons": {
+      "NEWPROJECT": "New Project!"
     }
   }
 }

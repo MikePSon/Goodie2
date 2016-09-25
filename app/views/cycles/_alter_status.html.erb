@@ -9,8 +9,18 @@
 			<%= f.submit "Open", :class => "btn btn-success btn-xs" %>
 		<% end %>
 	<% elsif @cycle.status == "Open" %>
-		<%= form_for(@cycle) do |f| %> <%= f.hidden_field :status, value: "Closed" %> <%= f.submit "Close", :class => "btn btn-danger btn-xs" %><% end %>
+
+		<%= form_for(@cycle) do |f| %>
+			<%= f.hidden_field :status, value: "Closed" %>
+		<%= f.submit "Close", :class => "btn btn-danger btn-xs" %>
+
+		<% end %>
+
+
+
+		<% if 1==2 # Commenting out pause function pending further development %>
 		<%= form_for(@cycle) do |f| %> <%= f.hidden_field :status, value: "Paused" %> <%= f.submit "Pause", :class => "btn btn-warning btn-xs" %><% end %>
+		<% end %>
 	
 	<% elsif @cycle.status == "Paused" %>
 		<%= form_for(@cycle) do |f| %>

@@ -26,6 +26,5 @@ require File.expand_path(File.dirname(__FILE__) + "/environment")
 
 every 15.minutes do
 	Rails.logger = Logger.new(STDOUT)
-	Rails.logger.debug "===== OPEN/CLOSE RUNNING ====="
 	rake "cycles:open_close_cycles", :environment => "development", :output => "log/cron_log.log"
 end

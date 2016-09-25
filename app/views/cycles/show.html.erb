@@ -14,12 +14,14 @@
 
    </div>
    <div class="col-lg-4">
-      <% if @cycle.status == "Open" %>
-         <% @donut_name = "open_donut" %>
-         <%= render 'cycle_breakdown', :name => @donut_name %>
-      <% elsif @cycle.status = "Closed" %>
-         <% @donut_name = "closed_donut" %>
-         <%= render 'cycle_breakdown', :name => @donut_name %>
+      <% if @cycle.status != "Planned" %>
+         <% if @cycle.status == "Open" %>
+            <% @donut_name = "open_donut" %>
+            <%= render 'cycle_breakdown', :name => @donut_name %>
+         <% elsif @cycle.status = "Closed" %>
+            <% @donut_name = "closed_donut" %>
+            <%= render 'cycle_breakdown', :name => @donut_name %>
+         <% end %>
       <% end %>
    </div>
 </div>
@@ -41,21 +43,37 @@
 
 <% elsif @cycle.status == "Closed" %>
    var donutData = [
+
+      <% if @submittedRequests.count > 0 %>
       {label: "Submitted",value: <%= @submittedRequests.count %>},
+      <% end %>
+      <% if @incompleteRequests.count > 0 %>
       {label: "Incomplete", value: <%= @incompleteRequests.count %>},
+      <% end %>
+      <% if @underReviewRequests.count > 0 %>
       {label: "Under Review", value: <%= @underReviewRequests.count %>},
+      <% end %>
+      <% if @closedRequests.count > 0 %>
       {label: "Closed", value: <%= @closedRequests.count %>},
+      <% end %>
+      <% if @awardedRequests.count > 0 %>
       {label: "Awarded", value: <%= @awardedRequests.count %>},
+      <% end %>
+      <% if @paymentRequests.count > 0 %>
       {label: "Payment", value: <%= @paymentRequests.count %>},
-      {label: "Complete", value: <%= @projectCompleteRequests.count %>}
+      <% end %>
+      <% if @projectCompleteRequests.count > 0 %>
+      {label: "Complete", value: <%= @projectCompleteRequests.count %>},
+      <% end %>
    ];
-<% end %>
-$(document).ready(function(){
-   new Morris.Donut({
-      element: 'closed_donut',
-      data: donutData,
-      colors: [ '#5d9cec', '#000', '#ff902b', '#f05050', '#27c24c', '#F62459', '#6C7A89' ],
-      resize: true
+   $(document).ready(function(){
+      new Morris.Donut({
+         element: 'closed_donut',
+         data: donutData,
+         colors: [ '#5d9cec', '#000', '#f05050', '#27c24c', '#ff902b', '#F62459', '#6C7A89' ],
+         resize: true
+      });
    });
-})
+<% end %>
+
 </script>

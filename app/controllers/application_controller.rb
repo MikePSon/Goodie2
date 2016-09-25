@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   # Redirects on successful sign in
   def after_sign_in_path_for(resource)
     if resource.admin?
-      inside_path
+      admin_dash_path
     elsif resource.program_admin?
       programadmin_dash_path
     elsif resource.program_manager?
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   def require_admin!
     authenticate_user!
     if current_user && !current_user.admin?
-      redirect_to root_path
+      redirect_to admin_dash_path
     end
   end
   helper_method :require_admin!
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   def require_programadmin!
     authenticate_user!
     if current_user && !current_user.program_admin?
-      redirect_to root_path
+      redirect_to programadmin_dash_path
     end
   end
   helper_method :require_programadmin!
@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   def require_programmanager!
     authenticate_user!
     if current_user && !current_user.program_manager?
-      redirect_to root_path
+      redirect_to programmanager_dash_path
     end
   end
   helper_method :require_programmanager!
@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   def require_applicant!
     authenticate_user!
     if current_user && !current_user.applicant?
-      redirect_to root_path
+      redirect_to applicant_dash_path
     end
   end
   helper_method :require_applicant!

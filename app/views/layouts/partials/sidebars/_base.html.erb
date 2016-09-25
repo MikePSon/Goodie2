@@ -11,9 +11,17 @@
             <span>Base Navigation</span>
          </li>
 
+         <li class="<%= 'active' if controller?('admin/base') %>">
+            <%= link_to admin_dash_path do %>
+               <em class="<%= get_icon('dashboard') %>"></em>
+               <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+            <% end %>
+         </li>
+         <!-- End Sidebar Item -->
+
          <li class="<%= 'active' if controller?('organizations') %>">
             <%= link_to organizations_path do %>
-               <em class="fa fa-building-o"></em>
+               <em class="<%= get_icon('Organization') %>"></em>
                <span data-localize="sidebar.nav.ORGANIZATION">Organizations</span>
             <% end %>
          </li>
@@ -21,7 +29,7 @@
 
          <li class="<%= 'active' if controller?('projects') %>">
             <%= link_to projects_path do %>
-               <em class="fa fa-file-text-o"></em>
+               <em class="<%= get_icon('project') %>"></em>
                <span data-localize="sidebar.nav.PROJECTS">Projects</span>
             <% end %>
          </li>
@@ -29,7 +37,7 @@
 
          <li class="<%= 'active' if controller?('cycles') %>">
             <%= link_to cycles_path do %>
-               <em class="icon-refresh"></em>
+               <em class="<%= get_icon('CYCLE') %>"></em>
                <span data-localize="sidebar.nav.CYCLES">Cycles</span>
             <% end %>
          </li>
@@ -37,7 +45,7 @@
 
          <li class="<%= 'active' if controller?('requests') %>">
             <%= link_to requests_path do %>
-               <em class="icon-note"></em>
+               <em class="<%= get_icon('Request') %>"></em>
                <span data-localize="sidebar.nav.REQUESTS">Requests</span>
             <% end %>
          </li>

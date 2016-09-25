@@ -62,6 +62,7 @@ module Goodie2
     config.assets.precompile += %w( devise/*.js )
     config.assets.precompile += %w( applicant/base.js )
     config.assets.precompile += %w( applicant/requests.js )
+    config.assets.precompile += %w( admin/base.js )
     config.assets.precompile += %w( programadmin/base.js )
     config.assets.precompile += %w( programmanager/base.js )
 
@@ -77,6 +78,7 @@ module Goodie2
     config.assets.precompile += %w( applicant/requests.css )
     config.assets.precompile += %w( programadmin/base.css )
     config.assets.precompile += %w( programmanager/base.css )
+    config.assets.precompile += %w( admin/base.css )
 
 
     # precompile themes
