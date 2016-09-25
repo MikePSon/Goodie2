@@ -53,11 +53,11 @@ class RequestsController < ApplicationController
       @requestReviews = Review.where(:request_id => @request.id).where(:review_complete => true)
       mgrDecision = Organization.where(:id => @request.organization_id).first.manager_decision
       myReview = @requestReviews.where(:user_id => current_user.id)
-      if myReview.count == 0
-        @primaryAction = true
-        @primaryActionText = "Review"
-        @primaryActionPath = new_review_path #Needs to include params for review form
-      elsif myReview.count == 1 && !myReview.first.review_complete
+      # if myReview.count == 0
+      #   @primaryAction = true
+      #   @primaryActionText = "Review"
+      #   @primaryActionPath = new_review_path #Needs to include params for review form
+      if myReview.count == 1 && !myReview.first.review_complete
         @primaryAction = true
         @primaryActionText = "Review"
         @primaryActionPath = edit_review_path(myReview.first)
@@ -187,16 +187,10 @@ class RequestsController < ApplicationController
     end
 
     def application_submitted request
-      puts "========== THE FUNCTION ACTUALLY RAN =========="
-      puts '***** request.app_complete: ' + request[:app_complete].to_s + " *****"
       requestComplete = request[:app_complete]
-      puts "APP_Complete: " + requestComplete.to_s
-
       if requestComplete == "1"
-        puts "WORKS"
         return true
       else
-        puts "BROKE"
         return false
       end
     end
@@ -209,5 +203,4 @@ class RequestsController < ApplicationController
       completion_rate = (completion_rate * 100).to_i
       return completion_rate
     end
-
 end

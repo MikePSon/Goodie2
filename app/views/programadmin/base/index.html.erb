@@ -1,5 +1,8 @@
 <%= render 'layouts/partials/page_header' %>
 
+<% if @in_registration %>
+<%= @test %>
+<% else %>
 <div class="row">
    <%= render 'programadmin/base/partials/header_panels' %>
 </div>
@@ -124,8 +127,8 @@
     { latLng:[7.35,134.46],   name:'Palau'                 },
     { latLng:[42.5,1.51],     name:'Andorra'               }
   ];
-
-
 })(window, document, window.jQuery);
 
 </script>
+<% end %>
+

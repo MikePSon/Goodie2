@@ -1,6 +1,9 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Open Cycles</div>
 	<div class="panel-body">
+		<% if cycles.count == 0 %>
+		<h5 class="text-warning"><%= Organization.where(:id => current_user.organization_id.to_s).first.name %> has no cycles open right now.</h5>
+		<% else %>
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -14,7 +17,7 @@
 				<tr>
 					<td><%= cycle.name %></td>
 					<td>
-						<% if cycle.one_application && previous_application > 0 %>
+						<% if cycle.one_application && previous_application == 0 %>
 							<% thisProject = Project.where(:id => cycle.project_id).first.id %>
 							<%= link_to 'Apply', new_request_path(:cycle_id => cycle.id, :project_id => thisProject) %>
 						<% end %>
@@ -23,6 +26,7 @@
 				<% end %>
 			</tbody>
 		</table>
+		<% end %>
 	</div>
 	<div class="panel-footer">
 		<a class="btn btn-sm btn-info" mailto:"<%= @primary_contact.email %>">Contact</a>

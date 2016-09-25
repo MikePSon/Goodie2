@@ -33,7 +33,9 @@
     "NEWCYCLE": "Nuevo ciclo",
     "EDITORGANIZATION": "Editar su organización",
     "YOUR_REQUESTS": "Sus aplicaciónes",
-    "ORGREQUESTS": "Aplicaciónes"
+    "ORGREQUESTS": "Aplicaciónes",
+    "ADMINORGANIZATION": "Organizaciónes",
+    "ADMINDASH": "Goodie 2"
   },
   "subtitle": {
     "DASHBOARD": "Instrumentos de administración",
@@ -43,7 +45,9 @@
     "NEWCYCLE": "El siguiente ciclo",
     "EDITORGANIZATION": "Sus preferencias y ajustes",
     "YOUR_REQUESTS": "El bien que quiere hacer",
-    "ORGREQUESTS": "Su historial de aplicaciones"
+    "ORGREQUESTS": "Su historial de aplicaciones",
+    "ADMINORGANIZATION": "¿Quién está haciendo bien?",
+    "ADMINDASH": "¿Lo que es bueno?"
   },
   "organization_form": {
     "headers":{
@@ -64,6 +68,9 @@
       "MGRDECISION": "Administrador decisión",
       "MGREDIT": "Proyecto administrador de edición",
       "GIVINGGOAL": "Donación meta anual"
+    },
+    "buttons": {
+      "NEWPROJECT": "¡Nuevo proyecto!"
     }
   }
 }

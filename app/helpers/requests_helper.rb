@@ -12,6 +12,8 @@ module RequestsHelper
 			outputColor = "warning"
 		elsif status == "Payment"
 			outputColor = "success"
+		elsif status == "Closed"
+			outputColor = "danger"
 		else
 			outputColor = "success"
 		end

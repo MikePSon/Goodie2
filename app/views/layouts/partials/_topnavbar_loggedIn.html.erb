@@ -109,7 +109,7 @@
                      <%= link_to edit_user_registration_path, :class => "list-group-item"  do %>
                         <div class="media-box">
                            <div class="pull-left">
-                              <em class="fa fa-gears fa-2x text-warning"></em>
+                              <em class="<%= get_icon('edit') %> fa-2x text-warning"></em>
                            </div>
                            <div class="media-box-body clearfix">
                               <p class="m0">Edit Account</p>
@@ -125,7 +125,7 @@
                         <%= link_to edit_organization_path(current_organization.first), :class => "list-group-item" do %>
                            <div class="media-box">
                               <div class="pull-left">
-                                 <em class="fa fa-building-o fa-2x text-primary"></em>
+                                 <em class="<%= get_icon('Organization') %> fa-2x text-primary"></em>
                               </div>
                               <div class="media-box-body clearfix">
                                  <p class="m0">Edit Organization</p>
@@ -140,7 +140,7 @@
                      <%= link_to destroy_user_session_path, data:{method: :delete}, :class => "list-group-item" do %>
                         <div class="media-box">
                            <div class="pull-left">
-                              <em class="icon-power fa-2x text-danger"></em>
+                              <em class="<%= get_icon('Logout') %> fa-2x text-danger"></em>
                            </div>
                            <div class="media-box-body clearfix">
                               <p class="m0">Sign Out</p>

@@ -71,6 +71,3 @@ gem 'whenever', require: false
 #WYSIWYG Editor
 gem 'ckeditor'
 gem 'mongoid-paperclip', require: 'mongoid_paperclip'
-
-# Exports
-gem 'acts_as_xlsx'

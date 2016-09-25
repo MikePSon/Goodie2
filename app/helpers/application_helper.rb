@@ -63,4 +63,23 @@ module ApplicationHelper
       outputColor = "success"
     end
   end
+
+  def get_icon(param)
+    param = param.downcase
+    if param == "organization"
+      return "fa fa-building-o"
+    elsif param == "project"
+      return "fa fa-file-text-o"
+    elsif param == "cycle"
+      return "icon-refresh"
+    elsif param == "request"
+      return "icon-note"
+    elsif param == "dashboard"
+      return "icon-speedometer"
+    elsif param == "edit"
+      return "fa fa-gears"
+    elsif param == "logout"
+      return "icon-power"
+    end
+  end#End get_icon
 end

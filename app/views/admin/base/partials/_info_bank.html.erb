@@ -1,0 +1,124 @@
+<div class="panel widget">
+   <div class="row row-table row-flush">
+      <div class="col-xs-6 bb br">
+         <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-info">
+               <em class="fa fa-users fa-2x"></em>
+            </div>
+            <div class="col-xs-8">
+               <div class="panel-body text-center">
+                  <h4 class="mt0"><%= @all_applicants.count %></h4>
+                  <p class="mb0 text-muted">APPLICANTS</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xs-6 bb">
+         <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-danger">
+               <em class="fa fa-dollar fa-2x"></em>
+            </div>
+            <div class="col-xs-8">
+               <div class="panel-body text-center">
+                  <h4 class="mt0">$<%= @amount_requested %></h4>
+                  <p class="mb0 text-muted">REQUESTED</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row row-table row-flush">
+      <div class="col-xs-6 br">
+         <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-inverse">
+               <em class="fa fa-file-text-o fa-2x"></em>
+            </div>
+            <div class="col-xs-8">
+               <div class="panel-body text-center">
+                  <h4 class="mt0"><%= @my_projects.count %></h4>
+                  <p class="mb0 text-muted">PROJECTS</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xs-6">
+         <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-success">
+               <em class="icon-refresh fa-2x"></em>
+            </div>
+            <div class="col-xs-8">
+               <div class="panel-body text-center">
+                  <h4 class="mt0"><%= @my_cycles.count %></h4>
+                  <p class="mb0 text-muted">CYCLES</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- END widget-->
+<!-- START widget-->
+<div class="panel widget">
+   <div class="row row-table row-flush">
+      <div class="col-xs-6 bb br">
+         <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-info">
+               <!-- Bar chart-->
+               <div data-sparkline="" data-bar-color="#5d9cec" data-height="20" data-bar-width="3" data-bar-spacing="2" <% if @closed_incomplete_rate.length == 0 %>data-values="0"<% elsif @closed_incomplete_rate.length == 1 %>data-values="<%=@closed_incomplete_rate[0]%>"<% elsif @closed_incomplete_rate.length == 2 %>data-values="<%=@closed_incomplete_rate[0]%>,<%=@closed_incomplete_rate[1]%>"<% elsif @closed_incomplete_rate.length == 3 %>data-values="<%=@closed_incomplete_rate[0]%>,<%=@closed_incomplete_rate[1]%>,<%=@closed_incomplete_rate[2]%>"<% elsif @closed_incomplete_rate.length == 4 %>data-values="<%=@closed_incomplete_rate[0]%>,<%=@closed_incomplete_rate[1]%>,<%=@closed_incomplete_rate[2]%>,<%=@closed_incomplete_rate[3]%>"<% elsif @closed_incomplete_rate.length == 5 %>data-values="<%=@closed_incomplete_rate[0]%>,<%=@closed_incomplete_rate[1]%>,<%=@closed_incomplete_rate[2]%>,<%=@closed_incomplete_rate[3]%>,<%=@closed_incomplete_rate[4]%>"<% elsif @closed_incomplete_rate.length == 6 %>data-values="<%=@closed_incomplete_rate[0]%>,<%=@closed_incomplete_rate[1]%>,<%=@closed_incomplete_rate[2]%>,<%=@closed_incomplete_rate[3]%>,<%=@closed_incomplete_rate[4]%>,<%=@closed_incomplete_rate[5]%>"<%end%>></div>
+            </div>
+            <div class="col-xs-8">
+               <div class="panel-body text-center">
+                  <h4 class="mt0"><%= @avg_incomplete_rate %>%</h4>
+                  <p class="mb0 text-muted">COMPLETION</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xs-6 bb">
+         <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-danger">
+               <!-- Bar chart-->
+               <div data-sparkline="" data-bar-color="#5d9cec" data-height="20" data-bar-width="3" data-bar-spacing="2" <% if @closed_acceptance_rate.length == 0 %>data-values="0"<% elsif @closed_acceptance_rate.length == 1 %>data-values="<%=@closed_acceptance_rate[0]%>"<% elsif @closed_acceptance_rate.length == 2 %>data-values="<%=@closed_acceptance_rate[0]%>,<%=@closed_acceptance_rate[1]%>"<% elsif @closed_acceptance_rate.length == 3 %>data-values="<%=@closed_acceptance_rate[0]%>,<%=@closed_acceptance_rate[1]%>,<%=@closed_acceptance_rate[2]%>"<% elsif @closed_acceptance_rate.length == 4 %>data-values="<%=@closed_acceptance_rate[0]%>,<%=@closed_acceptance_rate[1]%>,<%=@closed_acceptance_rate[2]%>,<%=@closed_acceptance_rate[3]%>"<% elsif @closed_acceptance_rate.length == 5 %>data-values="<%=@closed_acceptance_rate[0]%>,<%=@closed_acceptance_rate[1]%>,<%=@closed_acceptance_rate[2]%>,<%=@closed_acceptance_rate[3]%>,<%=@closed_acceptance_rate[4]%>"<% elsif @closed_acceptance_rate.length == 6 %>data-values="<%=@closed_acceptance_rate[0]%>,<%=@closed_acceptance_rate[1]%>,<%=@closed_acceptance_rate[2]%>,<%=@closed_acceptance_rate[3]%>,<%=@closed_acceptance_rate[4]%>,<%=@closed_acceptance_rate[5]%>"<%end%>></div>
+
+            </div>
+            <div class="col-xs-8">
+               <div class="panel-body text-center">
+                  <h4 class="mt0"><%= @avg_accepted_rate %>%</h4>
+                  <p class="mb0 text-muted">ACCEPTANCE</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row row-table row-flush">
+      <div class="col-xs-6 br">
+         <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-inverse">
+               <!-- Bar chart-->
+               <div data-sparkline="" data-bar-color="#5d9cec" data-height="20" data-bar-width="3" data-bar-spacing="2" data-values="1,0,4,9,5,7,8,4,7"></div>
+            </div>
+            <div class="col-xs-8">
+               <div class="panel-body text-center">
+                  <h4 class="mt0">150</h4>
+                  <p class="mb0 text-muted">REPEAT</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xs-6">
+         <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-success">
+               <!-- Bar chart-->
+               <div data-sparkline="" data-bar-color="#5d9cec" data-height="20" data-bar-width="3" data-bar-spacing="2" data-values="1,5,2,2,8,4,4,8"></div>
+            </div>
+            <div class="col-xs-8">
+               <div class="panel-body text-center">
+                  <h4 class="mt0">10</h4>
+                  <p class="mb0 text-muted">NEED FIELD</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- END widget-->

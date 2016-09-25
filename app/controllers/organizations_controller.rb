@@ -12,8 +12,8 @@ class OrganizationsController < ApplicationController
   # GET /organizations.json
   def index
     if current_user.admin?
-      @test = "HELLOW"
       @organizations = Organization.all
+      @thisPage = "ADMINORGANIZATION"
     elsif current_user.program_admin?
       @organizations = Organization.where(:id => current_user.organization_id.to_s).first
     end
