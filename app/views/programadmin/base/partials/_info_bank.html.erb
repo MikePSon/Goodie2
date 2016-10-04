@@ -95,12 +95,12 @@
          <div class="row row-table row-flush">
             <div class="col-xs-4 text-center text-inverse">
                <!-- Bar chart-->
-               <div data-sparkline="" data-bar-color="#5d9cec" data-height="20" data-bar-width="3" data-bar-spacing="2" data-values="1,0,4,9,5,7,8,4,7"></div>
+               <div data-sparkline="" data-bar-color="#5d9cec" data-height="20" data-bar-width="3" data-bar-spacing="2" <% if @closed_requests_rate.length == 0 %>data-values="0"<% elsif @closed_requests_rate.length == 1 %>data-values="<%=@closed_requests_rate[0]%>"<% elsif @closed_requests_rate.length == 2 %>data-values="<%=@closed_requests_rate[0]%>,<%=@closed_requests_rate[1]%>"<% elsif @closed_requests_rate.length == 3 %>data-values="<%=@closed_requests_rate[0]%>,<%=@closed_requests_rate[1]%>,<%=@closed_requests_rate[2]%>"<% elsif @closed_requests_rate.length == 4 %>data-values="<%=@closed_requests_rate[0]%>,<%=@closed_requests_rate[1]%>,<%=@closed_requests_rate[2]%>,<%=@closed_requests_rate[3]%>"<% elsif @closed_requests_rate.length == 5 %>data-values="<%=@closed_requests_rate[0]%>,<%=@closed_requests_rate[1]%>,<%=@closed_requests_rate[2]%>,<%=@closed_requests_rate[3]%>,<%=@closed_requests_rate[4]%>"<% elsif @closed_requests_rate.length == 6 %>data-values="<%=@closed_requests_rate[0]%>,<%=@closed_requests_rate[1]%>,<%=@closed_requests_rate[2]%>,<%=@closed_requests_rate[3]%>,<%=@closed_requests_rate[4]%>,<%=@closed_requests_rate[5]%>"<%end%>></div>
             </div>
             <div class="col-xs-8">
                <div class="panel-body text-center">
-                  <h4 class="mt0">150</h4>
-                  <p class="mb0 text-muted">REPEAT</p>
+                  <h4 class="mt0"><%= @avg_applicant_rate %></h4>
+                  <p class="mb0 text-muted">Applicants</p>
                </div>
             </div>
          </div>
@@ -109,12 +109,12 @@
          <div class="row row-table row-flush">
             <div class="col-xs-4 text-center text-success">
                <!-- Bar chart-->
-               <div data-sparkline="" data-bar-color="#5d9cec" data-height="20" data-bar-width="3" data-bar-spacing="2" data-values="1,5,2,2,8,4,4,8"></div>
+               <div data-sparkline="" data-bar-color="#5d9cec" data-height="20" data-bar-width="3" data-bar-spacing="2" <% if @amount_given_array.length == 0 %>data-values="0"<% elsif @amount_given_array.length == 1 %>data-values="<%=@amount_given_array[0]%>"<% elsif @amount_given_array.length == 2 %>data-values="<%=@amount_given_array[0]%>,<%=@amount_given_array[1]%>"<% elsif @amount_given_array.length == 3 %>data-values="<%=@amount_given_array[0]%>,<%=@amount_given_array[1]%>,<%=@amount_given_array[2]%>"<% elsif @amount_given_array.length == 4 %>data-values="<%=@amount_given_array[0]%>,<%=@amount_given_array[1]%>,<%=@amount_given_array[2]%>,<%=@amount_given_array[3]%>"<% elsif @amount_given_array.length == 5 %>data-values="<%=@amount_given_array[0]%>,<%=@amount_given_array[1]%>,<%=@amount_given_array[2]%>,<%=@amount_given_array[3]%>,<%=@amount_given_array[4]%>"<% elsif @amount_given_array.length == 6 %>data-values="<%=@amount_given_array[0]%>,<%=@amount_given_array[1]%>,<%=@amount_given_array[2]%>,<%=@amount_given_array[3]%>,<%=@amount_given_array[4]%>,<%=@amount_given_array[5]%>"<%end%>></div>
             </div>
             <div class="col-xs-8">
                <div class="panel-body text-center">
-                  <h4 class="mt0">10</h4>
-                  <p class="mb0 text-muted">NEED FIELD</p>
+                  <h4 class="mt0"><%= @avg_amount_given %></h4>
+                  <p class="mb0 text-muted">Given</p>
                </div>
             </div>
          </div>

@@ -28,3 +28,8 @@ every 15.minutes do
 	Rails.logger = Logger.new(STDOUT)
 	rake "cycles:open_close_cycles", :environment => "development", :output => "log/cron_log.log"
 end
+
+every 24.hours do
+	Rails.logger = Logger.new(STDOUT)
+	rake "users:calculate_age", :environment => "development", :output => "log/cron_log.log"
+end

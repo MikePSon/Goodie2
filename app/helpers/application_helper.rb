@@ -12,6 +12,15 @@ module ApplicationHelper
     ]
   end
 
+  def genders
+    [ ['Male'], ['Female'], ['Other'], ['Prefer not to say'] ]
+  end
+
+  def races
+    [ ['White'], ['Hispanic, Latino, Spanish Origin'], ['Black or African American'], ['American Indian, Alaska Native'],
+      ['Middle Eastern, North African'], ['Native Hawaiian, Pacific Islander'], ['Two or more races'], ['Other']]
+  end
+
   def request_statuses
     [
         ['Created','1', 'Created'], ['In Progress','2', 'In Progress'],
@@ -61,6 +70,19 @@ module ApplicationHelper
       outputColor = "info"
     else
       outputColor = "success"
+    end
+  end
+  def progress_hex(amount)
+    if amount <= 59
+      output_hex = "#F05050"
+    elsif amount > 59 && amount <= 69
+      output_hex = "#FF902B"
+    elsif amount > 69 && amount <= 79
+      output_hex = "#5D9CEC"
+    elsif amount > 79 && amount <= 89
+      output_hex = "#23B7E5"
+    else
+      output_hex = "#27C24C"
     end
   end
 

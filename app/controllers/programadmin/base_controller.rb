@@ -16,7 +16,7 @@ class Programadmin::BaseController < ApplicationController
 	
     	@all_applicants = User.where(:organization_id => current_user.organization_id).where(:applicant => true)
     	@requests = Request.where(:organization_id => current_user.organization_id.to_s)
-    	@awarded = @requests.where(:accepted => "true")
+    	@awarded = @requests.where(:accepted => true)
     	@amount_given = 0.0
     	@awarded.each do |this_award|
     		@amount_given += this_award.amount_awarded.to_f
@@ -25,9 +25,53 @@ class Programadmin::BaseController < ApplicationController
     	@requests.each do |this_request|
     		@amount_requested += this_request.amount_requested.to_f
     	end
-    	#to_reach_giving_goal = (@my_organization.annual_giving_goal - @amount_given).to_f
-    	#@giving_goal_completion = ((1-(to_reach_giving_goal / @my_organization.annual_giving_goal))*100).round(0)
-    	@giving_goal_completion = 20
+
+    	@giving_goal = @my_organization.annual_giving_goal
+    	@giving_goal_completion = ((@amount_given / @giving_goal).round(2)) * 100
+
+    	given_last_month_awards = @awarded.where(submitted_date: (1.months.ago..Time.now))
+    	@given_last_month = 0.0
+    	given_last_month_awards.each do |this_award|
+    		@given_last_month += this_award.amount_awarded
+    	end
+
+    	#Applicant Demographics
+    	@male_applicants = @all_applicants.where(:gender => "Male").count
+    	@female_applicants = @all_applicants.where(:gender => "Female").count
+    	@other_gender_applicants = @all_applicants.where(:gender => "Other").count
+    	@decline_gender_applicants = @all_applicants.where(:gender => "Prefer not to say").count
+    	
+    	@white_applicants = @all_applicants.where(:race => "White").count
+		@hispanic_applicants = @all_applicants.where(:race => 'Hispanic, Latino, Spanish Origin').count
+		@black_applicants = @all_applicants.where(:race => 'Black or African American').count
+		@native_american_applicants = @all_applicants.where(:race => 'American Indian, Alaska Native').count
+		@middle_eastern_applicants = @all_applicants.where(:race => 'Middle Eastern, North African').count
+		@hawaiian_applicants = @all_applicants.where(:race => 'Native Hawaiian, Pacific Islander').count
+		@two_race_applicants = @all_applicants.where(:race => 'Two or more races').count
+		@other_race_applicants = @all_applicants.where(:race => 'Other').count
+
+		@applicants_18_under = @all_applicants.where(:age.lte => 18).count
+		@applicants_18_to_24 = @all_applicants.where(:age.gte => 19).where(:age.lte => 24).count
+		@applicants_25_to_29 = @all_applicants.where(:age.gte => 25).where(:age.lte => 29).count 
+		@applicants_30_to_39 = @all_applicants.where(:age.gte => 30).where(:age.lte => 39).count 
+		@applicants_40_to_49 = @all_applicants.where(:age.gte => 40).where(:age.lte => 49).count 
+		@applicants_50_to_59 = @all_applicants.where(:age.gte => 50).where(:age.lte => 59).count
+		@applicants_60_to_69 = @all_applicants.where(:age.gte => 60).where(:age.lte => 69).count
+		@applicants_70_plus = @all_applicants.where(:age.gte => 70).count
+
+    	# Request history
+    	@trailing_1 = 1.months.ago.strftime("%Y-%m")
+    	@trailing_2 = 2.months.ago.strftime("%Y-%m")
+    	@trailing_3 = 3.months.ago.strftime("%Y-%m")
+    	@trailing_4 = 4.months.ago.strftime("%Y-%m")
+    	@trailing_5 = 5.months.ago.strftime("%Y-%m")
+    	@trailing_6 = 6.months.ago.strftime("%Y-%m")
+    	@trailing_1_count = @requests.where(submitted_date: (1.months.ago..Time.now)).count
+    	@trailing_2_count = @requests.where(submitted_date: (2.months.ago..1.months.ago)).count
+    	@trailing_3_count = @requests.where(submitted_date: (3.months.ago..2.months.ago)).count
+    	@trailing_4_count = @requests.where(submitted_date: (4.months.ago..3.months.ago)).count
+    	@trailing_5_count = @requests.where(submitted_date: (5.months.ago..4.months.ago)).count
+    	@trailing_6_count = @requests.where(submitted_date: (6.months.ago..5.months.ago)).count
 	
     	#Closed Cycle Data
     	closed_cycles = @my_cycles.where(:status => "Closed")
@@ -40,12 +84,34 @@ class Programadmin::BaseController < ApplicationController
 		@closed_incomplete_raw = Array.new
 		@closed_rejection_rate = Array.new
 		@closed_rejection_raw = Array.new
+		@closed_requests_raw = Array.new
+		@closed_requests_rate = Array.new
 		
 		avg_accepted_total = 0.0
 		avg_incomplete_total = 0.0
 		avg_rejected_total = 0.0
+		avg_application_total = 0.0
+
+		@amount_given_array = Array.new
+
 		closed_cycles.each do |this_cycle|
-			this_all = Request.where(:cycle_id => this_cycle.id).count
+			all_requests = Request.where(:cycle_id => this_cycle.id)
+			this_all = all_requests.count
+
+			# Amount Given
+			this_given = 0.0
+			all_requests.each do |this_req|
+				this_given += this_req.amount_awarded.to_f
+			end
+			@amount_given_array << this_given
+
+
+			# Total Request Rate
+			application_rate = this_all
+			@closed_requests_rate << application_rate
+			@closed_requests_raw << this_all
+			avg_application_total += application_rate
+
 		
 			# Accepted
 			this_accepted = Request.where(:cycle_id => this_cycle.id).where(:accepted => true).count
@@ -72,6 +138,8 @@ class Programadmin::BaseController < ApplicationController
 		@avg_accepted_rate = (avg_accepted_total / closed_cycles.length).round(2)
 		@avg_incomplete_rate = (avg_incomplete_total / closed_cycles.length).round(2)
 		@avg_rejected_rate = (avg_rejected_total / closed_cycles.length).round(2)
+		@avg_applicant_rate = (avg_application_total / closed_cycles.length).round(2)
+		@avg_amount_given = (@amount_given / closed_cycles.length).round(2)
 	
 		# Repeat Applicants
 		@repeat_raw = 0

@@ -22,6 +22,7 @@ class Request
   field :submitted_date,          type: DateTime
 
   field :amount_awarded,          type: Float
+  field :decision_made,           type: Boolean
   field :awarded,                 type: Boolean
   field :rejected,                type: Boolean
 

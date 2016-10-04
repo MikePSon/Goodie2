@@ -9,6 +9,7 @@
 
       <h4>Basic</h4>
       <section>
+        <strong><%= params[:action] %></strong>
         <%= render 'user_fields', :f => f %>
         
         <% if Rails.env.development? %>

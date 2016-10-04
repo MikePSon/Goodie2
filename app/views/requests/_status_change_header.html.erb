@@ -15,6 +15,7 @@
          <% if @acceptReject %>
             <%= form_for(@request) do |f| %>
                <%= f.hidden_field :status, value: "Closed" %>
+               <%= f.hidden_field :decision_made, value: true %>
                <%= f.hidden_field :rejected, value: true %>
                <%= f.submit "Reject", :class => "btn btn-danger" %>
             <% end %>
@@ -44,6 +45,7 @@
             <div class="modal-body">
                <%= f.hidden_field :status, value: "Awarded" %>
                <%= f.hidden_field :accepted, value: true %>
+               <%= f.hidden_field :decision_made, value: true %>
                <%= f.label :amount_awarded %>
                <div class="input-group m-b">
                   <span class="input-group-addon">$</span>

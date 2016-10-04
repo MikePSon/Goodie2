@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get 'new_applicant', :to => 'devise/registrations#new_applicant'
+    get 'new_program_manager', :to => 'devise/registrations#new_program_manager'
   end
 
   get "home", to: "pages#home", as: "home"

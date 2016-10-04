@@ -56,8 +56,8 @@ class Admin::UsersController < Admin::BaseController
   def user_params
     params.require(:user).permit(
     :email, :first_name, :last_name, :phone, :office_open, :office_close, :job_title,
-    :admin, :program_admin, :program_manager, :applicant,
-    :address1, :address2, :city, :zip, :state, :phone,
+    :admin, :program_admin, :program_manager, :applicant, :race,
+    :address1, :address2, :city, :zip, :state, :phone, :gender,
     :password, :password_confirmation, :locked,
     organizations_attributes: [:name]
     )

@@ -14,6 +14,28 @@
 </div>
 
 <div class="form-group">
+  <%= f.label :age, :class => "col-lg-2 control-label" %>
+  <div class="col-lg-10">
+    <%= f.number_field :age, :class => "form-control", :placeholder => "Your age" %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :gender, :class => "col-lg-2 control-label" %>
+  <div class="col-lg-10">
+    <%= f.select :gender, options_for_select(genders), {:selected => params[:id]}, :class => "form-control" %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :race, :class => "col-lg-2 control-label" %>
+  <div class="col-lg-10">
+    <%= f.select :race, options_for_select(races), {:selected => params[:id]}, :class => "form-control" %>
+  </div>
+</div>
+
+
+<div class="form-group">
   <%= f.label :office_open, :class => "col-lg-2 control-label" %>
   <div class="col-lg-10">
     <div id="openTimePicker" class="input-group date">
