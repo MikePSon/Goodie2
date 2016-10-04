@@ -1,9 +1,8 @@
 <%= render 'layouts/partials/page_header' %>
 
-<p id="notice"><%= notice %></p>
-
 <div class="row">
   <% @yourCycles.each do |cycle| %>
+  <% cycle_requests = Request.where(:cycle_id => cycle.id.to_s) %>
   <div class="col-lg-4 col-md-6">
     <div class="panel b">
        <div class="panel-heading">
@@ -51,15 +50,15 @@
                    <strong>Applications</strong>
                 </td>
                 <td>
-                  <%= Request.where(:cycle_id => cycle.id.to_s).count %>
+                  <%= cycle_requests.count %>
                 </td>
              </tr>
              <tr>
                 <td>
-                   <strong>Total Amt. Requested</strong>
+                   <strong>Amt. Requested</strong>
                 </td>
                 <td>
-                   <%=Request.where(:cycle_id => cycle.id.to_s).sum(:amount_requested) %>
+                   $<%= cycle_requests.sum(:amount_requested) %>
                 </td>
              </tr>
           </tbody>

@@ -10,18 +10,18 @@ class ApplicationController < ActionController::Base
   # Devise permitted params
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
-      :email, :first_name, :last_name,
+      :email, :first_name, :last_name, :dob, :age,
       :admin, :program_admin, :program_manager, :applicant,
-      :address_1, :address_2, :city, :state, :zip,
-      :phone, :office_open, :office_close, :job_title,
-      :password, :password_confirmation,
+      :address_1, :address_2, :city, :state, :zip, :race,
+      :phone, :office_open, :office_close, :job_title, :gender,
+      :password, :password_confirmation, :current_password,
       :organization_id)
     }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
-      :email, :first_name, :last_name,
+      :email, :first_name, :last_name, :dob, :age,
       :admin, :program_admin, :program_manager, :applicant,
-      :address_1, :address_2, :city, :state, :zip,
-      :phone, :office_open, :office_close, :job_title,
+      :address_1, :address_2, :city, :state, :zip, :race,
+      :phone, :office_open, :office_close, :job_title, :gender,
       :password, :password_confirmation, :current_password,
       :organization_id)
     }
@@ -90,7 +90,6 @@ class ApplicationController < ActionController::Base
     viewing_org = viewing_org_ID.to_s
     user_organization = Organization.where(:id => current_user.organization_id).first
     if viewing_org != user_organization.id.to_s
-      puts "===== USER ATTEMPTED TO ACCESS INCORRECT ORGANIZATION ====="
       redirect_to organization_path(user_organization)
     end
   end

@@ -1,40 +1,220 @@
 <%= render 'layouts/partials/page_header' %>
 
+<% if @in_registration %>
+<%= @test %>
+<% else %>
 <div class="row">
-   <%= render 'programmanager/base/partials/header_panels' %>
+   <%= render 'programadmin/base/partials/header_panels' %>
 </div>
 
 <div class="row">
    <div class="col-lg-8 col-md-12">
-      <%= render 'programmanager/base/partials/completion_history' %>
+      <%= render 'programadmin/base/partials/completion_history' %>
    </div>
    <div class="col-lg-4 col-md-12">
-    <%= render "programmanager/base/partials/info_bank" %>
+    <%= render "programadmin/base/partials/info_bank" %>
    </div>
 </div>
 
 <div class="row">
    <div class="col-lg-4">
-    <%= render "programmanager/base/partials/request_history" %>
+    <%= render "programadmin/base/partials/request_history" %>
    </div>
    <div class="col-lg-3">
     <div class="row">
       <div class="col-lg-12 col-md-6 col-sm-6">
-        <%= render 'programmanager/base/partials/monthly_completes' %>
-      </div>
-      <div class="col-lg-12 col-md-6 col-sm-6">
-        <%= render 'programmanager/base/partials/completion_rate' %>
+        <%= render 'programadmin/base/partials/monthly_completes' %>
       </div>
     </div>
    </div>
    <div class="col-lg-5">
-    <%= render "programmanager/base/partials/application_dispersion" %>
+    <%= render "programadmin/base/partials/application_dispersion" %>
    </div>
 </div>
+<style>
+#request_history text[y="321.5"]{
+  display:none
+}
+</style>
 <script>
+// CHART PIE
+// ----------------------------------- 
+(function(window, document, $, undefined){
+
+  $(function(){
+
+    var gender_data = [{
+      "label": "Male",
+      "color": "#23B7E5",
+      "data": <%= @male_applicants %>
+    }, {
+      "label": "Female",
+      "color": "#F532E5",
+      "data": <%= @female_applicants %>
+    }, {
+      "label": "Other",
+      "color": "#7266BA",
+      "data": <%= @other_gender_applicants %>
+    }, {
+      "label": "Prefer not to say",
+      "color": "#6C7A89",
+      "data": <%= @decline_gender_applicants %>
+    }];
+
+    var gender_options = {
+      series: {
+        pie: {
+          show: true,
+          innerRadius: 0,
+          label: {
+            show: true,
+            radius: 0.75,
+            formatter: function (label, series) {
+              return '<div class="flot-pie-label">' +
+              //label + ' : ' +
+              Math.round(series.percent) +
+              '%</div>';
+            },
+            background: {
+              opacity: 0.75,
+              color: '#222'
+            }
+          }
+        }
+      } 
+    };
+    var chart = $('.gender_pie');
+    if(chart.length)
+      $.plot(chart, gender_data, gender_options);
+
+
+
+
+
+    var race_data = [{
+      "label": "White",
+      "color": "#23B7E5",
+      "data": <%= @white_applicants %>
+    }, {
+      "label": "Hispanic",
+      "color": "#F532E5",
+      "data": <%= @hispanic_applicants %>
+    }, {
+      "label": "Asian",
+      "color": "#7266BA",
+      "data": <%= @black_applicants %>
+    }, {
+      "label": "American Indian",
+      "color": "#6C7A89",
+      "data": <%= @native_american_applicants %>
+    }, {
+      "label": "Middle Eastern",
+      "color": "#FF902B",
+      "data": <%= @middle_eastern_applicants %>
+    }, {
+      "label": "Hawaiian",
+      "color": "#37BC9B",
+      "data": <%= @hawaiian_applicants %>
+    }, {
+      "label": "2+ races",
+      "color": "#000",
+      "data": <%= @two_race_applicants %>
+    },{
+      "label": "Other",
+      "color": "#F05050",
+      "data": <%= @other_race_applicants %>
+    }];
+    var race_options = {
+      series: {
+        pie: {
+          show: true,
+          innerRadius: 0,
+          label: {
+            show: true,
+            radius: 0.875,
+            formatter: function (label, series) {
+              return '<div class="flot-pie-label">' +
+              //label + ' : ' +
+              Math.round(series.percent) +
+              '%</div>';
+            },
+            background: {
+              opacity: 0.875,
+              color: '#222'
+            }
+          }
+        }
+      } 
+    };
+    var chart = $('.race_pie');
+    if(chart.length)
+      $.plot(chart, race_data, race_options);
+    var age_data = [{
+      "label": "Under 18",
+      "color": "#23B7E5",
+      "data": <%= @applicants_18_under %>
+    }, {
+      "label": "18-24",
+      "color": "#F532E5",
+      "data": <%= @applicants_18_to_24 %>
+    }, {
+      "label": "19-29",
+      "color": "#7266BA",
+      "data": <%= @applicants_25_to_29 %>
+    }, {
+      "label": "30-39",
+      "color": "#FF902B",
+      "data": <%= @applicants_30_to_39 %>
+    }, {
+      "label": "40-49 ",
+      "color": "#37BC9B",
+      "data": <%= @applicants_40_to_49 %>
+    }, {
+      "label": "50-59",
+      "color": "#6C7A89",
+      "data": <%= @applicants_50_to_59 %>
+    }, {
+      "label": "60-69",
+      "color": "#000",
+      "data": <%= @applicants_60_to_69 %>
+    }, {
+      "label": "70+",
+      "color": "#FFF",
+      "data": <%= @applicants_70_plus %>
+    }];
+    var age_options = {
+      series: {
+        pie: {
+          show: true,
+          innerRadius: 0,
+          label: {
+            show: true,
+            radius: 0.875,
+            formatter: function (label, series) {
+              return '<div class="flot-pie-label">' +
+              //label + ' : ' +
+              Math.round(series.percent) +
+              '%</div>';
+            },
+            background: {
+              opacity: 0.875,
+              color: '#222'
+            }
+          }
+        }
+      } 
+    };
+    var chart = $('.age_pie');
+    if(chart.length)
+      $.plot(chart, age_data, age_options);
+
+
+  });
+
+})(window, document, window.jQuery);
+
 // Morris
 // ----------------------------------- 
-
 (function(window, document, $, undefined){
 
   $(function(){
@@ -44,10 +224,23 @@
     var cycle_data = [
       <% @abbrev_cycles.each do |this_cycle| %>
         <% this_requests = Request.where(:cycle_id => this_cycle.id) %>
-        { y: "<%= this_cycle.name %>", inc:<%=this_requests.where(:status=>"Incomplete").count%> , rej: <%=this_requests.where(:rejected=>true).count%>, acc: <%=this_requests.where(:accepted=>true).count%>, tot: <%=this_requests.count%>},
+        { 
+          y: "<%= this_cycle.name %>",
+          inc:<%=this_requests.where(:status=>"Incomplete").count %>,
+          rej: <%=this_requests.where(:rejected=>true).count %>,
+          acc: <%=this_requests.where(:accepted=>true).count %>
+          },
       <% end %>
     ];
 
+    var linedata = [
+      { m: '<%= @trailing_1 %>', a: <%= @trailing_1_count %> },
+      { m: '<%= @trailing_2 %>', a: <%= @trailing_2_count %> },
+      { m: '<%= @trailing_3 %>', a: <%= @trailing_3_count %> },
+      { m: '<%= @trailing_4 %>', a: <%= @trailing_4_count %> },
+      { m: '<%= @trailing_5 %>', a: <%= @trailing_5_count %> },
+      { m: '<%= @trailing_6 %>', a: <%= @trailing_6_count %> } 
+    ];
 
     // Bar Chart
     // ----------------------------------- 
@@ -64,14 +257,22 @@
       });
   
     if( document.getElementById('request_timeline') )
-      new Morris.Line({
+      var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      Morris.Line({
         element: 'request_timeline',
-        data: cycle_data,
-        xkey: 'y',
-        ykeys: ["tot"],
-        labels: ["Requests"],
-        lineColors: ["#23b7e5"],
-        resize: true
+        data: linedata,
+        xkey: 'm',
+        ykeys: ['a'],
+        labels: ['2014'],
+        lineColors: ['#23B7E5'],
+        xLabelFormat: function(x) { // <--- x.getMonth() returns valid index
+          var month = months[x.getMonth()];
+          return month;
+        },
+        dateFormat: function(x) {
+          var month = months[new Date(x).getMonth()];
+          return month;
+        },
       });
   });
 
@@ -79,53 +280,33 @@
 
 
 
+$(document).ready(function(){
+  display_demo_chart();
+})
+$("#demo_chart_select").change(function(){
+  display_demo_chart();
+})
 
+function display_demo_chart() {
+  var selected = $("#demo_chart_select option:selected").text();
 
-
-
-(function(window, document, $, undefined){
-
-  $(function(){
-  
-    var element = $('[data-vector-map]');
-    
-    new VectorMap(element, seriesData, markersData);
-    
-  });
-
-  var seriesData = {
-    'CA': 11100,   // Canada
-    'DE': 2510,    // Germany
-    'FR': 3710,    // France
-    'AU': 5710,    // Australia
-    'GB': 8310,    // Great Britain
-    'RU': 9310,    // Russia
-    'BR': 6610,    // Brazil
-    'IN': 7810,    // India
-    'CN': 4310,    // China
-    'US': 839,     // USA
-    'SA': 410      // Saudi Arabia
-  };
-  
-  var markersData = [
-    { latLng:[41.90, 12.45],  name:'Vatican City'          },
-    { latLng:[43.73, 7.41],   name:'Monaco'                },
-    { latLng:[-0.52, 166.93], name:'Nauru'                 },
-    { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-    { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-    { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-    { latLng:[3.2,73.22],     name:'Maldives'              },
-    { latLng:[35.88,14.5],    name:'Malta'                 },
-    { latLng:[41.0,-71.06],   name:'New England'           },
-    { latLng:[12.05,-61.75],  name:'Grenada'               },
-    { latLng:[13.16,-59.55],  name:'Barbados'              },
-    { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-    { latLng:[-4.61,55.45],   name:'Seychelles'            },
-    { latLng:[7.35,134.46],   name:'Palau'                 },
-    { latLng:[42.5,1.51],     name:'Andorra'               }
-  ];
-
-
-})(window, document, window.jQuery);
+  if(selected == "Gender"){
+    $('.gender_pie').show();
+    $('.race_pie').hide();
+    $('.age_pie').hide();
+  }
+  else if(selected == "Race") {
+    $('.race_pie').show();
+    $('.gender_pie').hide();
+    $('.age_pie').hide();
+  }
+  else if(selected == "Age") {
+    $('.age_pie').show();
+    $('.race_pie').hide();
+    $('.gender_pie').hide();
+  }
+};
 
 </script>
+<% end %>
+

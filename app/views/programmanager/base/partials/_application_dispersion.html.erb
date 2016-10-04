@@ -1,12 +1,21 @@
 <div class="panel panel-default">
    <div class="panel-heading">
-      <div class="pull-right label label-danger">5</div>
-      <div class="pull-right label label-success">12</div>
-      <div class="panel-title">Application Dispersion</div>
+      <div class="pull-right">
+         <form>
+            <select class="form-control" id="demo_chart_select">
+               <option>Gender</option>
+               <option>Race</option>
+               <option>Age</option>
+            </select>
+         </form>
+      </div>
+      <div class="panel-title">Applicant Demographics</div>
    </div>
    <div class="panel-body">
-      <div ng-controller="VectorMapController" class="">
-         <div data-vector-map="" data-height="450" data-scale='0' data-map-name="world_mill_en"></div>
+      <div id="gender_pie_chart">
+         <div class="gender_pie flot-chart"></div>
+         <div class="race_pie flot-chart"></div>
+         <div class="age_pie flot-chart"></div>
       </div>
    </div>
 </div>

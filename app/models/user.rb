@@ -58,5 +58,17 @@ class User
   field :zip,               type: String
   field :office_open,       type: String
   field :office_close,      type: String
+  field :gender,            type: String
+  field :race,              type: String
+  field :dob,               type: Date 
+  field :age,               type: Integer
+
+
+  def self.set_age
+    Rails.logger.debug "*********** OPEN/CLOSE CYCLES AUTO RUN ***********"
+    now = Time.now.utc.to_date
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
+
 
 end
