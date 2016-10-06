@@ -9,9 +9,6 @@
 //= require seiyria-bootstrap-slider/dist/bootstrap-slider.min
 //--- Input Mask
 //= require jquery.inputmask/dist/jquery.inputmask.bundle
-//--- Wysiwyg
-//= require bootstrap-wysiwyg/bootstrap-wysiwyg
-//= require bootstrap-wysiwyg/external/jquery.hotkeys
 //--- Parsley
 //= require parsleyjs/dist/parsley.min
 //--- Moment
@@ -93,6 +90,7 @@
     if($.fn.datetimepicker) {
 
       $('#openTimePicker, #closeTimePicker').datetimepicker({
+        //FIXME: This is a bug that needs fixin, something with DateTime formatting
       	timeFormat: "DD/MM/YYYY HH:mm A",
         icons: {
             time: 'fa fa-clock-o',
@@ -108,5 +106,11 @@
     }
 
   });
+
+  // WYSIWYG
+    // ----------------------------------- 
+
+    if($.fn.wysiwyg)
+      $('.wysiwyg').wysiwyg();
 
 })(window, document, window.jQuery);

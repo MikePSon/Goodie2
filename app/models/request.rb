@@ -14,10 +14,10 @@ class Request
   field :amount_requested,        type: Float
   field :other_funding,           type: Boolean
   field :total_budget,            type: Float
-  field :description,             type: String
-  field :summary,                 type: String
-  field :begin_date,              type: Date
-  field :end_date,                type: Date
+  field :detailed_description,    type: String
+  field :project_summary,         type: String
+  field :project_start,           type: Date
+  field :project_end,             type: Date
   field :app_complete,            type: Boolean
   field :submitted_date,          type: DateTime
 
@@ -25,6 +25,17 @@ class Request
   field :decision_made,           type: Boolean
   field :awarded,                 type: Boolean
   field :rejected,                type: Boolean
+
+  #Standard Form Questions
+  field :organization_name,       type: String
+  field :organization_ein,        type: String
+  field :org_address_1,           type: String
+  field :org_address_2,           type: String
+  field :org_city,                type: String
+  field :org_state,               type: String
+  field :org_zip,                 type: String
+  field :org_mission,             type: String
+  field :target_demo,             type: String
 
   # Validate Submitted Status
   before_save :check_submitted

@@ -1,3 +1,7 @@
+<style>
+  .ninja { display:none; }
+</style>
+
 <%= form_for(@request) do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
@@ -11,93 +15,70 @@
     </div>
   <% end %>
 
-<div style="display: none !important">
-    <div class="field">
-      <%= f.label :user %><br>
-      <%= f.text_field :user_id, value: current_user.id, :class => "form-control", :required => true %>
-    </div>
-    <div class="field">
-      <%= f.label :organization_id %><br>
-      <%= f.text_field :organization_id, value: current_user.organization_id, :class => "form-control", :required => true %>
-    </div>
-  </div>
 
-  <% if @projectID %>
-    <div style="display:none !important">
-      <%= f.label :project %>
-      <%= f.text_field :project_id, :value => @projectID, :class => "form-control" %>
-    </div>
-  <% else %>
-    <div class="field">
-      <%= f.label :project %><br>
-      <% @projectOptions = options_from_collection_for_select(Project.where(:organization_id => current_user.organization_id.to_s), :id, :name, @myProject) %>
-      <%= f.select(:project_id, @projectOptions, {}, { :class => 'form-control', :required => true }) %>
-    </div>
+  <% if @cycle.instructions? %>
+    Administrative note:<br>
+    <p><%= @cycle.instructions.html_safe %></p>
   <% end %>
 
-  <!-- End Project Inputs -->
-  <% if @cycleID %>
-    <div style="display:none !important">
-      <%= f.label :cycle %>
-      <%= f.text_field :cycle_id, :value => @cycleID, :class => "form-control" %>
-    </div>
-  <% else %>
-    <div class="field">
-      <%= f.label :cycle %><br>
-      <% @cycleOptions = options_from_collection_for_select(Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open"), :id, :name, @myCycle) %>
-      <%= f.select(:cycle_id, @cycleOptions, {}, { :class => 'form-control', :required => true }) %>
-    </div> 
-  <% end %>
-  <!-- End cycle inputs -->
+  <div id="request_form">
+    <h4>General Info</h4>
+    <section>
+      <%= render 'requests/form_partials/general_questions', :f => f %>
+    </section>
+    
+    <% if @show_organization %>
+      <h4>Organization</h4>
+      <section>
+        <%= render 'requests/form_partials/organization_questions', :f => f %>
+      </section>
+    <% end %>
 
+    <% if @cycle.org_mission? %>
+      <h4>Mission Statement</h4>
+      <section>
+        <%= render 'requests/form_partials/mission_statement', :f => f %>
+      </section>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title, :class => "form-control", :required => true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :summary %><br>
-    <%= f.text_field :summary, :class => "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :amount_requested %><br>
-    <%= f.text_field :amount_requested, :class => "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :other_funding %><br>
-    <%= f.check_box :other_funding, :class => "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :total_budget %><br>
-    <%= f.text_field :total_budget, :class => "form-control" %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.cktext_area :description, :class => "form-control" %>
-  </div> 
-
-  <div class="field">
-    <%= f.label :begin_date %><br>
-    <%= f.date_select :begin_date, :class => "form-control" %>
-  </div> 
-
-  <div class="field">
-    <%= f.label :end_date %><br>
-    <%= f.date_select :end_date, :class => "form-control" %>
-  </div> 
-
-  <div class="field">
-    <%= f.label :app_complete %><br>
-    <%= f.check_box :app_complete, :class => "form-control" %>
+    <% if @show_details %>
+      <h4>Details</h4>
+      <section>
+        <%= render 'requests/form_partials/details_questions', :f => f %>
+      </section>
+    <% end %>
+  
   </div>
 
   <div class="actions" style="margin-top:15px">
     <%= f.submit 'Submit', :class => 'btn btn-success btn-sm' %>
   </div>
 <% end %>
+
+<script>
+$(document).on('turbolinks:load', function() {
+  $('.ckeditor:visible').each(function() {
+    var id = $(this).attr('id');
+    if (!CKEDITOR.instances[id]) {
+       CKEDITOR.replace(id);
+    }});
+});
+
+
+(function(window, document, $, undefined){
+
+  $(function(){
+
+    if ( ! $.fn.validate || ! $.fn.steps ) return;
+
+    $("#request_form").steps({
+        headerTag: "h4",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        stepsOrientation: "vertical"
+    });
+
+  });
+
+})(window, document, window.jQuery);
+</script>
