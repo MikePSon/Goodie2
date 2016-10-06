@@ -65,18 +65,21 @@ class CyclesController < ApplicationController
     #Need to figure out DateTime Math
     @recentRequests = Request.where(:cycle_id => @cycle.id.to_s).where(submitted_date: (DateTime.now - 48.hours)..DateTime.now)
 
-
-
   end
 
   # GET /cycles/new
   def new
     @cycle = Cycle.new
-    @thisPage = "NEWCYCLE"
+    @thisPage = "CYCLES"
+    @title = "New Cycle"
+    @subtitle = "Create a new cycle"
   end
 
   # GET /cycles/1/edit
   def edit
+    @thisPage = "CYCLES"
+    @title = "Edit Cycle"
+    @subtitle = "Make changes to your grant cycle"
   end
 
   # POST /cycles
@@ -132,15 +135,13 @@ class CyclesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cycle_params
       params.require(:cycle).permit(
-        :name,
-        :organization_id,
-        :project_id,
-        :status,
-        :open,
-        :close,
-        :admin_note,
-        :one_application,
-        question_attributes: [ :label, :id, :_destroy ])
+        :admin_note, :instructions, :name, :status,
+        :open, :close, :created_at, :one_application, :amount_requested,
+        :project_summary, :begin_date, :end_date, :organization_name,
+        :ein_taxID, :org_address_1, :org_address_2, :org_city, :org_state, 
+        :org_zip, :org_mission, :description, :other_funding, :total_budget,
+        :target_demo, :app_complete, :is_cycle, :is_project, :project_start,
+        :project_end, :organization_id, :project_id)
     end
 
     def close_requests cycle

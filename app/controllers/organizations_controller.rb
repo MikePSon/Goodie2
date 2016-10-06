@@ -39,12 +39,17 @@ class OrganizationsController < ApplicationController
       @programAdmin = User.where(:organization_id => @organization.id).where(:id => @organization.created_by).first
     end
     @organizationApplicants = User.where(:organization_id => @organization.id).where(:applicant => true)
-    @organizationRequests = Request.where(:organization_id => @organization.id)
-    @organizationProjects = Project.where(:organization_id => @organization.id)
+    @organizationRequests = Request.where(:organization_id => @organization.id.to_s)
+    @organizationProjects = Project.where(:organization_id => @organization.id.to_s)
+    @awarded_requests = @organizationRequests.where(:accepted => true)
     @organizationTeam = User.where(:organization_id => @organization.id).where(:applicant => false)
     @openCycles = Cycle.where(:organization_id => @organization.id).where(:status => "Open")
 
-    @totalAmountAwarded = @organizationRequests.sum(:amount_awarded)
+    @total_amount_awarded = 0.0
+    @awarded_requests.each do |this_request|
+      @total_amount_awarded += this_request.amount_awarded
+    end
+
 
     @timelineItems = get_timeline(@organization)
   end

@@ -40,8 +40,6 @@
 //= require cropper/dist/cropper.js
 // --- Select2
 //= require select2/dist/js/select2
-// --- Cocoon
-//= require cocoon
 
 
 (function(window, document, $, undefined){

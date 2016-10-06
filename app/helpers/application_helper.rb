@@ -23,11 +23,11 @@ module ApplicationHelper
 
   def request_statuses
     [
-        ['Created','1', 'Created'], ['In Progress','2', 'In Progress'],
-        ['Submitted','3', 'Submitted'], ['Incomplete','4', 'Incomplete'],
-        ['Re-Opened','5', 'Re-Opened'], ['Under Review','6', 'Under Review'],
-        ['Closed','7', 'Closed'], ['Awarded','8', 'Awarded'],['Payment','9', 'Payment'],
-        ['Project Complete','10', 'Project Complete']
+      ['Created','1', 'Created'], ['In Progress','2', 'In Progress'],
+      ['Submitted','3', 'Submitted'], ['Incomplete','4', 'Incomplete'],
+      ['Re-Opened','5', 'Re-Opened'], ['Under Review','6', 'Under Review'],
+      ['Closed','7', 'Closed'], ['Awarded','8', 'Awarded'],['Payment','9', 'Payment'],
+      ['Project Complete','10', 'Project Complete']
     ]
   end
 
@@ -42,7 +42,7 @@ module ApplicationHelper
     	['Michigan', 'MI'], ['Minnesota', 'MN'], ['Mississippi', 'MS'], ['Missouri', 'MO'],
     	['Montana', 'MT'], ['Nebraska', 'NE'], ['Nevada', 'NV'], ['New Hampshire', 'NH'],
     	['New Jersey', 'NJ'], ['New Mexico', 'NM'], ['New York', 'NY'], 
-        ['North Carolina', 'NC'], ['North Dakota', 'ND'], ['Ohio', 'OH'], ['Oklahoma', 'OK'],
+      ['North Carolina', 'NC'], ['North Dakota', 'ND'], ['Ohio', 'OH'], ['Oklahoma', 'OK'],
     	['Oregon', 'OR'], ['Pennsylvania', 'PA'], ['Puerto Rico', 'PR'],
     	['Rhode Island', 'RI'], ['South Carolina', 'SC'], ['South Dakota', 'SD'],
     	['Tennessee', 'TN'], ['Texas', 'TX'], ['Utah', 'UT'], ['Vermont', 'VT'],

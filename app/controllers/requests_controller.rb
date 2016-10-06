@@ -6,7 +6,6 @@ class RequestsController < ApplicationController
   # GET /requests.json
   def index
     @thisPage = "ORGREQUESTS"
-    
     if !current_user.admin || !current_user.applicant
       @thisPage = "ORGREQUESTS"
       @organization_requests = Request.where(:organization_id => current_user.organization_id.to_s)
@@ -14,13 +13,7 @@ class RequestsController < ApplicationController
       @planned_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Planned").order(created_at: :desc)
       @open_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open").order(open: :asc)
       @closed_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Closed").order(close: :desc) 
-
-
-
-
     end #End Program Admin/Mgr Stuff
-
-
   end
 
   # GET /requests/1
@@ -88,6 +81,9 @@ class RequestsController < ApplicationController
 
     if params[:cycle_id]
       @cycleID = params[:cycle_id]
+      @cycle = Cycle.where(:id => @cycleID).first
+      @show_organization = show_org_test(@cycle)
+      @show_details= show_req_details(@cycle)
     end
     if params[:project_id]
       @projectID = params[:project_id]
@@ -108,7 +104,10 @@ class RequestsController < ApplicationController
       @subtitle = "Edit this request, make it awesome"
     end
     @myProject = Project.where(:id => @request.project_id).first.id
-    @myCycle = Cycle.where(:id => @request.cycle_id).first.id
+    @cycle = Cycle.where(:id => @request.cycle_id).first.id
+
+    @show_organization = show_org_test(@cycle)
+    @show_details= show_req_details(@cycle)
 
 
   end
@@ -177,6 +176,21 @@ class RequestsController < ApplicationController
     def request_params
       #To whoever fixes this, I know it's not ideal, but I'm hacking. Same thing is in reviews.
       params.require(:request).permit!
+    end
+    
+    def show_org_test cycle
+      if cycle.organization_name? || cycle.ein_taxID? || cycle.org_address_1? || cycle.org_address_2? || cycle.org_city? || cycle.org_state? || cycle.org_zip? || cycle.org_mission?
+        return true
+      else
+        return false
+      end
+    end
+    def show_req_details cycle
+     if cycle.target_demo? || cycle.amount_requested? || cycle.instructions? || cycle.detailed_description? || cycle.project_start? || cycle.project_end? || cycle.other_funding? || cycle.instructions_entry?
+        return true
+      else
+        return false
+      end
     end
 
     def get_relations

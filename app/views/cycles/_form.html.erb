@@ -13,65 +13,29 @@
     </div>
   <% end %>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <div class="field">
-        <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, :class => "form-control" %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="form-group">
-          <%= f.label :status %>
-          <%= f.select(:status, cycle_statuses, {}, { :class => 'form-control' }) %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="form-group">
-          <%= f.label :project %>
-          <% @projectOptions = options_from_collection_for_select(Project.where(:organization_id => @myOrgID), :id, :name) %>
-          <%= f.select(:project_id, @projectOptions, {}, { :class => 'form-control' }) %>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="form-group mb">
-           <%= f.label :open %>
-          <div id="openTimePicker" class="input-group date">
-             <%= f.text_field :open, as: :default, value: f.object.open.try(:strftime,"%e %b %Y %l:%M %p"), :class => "form-control m-b", :placeholder => "DD Mon YYYY HH:MM AM/PM" %>
-             <span class="input-group-addon">
-                <span class="fa fa-calendar"></span>
-             </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="form-group mb">
-           <%= f.label :close %>
-          <div id="closeTimePicker" class="input-group date">
-             <%= f.text_field :close, as: :default, value: f.object.close.try(:strftime,"%e %b %Y %l:%M %p"), :class => "form-control m-b", :placeholder => "DD Mon YYYY HH:MM AM/PM" %>
-             <span class="input-group-addon">
-                <span class="fa fa-calendar"></span>
-             </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="form-group">
-          <%= f.label :admin_note %>
-          <%= f.cktext_area :admin_note, :class => "form-control" %>
-        </div>
-      </div>
-    
-
-      <div style="display:none">
-        <div class="field">
-          <%= f.label :organization %><br>
-          <%= f.text_field :organization_id, :class => "form-control", :value => @myOrgID %>
-        </div>
+  <div class="row-fluid">
+    <div class="col-xs-12">
+      <div id="cycle_form">
+        <h4>Basic</h4>
+        <section>
+          <%= render 'cycles/form_partials/basic_cycle_questions', :f => f %>
+        </section>
+        <h4>Instructions</h4>
+        <section>
+          <%= render 'cycles/form_partials/application_instructions', :f => f %>
+        </section>
+        <h4>Organization</h4>
+        <section>
+          <%= render 'cycles/form_partials/organization_questions', :f => f %>
+        </section>
+        <h4>Details</h4>
+        <section>
+          <%= render 'cycles/form_partials/request_details', :f => f %>
+        </section>
+        <h4>Administrative</h4>
+        <section>
+          <%= render 'cycles/form_partials/admin_details', :f => f %>
+        </section>
       </div>
     </div>
   </div>
@@ -84,3 +48,22 @@
     <% end %>
   </div>
 <% end %>
+
+<script>
+(function(window, document, $, undefined){
+
+  $(function(){
+
+    if ( ! $.fn.validate || ! $.fn.steps ) return;
+
+    $("#cycle_form").steps({
+        headerTag: "h4",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        stepsOrientation: "vertical"
+    });
+
+  });
+
+})(window, document, window.jQuery);
+</script>

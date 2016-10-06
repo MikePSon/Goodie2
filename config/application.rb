@@ -36,6 +36,7 @@ module Goodie2
 
     # CKEditor, WYSIWYG
     config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
+    Rails.application.config.assets.precompile += %w( ckeditor/* )
     # setup bower components folder for lookup
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
     

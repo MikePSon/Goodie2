@@ -1,0 +1,45 @@
+<style>
+	#city_state_zip_input .city_input {display: inline; max-width: 37%;}
+	#city_state_zip_input .state_input {display: inline; max-width: 23%;}
+	#city_state_zip_input .zip_input {display: inline; max-width: 75px;}
+	#city_state_zip_input .ein_container {display: inline; max-width: 110px;}
+</style>
+
+<% if @cycle.organization_name? %>
+	<div class="field">
+		<%= f.label :organization_name, "Organization Name" %><br>
+		<%= f.text_field :organization_name, :class => "form-control", :placeholder => "Organization Name" %>
+	</div>
+<% end %>
+
+<% if @cycle.ein_taxID? %>
+	<div class="field">
+		<%= f.label :organization_ein, "EIN/Tax ID#" %><br>
+		<%= f.text_field :organization_ein, :class => "form-control ein_input", :placeholder => "##-#######" %>
+	</div>
+<% end %>
+
+<% if @cycle.org_address_1? %>
+	<div class="field">
+		<%= f.label :org_address_1, "Organization Address 1" %><br>
+		<%= f.text_field :org_address_1, :class => "form-control", :placeholder => "Address 1" %>
+	</div>
+<% end %>
+
+<% if @cycle.org_address_2? %>
+	<div class="field">
+		<%= f.label :org_address_2, "Organization Address 2" %><br>
+		<%= f.text_field :org_address_2, :class => "form-control", :placeholder => "Address 2" %>
+	</div>
+<% end %>
+
+<% if @cycle.org_city? || @cycle.org_state? || @cycle.org_zip? %>
+<div id="city_state_zip_input">
+
+		<%= f.label :org_address_2, "City, State Zip" %><br>
+		<%= f.text_field :org_city, :class => "form-control city_input", :placeholder => "City" %>
+		<%= f.select :org_state, options_for_select(us_states), {:selected => params[:id]}, :class => "form-control state_input" %>
+		<%= f.text_field :org_zip, :class => "form-control zip_input", :placeholder => "Zip" %>
+
+</div>
+<% end %>

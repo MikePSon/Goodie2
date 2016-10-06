@@ -1,0 +1,71 @@
+<div style="display: none !important">
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.text_field :user_id, value: current_user.id, :class => "form-control", :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :organization_id %><br>
+    <%= f.text_field :organization_id, value: current_user.organization_id, :class => "form-control", :required => true %>
+  </div>
+</div>
+
+<% if @projectID %>
+  <div style="display:none !important">
+    <%= f.label :project %>
+    <%= f.text_field :project_id, :value => @projectID, :class => "form-control" %>
+  </div>
+<% else %>
+  <div class="field">
+    <%= f.label :project %><br>
+    <% @projectOptions = options_from_collection_for_select(Project.where(:organization_id => current_user.organization_id.to_s), :id, :name, @myProject) %>
+    <%= f.select(:project_id, @projectOptions, {}, { :class => 'form-control', :required => true }) %>
+  </div>
+<% end %>
+
+<!-- End Project Inputs -->
+<% if @cycleID %>
+  <div style="display:none !important">
+    <%= f.label :cycle %>
+    <%= f.text_field :cycle_id, :value => @cycleID, :class => "form-control" %>
+  </div>
+<% else %>
+  <div class="field">
+    <%= f.label :cycle %><br>
+    <% @cycleOptions = options_from_collection_for_select(Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open"), :id, :name, @myCycle) %>
+    <%= f.select(:cycle_id, @cycleOptions, {}, { :class => 'form-control', :required => true }) %>
+  </div> 
+<% end %>
+<!-- End cycle inputs -->
+
+<div class="field">
+  <%= f.label :title %><br>
+  <%= f.text_field :title, :class => "form-control", :required => true %>
+</div>
+
+<% if @cycle.project_summary? %>
+  <div class="field">
+    <%= f.label :project_summary %><br>
+    <%= f.text_field :project_summary, :class => "form-control" %>
+  </div>
+<% end %>
+
+<% if @cycle.amount_requested %>
+  <div class="field">
+    <%= f.label :amount_requested, "Amount Requested" %><br>
+    <%= f.text_field :amount_requested, :class => "form-control" %>
+  </div>
+<% end %>
+
+<% if @cycle.project_start? %>
+  <div class="field">
+    <%= f.label :project_start %><br>
+    <%= f.date_select :project_start, :class => "form-control" %>
+  </div> 
+<% end %>
+
+<% if @cycle.project_end? %>
+  <div class="field">
+    <%= f.label :project_end %><br>
+    <%= f.date_select :project_end, :class => "form-control" %>
+  </div> 
+<% end %>
