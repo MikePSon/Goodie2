@@ -43,7 +43,7 @@ group :development do
   gem 'spring'
 end
 
-#Mongo DB
+# Mongo DB
 gem 'mongoid', '~> 5.1', '>= 5.1.3'
 gem 'bson_ext'
 
@@ -68,9 +68,13 @@ gem "bower-rails", "~> 0.9.2"
 # Wheneverise for CronJobs
 gem 'whenever', require: false
 
-#WYSIWYG Editor
+# WYSIWYG Editor
 gem 'ckeditor'
 gem 'mongoid-paperclip', require: 'mongoid_paperclip'
 
-# AXLSX
-gem 'axlsx'
+# Cucumber Testing
+group :development, :test do
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+end
