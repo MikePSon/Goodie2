@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :requests
   resources :cycles
   resources :projects
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => 'users/registrations' }
 
   devise_scope :user do
     get 'new_applicant', :to => 'devise/registrations#new_applicant'
