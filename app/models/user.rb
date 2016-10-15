@@ -22,6 +22,8 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+  field :deleted_at,         type: DateTime
+  field :inactive_user,      type: Boolean
 
   ## Confirmable
   # field :confirmation_token,   type: String
@@ -64,10 +66,30 @@ class User
   field :age,               type: Integer
 
 
-  def self.set_age
-    Rails.logger.debug "*********** OPEN/CLOSE CYCLES AUTO RUN ***********"
-    now = Time.now.utc.to_date
-    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  # instead of deleting, indicate the user requested a delete & timestamp it  
+  def soft_delete  
+    if self.program_admin?
+      organization_users = User.where(:organization_id => self.organization_id.to_s)
+      
+      organization_users.each do |this_user|
+        this_user.update_attribute(:deleted_at, Time.current) 
+        this_user.update_attribute(:inactive_user, true)
+      end
+
+    else
+      update_attribute(:deleted_at, Time.current) 
+      update_attribute(:inactive_user, true)
+    end
+  end
+
+  # ensure user account is active  
+  def active_for_authentication?  
+    super && !deleted_at  
+  end  
+
+  # provide a custom message for a deleted account   
+  def inactive_message   
+    !deleted_at ? super : :deleted_account  
   end
 
 

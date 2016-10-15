@@ -9,7 +9,6 @@
 
       <h4>Basic</h4>
       <section>
-        <strong><%= params[:action] %></strong>
         <%= render 'user_fields', :f => f %>
         
         <% if Rails.env.development? %>
@@ -35,5 +34,10 @@
       <%= f.submit "Let's Go!", class: "btn btn-primary", id: "submit_button" %>
       
     <% end #End Form %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to 'Delete Account', user_registration_path, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
   </div>
 </div>
