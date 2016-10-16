@@ -102,6 +102,8 @@ module ApplicationHelper
       return "fa fa-gears"
     elsif param == "logout"
       return "icon-power"
+    elsif param == "help_center"
+      return "fa fa-life-buoy"
     end
   end#End get_icon
 end

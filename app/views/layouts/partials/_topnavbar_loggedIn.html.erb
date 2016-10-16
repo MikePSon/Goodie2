@@ -105,11 +105,25 @@
                         </div>
                      </a>
 
+                     <%= link_to help_center_path, :class => "list-group-item"  do %>
+                        <div class="media-box">
+                           <div class="pull-left">
+                              <em class="<%= get_icon('help_center') %> fa-2x text-warning"></em>
+                           </div>
+                           <div class="media-box-body clearfix">
+                              <p class="m0">Help Center</p>
+                              <p class="m0 text-muted">
+                                 <small>Goodie 2 documentation</small>
+                              </p>
+                           </div>
+                        </div>
+                     <% end %>
+
 
                      <%= link_to edit_user_registration_path, :class => "list-group-item"  do %>
                         <div class="media-box">
                            <div class="pull-left">
-                              <em class="<%= get_icon('edit') %> fa-2x text-warning"></em>
+                              <em class="<%= get_icon('edit') %> fa-2x text-muted"></em>
                            </div>
                            <div class="media-box-body clearfix">
                               <p class="m0">Edit Account</p>
