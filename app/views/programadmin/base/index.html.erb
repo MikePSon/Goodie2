@@ -1,11 +1,15 @@
 <%= render 'layouts/partials/page_header' %>
 
-<% if @in_registration %>
-<%= @test %>
+<% if !@has_org %>
+  <%= render 'programadmin/base/registration_help/no_org' %>
+<% elsif !@has_projects %>
+  <%= render 'programadmin/base/registration_help/no_projects' %>
+<% elsif !@has_cycles %>
+  <%= render 'programadmin/base/registration_help/no_cycles' %>
 <% else %>
 <div class="row">
-   <%= render 'programadmin/base/partials/header_panels' %>
-</div>
+    <%= render 'programadmin/base/partials/header_panels' %>
+  </div>
 
 <div class="row">
    <div class="col-lg-8 col-md-12">

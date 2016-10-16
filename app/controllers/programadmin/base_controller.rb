@@ -7,10 +7,22 @@ class Programadmin::BaseController < ApplicationController
     @title = "Dashboard"
     @subtitle = "Your Admin Dashboard"
     @my_organization = Organization.where(:id => current_user.organization_id.to_s).first
-    @in_registration = @my_organization.blank?
+	
+	@has_org = !@my_organization.blank?
 
+	if @has_org
+		@my_projects = Project.where(:organization_id => current_user.organization_id)
+    	@my_cycles = Cycle.where(:organization_id => current_user.organization_id)
+    	@has_projects = @my_projects.count > 0
+    	@has_cycles = @my_cycles.count > 0
+    	if @has_cycles && @has_projects
+    		@registered = true
+    	else
+    		@registered = false
+    	end
+	end
     
-    if !@in_registration
+    if @registered
     	@my_projects = Project.where(:organization_id => current_user.organization_id)
     	@my_cycles = Cycle.where(:organization_id => current_user.organization_id)
 	
@@ -149,8 +161,7 @@ class Programadmin::BaseController < ApplicationController
 				@repeat_raw += 1
 			end
 		end
-	else #User just registered, has no organizations
-		@test = "Need to create how-to to instruct user on how to get up and running. Do in documentation phase"
+	else #User just registered, has no organization
 	end
 
   end#End Index
