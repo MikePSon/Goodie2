@@ -43,7 +43,6 @@
 
 <% elsif @cycle.status == "Closed" %>
    var donutData = [
-
       <% if @submittedRequests.count > 0 %>
       {label: "Submitted",value: <%= @submittedRequests.count %>},
       <% end %>
@@ -66,11 +65,12 @@
       {label: "Complete", value: <%= @projectCompleteRequests.count %>},
       <% end %>
    ];
+
    $(document).ready(function(){
       new Morris.Donut({
          element: 'closed_donut',
          data: donutData,
-         colors: [ '#5d9cec', '#000', '#f05050', '#27c24c', '#ff902b', '#F62459', '#6C7A89' ],
+         colors: [ '#5d9cec', '#000', '#f05050', '#27c24c', '#ff902b', '#F62459', '#6C7A89', '#7268B8' ],
          resize: true
       });
    });

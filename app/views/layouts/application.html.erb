@@ -85,6 +85,10 @@
    <%= javascript_include_tag 'application', 'data-turbolinks-eval' => false %>
    <!-- =============== ANGLE SCRIPTS ===============-->
    <%= javascript_include_tag 'angle' %>
+   <!-- =============== Landing Page Only SCRIPTS ===============-->
+   <% if (params[:controller] == "pages") && (params[:action] == "home") %>
+      <%= javascript_include_tag 'landing_scripts' %>
+   <% end %>
 
    <%= yield :body_area %> 
 

@@ -83,6 +83,14 @@ module Goodie2
     config.assets.precompile += %w( admin/base.css )
     config.assets.precompile += %w( users/registrations.css )
 
+    config.assets.precompile += %w( landing/landing.css )
+    config.assets.precompile += %w( landing/custom-landing.css )
+    
+
+    config.assets.precompile += %w( landing/landing.js )
+    config.assets.precompile += %w( landing/waypoints.js )
+    config.assets.precompile += %w( landing_scripts.js )
+
 
     # precompile themes
     config.assets.precompile += ['angle/themes/theme-a.css',
