@@ -103,6 +103,7 @@
             clear: 'fa fa-trash'
           }
       });
+      
     }
 
   });

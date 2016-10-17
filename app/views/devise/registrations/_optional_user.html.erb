@@ -16,7 +16,7 @@
 <div class="form-group">
   <%= f.label :age, :class => "col-lg-2 control-label" %>
   <div class="col-lg-10">
-    <%= f.number_field :age, :class => "form-control", :placeholder => "Your age" %>
+    <%= f.number_field :age, :class => "form-control", :placeholder => "Your age", :min => "0", :max => "125" %>
   </div>
 </div>
 
@@ -39,9 +39,9 @@
   <%= f.label :office_open, :class => "col-lg-2 control-label" %>
   <div class="col-lg-10">
     <div id="openTimePicker" class="input-group date">
-      <%= f.text_field :office_open, as: :default, :class => "form-control m-b", :placeholder => "HH:MM AM/PM" %>
+      <%= f.text_field :office_open, as: :default, :class => "form-control", :placeholder => "HH:MM AM/PM" %>
       <span class="input-group-addon">
-        <span class="fa fa-calendar"></span>
+        <span class="fa fa-clock-o"></span>
       </span>
     </div>
   </div>
@@ -51,9 +51,9 @@
   <%= f.label :office_close, :class => "col-lg-2 control-label" %>
   <div class="col-lg-10">
     <div id="closeTimePicker" class="input-group date">
-      <%= f.text_field :office_close, as: :default, :class => "form-control m-b", :placeholder => "HH:MM AM/PM" %>
+      <%= f.text_field :office_open, as: :default, :class => "form-control", :placeholder => "HH:MM AM/PM" %>
       <span class="input-group-addon">
-        <span class="fa fa-calendar"></span>
+        <span class="fa fa-clock-o"></span>
       </span>
     </div>
   </div>

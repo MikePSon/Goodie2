@@ -2562,6 +2562,7 @@ a.text-lime:hover {
   position: relative;
   background-image: url(give_back.jpg);
   background-size: cover;
+  background-position: 0;
   /*Header*/
   /*Intro slogan*/
 }

@@ -86,4 +86,30 @@
     	  });
 	});
 
+  $(function(){
+
+    // DATETIMEPICKER
+    // ----------------------------------- 
+
+    if($.fn.datetimepicker) {
+
+      $('#project_start_picker, #project_end_picker').datetimepicker({
+        //FIXME: This is a bug that needs fixin, something with DateTime formatting
+        format: "DD/MM/YYYY",
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-crosshairs',
+            clear: 'fa fa-trash'
+          }
+      });
+      
+    }
+
+  });
+
 })(window, document, window.jQuery);
