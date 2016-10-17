@@ -159,8 +159,6 @@
         $('[role="menu"]').children().eq(0).children().addClass("btn btn-primary");
         $('[role="menu"]').children().eq(1).children().addClass("btn btn-default");
     });
-
 });
 
 })(window, document, window.jQuery);
-
