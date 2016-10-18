@@ -152,30 +152,44 @@
             submitBtn.hide();
         }
     };
+
+    // Moves Submit button to proper place
+    // ----------------------------------- 
     $(document).ready(function(){
         $('#submit_button').hide();
         $('[role="menu"]').children().eq(0).children().addClass("btn btn-primary");
         $('[role="menu"]').children().eq(1).children().addClass("btn btn-default");
     });
 
-    
+    // Field Validations
+    // ----------------------------------- 
     $(document).ready(function(){
-        console.log("HELLO");
         $('#new_user').attr('data-validate', 'parsley');
         $('.parsley-validate').parsley();
         $('#user_email').attr('data-parsley-type', 'email');
         $('#user_phone').inputmask("(999)999-9999");
-        $('#user_phone').inputmask("(999)999-9999");
         $('#user_age').attr('data-parsley-min', "0");
         $('#user_age').attr('data-parsley-max', "125");
-        $('#user_phone').inputmask("99999");
+        $('#user_zip').inputmask("99999");
     });
-
     if($.fn.datetimepicker) {
 		$('#user_office_open, #user_office_close').datetimepicker({
 			format: 'LT'
 		});
     }
+
+    // Toggles Program Admin and Program Manager Checkboxes
+    // ----------------------------------- 
+    $('#user_program_admin').click(function(){
+        if ($(this).is(':checked')){
+            $('#user_program_manager').prop('checked', false);
+        }
+    });
+    $('#user_program_manager').click(function(){
+        if ($(this).is(':checked')){
+            $('#user_program_admin').prop('checked', false);
+        }
+    });
 
     
 });

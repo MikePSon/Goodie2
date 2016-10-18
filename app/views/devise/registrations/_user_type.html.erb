@@ -2,18 +2,21 @@
 	<div class="row">
 		<label class="col-sm-2 control-label">Type</label>
 		<div class="col-sm-10">
-			<label class="checkbox-inline">
-				<%= f.check_box :admin %>Admin
-			</label>
-			<label class="checkbox-inline">
-				<%= f.check_box :program_admin %>Program Admin
-			</label>
-			<label class="checkbox-inline">
-				<%= f.check_box :program_manager %>Program Manager
-			</label>
-			<label class="checkbox-inline">
-				<%= f.check_box :applicant %>Applicant
-			</label>
+			<div class="checkbox c-checkbox needsclick">
+				<label class="needsclick">
+					<%= f.check_box :program_admin, :class => "needsclick" %>
+					<span class="fa fa-check"></span>Program Admin, the head honcho
+				</label>
+			</div>
+			<!--<div class="checkbox c-checkbox">
+				<label>
+					<%= f.check_box :program_manager %>
+					<span class="fa fa-check"></span>Program Manager, still doing good
+				</label>
+			</div>-->
 		</div>
 	</div>
 </div>
+<script>
+	$('#user_program_admin').prop('checked', true)
+</script>
