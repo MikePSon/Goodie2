@@ -80,6 +80,10 @@
                            <!-- Possibly buggy -->
                            <%= f.text_field :created_by, :class => "form-control", :value => current_user.id %>
                         </div>
+                        <div class="form-group">
+                           <label>Logo</label>
+                           <%= f.file_field :logo, class: "form-control", :placeholder => "Your pic!" %>
+                        </div>
                   </div>
                </div>
             </div>

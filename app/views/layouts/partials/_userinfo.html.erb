@@ -5,7 +5,15 @@
          <!-- User picture-->
          <div class="user-block-picture">
             <div class="user-block-status">
-               <img src="<%= image_path('angle/user/02.jpg') %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
+               <% if current_user.avatar? %>
+                  <%= image_tag current_user.avatar.url(:thumb), :class => "img-thumbnail img-circle", :height => 60, :width => 60 %>
+               <% else %>
+               <div class="avatar-circle-side">
+                  <span class="initials">
+                     <%= current_user.first_name[0].upcase %><%= current_user.last_name[0].upcase %>
+                  </span>
+               </div>
+               <% end %>
                <div class="circle circle-success circle-lg"></div>
             </div>
          </div>
