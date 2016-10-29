@@ -17,10 +17,15 @@
     }
 }
 
-.avatar-circle      { @include avatar(100px); }
-.avatar-circle-side { @include avatar(60px); }
-.avatar-circle-sm   { @include avatar(50px); }
-.avatar-circle-lg   { @include avatar(250px); }
+.avatar-circle           { @include avatar(100px); }
+.avatar-circle-side      { @include avatar(60px); }
+.avatar-circle-sm        { @include avatar(50px); }
+.avatar-circle-lg        { @include avatar(250px); }
+.avatar-circle-cy-view   { 
+  @include avatar(48px); 
+  display:inline-block;
+  .initials { top:12px;}
+}
 
 .logo-table {float: right;}
 .logo_table_name {padding-left:10px;}
