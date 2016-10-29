@@ -26,7 +26,6 @@ class CyclesController < ApplicationController
   # GET /cycles/1.json
   def show
     @project = @cycle.project
-    @requests = Request.all
     @allRequests = Request.where(:cycle_id => @cycle.id.to_s)
     @createdRequests = @allRequests.where(:status => "Created")
     @submittedRequests = @allRequests.where(:status => "Submitted")
@@ -37,6 +36,13 @@ class CyclesController < ApplicationController
     @awardedRequests = @allRequests.where(:accepted => true)
     @paymentRequests = @allRequests.where(:status => "Payment")
     @projectCompleteRequests = @allRequests.where(:status => "Project Complete")
+
+    @applicants = Array.new
+    @allRequests.each do |thisReq|
+      @applicants << User.where(:id => thisReq.user_id).first
+    end
+
+
 
     @thisPage = "NULL"
     @title = @cycle.name
