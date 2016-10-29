@@ -146,6 +146,7 @@ class OrganizationsController < ApplicationController
         :name,
         :motto,
         :url,
+        :logo,
         :address_1, :address_2, :city, :state, :zip, 
         :manager_decision,
         :manager_project_edit,

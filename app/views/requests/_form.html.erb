@@ -15,11 +15,22 @@
     </div>
   <% end %>
 
-
-  <% if @cycle.instructions? %>
-    Administrative note:<br>
-    <p><%= @cycle.instructions.html_safe %></p>
-  <% end %>
+  <div class="row-fluid">
+    <div class="col-xs-12 col-sm-9">
+      <% if @cycle.instructions? %>
+        Administrative note:<br>
+        <p><%= @cycle.instructions.html_safe %></p>
+      <% end %>
+    </div>
+    <div class="hidden-xs col-sm-3">
+      <table class="logo-table">
+        <tr>
+          <td class="logo_table_logo"><%= image_tag current_user.organization.logo.url(:thumb), :class => "img-thumbnail img-circle" %></td>
+          <td class="logo_table_name"><%= current_user.organization.name%></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
   <div id="request_form">
     <h4>General Info</h4>

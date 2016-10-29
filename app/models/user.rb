@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Paperclip
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -64,6 +65,13 @@ class User
   field :race,              type: String
   field :dob,               type: Date 
   field :age,               type: Integer
+
+  has_mongoid_attached_file :avatar, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 
   # instead of deleting, indicate the user requested a delete & timestamp it  
