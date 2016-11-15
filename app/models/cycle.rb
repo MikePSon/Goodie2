@@ -32,6 +32,8 @@ class Cycle
     field :org_state,           type: Boolean
     field :org_zip,             type: Boolean
     field :org_mission,         type: Boolean
+    field :form990,             type: Boolean
+    field :board_members,       type: Boolean
 
     #Request Details
     field :description,         type: Boolean

@@ -1,0 +1,22 @@
+<% if @cycle.form990? %>
+	<div class="field">
+		<%= f.label :form_990_1, "Form 990" %><br>
+		<%= f.file_field :form990_1, :class => "form-control" %>
+	</div>
+	<div class="field">
+		<%= f.label :form_990_2, "Form 990" %><br>
+		<%= f.file_field :form990_2, :class => "form-control" %>
+	</div>
+	<div class="field">
+		<%= f.label :form_990_3, "Form 990" %><br>
+		<%= f.file_field :form990_3, :class => "form-control" %>
+	</div>
+<% end %>
+
+<% if @cycle.form990? %>
+	<div class="field">
+		<%= f.label :board_members, "Board Chair & Board members" %><br>
+		<%= f.file_field :board_members, :class => "form-control" %>
+	</div>
+<% end %>
+

@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @cycles = Cycle.where(:project_id => @project.id)
+    @all_cycles = Cycle.where(:project_id => @project.id)
     @thisPage = "SHOWPROJECT"
     @title = @project.name
     @subtitle = @project.mission
@@ -52,7 +52,51 @@ class ProjectsController < ApplicationController
       @primaryAction = true
       @primaryActionText = "Edit Project <i class='icon-settings' style='margin-left:3px;'></i>"
       @primaryActionPath = edit_project_path(@project)
-    end
+
+      @all_applicants = User.where(:organization_id => current_user.organization_id.to_s).where(:applicant => true)
+      @all_requests = Request.where(:project_id => @project.id)
+      @all_awarded = @all_requests.where(:accepted => true)
+
+      @average_applications = (@all_requests.count / @all_cycles.count).round(0)
+      @average_awards = (@all_awarded.count / @all_cycles.count).round(0)
+
+      @has_open_cycle = false
+      @amount_given = 0.0
+      @all_cycles.each do |this_cycle|
+        if this_cycle.status =="Open"
+          @has_open_cycle = true
+        end #has_open_cycle check
+      end #End Cycle Loop
+
+      @all_awarded.each do |this_request|
+        @amount_given += this_request.amount_awarded
+      end
+
+      # Demographics
+      @male_applicants = @all_applicants.where(:gender => "Male").count
+      @female_applicants = @all_applicants.where(:gender => "Female").count
+      @other_gender_applicants = @all_applicants.where(:gender => "Other").count
+      @decline_gender_applicants = @all_applicants.where(:gender => "Prefer not to say").count
+      
+      @applicants_18_under = @all_applicants.where(:age.lte => 18).count
+      @applicants_18_to_24 = @all_applicants.where(:age.gte => 19).where(:age.lte => 24).count
+      @applicants_25_to_29 = @all_applicants.where(:age.gte => 25).where(:age.lte => 29).count 
+      @applicants_30_to_39 = @all_applicants.where(:age.gte => 30).where(:age.lte => 39).count 
+      @applicants_40_to_49 = @all_applicants.where(:age.gte => 40).where(:age.lte => 49).count 
+      @applicants_50_to_59 = @all_applicants.where(:age.gte => 50).where(:age.lte => 59).count
+      @applicants_60_to_69 = @all_applicants.where(:age.gte => 60).where(:age.lte => 69).count
+      @applicants_70_plus  = @all_applicants.where(:age.gte => 70).count
+
+      @white_applicants = @all_applicants.where(:race => "White").count
+      @hispanic_applicants = @all_applicants.where(:race => 'Hispanic, Latino, Spanish Origin').count
+      @black_applicants = @all_applicants.where(:race => 'Black or African American').count
+      @native_american_applicants = @all_applicants.where(:race => 'American Indian, Alaska Native').count
+      @middle_eastern_applicants = @all_applicants.where(:race => 'Middle Eastern, North African').count
+      @hawaiian_applicants = @all_applicants.where(:race => 'Native Hawaiian, Pacific Islander').count
+      @two_race_applicants = @all_applicants.where(:race => 'Two or more races').count
+      @other_race_applicants = @all_applicants.where(:race => 'Other').count
+
+    end #End program admin view
   end
 
   # GET /projects/new

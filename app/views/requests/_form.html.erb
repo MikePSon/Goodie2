@@ -33,7 +33,7 @@
   </div>
 
   <div id="request_form">
-    <h4>General Info</h4>
+    <h4>General<span class="hidden-xs"> Info</span></h4>
     <section>
       <%= render 'requests/form_partials/general_questions', :f => f %>
     </section>
@@ -43,6 +43,13 @@
       <section>
         <%= render 'requests/form_partials/organization_questions', :f => f %>
       </section>
+
+      <% if @cycle.form990? || @cycle.board_members? %>
+      <h4>Org<span class="hidden-xs">anization</span> Uploads</h4>
+      <section>
+        <%= render 'requests/form_partials/organization_uploads', :f => f %>
+      </section>
+      <% end %>
     <% end %>
 
     <% if @cycle.org_mission? %>

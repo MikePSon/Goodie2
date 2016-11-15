@@ -1,0 +1,62 @@
+<div class="panel b">
+   <div class="panel-heading">
+      <div class="pull-right mt">
+         <% if @has_open_cycle %>
+            <div class="label label-success">Open</div>
+         <% else %>
+            <div class="label label-info">Not open</div>
+         <% end %>
+      </div>
+      <h4 class="mv">
+         <span><%= @project.name %></span>
+      </h4>
+   </div>
+
+   <div class="panel-body">
+      <h4>Mission</h4>
+      <div class="row row-table row-flush">
+         <div class="col-xs-9"><p><%= @project.mission %></p></div>
+         <div class="col-xs-3"><%= link_to "View all Awards", requests_path, :class => "btn btn-default btn-disabled pull-right" %></div>
+      </div>
+   </div>
+   <div class="panel-body">
+      <div class="row text-center">
+         <div class="col-xs-4">
+            <div class="portlet-handler">
+               <div class="row row-table row-flush">
+                  <div class="col-xs-12">
+                     <div class="panel-body text-center bg-purple-light">
+                        <h4 class="mt0"><%= @all_applicants.count %></h4>
+                        <p class="mb0 text-white">Applicants</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-xs-4">
+            <div class="portlet-handler">
+               <div class="row row-table row-flush">
+                  <div class="col-xs-12">
+                     <div class="panel-body text-center bg-success-light">
+                        <h4 class="mt0"><%= number_to_currency(@amount_given) %></h4>
+                        <p class="mb0 text-white">Given</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-xs-4">
+            <div class="portlet-handler">
+               <div class="row row-table row-flush">
+                  <div class="col-xs-12">
+                     <div class="panel-body text-center bg-warning-light">
+                        <h4 class="mt0"><%= @all_awarded.count %></h4>
+                        <p class="mb0 text-white">Awards</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
