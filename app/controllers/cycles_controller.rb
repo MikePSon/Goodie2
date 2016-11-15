@@ -142,7 +142,7 @@ class CyclesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cycle_params
       params.require(:cycle).permit(
-        :admin_note, :instructions, :name, :status,
+        :admin_note, :instructions, :name, :status, :form990, :board_members,
         :open, :close, :created_at, :one_application, :amount_requested,
         :project_summary, :begin_date, :end_date, :organization_name,
         :ein_taxID, :org_address_1, :org_address_2, :org_city, :org_state, 
