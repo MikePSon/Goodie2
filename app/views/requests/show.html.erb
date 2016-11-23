@@ -1,94 +1,11 @@
 <%= render 'status_change_header' %>
 
-<p id="notice"><%= notice %></p>
-
-<% if @request.status == "Under Review" %>
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <td>Review</td>
-      <td>Decision</td>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @requestReviews.each do |display| %>
-      <tr>
-        <td><%= display.user.first_name %> <%= display.user.last_name %></td>
-        <td><%= display.decision %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br><hr><br>
-
+<% if !current_user.applicant? %>
+  <div class="row" id="non_applicant_show_request">
+    <%= render 'requests/show_request/non_applicant_view' %>
+  </div>
+<% else %>
+  <div class="row" id="applicant_show_request">
+    <%= render 'requests/show_request/applicant_view' %>
+  </div>
 <% end %>
-
-<p>
-	<strong>Applicant: </strong><%= @applicant.first_name %> <%= @applicant.last_name %>
-</p>
-
-<p>
-	<strong>Organization: </strong><%= @organization.name %>
-</p>
-
-<p>
-	<strong>Project: </strong><%= @project.name %>
-</p>
-
-<p>
-	<strong>Cycle: </strong><%= @cycle.name %>
-</p>
-<p>
-	<strong>Status: </strong><%= @request.status %>
-</p>
-
-
-<br><hr><br>
-
-<p>
-	<strong>Amount Requested: </strong><%= @request.amount_requested %>
-</p>
-
-<p>
-	<strong>Title: </strong><%= @request.title %>
-</p>
-
-<p>
-	<strong>other_funding: </strong><%= @request.other_funding %>
-</p>
-
-<p>
-	<strong>total_budget: </strong><%= @request.total_budget %>
-</p>
-
-<p>
-	<strong>description: </strong><%= @request.description.html_safe %>
-</p>
-
-<p>
-	<strong>summary: </strong><%= @request.summary %>
-</p>
-
-<p>
-	<strong>begin_date: </strong><%= @request.begin_date.strftime("%e %b %Y %l:%M %p").to_s %>
-</p>
-
-<p>
-	<strong>end_date: </strong><%= @request.end_date.strftime("%e %b %Y %l:%M %p").to_s %>
-</p>
-
-<% if @request.submitted_date? %>
-<p>
-	<strong>submitted_date: </strong><%= @request.submitted_date.strftime("%e %b %Y %l:%M %p").to_s %>
-</p>
-<% end %>
-
-<p>
-	<strong>app_complete: </strong><%= @request.app_complete %>
-</p>
-
-
-<%= link_to 'Edit', edit_request_path(@request) %> |
-<%= link_to 'Back', requests_path %>
