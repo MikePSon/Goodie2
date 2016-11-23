@@ -19,7 +19,7 @@
                <%= f.hidden_field :rejected, value: true %>
                <%= f.submit "Reject", :class => "btn btn-danger" %>
             <% end %>
-            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success">Accept</button>
+            <button type="button" data-toggle="modal" data-target="#accept_modal" class="btn btn-success">Accept</button>
          <% end %>
       </div>
 
@@ -31,8 +31,7 @@
 </div>
 
 <% content_for :body_area do %> 
-   <!-- Modal-->
-   <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+   <div id="accept_modal" tabindex="-1" role="dialog" aria-labelledby="accept_modal" aria-hidden="true" class="modal fade">
       <div class="modal-dialog">
          <%= form_for(@request) do |f| %>
          <div class="modal-content">
@@ -40,7 +39,7 @@
                <button type="button" data-dismiss="modal" aria-label="Close" class="close">
                   <span aria-hidden="true">&times;</span>
                </button>
-               <h4 id="myModalLabel" class="modal-title">Accept Award!</h4>
+               <h4 id="accept_modal" class="modal-title">Accept Award!</h4>
             </div>
             <div class="modal-body">
                <%= f.hidden_field :status, value: "Awarded" %>

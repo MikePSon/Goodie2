@@ -36,25 +36,20 @@ class RequestsController < ApplicationController
       @primaryActionText = "Edit"
       @primaryActionPath = edit_request_path(@request)
     end
-    
-    if @request.status == "Submitted"
-      #@rejectAction = true
-    end
 
-
-    if @request.status == "Under Review"
+    if (@request.status == "Under Review" && !current_user.applicant?)
       @requestReviews = Review.where(:request_id => @request.id).where(:review_complete => true)
       mgrDecision = Organization.where(:id => @request.organization_id).first.manager_decision
-      myReview = @requestReviews.where(:user_id => current_user.id)
-      # if myReview.count == 0
-      #   @primaryAction = true
-      #   @primaryActionText = "Review"
-      #   @primaryActionPath = new_review_path #Needs to include params for review form
-      if myReview.count == 1 && !myReview.first.review_complete
+      @myReview = @requestReviews.where(:user_id => current_user.id)
+      if @myReview.count == 0
+        @primaryAction = true
+        @primaryActionText = "Review"
+        @primaryActionPath = new_review_path(:organization_id => @current_user.organization_id, :project_id => @project.id, :cycle_id => @cycle.id, :request_id => @request.id)
+      elsif @myReview.count == 1 && !@myReview.first.review_complete
         @primaryAction = true
         @primaryActionText = "Review"
         @primaryActionPath = edit_review_path(myReview.first)
-      elsif myReview.count == 1 && myReview.first.review_complete
+      elsif @myReview.count == 1 && !@myReview.first.review_complete
         if (current_user.program_admin? || mgrDecision)
           @primaryAction = true
           @acceptReject = true
