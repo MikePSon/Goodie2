@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :requests
   resources :cycles
   resources :projects
+  resources :subscribers
+  
   devise_for :users, :controllers => { :registrations => 'users/registrations' }
 
   devise_scope :user do

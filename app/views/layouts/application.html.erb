@@ -44,7 +44,7 @@
             <% elsif current_user.program_manager? %>
                <%= render partial: "layouts/partials/sidebars/program_manager" %> 
             <% elsif current_user.applicant? %>
-               <%= render partial: "layouts/partials/sidebars/applicant" %> 
+               <%= render partial: "layouts/partials/sidebars/applicant" %>
             <% else %>
                <%= render partial: "layouts/partials/sidebars/base" %> 
             <% end %>
@@ -56,11 +56,11 @@
       </aside>
       <!-- Main section-->
       <% if user_signed_in? %>
-         <section>
-            <div class="content-wrapper">
-               <%= yield %>
-            </div>
-         </section>
+            <section>
+               <div class="content-wrapper">
+                  <%= yield %>
+               </div>
+            </section>
          <!-- Page footer-->
          <footer>
             <%= render partial: "layouts/partials/footer" %>

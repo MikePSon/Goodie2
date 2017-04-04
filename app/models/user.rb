@@ -25,6 +25,10 @@ class User
   field :deleted_at,         type: DateTime
   field :inactive_user,      type: Boolean
 
+  ## Stripe Fields
+  field :stripeid,           type: String
+  field :subscribed,      type: Boolean
+
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
@@ -79,6 +83,7 @@ class User
     else
       update_attribute(:deleted_at, Time.current) 
       update_attribute(:inactive_user, true)
+      update_attribute(:subscribed, false)
     end
   end
 

@@ -33,7 +33,6 @@ module Goodie2
 
     config.time_zone = 'Eastern Time (US & Canada)'
 
-
     # CKEditor, WYSIWYG
     config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
     Rails.application.config.assets.precompile += %w( ckeditor/* )
