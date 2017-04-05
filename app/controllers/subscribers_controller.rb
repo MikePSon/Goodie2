@@ -20,10 +20,4 @@ class SubscribersController < ApplicationController
 
 		redirect_to programadmin_dash_path
 	end
-
-	def cancel_plan
-		stripe_subscription = Stripe::Subscription.retrieve(current_user.stripeid)
-		stripe_subscription.delete(:at_period_end => true)
-		current_user.subscribed = false;
-	end
 end

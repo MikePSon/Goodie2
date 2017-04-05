@@ -27,7 +27,7 @@ class User
 
   ## Stripe Fields
   field :stripeid,           type: String
-  field :subscribed,      type: Boolean
+  field :subscribed,         type: Boolean
 
   ## Confirmable
   # field :confirmation_token,   type: String
@@ -80,10 +80,10 @@ class User
         this_user.update_attribute(:inactive_user, true)
       end
 
+
     else
       update_attribute(:deleted_at, Time.current) 
       update_attribute(:inactive_user, true)
-      update_attribute(:subscribed, false)
     end
   end
 
