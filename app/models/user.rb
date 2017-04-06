@@ -28,6 +28,7 @@ class User
   ## Stripe Fields
   field :stripeid,           type: String
   field :subscribed,         type: Boolean
+  field :planid,             type: String
 
   ## Confirmable
   # field :confirmation_token,   type: String

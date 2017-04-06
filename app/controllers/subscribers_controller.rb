@@ -3,14 +3,16 @@ class SubscribersController < ApplicationController
 	before_filter :authenticate_user!
 
 	def new
+		@plans = Stripe::Plan.all
 	end
 
 	def update
 		token = params[:stripeToken]
+		plan_id = params[:plan_id]
 
 		customer = Stripe::Customer.create(
 			card: token,
-			plan: 1000,
+			plan: plan_id,
 			email: current_user.email
 			)
 
