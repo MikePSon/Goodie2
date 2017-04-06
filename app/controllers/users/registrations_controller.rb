@@ -6,7 +6,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       stripe_customer = Stripe::Customer.retrieve(current_user.stripeid)
       my_subscription = stripe_customer.subscriptions.first
       my_subscription.delete(:at_period_end => true)
-
     end
 
     resource.soft_delete
@@ -20,4 +19,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   	'/subscribers/new'
   end
 
-end  
+end
