@@ -1,0 +1,54 @@
+<div class="container container-md pv-lg">
+   <div class="text-center mb-lg pb-lg">
+      <div class="h2 text-bold"><%= params[:controller] %></div>
+      <p>Select the plan in different options that best fit your project</p>
+   </div>
+</div>
+<div class="container container-md">
+	<!-- START PLAN TABLE-->
+	<div class="row">
+
+   		<% @plans.each do |thisPlan| %>
+   			<div class="col-md-4">
+   				<div class="plan">
+   					<h3 class="plan-header"><%= thisPlan.name %></h3>
+   					<div class="plan-price">
+   						<div class="text-lg">
+   							<sup><small>$</small></sup><%= (thisPlan.amount)/100 %>
+              			</div>
+              		</div>
+              		<h5><%= thisPlan.id %></h5>
+              		<ul class="plan-features">
+						<li>
+						  <em class="fa fa-check"></em>Basic Questions</li>
+						<li>
+						  <em class="fa fa-check"></em>Multiple Reviews</li>
+						<li>
+						  <em class="fa fa-check"></em>Analytics/Demographics</li>
+						<li>
+						  <em class="fa fa-check"></em>Free Updates</li>
+						<li>
+						  <em class="fa fa-times plan-feature-disable"></em>Advanced Forms</li>
+						<li>
+						  <em class="fa fa-times plan-feature-disable"></em>Advanced Reviews</li>
+					</ul>
+					<hr/>
+
+					<%= form_tag subscriber_path(current_user.id), method: :put do %>
+						<%= hidden_field_tag :plan_id, thisPlan.id %>
+
+						<script src="https://checkout.stripe.com/checkout.js" 
+							class="stripe-button basic"
+							data-key="<%= Rails.configuration.stripe[:publishable_key]%>"
+							data-description="Monthly Subscription"
+							data-amount="<%= (thisPlan.amount) %>"
+							data-label="<%= thisPlan.name %>"></script>
+					<% end %>
+
+
+
+   				</div>
+   			</div>
+   		<% end %>
+   	</div>
+</div>

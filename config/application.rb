@@ -35,7 +35,6 @@ module Goodie2
 
     config.time_zone = 'Eastern Time (US & Canada)'
 
-
     # CKEditor, WYSIWYG
     config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
     Rails.application.config.assets.precompile += %w( ckeditor/* )
@@ -69,6 +68,7 @@ module Goodie2
     config.assets.precompile += %w( programadmin/base.js )
     config.assets.precompile += %w( programmanager/base.js )
     config.assets.precompile += %w( users/registrations.js )
+    config.assets.precompile += %w( subscribers.js )
 
     config.assets.precompile += %w( base.css )
     config.assets.precompile += %w( pages.css )
@@ -84,6 +84,7 @@ module Goodie2
     config.assets.precompile += %w( programmanager/base.css )
     config.assets.precompile += %w( admin/base.css )
     config.assets.precompile += %w( users/registrations.css )
+    config.assets.precompile += %w( subscribers.css )
 
     config.assets.precompile += %w( landing/landing.css )
     config.assets.precompile += %w( landing/custom-landing.css )
