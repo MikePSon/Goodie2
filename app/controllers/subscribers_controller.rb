@@ -18,6 +18,10 @@ class SubscribersController < ApplicationController
 
 		current_user.subscribed = true
 		current_user.stripeid = customer.id
+
+		subsid = Stripe::Subscription.retrieve(customer.subscription.id)
+		current_user.subscriptionid = subs_id
+		
 		current_user.save
 
 		redirect_to programadmin_dash_path

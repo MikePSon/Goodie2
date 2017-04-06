@@ -29,6 +29,7 @@ class User
   field :stripeid,           type: String
   field :subscribed,         type: Boolean
   field :planid,             type: String
+  field :subscriptionid,     type: String
 
   ## Confirmable
   # field :confirmation_token,   type: String

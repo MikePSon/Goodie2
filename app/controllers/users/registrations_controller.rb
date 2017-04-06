@@ -5,7 +5,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Delete stripe acct
     if current_user.program_admin?
       stripe_customer = Stripe::Customer.retrieve(current_user.stripeid)
-      stripe_customer.delete
+      my_subscription = stripe_customer.subscriptions.first
+      my_subscription.delete(:at_period_end => true)
+
     end
 
     resource.soft_delete
