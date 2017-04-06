@@ -164,11 +164,13 @@ class Programadmin::BaseController < ApplicationController
 			end
 		else #User just registered, has no organization
 		end
+	else
+		redirect_to new_subscriber_path
 	end#is subscribed
 
   end#End Index
 
   def notsubscribed
-  	@test = "Sorry, you are not subscribed."
   end
+
 end#End Controller

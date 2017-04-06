@@ -1,8 +1,5 @@
 <%= render 'layouts/partials/page_header' %>
 
-<% if !current_user.subscribed? %>
-  <h2 class="text-danger">Sorry, you're not subscribed.</h2>
-<% else %>
 <% if !@has_org %>
   <%= render 'programadmin/base/registration_help/no_org' %>
 <% elsif !@has_projects %>
@@ -316,4 +313,3 @@ function display_demo_chart() {
 
 </script>
 <% end %>
-<% end #user subscribed%>
