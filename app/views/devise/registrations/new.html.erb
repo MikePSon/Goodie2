@@ -12,7 +12,9 @@
         <%= render 'user_fields', :f => f %>
         
         <% if Rails.env.development? %>
-          <%= render 'user_type', :f => f %>
+          <div style="display:none;">
+            <%= render 'user_type', :f => f %>
+          </div>
         <% end %>
       </section>
 

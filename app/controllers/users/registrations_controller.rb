@@ -1,7 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # DELETE /resource  
   def destroy
-    
     # Delete stripe acct
     if current_user.program_admin?
       stripe_customer = Stripe::Customer.retrieve(current_user.stripeid)

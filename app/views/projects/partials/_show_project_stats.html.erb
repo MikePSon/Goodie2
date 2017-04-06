@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="col-sm-5 col-xs-12">
+		<%= render 'projects/partials/latest_activities' %>
+	</div>
+	<div class="col-sm-7 col-xs-12">
+		<div class="panel b">
+   			<div class="panel-heading">
+   				Demographics
+   				<form class="pull-right">
+            		<select class="form-control fadeInLeft animated" id="demo_chart_select">
+               			<option>Gender</option>
+               			<option>Race</option>
+               			<option>Age</option>
+            		</select>
+         		</form>
+   			</div>
+			<div class="panel-body">
+				<div id="gender_pie_chart">
+         			<div class="gender_pie flot-chart"></div>
+         			<div class="race_pie flot-chart"></div>
+         			<div class="age_pie flot-chart"></div>
+      			</div>
+			</div>
+		</div>
+	</div>
+</div>

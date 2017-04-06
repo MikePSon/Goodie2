@@ -1,5 +1,6 @@
 class Organization
   include Mongoid::Document
+  include Mongoid::Paperclip
   # Associations
   has_many :users
   has_many :request
@@ -22,4 +23,11 @@ class Organization
   field :manager_project_edit,      type: Boolean
 
   field :annual_giving_goal,        type: Integer
+
+  has_mongoid_attached_file :logo, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }
+  validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
 end

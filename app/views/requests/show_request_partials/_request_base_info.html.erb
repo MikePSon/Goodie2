@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+   <div class="panel-heading">Basic Information</div>
+   <div class="panel-body">
+   	<dl class="dl-horizontal">
+		<dt>Project</dt>
+      	<dd><%= @project.name %></dd>
+
+      	<dt>Cycle</dt>
+      	<dd><%= @cycle.name %></dd>
+
+   		<dt>Amount Requested</dt>
+   		<dd><%= @request.amount_requested %></dd>
+
+		<dt>Project Title</dt>
+		<dd><%= @request.title %></dd>
+
+		<dt><span class="">Uses </span>Other Funding?</dt>
+		<dd><%= @request.other_funding %></dd>
+
+		<% if @request.other_funding %>
+      		<dt>Total Budget</dt>
+      		<dd><%= @request.total_budget %></dd>
+  		<% end %>
+    </dl>
+  </div>     
+</div>

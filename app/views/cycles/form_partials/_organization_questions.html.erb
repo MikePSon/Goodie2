@@ -42,6 +42,15 @@
 		      <span></span>
 		   </label>
 		</div>
+		<div class="field">
+		   <label>
+		      <span data-localize="cycle_form.fields.FORM990">Form 990</span> <%= form990_helper %>
+		   </label><br>
+		   <label class="switch">
+		      <%= f.check_box :form990 %>
+		      <span></span>
+		   </label>
+		</div>
 	</div>
 	<div class="col-xs-12 col-sm-6">
 		<div class="field">
@@ -77,6 +86,15 @@
 		   </label><br>
 		   <label class="switch">
 		      <%= f.check_box :org_mission %>
+		      <span></span>
+		   </label>
+		</div>
+		<div class="field">
+		   <label>
+		      <span data-localize="cycle_form.fields.BOARDMEMBERS">Board Members</span> <%= board_members_helper %>
+		   </label><br>
+		   <label class="switch">
+		      <%= f.check_box :board_members %>
 		      <span></span>
 		   </label>
 		</div>

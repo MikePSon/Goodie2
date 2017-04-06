@@ -1,0 +1,82 @@
+<div class="panel b">
+   <div class="panel-body bb">
+      <div class="clearfix">
+         <button type="button" class="btn btn-default btn-oval">
+            <em class="fa fa-play fa-fw text-muted"></em>
+            <span>New</span>
+         </button>
+         <button type="button" class="btn btn-default btn-oval">
+            <em class="fa fa-pause fa-fw text-muted"></em>
+            <span>Pause</span>
+         </button>
+      </div>
+   </div>
+   <!--<div class="panel-body bb">
+      <h5><strong>Guidestar Rating</strong></h5>
+      <div class="table-grid table-grid-align-middle mv">
+         <div class="col">
+              <div class="progress progress-xs m0">
+                  <div class="progress-bar progress-bar-info" style="width:<%= @project_budget_usage %>%"></div>
+              </div>
+         </div>
+         <div class="col wd-xxs text-right">
+            <div class="text-bold text-muted"><%= @project_budget_usage %>%</div>
+         </div>
+      </div>
+   </div>-->
+   <table class="table bb">
+      <tbody>
+         <tr>
+            <td>
+               <strong>Applications</strong>
+            </td>
+            <td><%= @all_requests.count %></td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Awards/Cycle</strong>
+            </td>
+            <td><%= @average_awards %></td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Repeat Type</strong>
+            </td>
+            <td><%= @project.repeat_type %></td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Cycles</strong>
+            </td>
+            <td>
+               <% @all_cycles[0..5].each do |thisCycle| %>
+                  <p><%= thisCycle.name %></p>
+               <% end %>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Recent Requests</strong>
+            </td>
+            <td>
+               <div data-height="120" data-scrollable="" class="list-group">
+                  <table class="table table-bordered bg-transparent">
+                     <tbody>
+                        <% @all_requests[0..2].each do |this_request| %>
+                           <tr>
+                              <td>
+                                 <em class=""><%= this_request.status %></em>
+                              </td>
+                              <td>
+                                 <%= link_to this_request.title, request_path(this_request) %>
+                              </td>
+                           </tr>
+                        <% end %>
+                     </tbody>
+                  </table>
+               </div>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>

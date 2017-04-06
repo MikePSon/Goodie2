@@ -8,24 +8,18 @@
       </h4>
    </div>
    <div class="panel-body bb bt">
-      <a href="#" class="inline">
-         <img src="<%= image_path('angle/user/05.jpg') %>" alt="program admin" class="img-circle thumb48" />
-      </a>
-      <a href="#" class="inline">
-         <img src="<%= image_path('angle/user/06.jpg') %>" alt="program manager" class="img-circle thumb24" />
-      </a>
-      <a href="#" class="inline">
-         <img src="<%= image_path('angle/user/07.jpg') %>" alt="program manager" class="img-circle thumb24" />
-      </a>
-      <a href="#" class="inline">
-         <img src="<%= image_path('angle/user/08.jpg') %>" alt="program manager" class="img-circle thumb24" />
-      </a>
-      <a href="#" class="inline">
-         <img src="<%= image_path('angle/user/09.jpg') %>" alt="program manager" class="img-circle thumb24" />
-      </a>
-      <div class="pull-right mt">
-         <button type="button" class="btn btn-default">Add Member</button>
-      </div>
+      <% @applicants[0..5].each do |this_applicant| %>
+         <% if this_applicant.avatar_file_name? %>
+            <%= image_tag this_applicant.avatar.url(:thumb), :class => "img-circle thumb48" %>
+         <% else %>
+            <div class="avatar-circle-cy-view">
+               <span class="initials">
+                  <%= this_applicant.first_name[0].upcase %><%= this_applicant.last_name[0].upcase %>
+               </span>
+            </div>
+         <% end %>
+      <% end %>
+
    </div>
    <div class="panel-body">
       <h4>Project Description</h4>

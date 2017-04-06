@@ -40,6 +40,5 @@
 		<%= f.text_field :org_city, :class => "form-control city_input", :placeholder => "City" %>
 		<%= f.select :org_state, options_for_select(us_states), {:selected => params[:id]}, :class => "form-control state_input" %>
 		<%= f.text_field :org_zip, :class => "form-control zip_input", :placeholder => "Zip" %>
-
 </div>
 <% end %>

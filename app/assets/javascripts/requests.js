@@ -21,6 +21,26 @@
 //= require datatables-colvis/js/dataTables.colVis
 //= require datatables/media/js/dataTables.bootstrap
 
+
+//--- jQuery UI
+//= require jquery-ui/ui/core
+//= require jquery-ui/ui/widget
+//= require jquery-ui/ui/mouse
+//= require jquery-ui/ui/draggable
+//= require jquery-ui/ui/droppable
+//= require jquery-ui/ui/sortable
+//= require jqueryui-touch-punch/jquery.ui.touch-punch.min
+//--- Skycons
+//= require skycons/skycons
+//--- Sortable
+//= require html.sortable/dist/html.sortable.js
+//--- Nestable
+//= require nestable/jquery.nestable.js
+// --- Bootstrap Tour
+//= require bootstrap-tour/build/js/bootstrap-tour-standalone.js
+// --- Sweet Alert
+//= require sweetalert/dist/sweetalert.min.js
+
 //--- Filestyle
 //= require bootstrap-filestyle/src/bootstrap-filestyle
 //--- Tags input
