@@ -114,7 +114,6 @@ class ApplicationController < ActionController::Base
 
   #Validates that non admins can only see projects for their organization
   def require_mycycle viewing_cycle_id
-    puts "***** VERIFYING Cycle"
     viewing_cycle = viewing_cycle_id.to_s
     org_cycles = Cycle.where(:organization_id => current_user.organization_id)
     allowed = false
