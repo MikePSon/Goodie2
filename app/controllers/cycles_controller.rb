@@ -26,7 +26,6 @@ class CyclesController < ApplicationController
   # GET /cycles/1.json
   def show
     @project = @cycle.project
-    @requests = Request.all
     @allRequests = Request.where(:cycle_id => @cycle.id.to_s)
     @createdRequests = @allRequests.where(:status => "Created")
     @submittedRequests = @allRequests.where(:status => "Submitted")
@@ -37,6 +36,13 @@ class CyclesController < ApplicationController
     @awardedRequests = @allRequests.where(:accepted => true)
     @paymentRequests = @allRequests.where(:status => "Payment")
     @projectCompleteRequests = @allRequests.where(:status => "Project Complete")
+
+    @applicants = Array.new
+    @allRequests.each do |thisReq|
+      @applicants << User.where(:id => thisReq.user_id).first
+    end
+
+
 
     @thisPage = "NULL"
     @title = @cycle.name
@@ -136,7 +142,7 @@ class CyclesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cycle_params
       params.require(:cycle).permit(
-        :admin_note, :instructions, :name, :status,
+        :admin_note, :instructions, :name, :status, :form990, :board_members,
         :open, :close, :created_at, :one_application, :amount_requested,
         :project_summary, :begin_date, :end_date, :organization_name,
         :ein_taxID, :org_address_1, :org_address_2, :org_city, :org_state, 

@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Paperclip
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,6 +25,12 @@ class User
   field :last_sign_in_ip,    type: String
   field :deleted_at,         type: DateTime
   field :inactive_user,      type: Boolean
+
+  ## Stripe Fields
+  field :stripeid,           type: String
+  field :subscribed,         type: Boolean
+  field :planid,             type: String
+  field :subscriptionid,     type: String
 
   ## Confirmable
   # field :confirmation_token,   type: String
@@ -65,6 +72,13 @@ class User
   field :dob,               type: Date 
   field :age,               type: Integer
 
+  has_mongoid_attached_file :avatar, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
 
   # instead of deleting, indicate the user requested a delete & timestamp it  
   def soft_delete  
@@ -75,6 +89,7 @@ class User
         this_user.update_attribute(:deleted_at, Time.current) 
         this_user.update_attribute(:inactive_user, true)
       end
+
 
     else
       update_attribute(:deleted_at, Time.current) 

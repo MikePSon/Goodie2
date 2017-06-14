@@ -15,6 +15,8 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue {}
+
 module Goodie2
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -32,7 +34,6 @@ module Goodie2
     I18n.enforce_available_locales = false
 
     config.time_zone = 'Eastern Time (US & Canada)'
-
 
     # CKEditor, WYSIWYG
     config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
@@ -67,6 +68,7 @@ module Goodie2
     config.assets.precompile += %w( programadmin/base.js )
     config.assets.precompile += %w( programmanager/base.js )
     config.assets.precompile += %w( users/registrations.js )
+    config.assets.precompile += %w( subscribers.js )
 
     config.assets.precompile += %w( base.css )
     config.assets.precompile += %w( pages.css )
@@ -82,6 +84,7 @@ module Goodie2
     config.assets.precompile += %w( programmanager/base.css )
     config.assets.precompile += %w( admin/base.css )
     config.assets.precompile += %w( users/registrations.css )
+    config.assets.precompile += %w( subscribers.css )
 
     config.assets.precompile += %w( landing/landing.css )
     config.assets.precompile += %w( landing/custom-landing.css )

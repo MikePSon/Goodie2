@@ -9,16 +9,16 @@ class ApplicationController < ActionController::Base
 
   # Devise permitted params
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
-      :email, :first_name, :last_name, :dob, :age,
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(
+      :email, :first_name, :last_name, :dob, :age, :avatar,
       :admin, :program_admin, :program_manager, :applicant,
       :address_1, :address_2, :city, :state, :zip, :race,
       :phone, :office_open, :office_close, :job_title, :gender,
       :password, :password_confirmation, :current_password,
       :organization_id)
     }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
-      :email, :first_name, :last_name, :dob, :age,
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(
+      :email, :first_name, :last_name, :dob, :age, :avatar,
       :admin, :program_admin, :program_manager, :applicant,
       :address_1, :address_2, :city, :state, :zip, :race,
       :phone, :office_open, :office_close, :job_title, :gender,
@@ -114,7 +114,6 @@ class ApplicationController < ActionController::Base
 
   #Validates that non admins can only see projects for their organization
   def require_mycycle viewing_cycle_id
-    puts "***** VERIFYING Cycle"
     viewing_cycle = viewing_cycle_id.to_s
     org_cycles = Cycle.where(:organization_id => current_user.organization_id)
     allowed = false

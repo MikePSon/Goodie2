@@ -52,6 +52,9 @@ module CyclesHelper
 	def org_mission_helper
 		raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="Mission" data-content="Will display a larger text area field for the applicant to enter their organizations mission statement"> </i>')
 	end
+	def form990_helper
+		raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="Form 990" data-content="Will display 3 upload fields to upload the previous 3 Form 990s."> </i>')
+	end
 
 	def target_demo_helper
 		raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="Target Demo" data-content="Will display a larger text area field for the applicant to enter a describe the community they will be serving."> </i>')
@@ -76,5 +79,8 @@ module CyclesHelper
 	end
 	def other_funding_helper
 		raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="Other Funding" data-content="Some projects have multiple sources of funding. Will display a true/false indicator. If the user elects true, will also display a Total Budget field."> </i>')
+	end
+	def board_members_helper
+		raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="Board Chair & Members" data-content="Will display a file upload for the user to upload the Board Chair & Board Members of their organization."> </i>')
 	end
 end

@@ -2574,6 +2574,15 @@ a.text-lime:hover {
   top:50px;
   width:25%;
 }
+@media screen and (max-width: 720px) {
+  .btn-landing {width: 75%;}
+  #charts {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 0px 15px;
+  }
+  .landing-intro {background-position: 50%;}
+}
 .landing-intro .header {
   padding: 15px 0;
   border-bottom: 1px solid #f3f5f6;

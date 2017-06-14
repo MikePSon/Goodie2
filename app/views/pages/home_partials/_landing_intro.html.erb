@@ -7,7 +7,7 @@
             </h1>
             <p>
                 An Easy <strong>Giving App</strong> Designed for Simplicity
-                <br class="hidden-xs">Deep Insights. User friendly.<strong>Fast start up.</strong>
+                <br><span class="hidden-xs">Deep Insights. User friendly.<strong>Fast start up.</strong></span>
             </p>
             <div class="registration-btn-container">
                 <%= link_to "Sign up", new_user_registration_path, :class => "btn btn-xl btn-landing" %>
@@ -19,8 +19,11 @@
     <!-- Start .description-bar -->
     <div class="description-bar">
         <!-- Start container -->
-        <div class="container text-center">
+        <div class="container text-center hidden-xs">
             <p>Low cost solution for community foundations, corporations, government groups, academic instiutions to accept, award and track grant giving.</p>
+        </div>
+        <div class="container text-center visible-xs">
+            <p>Low cost solution to accept, review, and track your giving efforts.</p>
         </div>
         <!-- End container -->
     </div>

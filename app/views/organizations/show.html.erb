@@ -1,7 +1,7 @@
 <div class="unwrap">
    <div style="background-image: url(<%= asset_path 'angle/profile-bg.jpg' %>)" class="bg-cover">
       <div class="p-xl text-center text-white">
-         <img src="<%= image_path('angle/user/09.jpg') %>" alt="Image" class="img-thumbnail img-circle thumb128" />
+         <%= image_tag current_user.avatar.url(:square), :class => "img-thumbnail img-circle thumb128" %>
          <h3 class="m0"><%= @current_user.first_name %> <%= @current_user.last_name %></h3>
          <p><%= @current_user.job_title %></p>
          <p><%= @organization.motto %></p>

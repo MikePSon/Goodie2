@@ -1,6 +1,8 @@
 class Request
   include Mongoid::Document
   include Mongoid::Attributes::Dynamic
+  include Mongoid::Paperclip
+
   # Associations
   belongs_to :project
   belongs_to :cycle
@@ -36,6 +38,26 @@ class Request
   field :org_zip,                 type: String
   field :org_mission,             type: String
   field :target_demo,             type: String
+  has_mongoid_attached_file :form990_1
+  validates_attachment_content_type :form990_1, :content_type => ["application/pdf","application/vnd.ms-excel",     
+             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+             "application/msword", 
+             "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+             "text/plain"]
+  has_mongoid_attached_file :form990_2
+  validates_attachment_content_type :form990_2, :content_type => ["application/pdf","application/vnd.ms-excel",     
+             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+             "application/msword", 
+             "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+             "text/plain"]
+  has_mongoid_attached_file :form990_3
+  validates_attachment_content_type :form990_3, :content_type => ["application/pdf","application/vnd.ms-excel",     
+             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+             "application/msword", 
+             "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+             "text/plain"]
+  has_mongoid_attached_file :board_chair_board_members
+
 
   # Validate Submitted Status
   before_save :check_submitted

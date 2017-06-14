@@ -9,3 +9,7 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+
+#Not sure why this has to be here instead of in application.rb like all the others...
+Rails.application.config.assets.precompile += %w( subscribers.css )
+Rails.application.config.assets.precompile += %w( subscribers.js )

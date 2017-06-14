@@ -165,6 +165,22 @@
                         </div>
                      <% end %>
 
+                     <% if current_user.admin? && Rails.env.development?  %>
+                     <a class="list-group-item" href="http://localhost:3000/rails/mailers" target="_blank">
+                        <div class="media-box">
+                           <div class="pull-left">
+                              <em class="icon-envelope fa-2x text-info"></em>
+                           </div>
+                           <div class="media-box-body clearfix">
+                              <p class="m0">Email Previews</p>
+                              <p class="m0 text-muted">
+                                 <small>Minimize menu</small>
+                              </p>
+                           </div>
+                        </div>
+                     </a>
+                     <% end %>
+
                   </div>
                   <!-- END list group-->
                </li>
