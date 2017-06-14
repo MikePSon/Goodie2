@@ -17,6 +17,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
   	'/subscribers/new'
+    #Send mail from here
+    @user = current_user
+    UserMailer.welcome_email(@user).deliver_now
   end
 
 end
