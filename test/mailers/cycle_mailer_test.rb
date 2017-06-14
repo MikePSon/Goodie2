@@ -15,4 +15,18 @@ class CycleMailerTest < ActionMailer::TestCase
   	@project = Project.first
   	CycleMailer.admin_cycle_closed(@user, @cycle, @project)
   end
+
+  def applicant_cycle_open
+  	@user = User.first
+  	@cycle = Cycle.first
+  	@project = Project.first
+  	CycleMailer.applicant_cycle_open(@user, @cycle, @project)
+  end
+
+  def applicant_cycle_closed
+  	@user = User.first
+  	@cycle = Cycle.first
+  	@project = Project.first
+  	CycleMailer.applicant_cycle_closed(@user, @cycle, @project)
+  end
 end

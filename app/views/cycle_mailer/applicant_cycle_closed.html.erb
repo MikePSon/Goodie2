@@ -54,8 +54,8 @@
                                       </tr>
                                     </tbody>
                                   </table>
-                                  <h4 style="text-align: center">Your <%= @project %> <%= @cycle.name %> cycle has opened.</h4>
-                                  <p>At <%= @cycle.open.strftime("%l:%M %p").to_s %>, your cycle opened. You will start receiving applications shortly! It will close on <%= @cycle.close.strftime("%e %b %Y").to_s %> at <%= @cycle.close.strftime("%l:%M %p").to_s %>.</p>
+                                  <h4 style="text-align: center">Oh no! The <%= @project %> <%= @cycle.name %> cycle closed!</h4>
+                                  <p>At <%= @cycle.open.strftime("%l:%M %p").to_s %>, the cycle closed. If you completed your application, the team will begin reviewing it shortly. Otherwise, I'm afraid your application has been marked as incomplete. You can reach out to the foundation to discuss with them if you still want to complete.</p>
                                 </th>
                                 <th class="expander"></th>
                               </tr>
@@ -64,42 +64,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <table class="row">
-                      <tbody>
-                        <tr>
-                          <th class="small-12 large-12 columns first last">
-                            <table>
-                              <tr>
-                                <th>
-                                  <table class="spacer">
-                                    <tbody>
-                                      <tr>
-                                        <td height="16px" style="font-size:16px;line-height:16px;">&#xA0;</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <table class="button large expand">
-                                    <tr>
-                                      <td>
-                                        <table>
-                                          <tr>
-                                            <td>
-                                              <center data-parsed=""><a href="#" align="center" class="float-center">Check it out!</a></center>
-                                            </td>
-                                          </tr>
-                                        </table>
-                                      </td>
-                                      <td class="expander"></td>
-                                    </tr>
-                                  </table>
-                                </th>
-                                <th class="expander"></th>
-                              </tr>
-                            </table>
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table>
+
                     <table class="spacer">
                       <tbody>
                         <tr>

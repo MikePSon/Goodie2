@@ -1,8 +1,8 @@
 Howdy <%= User.first.first_name %>,
  
-We just wanted to let you know that your <%= @project %> <%= @cycle.name %> cycle has opened.
+We just wanted to let you know that your <%= @project %> <%= @cycle.name %> cycle has closed.
 
-At <%= @cycle.close.strftime("%l:%M %p").to_s %>, your cycle opened. You will start receiving applications shortly! It will close on <%= @cycle.close.strftime("%e %b %Y").to_s %> at <%= @cycle.close.strftime("%l:%M %p").to_s %>.
+At <%= @cycle.close.strftime("%l:%M %p").to_s %>, your cycle closed. You will start receiving applications shortly! It will close on <%= @cycle.close.strftime("%e %b %Y").to_s %> at <%= @cycle.close.strftime("%l:%M %p").to_s %>.
 
 Login to Goodie2 to check it out!
 
