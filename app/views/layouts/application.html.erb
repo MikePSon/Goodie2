@@ -58,6 +58,7 @@
       <% if user_signed_in? %>
             <section>
                <div class="content-wrapper">
+                  <%= render 'layouts/partials/messages' %>
                   <%= yield %>
                </div>
             </section>

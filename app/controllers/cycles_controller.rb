@@ -97,11 +97,13 @@ class CyclesController < ApplicationController
 
     respond_to do |format|
       if @cycle.save
-        format.html { redirect_to @cycle, notice: 'Cycle was successfully created.' }
+        format.html { redirect_to @cycle }
         format.json { render :show, status: :created, location: @cycle }
+        flash[:success] = "Cycle successfully created!"
       else
         format.html { render :new }
         format.json { render json: @cycle.errors, status: :unprocessable_entity }
+        flash[:danger] = "Whoops! There was an error."
       end
     end
   end
