@@ -1,7 +1,16 @@
 <div class="unwrap">
    <div style="background-image: url(<%= asset_path 'angle/profile-bg.jpg' %>)" class="bg-cover">
       <div class="p-xl text-center text-white">
-         <%= image_tag current_user.avatar.url(:square), :class => "img-thumbnail img-circle thumb128" %>
+         <% if current_user.avatar? %>
+            <%= image_tag current_user.avatar.url(:square), :class => "img-thumbnail img-circle thumb128", :height => 60, :width => 60 %>
+         <% else %>
+            <div class="avatar-circle-side" style="margin:0 auto">
+               <span class="initials">
+                  <%= current_user.first_name[0].upcase %><%= current_user.last_name[0].upcase %>
+               </span>
+            </div>
+         <% end %>
+
          <h3 class="m0"><%= @current_user.first_name %> <%= @current_user.last_name %></h3>
          <p><%= @current_user.job_title %></p>
          <p><%= @organization.motto %></p>

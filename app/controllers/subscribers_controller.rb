@@ -2,6 +2,7 @@ class SubscribersController < ApplicationController
 	before_filter :authenticate_user!
 
 	def new
+		@plans = Stripe::Plan.all
 	end
 
 	def update

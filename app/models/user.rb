@@ -25,6 +25,7 @@ class User
   field :last_sign_in_ip,    type: String
   field :deleted_at,         type: DateTime
   field :inactive_user,      type: Boolean
+  field :accept_terms,       type: Boolean
 
   ## Stripe Fields
   field :stripeid,           type: String
@@ -71,6 +72,7 @@ class User
   field :race,              type: String
   field :dob,               type: Date 
   field :age,               type: Integer
+  field :profile_complete,  type: Boolean, default: false
 
   has_mongoid_attached_file :avatar, styles: {
     thumb: '100x100>',
