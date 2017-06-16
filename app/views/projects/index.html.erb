@@ -1,7 +1,5 @@
 <%= render 'layouts/partials/page_header' %>
 
-<button type="button" data-notify="" data-message="Message in position.." data-options="{&quot;pos&quot;:&quot;top-right&quot;}" class="btn btn-default">Top Right</button>
-
 <div class="row">
   <% @projects.each do |project| %>
     <% @projectCycles = Cycle.where(:project_id => project.id.to_s) %>

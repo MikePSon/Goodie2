@@ -72,7 +72,6 @@ class User
   field :race,              type: String
   field :dob,               type: Date 
   field :age,               type: Integer
-  field :profile_complete,  type: Boolean, default: false
 
   has_mongoid_attached_file :avatar, styles: {
     thumb: '100x100>',

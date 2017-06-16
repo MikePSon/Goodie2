@@ -35,7 +35,6 @@ class Admin::UsersController < Admin::BaseController
 
     if @user.valid?
       @user.skip_reconfirmation!
-      @user.profile_complete = is_complete
       @user.save
       redirect_to admin_users_path, notice: "#{@user.email} updated."
     else

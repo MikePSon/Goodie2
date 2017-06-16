@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
     @title = @project.name
     @subtitle = @project.mission
 
-    if current_user.program_admin || current_user.admin
+    if (current_user.program_admin || current_user.admin ) && @all_cycles.count > 0
       @primaryAction = true
       @primaryActionText = "Edit Project <i class='icon-settings' style='margin-left:3px;'></i>"
       @primaryActionPath = edit_project_path(@project)
@@ -121,11 +121,13 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
+        format.html { redirect_to @project }
+        format.json { render :index, status: :created, location: @project }
+        flash[:success] = "Project successfully created!"
       else
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
+        flash[:danger] = "Whoops! There was an error."
       end
     end
   end

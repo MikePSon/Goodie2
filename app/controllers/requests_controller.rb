@@ -119,11 +119,17 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
-        format.html { redirect_to @request, notice: 'Request was successfully created.' }
+        format.html { redirect_to @request }
         format.json { render :show, status: :created, location: @request }
+        if @request.isSubmitted?
+          flash[:success] = "Application complete!"
+        else
+          flash[:warning] = "Application saved, but not complete."
+        end
       else
         format.html { render :new }
         format.json { render json: @request.errors, status: :unprocessable_entity }
+        flash[:danger] = "Whoops! There was an error."
       end
     end
   end

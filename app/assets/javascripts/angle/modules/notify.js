@@ -208,7 +208,7 @@
         status: "normal",
         timeout: 5000,
         group: null,
-        pos: 'top-center'
+        pos: 'top-right'
     };
 
 
