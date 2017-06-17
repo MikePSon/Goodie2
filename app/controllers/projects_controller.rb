@@ -95,7 +95,11 @@ class ProjectsController < ApplicationController
       @hawaiian_applicants = @all_applicants.where(:race => 'Native Hawaiian, Pacific Islander').count
       @two_race_applicants = @all_applicants.where(:race => 'Two or more races').count
       @other_race_applicants = @all_applicants.where(:race => 'Other').count
-
+    else
+      @primaryAction = true
+      @primaryActionText = "Create Cycle"
+      @primaryActionPath = new_cycle_path(@project)
+      @my_organization = Organization.where(:id => current_user.organization_id)
     end #End program admin view
   end
 
@@ -173,4 +177,14 @@ class ProjectsController < ApplicationController
         cycle_attributes: [ :name, :id, :_destroy ]
         )
     end
+
+
+    def get_show_data
+
+    end
+
+
+
+
+
 end
