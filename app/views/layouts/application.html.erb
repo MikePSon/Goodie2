@@ -54,10 +54,11 @@
       <aside class="offsidebar hide">
          <%= render partial: "layouts/partials/offsidebar" %>
       </aside>
-      <!-- Main section-->
+
       <% if user_signed_in? %>
             <section>
                <div class="content-wrapper">
+                  <%= render 'layouts/partials/messages' %>
                   <%= yield %>
                </div>
             </section>

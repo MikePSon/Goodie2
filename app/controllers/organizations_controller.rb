@@ -26,6 +26,17 @@ class OrganizationsController < ApplicationController
     @thisPage = "ORGANIZATION"
     @title = @organization.name
     @subtitle = "What are you about?"
+    
+    @profile_complete = get_completion_rate(@organization)
+    if @profile_complete < 59
+      @complete_color = "danger"
+    elsif @profile_complete <79
+      @complete_color = "warning"
+    elsif @profile_complete < 95
+      @complete_color = "info"
+    else
+      @complete_color = "success"
+    end
 
     if current_user.program_admin?
       @primaryAction = true
@@ -86,8 +97,9 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
+        format.html { redirect_to @organization }
         format.json { render :show, status: :ok, location: @organization }
+        flash[:success] = "Organization was successfully updated."
       else
         format.html { render :edit }
         format.json { render json: @organization.errors, status: :unprocessable_entity }
@@ -157,5 +169,36 @@ class OrganizationsController < ApplicationController
     def create_admin_user
       thisUser = User.where(:id => @organization.created_by).first
       thisUser.update(organization_id: @organization.id)
+    end
+
+    def get_completion_rate(org)
+      net_amt = 0.0
+
+      if !org.name.blank?
+        net_amt += 1
+      end
+      if !org.motto.blank?
+        net_amt += 1
+      end
+      if !org.url.blank?
+        net_amt += 1
+      end
+      if !org.address_1.blank?
+        net_amt += 1
+      end
+      if !org.city.blank?
+        net_amt += 1
+      end
+      if !org.state.blank?
+        net_amt += 1
+      end
+      if !org.zip.blank?
+        net_amt += 1
+      end
+      if !org.annual_giving_goal.blank?
+        net_amt += 1
+      end
+      rate = (net_amt / 8.0)*100
+      return rate
     end
 end

@@ -1,7 +1,16 @@
 <div class="unwrap">
    <div style="background-image: url(<%= asset_path 'angle/profile-bg.jpg' %>)" class="bg-cover">
       <div class="p-xl text-center text-white">
-         <%= image_tag current_user.avatar.url(:square), :class => "img-thumbnail img-circle thumb128" %>
+         <% if current_user.avatar? %>
+            <%= image_tag current_user.avatar.url(:square), :class => "img-thumbnail img-circle thumb128", :height => 60, :width => 60 %>
+         <% else %>
+            <div class="avatar-circle-side" style="margin:0 auto">
+               <span class="initials">
+                  <%= current_user.first_name[0].upcase %><%= current_user.last_name[0].upcase %>
+               </span>
+            </div>
+         <% end %>
+
          <h3 class="m0"><%= @current_user.first_name %> <%= @current_user.last_name %></h3>
          <p><%= @current_user.job_title %></p>
          <p><%= @organization.motto %></p>
@@ -48,13 +57,19 @@
                      .ph-xl li { word-wrap: break-word;}
                   </style>
                   <ul class="list-unstyled ph-xl">
+                     <% if !@programAdmin.phone.blank? %>
+                        <li>
+                           <em class="fa fa-phone fa-fw mr-lg"></em><%= @programAdmin.phone %></li>
+                     <% end %>
+
                      <li>
-                        <em class="fa fa-phone fa-fw mr-lg"></em><%= @programAdmin.phone %></li>
-                     <li>
-                        <em class="fa fa-envelope fa-fw mr-lg"></em><a href="#"><%= @programAdmin.email %></a>
-                     </li>
-                     <li>
-                        <em class="fa fa-wechat fa-fw mr-lg"></em><%= @programAdmin.office_open %> - <%= @programAdmin.office_close %></li>
+                        <em class="fa fa-envelope fa-fw mr-lg"></em><a href="#"><%= @programAdmin.email %></a></li>
+
+                     <% if !@programAdmin.office_open.blank? && !@programAdmin.office_close.blank? %>
+                        <li>
+                           <em class="fa fa-wechat fa-fw mr-lg"></em><%= @programAdmin.office_open %> - <%= @programAdmin. office_close %></li>
+                     <% end %>
+
                      <% if !current_user.applicant? %>
                      <li>
                         <em class="icon-link fa-fw mr-lg"></em>
@@ -122,6 +137,13 @@
                      <em class="pull-right fa fa-twitter fa-lg fa-fw text-muted mt"></em>
                      <h4 class="list-group-item-heading"><%= @organizationRequests.count %></h4>
                      <p class="list-group-item-text">Applications</p>
+                  </a>
+                  <a href="#" class="list-group-item">
+                     <em class="pull-right fa fa-building-o fa-lg fa-fw text-<%= @complete_color %> mt"></em>
+                     <h4 class="list-group-item-heading">
+                        <span class="text-<%= @complete_color %>"><%= @profile_complete %>%</span>
+                     </h4>
+                     <p class="list-group-item-text text-<%= @complete_color %>">Profile complete</p>
                   </a>
                </div>
             </div>

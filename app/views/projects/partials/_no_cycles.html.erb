@@ -1,0 +1,10 @@
+<h4>Welcome to Goodie 2!</h4>
+<p>Almost there! <%= @my_organization.name %> is one step closer to using our system. Let's talk more about cycles...</p>
+
+<p>Cycles move through different statuses. When you first create one, it will be planned. This just means that the cycle will happen at some time in the future. The next phase for a cycle is Open. This means that your applicants can see the cycle, and can generate applications for it. The third and final phase is closed. This means that you are no longer accepting applications. During the closed phase you will review the applications, make decisions, and handle awards.</p>
+
+<p>We understand that a lot of cycles open and close at certain times. So if you elect to give a cycle Open and Closing times, the cycle will automatically change it's status at that point. Of course, you are free to open and close cycles manually whenever you see fit. Currently, we do not allow you to re-open a cycle, although that is functionality we intend to provide in the future.</p>
+
+<p>While creating and managing cycles, you will have the option to select which questions to ask applicants.</p>
+
+<%= link_to "Get Started", new_cycle_path, :class => "btn btn-info" %>

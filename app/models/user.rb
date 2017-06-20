@@ -25,6 +25,7 @@ class User
   field :last_sign_in_ip,    type: String
   field :deleted_at,         type: DateTime
   field :inactive_user,      type: Boolean
+  field :accept_terms,       type: Boolean
 
   ## Stripe Fields
   field :stripeid,           type: String
