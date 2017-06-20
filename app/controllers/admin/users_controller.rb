@@ -60,7 +60,7 @@ class Admin::UsersController < Admin::BaseController
     :address1, :address2, :city, :zip, :state, :phone, :gender,
     :password, :password_confirmation, :locked,
     organizations_attributes: [:name],
-    :accept_terms, :subscribed, :stripeid, :planid )
+    :subscribed, :stripeid, :planid )
   end
 
 end
