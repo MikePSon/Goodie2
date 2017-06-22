@@ -1,4 +1,4 @@
-production:
+staging:
   clients:
     default:
      # The standard MongoDB connection URI allows for easy
