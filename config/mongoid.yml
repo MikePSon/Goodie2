@@ -1,7 +1,7 @@
-production:
+staging:
   clients:
     default:
-     uri: <%= ENV['MONGODB_URI'] =>
+     uri: mongodb://heroku_jv3rxh9f:9kkg5f6lq1nkfvfclec99a3grd@ds133922.mlab.com:33922/heroku_jv3rxh9f
 
      options:
        # The default timeout is 5, which is the time in seconds
