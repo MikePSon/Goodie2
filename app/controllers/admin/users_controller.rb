@@ -58,9 +58,8 @@ class Admin::UsersController < Admin::BaseController
     :email, :first_name, :last_name, :phone, :office_open, :office_close, :job_title,
     :admin, :program_admin, :program_manager, :applicant, :race,
     :address1, :address2, :city, :zip, :state, :phone, :gender,
-    :password, :password_confirmation, :locked,
-    organizations_attributes: [:name],
-    :subscribed, :stripeid, :planid )
+    :password, :password_confirmation, :locked, :subscribed, :stripeid, :planid,
+    organizations_attributes: [:name])
   end
 
 end
