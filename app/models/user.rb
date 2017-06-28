@@ -3,7 +3,7 @@ class User
   include Mongoid::Paperclip
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
@@ -33,9 +33,9 @@ class User
   field :subscriptionid,     type: String
 
   ## Confirmable
-  field :confirmation_token,   type: String
-  field :confirmed_at,         type: Time
-  field :confirmation_sent_at, type: Time
+  # field :confirmation_token,   type: String
+  # field :confirmed_at,         type: Time
+  # field :confirmation_sent_at, type: Time
   # field :unconfirmed_email,    type: String # Only if using reconfirmable
 
   ## Lockable
@@ -89,6 +89,8 @@ class User
         this_user.update_attribute(:deleted_at, Time.current) 
         this_user.update_attribute(:inactive_user, true)
       end
+
+
     else
       update_attribute(:deleted_at, Time.current) 
       update_attribute(:inactive_user, true)
