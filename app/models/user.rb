@@ -53,6 +53,7 @@ class User
   field :program_admin,     type: Boolean, default: false
   field :program_manager,   type: Boolean, default: false
   field :applicant,         type: Boolean, default: false
+  field :accept_terms,      type: Boolean, default: false
 
 
 
