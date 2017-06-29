@@ -163,6 +163,8 @@ class OrganizationsController < ApplicationController
         :manager_decision,
         :manager_project_edit,
         :annual_giving_goal,
+        :custom_terms,
+        :terms_conditions,
         :created_by)
     end
 
