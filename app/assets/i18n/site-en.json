@@ -67,7 +67,8 @@
       "ZIP": "Zip Code",
       "MGRDECISION": "Manager Decision",
       "MGREDIT": "Manager Project Edit",
-      "GIVINGGOAL": "Annual Giving Goal"
+      "GIVINGGOAL": "Annual Giving Goal",
+      "CSTTERMS": "Custom Terms & Conditions"
     },
     "buttons": {
       "NEWPROJECT": "New Project!"

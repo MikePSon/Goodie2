@@ -156,6 +156,26 @@
                            </label><br>
                            <%= f.number_field :annual_giving_goal %>
                         </div>
+                        <!--<div class="field">
+                           <label>
+                              <span data-localize="organization_form.fields.CSTTERMS">Custom Terms and Conditions</span>  <%= custom_terms_helper %>
+                           </label><br>
+                           <label class="switch">
+                              <%= f.check_box :custom_terms %>
+                              <span></span>
+                           </label>
+                        </div>
+
+                        <div class="row" id="terms_entry">
+                           <div class="col-xs-12">
+                              <div class="field">
+                                 <div class="form-group">
+                                    <%= f.label :terms_conditions %>
+                                    <%= f.cktext_area :terms_conditions, :class => "form-control" %>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>-->
                   </div>
                </div>
                <!--<div class="panel b">
@@ -193,3 +213,15 @@
    </div>
 </div>
 <% end %>
+
+<script>
+   $(document).ready(function(){$('#terms_entry').hide()});
+   $('#organization_custom_terms').on('click',function(){
+      var this_clicked = $(this).is(":checked");
+      if(this_clicked)
+         $('#terms_entry').slideDown();
+      else
+         $('#terms_entry').slideUp();
+
+   });
+</script>

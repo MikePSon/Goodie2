@@ -24,6 +24,9 @@ class Organization
 
   field :annual_giving_goal,        type: Integer
 
+  field :custom_terms,              type: Boolean
+  field :terms_conditions,          type: String
+
   has_mongoid_attached_file :logo, styles: {
     thumb: '100x100>',
     square: '200x200#',

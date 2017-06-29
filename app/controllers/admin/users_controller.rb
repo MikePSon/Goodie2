@@ -59,7 +59,7 @@ class Admin::UsersController < Admin::BaseController
     :admin, :program_admin, :program_manager, :applicant, :race,
     :address1, :address2, :city, :zip, :state, :phone, :gender,
     :password, :password_confirmation, :locked,
-    :subscribed, :stripeid, :planid, 
+    :subscribed, :stripeid, :planid, :accept_terms, 
     organizations_attributes: [:name] )
   end
 
