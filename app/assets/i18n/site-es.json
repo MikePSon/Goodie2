@@ -67,7 +67,8 @@
       "ZIP": "Código postal",
       "MGRDECISION": "Administrador decisión",
       "MGREDIT": "Proyecto administrador de edición",
-      "GIVINGGOAL": "Donación meta anual"
+      "GIVINGGOAL": "Donación meta anual",
+      "CSTTERMS": "Términos y Condiciones Personales"
     },
     "buttons": {
       "NEWPROJECT": "¡Nuevo proyecto!"
