@@ -3,6 +3,7 @@ class SubscribersController < ApplicationController
 
 	def new
 		@plans = Stripe::Plan.all
+		@features = Feature.all
 	end
 
 	def update

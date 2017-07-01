@@ -181,6 +181,22 @@
                      </a>
                      <% end %>
 
+                     <% if current_user.admin? %>
+                        <%= link_to features_path, :class => "list-group-item"  do %>
+                           <div class="media-box">
+                              <div class="pull-left">
+                                 <em class="<%= get_icon('edit') %> fa-2x text-muted"></em>
+                              </div>
+                              <div class="media-box-body clearfix">
+                                 <p class="m0">Features</p>
+                                 <p class="m0 text-muted">
+                                    <small>Add/Edit App Features</small>
+                                 </p>
+                              </div>
+                           </div>
+                        <% end %>
+                     <% end %>
+
                   </div>
                   <!-- END list group-->
                </li>

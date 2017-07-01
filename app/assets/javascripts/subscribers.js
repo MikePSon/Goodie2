@@ -1,8 +1,5 @@
 // Place all the behaviors and hooks related to the matching controller here.
 
-
-
-
 //--- jQuery UI
 //= require jquery-ui/ui/core
 //= require jquery-ui/ui/widget

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  free_tier: false
+  paid_tier: false
+
+two:
+  name: MyString
+  free_tier: false
+  paid_tier: false

@@ -1,0 +1,42 @@
+<%= form_for(@feature) do |f| %>
+  <% if @feature.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
+
+      <ul>
+      <% @feature.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, :class =>"form-control" %>
+  </div>
+
+  <div class="field">
+    <label>
+      <span>Free Tier</span>
+    </label><br>
+    <label class="switch">
+      <%= f.check_box :free_tier %>
+      <span></span>
+    </label>
+  </div>
+
+  <div class="field">
+    <label>
+      <span>Paid Tier</span>
+    </label><br>
+    <label class="switch">
+      <%= f.check_box :paid_tier %>
+      <span></span>
+    </label>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

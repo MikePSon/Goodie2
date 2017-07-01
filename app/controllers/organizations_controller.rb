@@ -22,10 +22,6 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
-    #Page Standards
-    @thisPage = "ORGANIZATION"
-    @title = @organization.name
-    @subtitle = "What are you about?"
     
     @profile_complete = get_completion_rate(@organization)
     if @profile_complete < 59
@@ -38,17 +34,13 @@ class OrganizationsController < ApplicationController
       @complete_color = "success"
     end
 
-    if current_user.program_admin?
-      @primaryAction = true
-      @primaryActionText = "Edit Organization <i class='icon-settings' style='margin-left:3px;'></i>"
-      @primaryActionPath = edit_organization_path(@organization)
-    end
 
     if !current_user.admin?
       @programAdmin = User.where(:organization_id => @organization.id).where(:program_admin => true).first
     else
       @programAdmin = User.where(:organization_id => @organization.id).where(:id => @organization.created_by).first
     end
+
     @organizationApplicants = User.where(:organization_id => @organization.id).where(:applicant => true)
     @organizationRequests = Request.where(:organization_id => @organization.id.to_s)
     @organizationProjects = Project.where(:organization_id => @organization.id.to_s)
@@ -61,8 +53,8 @@ class OrganizationsController < ApplicationController
       @total_amount_awarded += this_request.amount_awarded
     end
 
-
     @timelineItems = get_timeline(@organization)
+    
   end
 
   # GET /organizations/new

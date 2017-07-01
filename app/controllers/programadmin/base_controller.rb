@@ -40,51 +40,24 @@ class Programadmin::BaseController < ApplicationController
     		end
 	
     		@giving_goal = @my_organization.annual_giving_goal
-    		@giving_goal_completion = ((@amount_given / @giving_goal).round(2)) * 100
+    		if @amount_given > 0.0
+    			@giving_goal_completion = ((@amount_given / @giving_goal).round(2)) * 100
+    		else
+    			@giving_goal_completion = 0
+    		end
 	
     		given_last_month_awards = @awarded.where(submitted_date: (1.months.ago..Time.now))
     		@given_last_month = 0.0
     		given_last_month_awards.each do |this_award|
     			@given_last_month += this_award.amount_awarded
     		end
-	
+
     		#Applicant Demographics
-    		@male_applicants = @all_applicants.where(:gender => "Male").count
-    		@female_applicants = @all_applicants.where(:gender => "Female").count
-    		@other_gender_applicants = @all_applicants.where(:gender => "Other").count
-    		@decline_gender_applicants = @all_applicants.where(:gender => "Prefer not to say").count
+    		get_applicant_demographics()
     		
-    		@white_applicants = @all_applicants.where(:race => "White").count
-			@hispanic_applicants = @all_applicants.where(:race => 'Hispanic, Latino, Spanish Origin').count
-			@black_applicants = @all_applicants.where(:race => 'Black or African American').count
-			@native_american_applicants = @all_applicants.where(:race => 'American Indian, Alaska Native').count
-			@middle_eastern_applicants = @all_applicants.where(:race => 'Middle Eastern, North African').count
-			@hawaiian_applicants = @all_applicants.where(:race => 'Native Hawaiian, Pacific Islander').count
-			@two_race_applicants = @all_applicants.where(:race => 'Two or more races').count
-			@other_race_applicants = @all_applicants.where(:race => 'Other').count
-	
-			@applicants_18_under = @all_applicants.where(:age.lte => 18).count
-			@applicants_18_to_24 = @all_applicants.where(:age.gte => 19).where(:age.lte => 24).count
-			@applicants_25_to_29 = @all_applicants.where(:age.gte => 25).where(:age.lte => 29).count 
-			@applicants_30_to_39 = @all_applicants.where(:age.gte => 30).where(:age.lte => 39).count 
-			@applicants_40_to_49 = @all_applicants.where(:age.gte => 40).where(:age.lte => 49).count 
-			@applicants_50_to_59 = @all_applicants.where(:age.gte => 50).where(:age.lte => 59).count
-			@applicants_60_to_69 = @all_applicants.where(:age.gte => 60).where(:age.lte => 69).count
-			@applicants_70_plus = @all_applicants.where(:age.gte => 70).count
-	
     		# Request history
-    		@trailing_1 = 1.months.ago.strftime("%Y-%m")
-    		@trailing_2 = 2.months.ago.strftime("%Y-%m")
-    		@trailing_3 = 3.months.ago.strftime("%Y-%m")
-    		@trailing_4 = 4.months.ago.strftime("%Y-%m")
-    		@trailing_5 = 5.months.ago.strftime("%Y-%m")
-    		@trailing_6 = 6.months.ago.strftime("%Y-%m")
-    		@trailing_1_count = @requests.where(submitted_date: (1.months.ago..Time.now)).count
-    		@trailing_2_count = @requests.where(submitted_date: (2.months.ago..1.months.ago)).count
-    		@trailing_3_count = @requests.where(submitted_date: (3.months.ago..2.months.ago)).count
-    		@trailing_4_count = @requests.where(submitted_date: (4.months.ago..3.months.ago)).count
-    		@trailing_5_count = @requests.where(submitted_date: (5.months.ago..4.months.ago)).count
-    		@trailing_6_count = @requests.where(submitted_date: (6.months.ago..5.months.ago)).count
+    		get_request_history()
+    		
 		
     		#Closed Cycle Data
     		closed_cycles = @my_cycles.where(:status => "Closed")
@@ -171,6 +144,46 @@ class Programadmin::BaseController < ApplicationController
   end#End Index
 
   def notsubscribed
+  end
+
+  def get_applicant_demographics
+  	@male_applicants = @all_applicants.where(:gender => "Male").count
+	@female_applicants = @all_applicants.where(:gender => "Female").count
+	@other_gender_applicants = @all_applicants.where(:gender => "Other").count
+	@decline_gender_applicants = @all_applicants.where(:gender => "Prefer not to say").count
+	
+	@white_applicants = @all_applicants.where(:race => "White").count
+	@hispanic_applicants = @all_applicants.where(:race => 'Hispanic, Latino, Spanish Origin').count
+	@black_applicants = @all_applicants.where(:race => 'Black or African American').count
+	@native_american_applicants = @all_applicants.where(:race => 'American Indian, Alaska Native').count
+	@middle_eastern_applicants = @all_applicants.where(:race => 'Middle Eastern, North African').count
+	@hawaiian_applicants = @all_applicants.where(:race => 'Native Hawaiian, Pacific Islander').count
+	@two_race_applicants = @all_applicants.where(:race => 'Two or more races').count
+	@other_race_applicants = @all_applicants.where(:race => 'Other').count
+
+	@applicants_18_under = @all_applicants.where(:age.lte => 18).count
+	@applicants_18_to_24 = @all_applicants.where(:age.gte => 19).where(:age.lte => 24).count
+	@applicants_25_to_29 = @all_applicants.where(:age.gte => 25).where(:age.lte => 29).count 
+	@applicants_30_to_39 = @all_applicants.where(:age.gte => 30).where(:age.lte => 39).count 
+	@applicants_40_to_49 = @all_applicants.where(:age.gte => 40).where(:age.lte => 49).count 
+	@applicants_50_to_59 = @all_applicants.where(:age.gte => 50).where(:age.lte => 59).count
+	@applicants_60_to_69 = @all_applicants.where(:age.gte => 60).where(:age.lte => 69).count
+	@applicants_70_plus = @all_applicants.where(:age.gte => 70).count
+  end
+
+  def get_request_history
+  	@trailing_1 = 1.months.ago.strftime("%Y-%m")
+	@trailing_2 = 2.months.ago.strftime("%Y-%m")
+	@trailing_3 = 3.months.ago.strftime("%Y-%m")
+	@trailing_4 = 4.months.ago.strftime("%Y-%m")
+	@trailing_5 = 5.months.ago.strftime("%Y-%m")
+	@trailing_6 = 6.months.ago.strftime("%Y-%m")
+	@trailing_1_count = @requests.where(submitted_date: (1.months.ago..Time.now)).count
+	@trailing_2_count = @requests.where(submitted_date: (2.months.ago..1.months.ago)).count
+	@trailing_3_count = @requests.where(submitted_date: (3.months.ago..2.months.ago)).count
+	@trailing_4_count = @requests.where(submitted_date: (4.months.ago..3.months.ago)).count
+	@trailing_5_count = @requests.where(submitted_date: (5.months.ago..4.months.ago)).count
+	@trailing_6_count = @requests.where(submitted_date: (6.months.ago..5.months.ago)).count
   end
 
 end#End Controller

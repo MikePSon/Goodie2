@@ -42,7 +42,11 @@
       <div class="row">
          <div class="col-lg-9">
             <!-- START timeline-->
-            <%= render "timeline" %>
+            <% if @timelineItems.count == 0 && !current_user.applicant? %>
+               <%= render "no_timeline" %>
+            <% else %>
+               <%= render "timeline" %>
+            <% end %>
             <!-- END timeline-->
          </div>
          <div class="col-lg-3">

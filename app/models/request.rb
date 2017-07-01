@@ -58,6 +58,12 @@ class Request
              "text/plain"]
   has_mongoid_attached_file :board_chair_board_members
 
+  #Fiscal Agent Questions
+  field :fiscal_agent,            type: Boolean
+  field :fiscal_agent_name,       type: String
+  field :fiscal_agent_ein,        type: String
+
+
 
   # Validate Submitted Status
   before_save :check_submitted

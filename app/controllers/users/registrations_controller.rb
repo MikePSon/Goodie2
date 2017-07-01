@@ -16,10 +16,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-  	'/subscribers/new'
-    #Send mail from here
-    #@user = current_user
-    #UserMailer.welcome_email(@user).deliver_now
+    if !current_user.applicant?
+  	 '/subscribers/new'
+    else
+      applicant_dash_path
+    end
   end
 
 end

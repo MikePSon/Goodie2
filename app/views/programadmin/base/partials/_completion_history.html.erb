@@ -12,3 +12,68 @@
       <!-- END widget-->
    </div>
 </div>
+
+<script>
+(function(window, document, $, undefined){
+
+  $(function(){
+
+    if ( typeof Morris === 'undefined' ) return;
+
+    var cycle_data = [
+      <% @abbrev_cycles.each do |this_cycle| %>
+        <% this_requests = Request.where(:cycle_id => this_cycle.id) %>
+        { 
+          y: "<%= this_cycle.name %>",
+          inc:<%=this_requests.where(:status=>"Incomplete").count %>,
+          rej: <%=this_requests.where(:rejected=>true).count %>,
+          acc: <%=this_requests.where(:accepted=>true).count %>
+          },
+      <% end %>
+    ];
+
+    var linedata = [
+      { m: '<%= @trailing_1 %>', a: <%= @trailing_1_count %> },
+      { m: '<%= @trailing_2 %>', a: <%= @trailing_2_count %> },
+      { m: '<%= @trailing_3 %>', a: <%= @trailing_3_count %> },
+      { m: '<%= @trailing_4 %>', a: <%= @trailing_4_count %> },
+      { m: '<%= @trailing_5 %>', a: <%= @trailing_5_count %> },
+      { m: '<%= @trailing_6 %>', a: <%= @trailing_6_count %> } 
+    ];
+
+    // Bar Chart
+    // ----------------------------------- 
+    if( document.getElementById('cycle_chart') )
+      new Morris.Bar({
+        element: 'cycle_chart',
+        data: cycle_data,
+        xkey: 'y',
+        ykeys: ["inc", "rej", "acc"],
+        labels: ["Incomplete", "Rejected", "Accepted"],
+        xLabelMargin: 2,
+        barColors: [ 'rgba(0, 0, 0, 1)', 'rgba(240, 80, 80, 1)', 'rgba(39, 194, 76, 1)' ],
+        resize: true
+      });
+  
+    if( document.getElementById('request_timeline') )
+      var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      Morris.Line({
+        element: 'request_timeline',
+        data: linedata,
+        xkey: 'm',
+        ykeys: ['a'],
+        labels: ['2014'],
+        lineColors: ['#23B7E5'],
+        xLabelFormat: function(x) { // <--- x.getMonth() returns valid index
+          var month = months[x.getMonth()];
+          return month;
+        },
+        dateFormat: function(x) {
+          var month = months[new Date(x).getMonth()];
+          return month;
+        },
+      });
+  });
+
+})(window, document, window.jQuery);
+</script>

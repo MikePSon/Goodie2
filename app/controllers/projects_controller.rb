@@ -49,9 +49,11 @@ class ProjectsController < ApplicationController
     @subtitle = @project.mission
 
     if (current_user.program_admin || current_user.admin ) && @all_cycles.count > 0
-      @primaryAction = true
-      @primaryActionText = "Edit Project <i class='icon-settings' style='margin-left:3px;'></i>"
-      @primaryActionPath = edit_project_path(@project)
+      if !current_user.admin?
+        @primaryAction = true
+        @primaryActionText = "Edit Project <i class='icon-settings' style='margin-left:3px;'></i>"
+        @primaryActionPath = edit_project_path(@project)
+      end
 
       @all_applicants = User.where(:organization_id => current_user.organization_id.to_s).where(:applicant => true)
       @all_requests = Request.where(:project_id => @project.id)
