@@ -88,7 +88,6 @@ end
 
 #Stripe Subscriptions
 gem 'stripe'
-gem 'figaro'
 
 
 # File Uploads
