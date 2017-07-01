@@ -3,7 +3,6 @@
   z-index: -1;
 }
 </style>
-
 <%= form_for(resource, :as => resource_name,
   :url => registration_path(resource_name), 
   :html => { :role => "form" }) do |f| %>
@@ -68,7 +67,7 @@
                   </label>
                </div>
             </div>-->
-
+            <p class="pt-lg text-center">Register today!</p>
             <%= f.submit "Create account", :class => "btn btn-block btn-primary mt-lg", id: "submit_button" %>
          </form>
          <p class="pt-lg text-center">Have an account?</p>
