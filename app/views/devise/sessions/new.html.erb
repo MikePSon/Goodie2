@@ -1,6 +1,10 @@
+<%= render 'layouts/partials/messages' %>
+
+
 <div class="row">
   <div class="col-sm-6 ">
     <h1>Sign in</h1>
+    <h5>Please enter your email and password</h5>
 
     <%= form_for(resource, :as => resource_name,
     :url => session_path(resource_name),
@@ -38,7 +42,7 @@
 
     <div class="row">
       <div class="col-sm-6">
-        <%= f.submit "Sign in", class: "btn btn-primary" %>
+        <%= f.submit "Sign in", class: "btn btn-primary", :id => "authenticate" %>
       </div>
     </div>
     <% end %>
