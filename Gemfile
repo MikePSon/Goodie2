@@ -76,10 +76,17 @@ gem 'ckeditor'
 
 # Cucumber Testing
 group :development, :test do
+  gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'cucumber-rails', :require => false
-  # database_cleaner is not required, but highly recommended
+  gem 'cucumber-rails'
+  gem 'selenium-webdriver'
+end
+group :test do
+  gem 'capybara'
   gem 'database_cleaner'
+  gem 'email_spec'
+  gem 'launchy'
+  gem 'mongoid-rspec'
 end
 
 # Heroku hosting
