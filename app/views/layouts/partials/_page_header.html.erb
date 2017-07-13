@@ -1,7 +1,7 @@
 <div class="content-heading">
       <div class="pull-right">
       <% if @primaryAction %>   
-         <%= link_to @primaryActionText.html_safe, @primaryActionPath, :class => "btn btn-primary btn-sm" %>
+         <%= link_to @primaryActionText.html_safe, @primaryActionPath, :class => "btn btn-primary btn-sm", :id => @primaryActionID %>
          <% if @secondaryAction %>
       	  <%= link_to @secondaryActionText.html_safe, @secondaryActionPath, :class => "btn btn-default btn-sm" %>
          <% end %>

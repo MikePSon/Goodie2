@@ -16,10 +16,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    if !current_user.applicant?
-  	 '/subscribers/new'
-    else
+    if current_user.applicant?
       applicant_dash_path
+    elsif current_user.subscribed?
+      #this method used by test only
+      programadmin_dash_path
+    else
+      '/subscribers/new'
     end
   end
 

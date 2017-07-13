@@ -46,12 +46,13 @@ class CyclesController < ApplicationController
 
     @thisPage = "NULL"
     @title = @cycle.name
-    @subtitle = @cycle.project.name
+    @subtitle = "Check out your cycle"
 
     if @cycle.status == "Planned"
       @primaryAction = true
       @primaryActionText = "Edit Cycle"
       @primaryActionPath = edit_cycle_path(@cycle)
+      @primaryActionID = "edit_cycle"
     end
 
     if @cycle.status == "Open"
@@ -77,9 +78,7 @@ class CyclesController < ApplicationController
   # GET /cycles/new
   def new
     @cycle = Cycle.new
-    @thisPage = "CYCLES"
-    @title = "New Cycle"
-    @subtitle = "Create a new cycle"
+    @thisPage = "NEWCYCLE"
   end
 
   # GET /cycles/1/edit
@@ -154,7 +153,6 @@ class CyclesController < ApplicationController
     end
 
     def close_requests cycle
-      puts "***** THIS IS RUNNING *****"
       requests = Request.where(:cycle_id => cycle.id.to_s)
       requests.each do |this_request|
         if this_request.app_complete?

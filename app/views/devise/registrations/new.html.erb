@@ -49,6 +49,9 @@
                <span class="fa fa-lock form-control-feedback text-muted"></span>
             </div>
 
+            <% if Rails.env.test? %>
+              <%= render 'test_fields', :f => f %>
+            <% end %>
 
             <div class="clearfix">
                <div class="checkbox c-checkbox pull-left mt0">

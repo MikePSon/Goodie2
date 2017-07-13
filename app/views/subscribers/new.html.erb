@@ -33,7 +33,7 @@
                 		<div class="text-center">
                 				<%= form_tag subscriber_path(current_user.id), method: :put do %>
 									<%= hidden_field_tag :plan_id, thisPlan.id %>
-									<button class="btn btn-info"><%= thisPlan.name %></button>
+									<button class="btn btn-info <%= thisPlan.id %>"><%= thisPlan.name %></button>
 
 									<script src="https://checkout.stripe.com/checkout.js" class="stripe-button basic" data-key="<%= Rails.configuration.stripe[:publishable_key]%>" data-description="Monthly Subscription" data-amount="<%= (thisPlan.amount) %>" data-label="<%= thisPlan.name %>"></script>
 								<% end %>

@@ -13,17 +13,17 @@
 
          <% if current_user.subscribed? %>
             <li class="<%= 'active' if controller?('programadmin/base') %>">
-               <%= link_to programadmin_dash_path do %>
+               <%= link_to programadmin_dash_path, :id =>"Dashboard" do %>
                   <em class="icon-speedometer"></em>
                   <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
                <% end %>
             </li>
             <!-- End Sidebar Item -->
    
-            <li class="<%= 'active' if controller?('organizations') %>">
+            <li class="<%= 'active' if controller?('organizations') %>" id="">
                <% if current_user.organization_id %>
                   <% userOrg = Organization.where(:id => current_user.organization_id).first %>
-                  <%= link_to organization_path(userOrg) do %>
+                  <%= link_to organization_path(userOrg), :id => "org_tab"  do %>
                      <em class="<%= get_icon('organization') %>"></em>
                      <span><%= userOrg.name %></span>
                   <% end %>
@@ -37,8 +37,8 @@
             <!-- End Sidebar Item -->
    
             <% if current_user.organization_id %>
-               <li class="<%= 'active' if controller?('projects') %>">
-                  <%= link_to projects_path do %>
+               <li class="<%= 'active' if controller?('projects') %>" id="">
+                  <%= link_to projects_path, :id => "project_tab" do %>
                      <em class="<%= get_icon('project') %>"></em>
                      <span data-localize="sidebar.nav.PROJECTS">Projects</span>
                   <% end %>
@@ -46,15 +46,15 @@
                <!-- End Sidebar Item -->
       
                <li class="<%= 'active' if controller?('cycles') %>">
-                  <%= link_to cycles_path do %>
+                  <%= link_to cycles_path, :id => "cycle_tab" do %>
                      <em class="<%= get_icon('Cycle') %>"></em>
                      <span data-localize="sidebar.nav.CYCLES">Cycles</span>
                   <% end %>
                </li>
                <!-- End Sidebar Item -->
       
-               <li class="<%= 'active' if controller?('requests') %>">
-                  <%= link_to requests_path do %>
+               <li class="<%= 'active' if controller?('requests') %>" id="">
+                  <%= link_to requests_path, :id => "request_tab"  do %>
                      <em class="<%= get_icon('Request') %>"></em>
                      <span data-localize="sidebar.nav.REQUESTS">Requests</span>
                   <% end %>
