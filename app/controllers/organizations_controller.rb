@@ -75,7 +75,12 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
+        if current_user.program_admin?
+          format.html { redirect_to programadmin_dash_path}
+          flash[:success] = 'Organization was successfully created.' 
+        else
+          format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
+        end
         format.json { render :show, status: :created, location: @organization }
       else
         format.html { render :new }

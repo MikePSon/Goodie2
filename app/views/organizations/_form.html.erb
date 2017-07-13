@@ -20,13 +20,13 @@
                <span data-localize="organization_form.headers.SETTINGS">Settings</span>
             </div>
             <div class="list-group">
-               <a href="#basic" data-toggle="tab" class="list-group-item">
+               <a href="#basic" data-toggle="tab" class="list-group-item" id="basic">
                   <span data-localize="organization_form.headers.BASIC">Basic</span>
                </a>
-               <a href="#contact" data-toggle="tab" class="list-group-item">
+               <a href="#contact" data-toggle="tab" class="list-group-item" id="contact">
                   <span data-localize="organization_form.headers.CONTACT">Contact</span>
                </a>
-               <a href="#advanced" data-toggle="tab" class="list-group-item">
+               <a href="#advanced" data-toggle="tab" class="list-group-item" id="advanced">
                   <span data-localize="organization_form.headers.ADVANCED">Advanced</span>
                </a>
                <!--<a href="#tabSetting3" data-toggle="tab" class="list-group-item">Team</a>-->
@@ -35,7 +35,7 @@
          <div class="row">
           <div class="col-xs-12">
             <div class="actions">
-               <%= button_tag(type: 'submit', class: "btn btn-success form-control") do %>
+               <%= button_tag(type: 'submit', class: "btn btn-success form-control", id: "submit_org") do %>
                   <% if params[:action] == "edit" %>
                      <span data-localize="organization_form.headers.UPDATE">Update Organization</span>
                   <% else %>

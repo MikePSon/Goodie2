@@ -42,9 +42,9 @@
 
   <div class="actions" style="margin-top:15px;">
     <% if params[:action] != "edit" %>
-      <%= f.submit 'Create Cycle', :class => 'btn btn-success' %>
+      <%= f.submit 'Create Cycle', :class => 'btn btn-success', :id => "create_cycle" %>
     <% else %>
-      <%= f.submit 'Edit Cycle', :class => 'btn btn-success' %>
+      <%= f.submit 'Edit Cycle', :class => 'btn btn-success', :id => "edit_cycle" %>
     <% end %>
   </div>
 <% end %>

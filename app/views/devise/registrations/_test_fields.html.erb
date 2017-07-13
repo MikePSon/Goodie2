@@ -1,0 +1,23 @@
+<div class="form-group has-feedback">
+   <label for="signupInputLastName" class="text-muted">Stripe ID</label>
+   <%= f.text_field :stripeid, class: "form-control", :placeholder => "Enter StripeID" %>
+   <span class="icon-people form-control-feedback text-muted"></span>
+</div>
+
+<div class="form-group has-feedback">
+   <label for="signupInputLastName" class="text-muted">Plan ID</label>
+   <%= f.text_field :planid, class: "form-control", :placeholder => "Enter PlanID" %>
+   <span class="icon-people form-control-feedback text-muted"></span>
+</div>
+
+<div class="clearfix">
+   <div class="checkbox c-checkbox pull-left mt0">
+      <label>
+        <%= f.check_box :subscribed %>
+         <span class="fa fa-check"></span>Stripe Subscribed
+      </label>
+   </div>
+</div>
+<script>
+  $('#user_subscribed').prop('checked', true)
+</script>

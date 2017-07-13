@@ -36,7 +36,7 @@
     </div>
   
   
-    <div class="" id="cycle" style="margin-top:15px;">
+    <!--<div class="" id="cycle" style="margin-top:15px;">
       <fieldset>
         <h4>
           Cycle
@@ -49,13 +49,13 @@
           <%= link_to_add_association 'Add Cycle', f, :cycle, :class => "btn btn-default" %>
         </div>
       </fieldset>
-    </div>
+    </div>-->
     
     <div class="actions" style="margin-top:15px;">
       <% if params[:action] != "edit" %>
-        <%= f.submit 'Create Project', :class => 'btn btn-success' %>
+        <%= f.submit 'Create Project', :class => 'btn btn-success', :id => "create_project" %>
       <% else %>
-        <%= f.submit 'Edit Project', :class => 'btn btn-success' %>
+        <%= f.submit 'Edit Project', :class => 'btn btn-success', :id => "edit_project" %>
       <% end %>
     </div>
   </div>

@@ -35,6 +35,8 @@ def sign_up
   fill_in "signupInputEmail", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
   fill_in "user_password_confirmation", :with => @visitor[:password_confirmation]
+  #Hack for stripe
+  page.evaluate_script("$('#user_subscribed').prop('checked', false)")
   click_button "submit_button"
   find_user
 end
@@ -161,6 +163,10 @@ end
 
 Then /^I should be able to select my plan$/ do
   page.should have_content "Select your plan!"
+end
+
+Then /^I see an unconfirmed account message$/ do
+  page.should have_content "setup your organization within Goodie"
 end
 
 Then /^I should see an invalid email message$/ do
