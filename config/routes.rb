@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :mailing_subscribers
   resources :features
   mount Ckeditor::Engine => '/ckeditor'
   resources :reviews
@@ -13,6 +14,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'new_applicant', :to => 'devise/registrations#new_applicant'
     get 'new_program_manager', :to => 'devise/registrations#new_program_manager'
+
+    #Temporary route, for pre-pro mailing list
+    get 'new_mailer_interest', :to => 'devise/registrations#new_mailer'
   end
 
   get "home", to: "pages#home", as: "home"

@@ -1,3 +1,8 @@
+<style>
+    .modal-backdrop{z-index:-1;}
+    @media (min-width: 768px){.modal-dialog{margin:90px auto;}}
+</style>
+
 <div id="top" class="landing-intro" role="main">
     <!-- Start .container -->
     <div class="container">
@@ -10,7 +15,7 @@
                 <br><span class="hidden-xs">Deep Insights. User friendly.<strong>Fast start up.</strong></span>
             </p>
             <div class="registration-btn-container">
-                <%= link_to "Sign up", new_user_registration_path, :class => "btn btn-xl btn-landing" %>
+                <button type="button" data-toggle="modal" data-target="#mail_registration" class="btn btn-landing btn-xl">Learn more</button>
             </div>
         </div>
         <!-- End intro-slogan -->

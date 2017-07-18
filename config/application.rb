@@ -70,6 +70,7 @@ module Goodie2
     config.assets.precompile += %w( users/registrations.js )
     config.assets.precompile += %w( subscribers.js )
     config.assets.precompile += %w( features.js )
+    config.assets.precompile += %w( mailing_subscribers.js )
 
     config.assets.precompile += %w( base.css )
     config.assets.precompile += %w( pages.css )
@@ -87,6 +88,7 @@ module Goodie2
     config.assets.precompile += %w( users/registrations.css )
     config.assets.precompile += %w( subscribers.css )
     config.assets.precompile += %w( features.css )
+    config.assets.precompile += %w( mailing_subscribers.css )
 
     config.assets.precompile += %w( landing/landing.css )
     config.assets.precompile += %w( landing/custom-landing.css )
