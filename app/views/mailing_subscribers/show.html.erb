@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @mailing_subscriber.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @mailing_subscriber.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @mailing_subscriber.email %>
+</p>
+
+<p>
+  <strong>Discount:</strong>
+  <%= @mailing_subscriber.discount %>
+</p>
+
+<%= link_to 'Edit', edit_mailing_subscriber_path(@mailing_subscriber) %> |
+<%= link_to 'Back', mailing_subscribers_path %>

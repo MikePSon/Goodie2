@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   ]
 
   def home
+    @mailing_subscriber = MailingSubscriber.new
   end
 
   def help_center
