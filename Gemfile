@@ -102,3 +102,6 @@ gem 'stripe'
 gem "mongoid-paperclip"
 gem 'aws-sdk', '~> 1'
 gem 'aws-sdk-resources', '~> 2'
+
+# Rebrandly URL Shortening
+gem 'rebrandly'

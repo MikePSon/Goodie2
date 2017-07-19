@@ -26,6 +26,8 @@ class Organization
 
   field :custom_terms,              type: Boolean
   field :terms_conditions,          type: String
+  field :applicant_url,             type: String
+  field :rawurl,                    type: String
 
   has_mongoid_attached_file :logo, styles: {
     thumb: '100x100>',

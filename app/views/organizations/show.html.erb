@@ -77,11 +77,7 @@
                      <% if !current_user.applicant? %>
                      <li>
                         <em class="icon-link fa-fw mr-lg"></em>
-                        <% if Rails.env.development? %>
-                           http://localhost:3000/new_applicant?organization_id=<%=current_user.organization_id %>
-                        <% else %>
-                           http://www.goodie2.com/new_applicant?organization_id=<%=current_user.organization_id %>
-                        <% end %>
+                        <%= @organization.applicant_url %>
                      </li>
                      <% end %>
                   </ul>
