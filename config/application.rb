@@ -112,4 +112,8 @@ module Goodie2
                                  'angle/themes/theme-h.css'
                                 ]
   end
+
+    Rebrandly.configure do |config|
+        config.api_key = ENV['REBRANDLY_KEY']
+    end
 end

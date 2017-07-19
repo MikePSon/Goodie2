@@ -71,6 +71,16 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
+    raw_url = set_applicant_url(@organization)
+    @organization.rawurl = raw_url
+
+    api = Rebrandly::Api.new
+    my_domain = api.domains.first
+    applicant_url = api.shorten(raw_url, domain: my_domain.to_h, title: @organization.name)
+    url = applicant_url.short_url
+
+
+    @organization.applicant_url = url
 
 
     respond_to do |format|
@@ -162,6 +172,8 @@ class OrganizationsController < ApplicationController
         :annual_giving_goal,
         :custom_terms,
         :terms_conditions,
+        :applicant_url,
+        :rawurl,
         :created_by)
     end
 
@@ -199,5 +211,14 @@ class OrganizationsController < ApplicationController
       end
       rate = (net_amt / 8.0)*100
       return rate
+    end
+
+    def set_applicant_url(org)
+      if Rails.env.production?
+        return "http://applicant.goodie2.com/new_applicant?organization_id=" + org.id.to_s
+      else
+        return "http://localhost:3000/new_applicant?organization_id=" + org.id.to_s
+      end
+      
     end
 end
