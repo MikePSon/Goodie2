@@ -1,0 +1,27 @@
+<%= render 'layouts/partials/page_header' %>
+
+<ul class="timeline">
+  <li data-datetime="Today" class="timeline-separator"></li>
+  <% @release_notes.each.with_index do |this_note, index| %>
+      <% if (index+1)%2 == 0 %><% index_inverted = true %><li class="timeline-inverted">
+      <% else %><% index_inverted = false %><li>
+      <% end %>
+
+      <div class="timeline-badge <%= release_color(this_note.release_type) %>">
+        <em class="<%= release_icon(this_note.release_type) %>"></em>
+      </div>
+
+      <div class="timeline-panel">
+        <div class="popover<% if index_inverted %> right<% else %> left<% end %>">
+
+          <h4 class="popover-title"><%=this_note.title %></h4>
+          <div class="arrow"></div>
+          <div class="popover-content">
+             <p><%= this_note.release_date.strftime("%e %b %Y").to_s %>
+              <br>
+              <small><%= this_note.note %></small>
+             </p>
+          </div>
+      </div>
+  <% end %>
+</ul>

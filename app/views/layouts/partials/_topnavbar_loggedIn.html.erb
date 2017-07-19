@@ -34,6 +34,44 @@
                </li>
             </ul>
          </li>
+
+         <li class="dropdown dropdown-list">
+            <a href="#" data-toggle="dropdown">
+               <em class="fa fa-life-buoy"></em>
+            </a>
+            <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
+
+                  <%= link_to help_center_path, :class => "list-group-item"  do %>
+                     <div class="media-box">
+                        <div class="pull-left">
+                           <em class="<%= get_icon('help_center') %> fa-2x text-danger"></em>
+                        </div>
+                        <div class="media-box-body clearfix">
+                           <p class="m0">Help Center</p>
+                           <p class="m0 text-muted">
+                              <small>Goodie 2 documentation</small>
+                           </p>
+                        </div>
+                     </div>
+                  <% end %>
+
+                  <%= link_to release_notes_path, :class => "list-group-item"  do %>
+                     <div class="media-box">
+                        <div class="pull-left">
+                           <em class="<%= get_icon('release_notes') %> fa-2x text-success"></em>
+                        </div>
+                        <div class="media-box-body clearfix">
+                           <p class="m0">Release Notes</p>
+                           <p class="m0 text-muted">
+                              <small>Goodie 2 Releases!</small>
+                           </p>
+                        </div>
+                     </div>
+                  <% end %>
+
+            </ul>
+         </li>
+
          <li class="dropdown dropdown-list" id="dropdown_container">
             <a href="#" data-toggle="dropdown">
                <em class="fa fa-th-large"></em>
@@ -104,21 +142,6 @@
                            </div>
                         </div>
                      </a>
-
-                     <%= link_to help_center_path, :class => "list-group-item"  do %>
-                        <div class="media-box">
-                           <div class="pull-left">
-                              <em class="<%= get_icon('help_center') %> fa-2x text-warning"></em>
-                           </div>
-                           <div class="media-box-body clearfix">
-                              <p class="m0">Help Center</p>
-                              <p class="m0 text-muted">
-                                 <small>Goodie 2 documentation</small>
-                              </p>
-                           </div>
-                        </div>
-                     <% end %>
-
 
                      <%= link_to edit_user_registration_path, :class => "list-group-item", :id => "edit_account"  do %>
                         <div class="media-box">

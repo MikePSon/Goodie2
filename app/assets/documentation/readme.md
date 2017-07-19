@@ -1,12 +1,27 @@
 Help Center
 =====
 
+Organization
+---------
+
+Your organizations profile is the cornerstone of Goodie. This outlines who you are and gives people an idea of what you've bene up to on Goodie.
+
+#### Applicant URL
+
+You can find this on your organizations page. This is a link that will only show for members of your organization. But this link is critical. This is the link you will distribute to prospective applicants (be it via email, social media, etc), this will direct your applicants to our website where they can create a profile to fill out applications.
+
+#### Attributes
+You can choose what information will display to your applicants and other viewers. As a warning, if you filled out the field and saved it, it'll display!
+
+Additionally, if you are the program administrator (the person who created the account), we allow you to display your ofice hours.
+
+
 Projects
 ---------
 
 Projects are the top level objects used in giving. These projects may have repeat or you may use them only one time.
 
-### Attributes
+#### Attributes
 
 All projects have a name, how else are your applicants supposed to know what they are applying to? When creating or managing a project, you can add a couple of different attributes to the project.
 
@@ -19,15 +34,15 @@ Cycles
 
 Cycles are the different iterations of a project. If your project will be a one-time only project, then create a single cycle to accept applications.
 
-### Attributes
+#### Attributes
 
 Bacon ipsum dolor amet frankfurter fatback cow shoulder tenderloin. Sausage jerky bresaola pork. Corned beef strip steak bacon biltong pancetta beef salami short loin swine andouille
 
-### Application Questions
+#### Application Questions
 
 Currently, we offer you a bank of questions to ask of you applicants. When creating/managing a cycle, you can elect which of these questions to display.
 
-### Status Flow
+#### Status Flow
 
 - Planned: This cycle has been planned, and it's opening date is sometime in the future.
 - Open: This cycle is now open, and applicants can apply to it.
@@ -46,7 +61,11 @@ When closing a cycle, whether automatically or manually, those applications whic
 Requests
 ---------
 
-### Statuses
+#### Application Creation
+
+An applicant can only apply to your cycle while the cycle is open. You as a program administrator can create or modify an application at any point in time. In the future, we want to build out a feature to allow you to re-open a cycle, as well as allow you to enable the applicants to edit them on adhoc basis.
+
+#### Statuses
 
 Requests have a number of statuses they go through in the lifetime of the application.
 
@@ -58,3 +77,16 @@ Requests have a number of statuses they go through in the lifetime of the applic
 - Awarded: Your foundation has decided to accept the application and donate the requested money.
 - Payment: Payments have been made to the recipient
 - Project Complete: All payments have been issued and the project has wrapped up!
+
+
+Your Account
+---------
+
+#### Support
+We currently offer email based support through ZenDesk. We'll at least respond to your tickets within 24 business hours. Sometimes the solutions are simple, and we'll turn those around quickly. Sometimes they aren't so simple. If you are facing troubles with a live cycle, we'll automatically escalate that to the top of our queue.
+
+#### Billing
+Billing occurs monthly, in accordance with the subscription plan you signed up with. Currently, if you want to downgrade from our paid to our free tier, you have to send us an email. Don't worry, we won't try and sell you.
+
+#### Cancelling
+If you want to cancel your account entirely, you can do so from the organization tab.

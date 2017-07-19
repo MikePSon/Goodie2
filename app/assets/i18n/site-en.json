@@ -35,7 +35,8 @@
     "YOUR_REQUESTS": "Your Requests",
     "ORGREQUESTS": "Requests",
     "ADMINORGANIZATION": "Organizations",
-    "ADMINDASH": "Goodie 2"
+    "ADMINDASH": "Goodie 2",
+    "RELEASENOTES": "Release Notes"
   },
   "subtitle": {
     "DASHBOARD": "Dashboard",

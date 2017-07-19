@@ -1,0 +1,34 @@
+<%= form_for(@release_note) do |f| %>
+  <% if @release_note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@release_note.errors.count, "error") %> prohibited this release_note from being saved:</h2>
+
+      <ul>
+      <% @release_note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :release_date %><br>
+    <%= f.date_select :release_date %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :release_type %><br>
+    <% @type_options = options_for_select(['Release','Bugfix', 'Patch']) %>
+    <%= f.select(:release_type, @type_options, {}, { :class => 'form-control' }) %>
+  </div>
+  <div class="field">
+    <%= f.label :note %><br>
+    <%= f.text_field :note %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
