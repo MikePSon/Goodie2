@@ -5,6 +5,29 @@ module ApplicationHelper
     end
   end
 
+  def release_icon(param)
+    if param == "Release"
+      return "fa fa-plane"
+    elsif param == "Bugfix"
+      return "fa fa-meh-o"
+    elsif param == "Patch"
+      return "icon-magic-wand"
+    else
+      return "bunk"
+    end
+  end
+  def release_color(param)
+    if param == "Release"
+      return "success"
+    elsif param == "Bugfix"
+      return "warning"
+    elsif param == "Patch"
+      return "danger"
+    else
+      return "bunk"
+    end
+  end
+
   def cycle_statuses
     [
         ['Planned', '1', 'Planned'], ['Open', '2', 'Open'], ['Closed', '3', 'Closed'],
@@ -104,6 +127,8 @@ module ApplicationHelper
       return "icon-power"
     elsif param == "help_center"
       return "fa fa-life-buoy"
+    elsif param == "release_notes"
+      return "icon-map"
     end
   end#End get_icon
 end

@@ -35,7 +35,8 @@
     "YOUR_REQUESTS": "Sus aplicaciónes",
     "ORGREQUESTS": "Aplicaciónes",
     "ADMINORGANIZATION": "Organizaciónes",
-    "ADMINDASH": "Goodie 2"
+    "ADMINDASH": "Goodie 2",
+    "RELEASENOTES": "Notas de la versión"
   },
   "subtitle": {
     "DASHBOARD": "Instrumentos de administración",

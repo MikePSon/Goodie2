@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Release date:</strong>
+  <%= @release_note.release_date %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @release_note.note %>
+</p>
+
+<%= link_to 'Edit', edit_release_note_path(@release_note) %> |
+<%= link_to 'Back', release_notes_path %>
