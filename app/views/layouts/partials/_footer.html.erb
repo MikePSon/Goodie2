@@ -1,4 +1,44 @@
-<span>&copy; 2016 - Goodie</span>
+<style>
+	.social_media_footer {float:right;}
+	.social_wrapper {margin-right:5px;display:inline;}
+	@media screen and (max-width: 768px) {
+    	.social_media_footer {float:none;text-align:center;}
+    	.copyright_container{text-align:center;}
+	}
+</style>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-3" ><div class="copyright_container">&copy; 2017 - Goodie</div></div>
+	<div class="col-xs-12 col-sm-3 col-sm-offset-6" style="display:none;">
+		<div class="social_media_footer">
+			<div class="social_wrapper">
+				<a href="http://www.twitter.com/T" target="_blank">
+					<i class="icon-social-twitter"></i>
+				</a>
+			</div>
+			<div class="social_wrapper">
+				<a href="http://www.instagram.com/goodie2usa" target="_blank">
+					<i class="icon-social-instagram"></i>
+				</a>
+			</div>
+			<div class="social_wrapper">
+				<a href="https://www.facebook.com/Goodie2-1623746544326611/" target="_blank">
+					<i class="icon-social-facebook"></i>
+				</a>
+			</div>
+			<div class="social_wrapper">
+				<a href="https://www.pinterest.com/goodie2usa/" target="_blank">
+					<i class="icon-social-pinterest"></i>
+				</a>
+			</div>
+
+			
+		</div>
+	</div>
+</div>
+
+
+
 
 <% if Rails.env == "production" %>
   <script>
