@@ -72,15 +72,19 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     raw_url = set_applicant_url(@organization)
-    @organization.rawurl = raw_url
 
     api = Rebrandly::Api.new
     my_domain = api.domains.first
+    
+    title = @organization.name
+
     applicant_url = api.shorten(raw_url, domain: my_domain.to_h, title: @organization.name)
     url = applicant_url.short_url
+    rebrand_id = applicant_url.id
 
 
     @organization.applicant_url = url
+    @organization.rebrandly_id = rebrand_id
 
 
     respond_to do |format|
@@ -173,7 +177,7 @@ class OrganizationsController < ApplicationController
         :custom_terms,
         :terms_conditions,
         :applicant_url,
-        :rawurl,
+        :rebrandly_id,
         :created_by)
     end
 

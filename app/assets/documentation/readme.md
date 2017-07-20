@@ -89,4 +89,4 @@ We currently offer email based support through ZenDesk. We'll at least respond t
 Billing occurs monthly, in accordance with the subscription plan you signed up with. Currently, if you want to downgrade from our paid to our free tier, you have to send us an email. Don't worry, we won't try and sell you.
 
 #### Cancelling
-If you want to cancel your account entirely, you can do so from the organization tab.
+If you want to cancel your account entirely, you can do so by deleting your account under Edit Account.

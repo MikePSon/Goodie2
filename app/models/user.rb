@@ -84,13 +84,22 @@ class User
   # instead of deleting, indicate the user requested a delete & timestamp it  
   def soft_delete  
     if self.program_admin?
-      organization_users = User.where(:organization_id => self.organization_id.to_s)
       
+      # Delete Rebrandly Link
+      thisOrg = Organization.where(:id => self.organization_id).first
+      api = Rebrandly::Api.new
+      api.delete(thisOrg.rebrandly_id)
+
+
+      # Mark Users Inactive, unable to login
+      organization_users = User.where(:organization_id => self.organization_id.to_s)
       organization_users.each do |this_user|
         this_user.update_attribute(:deleted_at, Time.current) 
         this_user.update_attribute(:inactive_user, true)
       end
 
+      # Mark Organization as Inactive
+      thisOrg.update_attribute(:inactive, true)
 
     else
       update_attribute(:deleted_at, Time.current) 
