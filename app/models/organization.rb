@@ -17,6 +17,7 @@ class Organization
   field :city,                      type: String
   field :state,                     type: String
   field :zip,                       type: String
+  field :inactive,                  type: Boolean
 
   field :created_by,                type: String
   field :manager_decision,          type: Boolean
@@ -27,7 +28,7 @@ class Organization
   field :custom_terms,              type: Boolean
   field :terms_conditions,          type: String
   field :applicant_url,             type: String
-  field :rawurl,                    type: String
+  field :rebrandly_id,              type: String
 
   has_mongoid_attached_file :logo, styles: {
     thumb: '100x100>',
