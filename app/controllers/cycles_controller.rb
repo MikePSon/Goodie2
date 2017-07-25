@@ -10,7 +10,6 @@ class CyclesController < ApplicationController
   # GET /cycles
   # GET /cycles.json
   def index
-    @cycles = Cycle.all
     @thisPage = "CYCLES"
     @title = "Your Cycles"
     @subtitle = "All of your Cycles"
@@ -20,6 +19,11 @@ class CyclesController < ApplicationController
     @primaryActionPath = new_cycle_path
 
     @yourCycles = Cycle.where(:organization_id => current_user.organization_id.to_s);
+
+    if current_user.admin?
+      @all_cycles = Cycle.all
+    end
+
   end
 
   # GET /cycles/1
@@ -33,7 +37,7 @@ class CyclesController < ApplicationController
     @reopenedRequests = @allRequests.where(:status => "Re-Opened")
     @underReviewRequests = @allRequests.where(:status => "Under Review")
     @closedRequests = @allRequests.where(:status => "Closed")
-    @awardedRequests = @allRequests.where(:accepted => true)
+    @awardedRequests = @allRequests.where(:accepted => "true")
     @paymentRequests = @allRequests.where(:status => "Payment")
     @projectCompleteRequests = @allRequests.where(:status => "Project Complete")
 
@@ -61,7 +65,7 @@ class CyclesController < ApplicationController
       @created_incomplete = @incompleteRequests
     end
 
-    if @cycle.status == "Closed" && (current_user.program_admin? || current_user.program_manager?)
+    if @cycle.status == "Closed" && (current_user.program_admin? || current_user.program_manager? || current_user.admin?)
       if @underReviewRequests.count > 0
         @requests_for_cycle = @underReviewRequests
       else

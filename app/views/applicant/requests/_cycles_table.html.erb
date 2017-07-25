@@ -13,7 +13,7 @@
 			</thead>
 			<tbody>
 				<% cycles.each do |cycle| %>
-				<% previous_application = Request.where(:user_id => current_user.id).where(:cycle_id => cycle.id).count %>
+				<% previous_application = Request.where(:user_id => current_user.id.to_s).where(:cycle_id => cycle.id).count %>
 				<tr>
 					<td><%= cycle.name %></td>
 					<td>

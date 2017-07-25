@@ -34,6 +34,7 @@
     "EDITORGANIZATION": "Editar su organización",
     "YOUR_REQUESTS": "Sus aplicaciónes",
     "ORGREQUESTS": "Aplicaciónes",
+    "ALLREQUESTS": "Aplicaciónes",
     "ADMINORGANIZATION": "Organizaciónes",
     "ADMINDASH": "Goodie 2",
     "RELEASENOTES": "Notas de la versión"
@@ -47,6 +48,7 @@
     "EDITORGANIZATION": "Sus preferencias y ajustes",
     "YOUR_REQUESTS": "El bien que quiere hacer",
     "ORGREQUESTS": "Su historial de aplicaciones",
+    "ALLREQUESTS": "Completar el historial de solicitudes",
     "ADMINORGANIZATION": "¿Quién está haciendo bien?",
     "ADMINDASH": "¿Lo que es bueno?"
   },

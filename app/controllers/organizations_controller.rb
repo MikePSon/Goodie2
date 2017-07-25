@@ -132,6 +132,7 @@ class OrganizationsController < ApplicationController
   def get_timeline this_organization
 
     opened_cycles = Cycle.where(:organization_id => current_user.organization_id).where(open: (Time.now..(Time.now + 24.hours)))
+    closed_cycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Closed")
     closing_cycles = Cycle.where(:organization_id => current_user.organization_id).where(close: (Time.now - 24.hours)..Time.now)
     new_projects = Project.where(:organization_id => current_user.organization_id).order(created_at: :desc).limit(5)
 
@@ -139,6 +140,11 @@ class OrganizationsController < ApplicationController
 
     if opened_cycles.count > 0
       opened_cycles.each do |this_cycle|
+        @timeline << this_cycle
+      end
+    end
+    if closed_cycles.count > 0
+      closed_cycles.each do |this_cycle|
         @timeline << this_cycle
       end
     end

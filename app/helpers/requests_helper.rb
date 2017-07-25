@@ -28,4 +28,7 @@ module RequestsHelper
 	def detailed_description_req_helper
 		raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="Detailed Description" data-content="Please provide a more detailed desription of this project, the community served, and what our funds will help with."> </i>')
 	end
+	def request_done_helper
+		raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="Done?" data-content="Please check this switch box if you are done with your application, this will submit if for review."> </i>')
+	end
 end

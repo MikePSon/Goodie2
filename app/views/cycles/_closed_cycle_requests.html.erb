@@ -29,11 +29,13 @@
           <%= link_to 'Show', request %>
         </td>
         <td>
-          <% myReview = Review.where(:request_id => request.id).where(:user_id => current_user.id) %>
-          <% if myReview.count == 0 %>
-            <%= link_to 'Review', new_review_path(:cycle_id => request.cycle_id, :project_id => request.project_id, :request_id => request.id, :organization_id => request.organization_id) %>
-          <% elsif !myReview.first.review_complete? %>
-            <%= link_to 'Review', edit_review_path(myReview.first) %>
+          <% if !current_user.admin? %>
+            <% myReview = Review.where(:request_id => request.id).where(:user_id => current_user.id) %>
+            <% if myReview.count == 0 %>
+              <%= link_to 'Review', new_review_path(:cycle_id => request.cycle_id, :project_id => request.project_id, :request_id => request.id, :organization_id => request.organization_id) %>
+            <% elsif !myReview.first.review_complete? %>
+              <%= link_to 'Review', edit_review_path(myReview.first) %>
+            <% end %>
           <% end %>
         </td>
         <td>

@@ -34,6 +34,7 @@
     "EDITORGANIZATION": "Edit your organization",
     "YOUR_REQUESTS": "Your Requests",
     "ORGREQUESTS": "Requests",
+    "ALLREQUESTS": "Requests",
     "ADMINORGANIZATION": "Organizations",
     "ADMINDASH": "Goodie 2",
     "RELEASENOTES": "Release Notes"
@@ -47,6 +48,7 @@
     "EDITORGANIZATION": "Your preferences and settings",
     "YOUR_REQUESTS": "The good you want to do",
     "ORGREQUESTS": "Your request history",
+    "ALLREQUESTS": "Complete request history",
     "ADMINORGANIZATION": "Who's doing good?",
     "ADMINDASH": "What's good?"
   },

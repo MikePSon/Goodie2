@@ -35,11 +35,12 @@
             </ul>
          </li>
 
+         <% if !current_user.applicant? %>
          <li class="dropdown dropdown-list">
             <a href="#" data-toggle="dropdown">
                <em class="fa fa-life-buoy"></em>
             </a>
-            <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
+            <ul role="menu" class="dropdown-menu dropdown-menu-right animated lightSpeedIn">
 
                   <%= link_to help_center_path, :class => "list-group-item"  do %>
                      <div class="media-box">
@@ -71,6 +72,49 @@
 
             </ul>
          </li>
+
+          <% if current_user.admin? %>
+         <li class="dropdown dropdown-list">
+            <a href="#" data-toggle="dropdown">
+               <em class="icon-settings"></em>
+            </a>
+            <ul role="menu" class="dropdown-menu dropdown-menu-right animated rotateInUpRight">
+
+                  <% if Rails.env.development? %>
+                  <a class="list-group-item" href="http://localhost:3000/rails/mailers" target="_blank">
+                     <div class="media-box">
+                        <div class="pull-left">
+                           <em class="icon-envelope fa-2x text-info"></em>
+                        </div>
+                        <div class="media-box-body clearfix">
+                           <p class="m0">Email Previews</p>
+                           <p class="m0 text-muted">
+                              <small>Check out emails</small>
+                           </p>
+                        </div>
+                     </div>
+                  </a>
+                  <% end %>
+
+                  <%= link_to features_path, :class => "list-group-item"  do %>
+                     <div class="media-box">
+                        <div class="pull-left">
+                           <em class="<%= get_icon('edit') %> fa-2x text-muted"></em>
+                        </div>
+                        <div class="media-box-body clearfix">
+                           <p class="m0">Features</p>
+                           <p class="m0 text-muted">
+                              <small>Add/Edit App Features</small>
+                           </p>
+                        </div>
+                     </div>
+                  <% end %>
+
+            </ul>
+         </li>
+         <% end %>
+
+         <% end %>
 
          <li class="dropdown dropdown-list" id="dropdown_container">
             <a href="#" data-toggle="dropdown">
@@ -187,39 +231,6 @@
                            </div>
                         </div>
                      <% end %>
-
-                     <% if current_user.admin? && Rails.env.development?  %>
-                     <a class="list-group-item" href="http://localhost:3000/rails/mailers" target="_blank">
-                        <div class="media-box">
-                           <div class="pull-left">
-                              <em class="icon-envelope fa-2x text-info"></em>
-                           </div>
-                           <div class="media-box-body clearfix">
-                              <p class="m0">Email Previews</p>
-                              <p class="m0 text-muted">
-                                 <small>Minimize menu</small>
-                              </p>
-                           </div>
-                        </div>
-                     </a>
-                     <% end %>
-
-                     <% if current_user.admin? %>
-                        <%= link_to features_path, :class => "list-group-item"  do %>
-                           <div class="media-box">
-                              <div class="pull-left">
-                                 <em class="<%= get_icon('edit') %> fa-2x text-muted"></em>
-                              </div>
-                              <div class="media-box-body clearfix">
-                                 <p class="m0">Features</p>
-                                 <p class="m0 text-muted">
-                                    <small>Add/Edit App Features</small>
-                                 </p>
-                              </div>
-                           </div>
-                        <% end %>
-                     <% end %>
-
                   </div>
                   <!-- END list group-->
                </li>

@@ -21,6 +21,7 @@
 .avatar-circle-side      { @include avatar(60px); }
 .avatar-circle-sm        { @include avatar(50px); }
 .avatar-circle-lg        { @include avatar(250px); }
+.avatar-circle-side-xs   { @include avatar(30px); }
 .avatar-circle-cy-view   { 
   @include avatar(48px); 
   display:inline-block;

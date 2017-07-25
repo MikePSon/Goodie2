@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
   get 'help_center', to: "pages#help_center", as: "help_center"
+  get 'applicant_help', to: "pages#applicant_help", as: "applicant_help"
   
   get "posts", to: "pages#posts", as: "posts"
   get "posts/:id", to: "pages#show_post", as: "post"
