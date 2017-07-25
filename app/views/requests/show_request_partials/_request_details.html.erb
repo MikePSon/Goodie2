@@ -2,17 +2,15 @@
    <div class="panel-heading">Particulars</div>
    <div class="panel-body">
    	<dl class="dl-horizontal">
-		  <dt>Summary</dt>
-      <dd><%= @request.summary %></dd>
 
       <dt>Details</dt>
-    	<dd><%= @request.description.html_safe %></dd>
+    	<dd><%= @request.detailed_description.html_safe %></dd>
 
       <dt>Project Begin</dt>
-      <dd><%= @request.begin_date.strftime("%e %b %Y %l:%M %p").to_s %></dd>
+      <dd><%= @request.project_start.strftime("%e %b %Y %l:%M %p").to_s %></dd>
 
       <dt>Project End</dt>
-      <dd><%= @request.end_date.strftime("%e %b %Y %l:%M %p").to_s %></dd>
+      <dd><%= @request.project_end.strftime("%e %b %Y %l:%M %p").to_s %></dd>
 
     </dl>
   </div>     

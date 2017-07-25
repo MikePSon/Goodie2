@@ -5,7 +5,6 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @thisPage = "ORGREQUESTS"
     if !current_user.admin || !current_user.applicant
       @thisPage = "ORGREQUESTS"
       @organization_requests = Request.where(:organization_id => current_user.organization_id.to_s)
@@ -14,6 +13,10 @@ class RequestsController < ApplicationController
       @open_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open").order(open: :asc)
       @closed_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Closed").order(close: :desc) 
     end #End Program Admin/Mgr Stuff
+    if current_user.admin?
+      @thisPage = "ALLREQUESTS"
+      @organization_requests = Request.all
+    end
   end
 
   # GET /requests/1
@@ -25,8 +28,9 @@ class RequestsController < ApplicationController
     else
       @title = "Your Request"
     end
-    if @request.summary != ""
-      @subtitle = @request.summary.to_s
+    
+    if @request.project_summary != ""
+      @subtitle = @request.project_summary.to_s
     else
       @subtitle = "Edit this request, make it awesome"
     end
@@ -37,10 +41,13 @@ class RequestsController < ApplicationController
       @primaryActionPath = edit_request_path(@request)
     end
 
+
+    # FIXME: REVIEW THIS LOGIC
     if (@request.status == "Under Review" && !current_user.applicant?)
       @requestReviews = Review.where(:request_id => @request.id).where(:review_complete => true)
       mgrDecision = Organization.where(:id => @request.organization_id).first.manager_decision
       @myReview = @requestReviews.where(:user_id => current_user.id)
+
       if @myReview.count == 0
         @primaryAction = true
         @primaryActionText = "Review"
@@ -49,7 +56,7 @@ class RequestsController < ApplicationController
         @primaryAction = true
         @primaryActionText = "Review"
         @primaryActionPath = edit_review_path(myReview.first)
-      elsif @myReview.count == 1 && !@myReview.first.review_complete
+      elsif @myReview.count == 1 && @myReview.first.review_complete
         if (current_user.program_admin? || mgrDecision)
           @primaryAction = true
           @acceptReject = true
@@ -93,13 +100,13 @@ class RequestsController < ApplicationController
     else
       @title = "Your Request"
     end
-    if @request.summary != ""
-      @subtitle = @request.summary.to_s
+    if @request.project_summary != ""
+      @subtitle = @request.project_summary.to_s
     else
       @subtitle = "Edit this request, make it awesome"
     end
     @myProject = Project.where(:id => @request.project_id).first.id
-    @cycle = Cycle.where(:id => @request.cycle_id).first.id
+    @cycle = Cycle.where(:id => @request.cycle_id).first
 
     @show_organization = show_org_test(@cycle)
     @show_details= show_req_details(@cycle)
@@ -121,7 +128,7 @@ class RequestsController < ApplicationController
       if @request.save
         format.html { redirect_to @request }
         format.json { render :show, status: :created, location: @request }
-        if @request.isSubmitted?
+        if isSubmitted
           flash[:success] = "Application complete!"
         else
           flash[:warning] = "Application saved, but not complete."
@@ -180,6 +187,7 @@ class RequestsController < ApplicationController
     end
     
     def show_org_test cycle
+      cycle = Cycle.where(:id => cycle).first
       if cycle.organization_name? || cycle.ein_taxID? || cycle.org_address_1? || cycle.org_address_2? || cycle.org_city? || cycle.org_state? || cycle.org_zip? || cycle.org_mission?
         return true
       else

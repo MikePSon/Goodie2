@@ -13,6 +13,10 @@
     <%= render 'requests/show_request_partials/user_info' %>
   </div>
 
+  <div id="request_org_info">
+    <%= render 'requests/show_request_partials/requesting_organization' %>
+  </div>
+
   <% if @request.status == "Under Review" %>
     <div id="show_request_review_info">
       <%= render 'requests/show_request_partials/review_info' %>

@@ -1,5 +1,9 @@
 <%= render 'layouts/partials/page_header' %>
 
+<% if current_user.admin? %>
+  <%= render 'admin_cycles' %>
+<% else %>
+
 <div class="row">
   <% @yourCycles.each do |cycle| %>
   <% cycle_requests = Request.where(:cycle_id => cycle.id.to_s) %>
@@ -69,3 +73,4 @@
   </div>
   <% end %>
 </div>
+<% end %>
