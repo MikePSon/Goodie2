@@ -74,7 +74,12 @@ class OrganizationsController < ApplicationController
     raw_url = set_applicant_url(@organization)
 
     api = Rebrandly::Api.new
-    my_domain = api.domains.first
+
+    if Rails.env.Staging?
+      my_domain = api.domains.last
+    else
+      my_domain = api.domains.first
+    end
     
     title = @organization.name
 

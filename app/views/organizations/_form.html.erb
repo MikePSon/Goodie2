@@ -20,15 +20,15 @@
                <span data-localize="organization_form.headers.SETTINGS">Settings</span>
             </div>
             <div class="list-group">
-               <a href="#basic" data-toggle="tab" class="list-group-item" id="basic">
+               <a href="#basic" data-toggle="tab" class="list-group-item" id="">
                   <span data-localize="organization_form.headers.BASIC">Basic</span>
                </a>
-               <a href="#contact" data-toggle="tab" class="list-group-item" id="contact">
+               <a href="#contact" data-toggle="tab" class="list-group-item" id="">
                   <span data-localize="organization_form.headers.CONTACT">Contact</span>
                </a>
-               <a href="#advanced" data-toggle="tab" class="list-group-item" id="advanced">
+               <!--<a href="#advanced" data-toggle="tab" class="list-group-item" id="">
                   <span data-localize="organization_form.headers.ADVANCED">Advanced</span>
-               </a>
+               </a>-->
                <!--<a href="#tabSetting3" data-toggle="tab" class="list-group-item">Team</a>-->
             </div>
          </div>
@@ -84,6 +84,12 @@
                            <label>Logo</label>
                            <%= f.file_field :logo, class: "form-control", :placeholder => "Your pic!" %>
                         </div>
+                        <div class="field">
+                           <label>
+                              <span data-localize="organization_form.fields.GIVINGGOAL">Annual Giving Goal</span>  <%= annual_giving_goal_helper %>
+                           </label><br>
+                           <%= f.number_field :annual_giving_goal, :class => "form-control" %>
+                        </div>
                   </div>
                </div>
             </div>
@@ -126,7 +132,8 @@
                   </div>
                </div>
             </div>
-            <div id="advanced" class="tab-pane">
+            
+            <!--<div id="advanced" class="tab-pane">
                <div class="panel b">
                   <div class="panel-heading bg-gray-lighter text-bold">
                      <span data-localize="organization_form.headers.ADVANCED">Advanced</span>
@@ -156,7 +163,7 @@
                            </label><br>
                            <%= f.number_field :annual_giving_goal %>
                         </div>
-                        <!--<div class="field">
+                        <div class="field">
                            <label>
                               <span data-localize="organization_form.fields.CSTTERMS">Custom Terms and Conditions</span>  <%= custom_terms_helper %>
                            </label><br>
@@ -175,40 +182,11 @@
                                  </div>
                               </div>
                            </div>
-                        </div>-->
+                        </div>
                   </div>
                </div>
-               <!--<div class="panel b">
-                  <div class="panel-heading bg-danger text-bold">Delete account</div>
-                  <div class="panel-body bt">
-                     <p>You will be asked for confirmation before delete account.</p>
-                     <button type="button" class="btn btn-default">
-                        <span class="text-danger">Delete account</span>
-                     </button>
-                  </div>
-               </div>-->
-            </div>
-            <!--<div id="tabSetting3" class="tab-pane">
-               <div class="panel b">
-                  <div class="panel-heading bg-gray-lighter text-bold">Emails</div>
-                  <div class="panel-body">
-                     <p>Etiam eros nibh, condimentum in auctor et, aliquam quis elit. Donec id libero eros. Ut fringilla, justo id fringilla pretium, nibh nunc suscipit mauris, et suscipit nulla nisl ac dolor. Nam egestas, leo eu gravida tincidunt, sem ipsum
-                        pellentesque quam, vel iaculis est quam et eros.</p>
-                     <p>
-                        <strong>Your email addresses</strong>
-                     </p>
-                     <p>
-                        <span class="mr">email@someaddress.com</span>
-                        <span class="label label-success">primary</span>
-                     </p>
-                     <p>
-                        <span class="mr">another.email@someaddress.com</span>
-                        <span class="label bg-gray">private</span>
-                     </p>
-                  </div>
-               </div>
-            </div>
-         </div>-->
+            </div>-->
+         </div>
       </div>
    </div>
 </div>
