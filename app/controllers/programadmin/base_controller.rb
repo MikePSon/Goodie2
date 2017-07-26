@@ -124,7 +124,6 @@ class Programadmin::BaseController < ApplicationController
 
   def get_giving_goal_stats
   	if @my_organization.annual_giving_goal
-		get_giving_goal_stats
 		@giving_goal = @my_organization.annual_giving_goal
 		if @amount_given > 0.0
 			@giving_goal_completion = ((@amount_given / @giving_goal).round(2)) * 100
