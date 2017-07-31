@@ -43,9 +43,14 @@
     <%= f.label :explanation %><br>
     <%= f.text_field :explanation, :class => "form-control", :required => true %>
   </div>
-  <div class="field">
-    <%= f.label :review_complete %><br>
-    <%= f.check_box :review_complete %>
+
+  <div class="clearfix">
+    <div class="checkbox c-checkbox pull-left mt0">
+      <label>
+        <%= f.check_box :review_complete %>
+        <span class="fa fa-check"></span>Review Complete?
+      </label>
+    </div>
   </div>
 
   <div class="actions" style="margin-top:15px;">

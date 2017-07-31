@@ -36,17 +36,22 @@
                 </li>
               <% end %>
               
+              <% if @request.org_city? && @request.org_state? && @request.org_zip? %>
               <li>
                 <span data-toggle="tooltip" data-placement="left" title="Job Title">
                   <em class="icon-briefcase fa-fw mr-lg"></em>
                 </span><%= @request.org_city %>, <%= @request.org_state %> <%= @request.org_zip %>
               </li>
+              <% end %>
 
-              <li>
-                <span data-toggle="tooltip" data-placement="left" title="Last Sign In">
-                  <em class="fa fa-reply fa-fw mr-lg"></em>
-                </span><%= @request.org_mission.html_safe %>
-              </li>
+              <% if @request.org_mission %>
+                <li>
+                  <span data-toggle="tooltip" data-placement="left" title="Last Sign In">
+                    <em class="fa fa-reply fa-fw mr-lg"></em>
+                  </span><%= @request.org_mission.html_safe %>
+                </li>
+              <% end %>
+
             </ul>
          </div>
       </div>

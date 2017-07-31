@@ -49,7 +49,7 @@
   </div>
 <% end %>
 
-<% if @cycle.amount_requested %>
+<% if @cycle.amount_requested? %>
   <div class="field">
     <%= f.label :amount_requested, "Amount Requested" %><br>
     <%= f.text_field :amount_requested, :class => "form-control" %>

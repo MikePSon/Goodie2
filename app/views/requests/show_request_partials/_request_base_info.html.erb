@@ -7,15 +7,22 @@
 
     	<dt>Cycle</dt>
     	<dd><%= @cycle.name %></dd>
+      
+      <% if @request.amount_requested %>
+        <dt>Amount Requested</dt>
+        <dd><%= @request.amount_requested %></dd>
+      <% end %>
 
-   		<dt>Amount Requested</dt>
-   		<dd><%= @request.amount_requested %></dd>
+      <% if @request.title %>
+		    <dt>Project Title</dt>
+		    <dd><%= @request.title %></dd>
+      <% end %>
 
-		<dt>Project Title</dt>
-		<dd><%= @request.title %></dd>
+    <% if @request.other_funding %>
+		  <dt><span class="">Uses </span>Other Funding?</dt>
+		  <dd><%= @request.other_funding %></dd>
+    <% end %>
 
-		<dt><span class="">Uses </span>Other Funding?</dt>
-		<dd><%= @request.other_funding %></dd>
 
 		<% if @request.other_funding %>
       		<dt>Total Budget</dt>

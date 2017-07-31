@@ -5,11 +5,13 @@ class Applicant::BaseController < ApplicationController
     @thisPage = "DASHBOARD"
     @title = "Dashboard"
     @subtitle = "Your Dashboard"
-    @primaryAction = true
-    @primaryActionText = "New Request"
-    @primaryActionPath = new_request_path
+    
+    #Has bug, page depends on having a cycle param, which you don't want to pass here
+    #@primaryAction = true
+    #@primaryActionText = "New Request"
+    #@primaryActionPath = new_request_path
 
-    @org_cycles = Cycle.where(:organization_id => current_user.organization.id)
+    @org_cycles = Cycle.where(:organization_id => current_user.organization.id).where(:status => "Open")
     @your_requests = Request.where(:user_id => current_user.id)
 
     #Total Requested, needs refactor
