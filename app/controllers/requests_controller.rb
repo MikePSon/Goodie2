@@ -64,6 +64,10 @@ class RequestsController < ApplicationController
       end
     end
 
+    if (@request.status == "Accepted" && current_user.program_admin?)
+      
+    end
+
   end
 
   # GET /requests/new
