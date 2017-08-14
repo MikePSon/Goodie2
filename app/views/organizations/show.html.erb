@@ -1,151 +1,16 @@
 <div class="unwrap">
-   <div style="background-image: url(<%= asset_path 'angle/profile-bg.jpg' %>)" class="bg-cover">
-      <div class="p-xl text-center text-white">
-         <%= image_tag @organization.logo.url(:thumb), :class => "img-thumbnail img-circle" %>
-         <h3 class="m0"><%= @current_user.first_name %> <%= @current_user.last_name %></h3>
-         <p><%= @organization.motto %></p>
+  <%= render 'organizations/show_partials/header' %>
+  
+  <div class="p-lg">
+    <div class="row">
+      <div class="col-lg-8">
+        <%= render 'organizations/show_partials/timeline' %>
       </div>
-   </div>
-   <div class="text-center bg-gray-dark p-lg mb-xl">
-      <div class="row row-table">
-         <div class="col-xs-4 br">
-            <h3 class="m0"><%= @organizationApplicants.count %></h3>
-            <p class="m0">
-               <span class="hidden-xs">Total</span>
-               <span>Applicants</span>
-            </p>
-         </div>
-         <div class="col-xs-4 br">
-            <h3 class="m0">$<%= @total_amount_awarded %></h3>
-            <p class="m0">Given</p>
-         </div>
-         <div class="col-xs-4">
-            <h3 class="m0"><%= @organizationProjects.count %></h3>
-            <p class="m0">
-            <span class="hidden-xs">Total</span>
-               <span>Projects</span>
-            </p>
-         </div>
+      <div class="col-lg-4">
+        <%= render 'organizations/show_partials/team_lead' %>
+
+        <%= render 'organizations/show_partials/org_stats' %>
       </div>
-   </div>
-   <div class="p-lg">
-      <div class="row">
-         <div class="col-lg-9">
-            <!-- START timeline-->
-            <% if @timelineItems.count == 0 && !current_user.applicant? %>
-               <%= render "no_timeline" %>
-            <% else %>
-               <%= render "timeline" %>
-            <% end %>
-            <!-- END timeline-->
-         </div>
-         <div class="col-lg-3">
-            <div class="panel panel-default">
-               <div class="panel-body">
-                  <div class="text-center">
-                     <h3 class="mt0"><%= @programAdmin.first_name %> <%= @programAdmin.last_name %></h3>
-                     <p><%= @programAdmin.job_title %></p>
-                  </div>
-                  <hr/>
-                  <style>
-                     .ph-xl li { word-wrap: break-word;}
-                  </style>
-                  <ul class="list-unstyled ph-xl">
-                     <% if !@programAdmin.phone.blank? %>
-                        <li>
-                           <em class="fa fa-phone fa-fw mr-lg"></em><%= @programAdmin.phone %></li>
-                     <% end %>
-
-                     <li>
-                        <em class="fa fa-envelope fa-fw mr-lg"></em><a href="#"><%= @programAdmin.email %></a></li>
-
-                     <% if !@programAdmin.office_open.blank? && !@programAdmin.office_close.blank? %>
-                        <li>
-                           <em class="fa fa-wechat fa-fw mr-lg"></em><%= @programAdmin.office_open %> - <%= @programAdmin. office_close %></li>
-                     <% end %>
-
-                     <% if !current_user.applicant? %>
-                     <li>
-                        <em class="icon-link fa-fw mr-lg"></em>
-                        <%= @organization.applicant_url %>
-                     </li>
-                     <% end %>
-                  </ul>
-               </div>
-            </div>
-            <div class="panel panel-default">
-               <div class="panel-heading">
-                  <a href="#" class="pull-right">
-                     <em class="icon-plus text-muted"></em>
-                  </a>Your Team</div>
-               <div class="list-group">
-                  <!-- START User status-->
-                  <% @organizationTeam.each do |teamMember| %>
-                     <a href="#" class="media p mt0 list-group-item">
-                        <!--<span class="pull-right">
-                           <span class="circle circle-success circle-lg"></span>
-                        </span>-->
-                        <span class="pull-left">
-                           <% if current_user.avatar? %>
-                              <%= image_tag current_user.avatar.url(:square), :class => "media-object img-circle thumb32", :height => 60, :width => 60 %>
-                           <% else %>
-                              <div class="avatar-circle-side-xs" style="margin:0 auto">
-                                 <span class="initials">
-                                    <%= current_user.first_name[0].upcase %><%= current_user.last_name[0].upcase %>
-                                 </span>
-                              </div>
-                           <% end %>
-                        </span>
-                        <!-- Contact info-->
-                        <span class="media-body">
-                           <span class="media-heading">
-                              <strong><%= teamMember.first_name %> <%= teamMember.last_name %></strong>
-                              <br/>
-                              <small class="text-muted"><%= teamMember.job_title %></small>
-                           </span>
-                        </span>
-                     </a>
-                  <% end %>
-                  <!--<a href="#" class="media p mt0 list-group-item text-center text-muted">View all contacts</a>-->
-               </div>
-            </div>
-            <div class="panel panel-default">
-               <div class="list-group">
-                  <a href="#" class="list-group-item">
-                     <em class="pull-right fa fa-users fa-lg fa-fw text-muted mt"></em>
-                     <h4 class="list-group-item-heading"><%= @organizationApplicants.count %></h4>
-                     <p class="list-group-item-text">Applicants</p>
-                  </a>
-                  <a href="#" class="list-group-item">
-                     <em class="pull-right fa fa-rss fa-lg fa-fw text-muted mt"></em>
-                     <h4 class="list-group-item-heading">$<%= @totalAmountAwarded %></h4>
-                     <p class="list-group-item-text">Given</p>
-                  </a>
-                  <a href="#" class="list-group-item">
-                     <em class="pull-right fa fa-map-marker fa-lg fa-fw text-muted mt"></em>
-                     <h4 class="list-group-item-heading"><%= @openCycles.count %></h4>
-                     <p class="list-group-item-text">Open Cycle</p>
-                  </a>
-                  <a href="#" class="list-group-item">
-                     <em class="pull-right fa fa-briefcase fa-lg fa-fw text-muted mt"></em>
-                     <h4 class="list-group-item-heading"><%= @organizationProjects.count %></h4>
-                     <p class="list-group-item-text">Projects</p>
-                  </a>
-                  <a href="#" class="list-group-item">
-                     <em class="pull-right fa fa-twitter fa-lg fa-fw text-muted mt"></em>
-                     <h4 class="list-group-item-heading"><%= @organizationRequests.count %></h4>
-                     <p class="list-group-item-text">Applications</p>
-                  </a>
-                  <a href="#" class="list-group-item">
-                     <em class="pull-right fa fa-building-o fa-lg fa-fw text-<%= @complete_color %> mt"></em>
-                     <h4 class="list-group-item-heading">
-                        <span class="text-<%= @complete_color %>"><%= @profile_complete %>%</span>
-                     </h4>
-                     <p class="list-group-item-text text-<%= @complete_color %>">Profile complete</p>
-                  </a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
+    </div>
+  </div>
 </div>

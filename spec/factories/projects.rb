@@ -1,9 +1,9 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :project do
-    name "Project Name Text"
-    mission "Ensure proper functionality"
-    cycle_budget "50000"
+    name "MyString"
+    open "2017-08-05 07:59:12"
+    close "2017-08-05 07:59:12"
+    annual_budget "MyString"
+    organization nil
   end
 end

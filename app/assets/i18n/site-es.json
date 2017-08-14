@@ -1,80 +1,29 @@
 {
-  "dashboard": {
-    "WELCOME": "Bienvenido a Angle"
-  },
-  "request": {
-    "index": {
-      "APPLICANTS": "Solicitantes",
-      "OPENCYCLES": "Ciclos abiertos",
-      "REQUESTS": "Aplicaciónes"
-    }  
-  },
-  "sidebar": {
-    "WELCOME": "Bienvenido",
-    "nav": {
-      "HELLO": "Hola",
-      "DASHBOARD": "Panel",
-      "PROJECTS": "Proyectos",
-      "CYCLES": "Ciclos",
-      "ORGANIZATION": "Organización",
-      "REQUESTS": "Aplicaciónes",
-      "VIEWALL": "Ver Todo",
-      "NEWCYCLE": "Nuevo Ciclo",
-      "subtitles": {
-        "PROJECT": "Todos sus proyectos"
-      }
-    }
-  },
-  "pagetitle": {
-    "DASHBOARD": "Panel",
-    "PROJECT": "Proyectos",
-    "NEWPROJECT": "Nuevo proyecto",
-    "CYCLES": "Ciclos",
-    "NEWCYCLE": "Nuevo ciclo",
-    "EDITORGANIZATION": "Editar su organización",
-    "YOUR_REQUESTS": "Sus aplicaciónes",
-    "ORGREQUESTS": "Aplicaciónes",
-    "ALLREQUESTS": "Aplicaciónes",
-    "ADMINORGANIZATION": "Organizaciónes",
-    "ADMINDASH": "Goodie 2",
-    "RELEASENOTES": "Notas de la versión"
-  },
-  "subtitle": {
-    "DASHBOARD": "Instrumentos de administración",
-    "PROJECT": "Todos sus proyectos",
-    "NEWPROJECT": "Empezar a hacer buen",
-    "CYCLES": "Todos sus ciclos",
-    "NEWCYCLE": "El siguiente ciclo",
-    "EDITORGANIZATION": "Sus preferencias y ajustes",
-    "YOUR_REQUESTS": "El bien que quiere hacer",
-    "ORGREQUESTS": "Su historial de aplicaciones",
-    "ALLREQUESTS": "Completar el historial de solicitudes",
-    "ADMINORGANIZATION": "¿Quién está haciendo bien?",
-    "ADMINDASH": "¿Lo que es bueno?"
-  },
-  "organization_form": {
-    "headers":{
-      "BASIC": "Básico",
-      "CONTACT": "Contacto",
-      "ADVANCED": "Superior",
-      "SETTINGS": "Configuración",
-      "CREATE": "Crear Organización",
-      "UPDATE": "Actualizar Organization"
-    },
-    "fields": {
-      "NAME": "Nombre",
-      "MOTTO": "Lema",
-      "ADDRESS": "Dirección",
-      "CITY": "Ciudad",
-      "STATE": "Estado",
-      "ZIP": "Código postal",
-      "MGRDECISION": "Administrador decisión",
-      "MGREDIT": "Proyecto administrador de edición",
-      "GIVINGGOAL": "Donación meta anual",
-      "CSTTERMS": "Términos y Condiciones Personales"
-    },
-    "buttons": {
-      "NEWPROJECT": "¡Nuevo proyecto!"
-    }
-  }
+	"common": {
+		"NAME": "Nombre",
+		"ADDY1": "Dirección 1",
+		"ADDY2": "Dirección 2",
+		"CITY": "Ciudad",
+		"STATE": "Estado",
+		"ZIP": "Código postal",
+		"PROJECT": "Proyecto",
+		"PROJECTS": "Proyectos",
+		"CYCLE": "Ciclo",
+		"CYCLES": "Ciclos",
+		"ORGANIZATION": "Organización",
+		"ORGANIZATIONS": "Organizaciones",
+		"REQUEST": "Peticiones",
+		"REQUESTS": "Peticiones",
+		"DASHBOARD": "Panel"
+	},	
+	"pagetitle": {
+		"NEWPROJECT": "Crear un nuevo proyecto",
+    	"PROJECTLISTING": "Sus Proyectos",
+    	"THISCYCLE": "Cycle"
+ 	},
+	"subtitle": {
+  		"NEWPROJECT": "Esto servirá durante tus ciclos",
+    	"PROJECTLISTING": "Qué vas a hacer",
+    	"THISCYCLE": "Cycle"
+  	}
 }

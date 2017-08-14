@@ -18,3 +18,4 @@
 //--- Morris
 //= require raphael/raphael
 //= require morris.js/morris
+//= require cocoon

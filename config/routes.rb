@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
+  resources :questions
+  resources :requests
+  resources :cycles
+  resources :projects
+  resources :questions
   resources :release_notes
   resources :mailing_subscribers
   resources :features
   mount Ckeditor::Engine => '/ckeditor'
   resources :reviews
   resources :organizations
-  resources :requests
-  resources :cycles
-  resources :projects
   resources :subscribers
   
   devise_for :users, :controllers => { :registrations => 'users/registrations' }

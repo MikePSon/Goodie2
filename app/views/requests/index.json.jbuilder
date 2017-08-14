@@ -1,4 +1,1 @@
-json.array!(@requests) do |request|
-  json.extract! request, :id
-  json.url request_url(request, format: :json)
-end
+json.array! @requests, partial: 'requests/request', as: :request

@@ -8,14 +8,14 @@
          <!-- END user info-->
          <!-- Iterates over all sidebar items-->
          <li class="nav-heading">
-            <span>Program Admin</span>
+            <span data-localize="sidebar.nav.PROGRAMADMIN">Program Admin</span>
          </li>
 
          <% if current_user.subscribed? %>
             <li class="<%= 'active' if controller?('programadmin/base') %>">
                <%= link_to programadmin_dash_path, :id =>"Dashboard" do %>
                   <em class="icon-speedometer"></em>
-                  <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                  <span data-localize="common.DASHBOARD">Dashboard</span>
                <% end %>
             </li>
             <!-- End Sidebar Item -->
@@ -30,7 +30,7 @@
                <% else %>
                   <%= link_to new_organization_path do %>
                      <em class="<%= get_icon('organization') %>"></em>
-                     <span>New Organization</span>
+                     <span data-localize="sidebar.nav.NEWORGANIZATION">New Organization</span>
                   <% end %>
                <% end %>
             </li>
@@ -40,7 +40,7 @@
                <li class="<%= 'active' if controller?('projects') %>" id="">
                   <%= link_to projects_path, :id => "project_tab" do %>
                      <em class="<%= get_icon('project') %>"></em>
-                     <span data-localize="sidebar.nav.PROJECTS">Projects</span>
+                     <span data-localize="common.PROJECTS">Projects</span>
                   <% end %>
                </li>
                <!-- End Sidebar Item -->
@@ -48,7 +48,7 @@
                <li class="<%= 'active' if controller?('cycles') %>">
                   <%= link_to cycles_path, :id => "cycle_tab" do %>
                      <em class="<%= get_icon('Cycle') %>"></em>
-                     <span data-localize="sidebar.nav.CYCLES">Cycles</span>
+                     <span data-localize="common.CYCLES">Cycles</span>
                   <% end %>
                </li>
                <!-- End Sidebar Item -->
@@ -56,7 +56,7 @@
                <li class="<%= 'active' if controller?('requests') %>" id="">
                   <%= link_to requests_path, :id => "request_tab"  do %>
                      <em class="<%= get_icon('Request') %>"></em>
-                     <span data-localize="sidebar.nav.REQUESTS">Requests</span>
+                     <span data-localize="common.REQUESTS">Requests</span>
                   <% end %>
                </li>
                <!-- End Sidebar Item -->

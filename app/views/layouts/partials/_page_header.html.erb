@@ -1,6 +1,6 @@
 <div class="content-heading">
       <div class="pull-right">
-      <% if @primaryAction %>   
+      <% if @primaryAction %>
          <%= link_to @primaryActionText.html_safe, @primaryActionPath, :class => "btn btn-primary btn-sm", :id => @primaryActionID %>
          <% if @secondaryAction %>
       	  <%= link_to @secondaryActionText.html_safe, @secondaryActionPath, :class => "btn btn-default btn-sm" %>
@@ -11,3 +11,5 @@
    <span data-localize="pagetitle.<%= @thisPage %>"><%= @title %></span>
    <small data-localize="subtitle.<%= @thisPage %>"><%= @subtitle %></small>
 </div>
+
+<p id="notice"><%= notice %></p>

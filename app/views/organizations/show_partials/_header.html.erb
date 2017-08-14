@@ -1,0 +1,30 @@
+<div style="background-image: url(<%= asset_path 'angle/profile-bg.jpg' %>)" class="bg-cover">
+   <div class="p-xl text-center text-white">
+      <%= image_tag @organization.logo.url(:thumb), :class => "img-thumbnail img-circle" %>
+      <h3 class="m0">Ted Berry</h3>
+      <p>Lead director</p>
+      <p>Proin metus justo, commodo in ultrices at, lobortis sit amet dui. Fusce dolor purus, adipiscing a tempus at, gravida vel purus.</p>
+   </div>
+</div>
+<div class="text-center bg-gray-dark p-lg mb-xl">
+   <div class="row row-table">
+      <div class="col-xs-4 br">
+         <h3 class="m0"><%= @all_requests.count %></h3>
+         <p class="m0">
+            <span class="hidden-xs">Total</span>
+            <span>Awards</span>
+         </p>
+      </div>
+      <div class="col-xs-4 br">
+         <h3 class="m0">2000</h3>
+         <p class="m0">Given</p>
+      </div>
+      <div class="col-xs-4">
+         <h3 class="m0">10%</h3>
+         <p class="m0">
+            <span class="hidden-xs">Annual Giving</span>
+            <span>Goal</span>
+         </p>
+      </div>
+   </div>
+</div>

@@ -1,5 +1,3 @@
-<% @myOrgID = Organization.where(:_id => current_user.organization_id).first.id %>
-
 <%= form_for(@cycle) do |f| %>
   <% if @cycle.errors.any? %>
     <div id="error_explanation">
@@ -13,57 +11,85 @@
     </div>
   <% end %>
 
-  <div class="row-fluid">
-    <div class="col-xs-12">
-      <div id="cycle_form">
-        <h4>Basic</h4>
-        <section>
-          <%= render 'cycles/form_partials/basic_cycle_questions', :f => f %>
-        </section>
-        <h4>Instructions</h4>
-        <section>
-          <%= render 'cycles/form_partials/application_instructions', :f => f %>
-        </section>
-        <h4>Organization</h4>
-        <section>
-          <%= render 'cycles/form_partials/organization_questions', :f => f %>
-        </section>
-        <h4>Details</h4>
-        <section>
-          <%= render 'cycles/form_partials/request_details', :f => f %>
-        </section>
-        <h4>Administrative</h4>
-        <section>
-          <%= render 'cycles/form_partials/admin_details', :f => f %>
-        </section>
-      </div>
-    </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
-
-  <div class="actions" style="margin-top:15px;">
-    <% if params[:action] != "edit" %>
-      <%= f.submit 'Create Cycle', :class => 'btn btn-success', :id => "create_cycle" %>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select(:status, cycle_statuses, {}, { :class => 'form-control' }) %>
+  </div>
+  <div class="field">
+    <%= f.label :open %><br>
+    <%= f.datetime_select :open, :minute_step => 10 %>
+  </div>
+  <div class="field">
+    <%= f.label :close %><br>
+    <%= f.datetime_select :close, :minute_step => 10 %>
+  </div>
+  <div class="field">
+    <%= f.label :budget %><br>
+    <%= f.text_field :budget %>
+  </div>
+  <div class="field">
+    <%= f.label :project_id %><br>
+    <% if @projectID %>
+      <%= f.text_field :project_id, :value => @projectID, :class => "form-control" %>
     <% else %>
-      <%= f.submit 'Edit Cycle', :class => 'btn btn-success', :id => "edit_cycle" %>
+      <% @projectOptions = options_from_collection_for_select(Project.where(:organization_id => current_user.organization_id), :id, :name) %>
+      <%= f.select(:project_id, @projectOptions, {}, { :class => 'form-control' }) %>
     <% end %>
   </div>
+  <div class="field">
+    <%= f.label :organization_id %><br>
+    <%= f.text_field :organization_id, :value => current_user.organization_id, :class => "form-control" %>
+  </div>
+  <br>
+  <hr>
+  <br>
+
+  <style>
+    .nested_table {display:table;}
+    .nested_field {display: table-cell;}
+  </style>
+  <div class="" id="questions">
+    <fieldset>
+      <h4>Questions</h4>
+      <div class="nested_table">
+        <div style="display: table-row">
+          <div class="nested_field">
+            Question Label
+          </div>
+
+          <div class="nested_field">
+            Question Type
+          </div>
+          
+          <div class="nested_field">
+            Question Matcher
+          </div>
+          
+          <div class="nested_field">
+            Actions
+          </div>
+          
+
+        </div>
+      </div>
+      <div style="display:table-row">
+        <%= f.fields_for :questions do |question| %>
+          <%= render 'question_fields', f: question %>
+        <% end %>
+      </div>
+      <div class="links">
+          <%= link_to_add_association '<i class="br-plus"></i> Add question'.html_safe, f, :questions, :class => "btn btn-default" %>
+        </div>
+    </fieldset>
+  </div>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
-
-<script>
-(function(window, document, $, undefined){
-
-  $(function(){
-
-    if ( ! $.fn.validate || ! $.fn.steps ) return;
-
-    $("#cycle_form").steps({
-        headerTag: "h4",
-        bodyTag: "section",
-        transitionEffect: "slideLeft",
-        stepsOrientation: "vertical"
-    });
-
-  });
-
-})(window, document, window.jQuery);
-</script>

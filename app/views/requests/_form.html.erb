@@ -1,7 +1,3 @@
-<style>
-  .ninja { display:none; }
-</style>
-
 <%= form_for(@request) do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
@@ -15,98 +11,61 @@
     </div>
   <% end %>
 
-  <div class="row-fluid">
-    <div class="col-xs-12 col-sm-9">
-        <% if @cycle.instructions? %>
-          Administrative note:<br>
-          <p><%= @cycle.instructions.html_safe %></p>
-        <% end %>
-    </div>
-    <div class="hidden-xs col-sm-3">
-      <table class="logo-table">
-        <tr>
-          <td class="logo_table_logo"><%= image_tag current_user.organization.logo.url(:thumb), :class => "img-thumbnail img-circle" %></td>
-          <td class="logo_table_name"><%= current_user.organization.name%></td>
-        </tr>
-      </table>
-    </div>
+  <h3>Base Questions</h3>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
 
-  <div id="request_form">
-    <h4>General<span class="hidden-xs"> Info</span></h4>
-    <section>
-      <%= render 'requests/form_partials/general_questions', :f => f %>
-    </section>
-    
-    <% if @show_organization %>
-      <h4>Organization</h4>
-      <section>
-        <%= render 'requests/form_partials/organization_questions', :f => f %>
-      </section>
+  <%= render 'associations', :f => f %>
 
-      <% if @cycle.form990? || @cycle.board_members? %>
-      <h4>Org<span class="hidden-xs">anization</span> Uploads</h4>
-      <section>
-        <%= render 'requests/form_partials/organization_uploads', :f => f %>
-      </section>
-      <% end %>
-    <% end %>
+  <hr class="star-primary">
 
-    <% if @cycle.org_mission? %>
-      <h4>Mission Statement</h4>
-      <section>
-        <%= render 'requests/form_partials/mission_statement', :f => f %>
-      </section>
-    <% end %>
-
-    <% if @show_details %>
-      <h4>Details</h4>
-      <section>
-        <%= render 'requests/form_partials/details_questions', :f => f %>
-      </section>
-    <% end %>
+  <h3>Project Questions</h3>
+  <% if @project_questions.count > 0 %>
+    <% @project_questions.each do |this_question| %>
   
-  </div>
+      <div class="field">
+        
+        <% if this_question.type == "String" %>
+          <label><%= this_question.label %></label><br>
+          <%= f.text_field this_question.question_matcher, :class => "form-control" %>
+  
+        <% elsif this_question.type == "Boolean" %>
+          <label>
+            <label><%= this_question.label %></label><br>
+            <%= f.check_box this_question.question_matcher %>
+          </label>
+        <% end %>
+  
+      </div>
+    <% end %>
+  <% end %>
 
-  <div class="actions" style="margin-top:15px">
-    <div class="field">
-      <label>
-        <span data-localize="cycle_form.fields.DONE">Done?</span> <%= request_done_helper %>
-      </label><br>
-      <label class="switch">
-        <%= f.check_box :app_complete %>
-        <span></span>
-      </label>
-    </div>
+  <hr class="star-primary">
+  <h3>Cycle Questions</h3>
+  <% if @cycle_questions.count > 0 %>
+    <% @cycle_questions.each do |this_question| %>
+  
+      <div class="field">
+        
+        <% if this_question.type == "String" %>
+          <label><%= this_question.label %></label><br>
+          <%= f.text_field this_question.question_matcher, :class => "form-control" %>
+  
+        <% elsif this_question.type == "Boolean" %>
+          <label>
+            <label><%= this_question.label %></label><br>
+            <%= f.check_box this_question.question_matcher %>
+          </label>
+        <% end %>
+  
+      </div>
+    <% end %>
+  <% end %>
 
-    <%= f.submit 'Submit', :class => 'btn btn-success btn-sm' %>
+
+  <div class="actions">
+    <%= f.submit %>
   </div>
 <% end %>
-
-<script>
-$(document).on('turbolinks:load', function() {
-  $('.ckeditor:visible').each(function() {
-    var id = $(this).attr('id');
-    if (!CKEDITOR.instances[id]) {
-       CKEDITOR.replace(id);
-    }});
-});
-
-
-(function(window, document, $, undefined){
-
-  $(function(){
-
-    if ( ! $.fn.validate || ! $.fn.steps ) return;
-
-    $("#request_form").steps({
-        headerTag: "h4",
-        bodyTag: "section",
-        transitionEffect: "slideLeft",
-        stepsOrientation: "vertical"
-    });
-
-  });
-
-})(window, document, window.jQuery);
-</script>

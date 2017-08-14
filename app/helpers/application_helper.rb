@@ -132,7 +132,4 @@ module ApplicationHelper
     end
   end#End get_icon
 
-  def applicant_demo_helper
-    raw('<i style="position:relative;top:1px; margin-left:5px" class="icon-question" data-container="body" data-toggle="popover" data-placement="right" data-title="Demographics" data-content="Please note, we do not mandate applicants to fill out this information. So this may not be 100% representative of your demographics."> </i>')
-  end
 end

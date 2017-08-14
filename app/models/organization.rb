@@ -3,10 +3,9 @@ class Organization
   include Mongoid::Paperclip
   # Associations
   has_many :users
-  has_many :request
-  has_many :project
-  has_many :cycle
-  has_many :review
+  has_many :projects
+  has_many :cycles
+
 
   # Data
   field :name,                      type: String
@@ -29,6 +28,13 @@ class Organization
   field :terms_conditions,          type: String
   field :applicant_url,             type: String
   field :rebrandly_id,              type: String
+
+
+  #Request Fields
+  field :string_1,    type: String
+  field :string_2,    type: String
+  field :boolean_1,   type: String
+  field :boolean_2,   type: String
 
   has_mongoid_attached_file :logo, styles: {
     thumb: '100x100>',

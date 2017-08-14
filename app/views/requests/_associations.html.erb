@@ -1,0 +1,27 @@
+<div class="field" style="">
+  <%= f.label :project_id %><br>
+
+  <% if params[:action] == "new" %>
+    <% @projectOptions = options_from_collection_for_select(Project.where(:organization_id => current_user.organization_id), :id, :name) %>
+    <%= f.select(:project_id, @projectOptions, {}, { :class => 'form-control' }) %>
+  <% else %>
+    <%= f.text_field :project_id, :class => "form-control" %>
+  <% end %>
+</div>
+
+<div class="field" style="">
+  <%= f.label :cycle %><br>
+  <% if params[:action] == "new" && !params[:cycle_id] %>
+    <% @cycle_options = options_from_collection_for_select(Cycle.where(:organization_id => current_user.organization_id), :id, :name) %>
+    <%= f.select(:cycle, @cycle_options, {}, { :class => 'form-control' }) %>
+  <% elsif params[:action] == "new" && params[:cycle_id] %>
+    <%= f.text_field :cycle, :class => "form-control", :value => params[:cycle_id] %>
+  <% else params[:action] == "new" && params[:cycle_id]%>
+    <%= f.text_field :cycle, :class => "form-control", :value => @request.cycle_id %>
+  <% end %>
+</div>
+
+<div class="field" style="">
+  <%= f.label :organization_id %><br>
+  <%= f.text_field :organization_id, :value => current_user.organization_id, :class => "form-control" %>
+</div>

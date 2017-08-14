@@ -1,81 +1,51 @@
 <%= render 'layouts/partials/page_header' %>
 
+<p>
+  <strong>Name:</strong>
+  <%= @cycle.name %>
+</p>
 
-<div class="row">
-   <div class="col-lg-8">
-      <!-- Main panel-->
-      <%= render 'cycle_description' %>
-      
-      <!-- End Main panel-->
-      <% if @cycle.status == "Open" %>
-         <%= render 'recent_requests' %>
-      <% elsif @cycle.status == "Closed" %>
-         <%= render 'closed_cycle_requests' %>
-      <% end %>
+<p>
+  <strong>Status:</strong>
+  <%= @cycle.status %>
+</p>
 
-   </div>
-   <div class="col-lg-4">
-      <% if @cycle.status != "Planned" %>
-         <% if @cycle.status == "Open" %>
-            <% @donut_name = "open_donut" %>
-            <%= render 'cycle_breakdown', :name => @donut_name %>
-         <% elsif @cycle.status = "Closed" %>
-            <% @donut_name = "closed_donut" %>
-            <%= render 'cycle_breakdown', :name => @donut_name %>
-         <% end %>
-      <% end %>
-   </div>
-</div>
+<p>
+  <strong>Open:</strong>
+  <%= @cycle.open.strftime("%e %b %Y %l:%M %p").to_s %>
+</p>
 
-<script>
+<p>
+  <strong>Close:</strong>
+  <%= @cycle.close.strftime("%e %b %Y %l:%M %p").to_s %>
+</p>
+
+<p>
+  <strong>Budget:</strong>
+  <%= @cycle.budget %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @cycle.project.name %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @cycle.organization.name %>
+</p>
+
+<p>
+  <strong>Questions:</strong>
+  <ol>
+  <% @questions.each do |this_question| %>
+      <li><%= this_question.label %> - <%= this_question.type %></li>
+  <% end %>
+</ol>
+</p>
+
+<%= link_to 'Edit', edit_cycle_path(@cycle) %> |
+<%= link_to 'Back', cycles_path %>
 <% if @cycle.status == "Open" %>
-   var donutData = [
-      {label: "Created", value: <%= @createdRequests.count %>},
-      {label: "Submitted",value: <%= @submittedRequests.count %>}
-   ];
-   $(document).ready(function(){
-   new Morris.Donut({
-      element: 'open_donut',
-      data: donutData,
-      colors: [ '#55C7E9', '#4CD564' ],
-      resize: true
-   });
-})
-
-<% elsif @cycle.status == "Closed" %>
-   var donutData = [
-      <% if @submittedRequests.count > 0 %>
-      {label: "Submitted",value: <%= @submittedRequests.count %>},
-      <% end %>
-      <% if @incompleteRequests.count > 0 %>
-      {label: "Incomplete", value: <%= @incompleteRequests.count %>},
-      <% end %>
-      <% if @underReviewRequests.count > 0 %>
-      {label: "Under Review", value: <%= @underReviewRequests.count %>},
-      <% end %>
-      <% if @closedRequests.count > 0 %>
-      {label: "Closed", value: <%= @closedRequests.count %>},
-      <% end %>
-      <% if @awardedRequests.count > 0 %>
-      {label: "Awarded", value: <%= @awardedRequests.count %>},
-      <% end %>
-      <% if @paymentRequests.count > 0 %>
-      {label: "Payment", value: <%= @paymentRequests.count %>},
-      <% end %>
-      <% if @projectCompleteRequests.count > 0 %>
-      {label: "Complete", value: <%= @projectCompleteRequests.count %>},
-      <% end %>
-   ];
-
-   $(document).ready(function(){
-      new Morris.Donut({
-         element: 'closed_donut',
-         data: donutData,
-         colors: [ '#243948', '#FBDE64', '#f05050', '#5DCCB0', '#ff902b', '#F62459', '#6C7A89' ],
-         // Submitted, Incomplete, Under Review, Closed, Awarded, Payment, Complete
-         resize: true
-      });
-   });
+  | <%= link_to 'Apply', new_request_path(:cycle_id => @cycle.id, :project_id => @cycle.project.id) %>
 <% end %>
-
-</script>

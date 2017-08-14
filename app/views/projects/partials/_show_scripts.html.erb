@@ -1,0 +1,190 @@
+<script>
+// CHART PIE
+// ----------------------------------- 
+(function(window, document, $, undefined){
+  $(function(){
+    var gender_data = [{
+      "label": "Male",
+      "color": "#23B7E5",
+      "data": <%= @male_applicants %>
+    }, {
+      "label": "Female",
+      "color": "#F532E5",
+      "data": <%= @female_applicants %>
+    }, {
+      "label": "Other",
+      "color": "#7266BA",
+      "data": <%= @other_gender_applicants %>
+    }, {
+      "label": "Prefer not to say",
+      "color": "#6C7A89",
+      "data": <%= @decline_gender_applicants %>
+    }];
+    var gender_options = {
+      series: {
+        pie: {
+          show: true,
+          innerRadius: 0,
+          label: {
+            show: true,
+            radius: 0.75,
+            formatter: function (label, series) {
+              return '<div class="flot-pie-label">' +
+              //label + ' : ' +
+              Math.round(series.percent) +
+              '%</div>';
+            },
+            background: {
+              opacity: 0.75,
+              color: '#222'
+            }
+          }
+        }
+      } 
+    };
+    var chart = $('.gender_pie');
+    if(chart.length)
+      $.plot(chart, gender_data, gender_options);
+    var race_data = [{
+      "label": "White",
+      "color": "#23B7E5",
+      "data": <%= @white_applicants %>
+    }, {
+      "label": "Hispanic",
+      "color": "#F532E5",
+      "data": <%= @hispanic_applicants %>
+    }, {
+      "label": "Asian",
+      "color": "#7266BA",
+      "data": <%= @black_applicants %>
+    }, {
+      "label": "American Indian",
+      "color": "#6C7A89",
+      "data": <%= @native_american_applicants %>
+    }, {
+      "label": "Middle Eastern",
+      "color": "#FF902B",
+      "data": <%= @middle_eastern_applicants %>
+    }, {
+      "label": "Hawaiian",
+      "color": "#37BC9B",
+      "data": <%= @hawaiian_applicants %>
+    }, {
+      "label": "2+ races",
+      "color": "#000",
+      "data": <%= @two_race_applicants %>
+    },{
+      "label": "Other",
+      "color": "#F05050",
+      "data": <%= @other_race_applicants %>
+    }];
+    var race_options = {
+      series: {
+        pie: {
+          show: true,
+          innerRadius: 0,
+          label: {
+            show: true,
+            radius: 0.875,
+            formatter: function (label, series) {
+              return '<div class="flot-pie-label">' +
+              //label + ' : ' +
+              Math.round(series.percent) +
+              '%</div>';
+            },
+            background: {
+              opacity: 0.875,
+              color: '#222'
+            }
+          }
+        }
+      } 
+    };
+    var chart = $('.race_pie');
+    if(chart.length)
+      $.plot(chart, race_data, race_options);
+    var age_data = [{
+      "label": "Under 18",
+      "color": "#23B7E5",
+      "data": <%= @applicants_18_under %>
+    }, {
+      "label": "18-24",
+      "color": "#F532E5",
+      "data": <%= @applicants_18_to_24 %>
+    }, {
+      "label": "19-29",
+      "color": "#7266BA",
+      "data": <%= @applicants_25_to_29 %>
+    }, {
+      "label": "30-39",
+      "color": "#FF902B",
+      "data": <%= @applicants_30_to_39 %>
+    }, {
+      "label": "40-49 ",
+      "color": "#37BC9B",
+      "data": <%= @applicants_40_to_49 %>
+    }, {
+      "label": "50-59",
+      "color": "#6C7A89",
+      "data": <%= @applicants_50_to_59 %>
+    }, {
+      "label": "60-69",
+      "color": "#000",
+      "data": <%= @applicants_60_to_69 %>
+    }, {
+      "label": "70+",
+      "color": "#FFF",
+      "data": <%= @applicants_70_plus %>
+    }];
+    var age_options = {
+      series: {
+        pie: {
+          show: true,
+          innerRadius: 0,
+          label: {
+            show: true,
+            radius: 0.875,
+            formatter: function (label, series) {
+              return '<div class="flot-pie-label">' +
+              //label + ' : ' +
+              Math.round(series.percent) +
+              '%</div>';
+            },
+            background: {
+              opacity: 0.875,
+              color: '#222'
+            }
+          }
+        }
+      } 
+    };
+    var chart = $('.age_pie');
+    if(chart.length)
+      $.plot(chart, age_data, age_options);
+  });
+})(window, document, window.jQuery);
+$(document).ready(function(){
+  display_demo_chart();
+})
+$("#demo_chart_select").change(function(){
+  display_demo_chart();
+})
+function display_demo_chart() {
+  var selected = $("#demo_chart_select option:selected").text();
+  if(selected == "Gender"){
+    $('.gender_pie').show();
+    $('.race_pie').hide();
+    $('.age_pie').hide();
+  }
+  else if(selected == "Race") {
+    $('.race_pie').show();
+    $('.gender_pie').hide();
+    $('.age_pie').hide();
+  }
+  else if(selected == "Age") {
+    $('.age_pie').show();
+    $('.race_pie').hide();
+    $('.gender_pie').hide();
+  }
+};
+</script>

@@ -1,0 +1,62 @@
+<div class="nested-fields">
+  <div class= "nested_field" style="display: table-cell;">
+    <%= f.select(:type, question_types, {}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class= "nested_field" style="display: table-cell;">
+    <%= f.text_field :label, class: "form-control", :placeholder => "Label" %>
+  </div>
+  
+  <div class= "nested_field" style="display: table-cell;">
+    <%= f.text_field :question_matcher, class: "form-control", :placeholder => "Matcher" %>
+  </div>
+  
+  <div class= "nested_field" style="display: table-cell;">
+    <%= link_to_remove_association '<i class="fa fa-trash-o"></i>'.html_safe, f %>
+  </div>
+</div>
+
+
+<script>
+  $('[id*="label"]').change(function(){
+    var thisEl = $(this);
+
+
+    // Get question type
+    var this_type_id = thisEl.attr('id').replace("label", "type");
+    var this_type_field = $('#' + this_type_id);
+    var this_type = this_type_field.val().toLowerCase();
+
+    // Get number of type on page
+    var all_select_types = $('#questions select');
+    var string_count = 0;
+    var bool_count = 0;
+
+    all_select_types.each(function() {
+      var test_el_val = $(this).val();
+
+      if(test_el_val == "String"){
+        string_count += 1
+      } else if(test_el_val == "Boolean"){
+        bool_count += 1
+      }
+      else {}
+    });
+
+
+
+    // Set Matcher Val
+    var edit_id = thisEl.attr('id').replace("label" ,"question_matcher");
+    var edit_field = $('#' + edit_id);
+    var edit_field_val = edit_field.val();
+    if (edit_field_val == '') {
+      if(this_type == "string"){
+        edit_field.val("project_" + this_type + "_" + string_count);
+      }
+      else if (this_type =="boolean") {
+        edit_field.val("project_" + this_type + "_" + bool_count);
+      }
+      else {}
+    }
+  });
+</script>

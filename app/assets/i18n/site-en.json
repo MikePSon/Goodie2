@@ -1,80 +1,28 @@
 {
-  "dashboard": {
-    "WELCOME": "Welcome to Angle!"
-  },
-  "request": {
-    "index": {
-      "APPLICANTS": "Applicants",
-      "OPENCYCLES": "Open Cycles",
-      "REQUESTS": "Requests"
-    }  
-  },
-  "sidebar": {
-    "WELCOME": "Welcome",
-    "nav": {
-      "HELLO": "Hello",
-      "DASHBOARD": "Dashboard",
-      "PROJECTS": "Projects",
-      "CYCLES": "Cycles",
-      "ORGANIZATION": "Organizations",
-      "REQUESTS": "Requests",
-      "VIEWALL": "View All",
-      "NEWCYCLE": "New Cycle",
-      "subtitles": {
-        "PROJECT": "All of your projects"
-      }
-    }
-  },
-  "pagetitle": {
-    "DASHBOARD": "Dashboard",
-    "PROJECT": "Projects",
-    "NEWPROJECT": "New Project",
-    "CYCLES": "Cycles",
-    "NEWCYCLE": "New Cycle",
-    "EDITORGANIZATION": "Edit your organization",
-    "YOUR_REQUESTS": "Your Requests",
-    "ORGREQUESTS": "Requests",
-    "ALLREQUESTS": "Requests",
-    "ADMINORGANIZATION": "Organizations",
-    "ADMINDASH": "Goodie 2",
-    "RELEASENOTES": "Release Notes"
-  },
-  "subtitle": {
-    "DASHBOARD": "Dashboard",
-    "PROJECT": "All of your projects",
-    "NEWPROJECT": "Start going good",
-    "CYCLES": "All of your cycles",
-    "NEWCYCLE": "The next cycle",
-    "EDITORGANIZATION": "Your preferences and settings",
-    "YOUR_REQUESTS": "The good you want to do",
-    "ORGREQUESTS": "Your request history",
-    "ALLREQUESTS": "Complete request history",
-    "ADMINORGANIZATION": "Who's doing good?",
-    "ADMINDASH": "What's good?"
-  },
-  "organization_form": {
-    "headers":{
-      "BASIC": "Basic",
-      "CONTACT": "Contact",
-      "ADVANCED": "Advanced",
-      "SETTINGS": "Settings",
-      "CREATE": "Create Organization",
-      "UPDATE": "Update Organization"
-    },
-    "fields": {
-      "NAME": "Name",
-      "MOTTO": "Motto",
-      "ADDRESS": "Address",
-      "CITY": "City",
-      "STATE": "State",
-      "ZIP": "Zip Code",
-      "MGRDECISION": "Manager Decision",
-      "MGREDIT": "Manager Project Edit",
-      "GIVINGGOAL": "Annual Giving Goal",
-      "CSTTERMS": "Custom Terms & Conditions"
-    },
-    "buttons": {
-      "NEWPROJECT": "New Project!"
-    }
-  }
+	"common": {
+		"NAME": "Name",
+		"ADDY1": "Address 1",
+		"ADDY2": "Address 2",
+		"CITY": "City",
+		"STATE": "State",
+		"ZIP": "Zip Code",
+		"PROJECT": "Project",
+		"PROJECTS": "Projects",
+		"CYCLE": "Cycle",
+		"CYCLES": "Cycles",
+		"ORGANIZATION": "Organization",
+		"ORGANIZATIONS": "Organizations",
+		"REQUEST": "Request",
+		"REQUESTS": "Requests",
+		"DASHBOARD": "Dashboard"
+	},	
+  	"pagetitle": {
+    	"NEWPROJECT": "Create a new Project",
+    	"PROJECTLISTING": "Your Projects"
+  	},
+  	"subtitle": {
+  		"NEWPROJECT": "This will serve over your cycles",
+  		"PROJECTLISTING": "What you're up to"
+  	}
+
 }

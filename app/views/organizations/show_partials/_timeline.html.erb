@@ -1,0 +1,18 @@
+<ul class="timeline">
+   <li data-datetime="Today" class="timeline-separator"></li>
+   <% @timeline_items.each.with_index do |this_item, index| %>
+      <% if (index+1)%2 == 0 %>
+         <% index_inverted = true %>
+         <li class="timeline-inverted">
+      <% else %>
+         <% index_inverted = false %>
+         <li>
+      <% end %>
+         <% if this_item.is_cycle? %>
+            <%= render "organizations/show_partials/timeline_items/cycle", :this_cycle => this_item, :index_inverted => index_inverted %>
+         <% elsif this_item.is_project? %>
+            <%= render "organizations/show_partials/timeline_items/project", :this_project => this_item, :index_inverted => index_inverted %>
+         <% end %>
+      </li>
+   <% end %>
+</ul>

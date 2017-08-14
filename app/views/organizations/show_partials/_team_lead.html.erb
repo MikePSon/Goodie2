@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+   <div class="panel-body">
+      <div class="text-center">
+         <h3 class="mt0"><%= @organization_admin.first_name %> <%= @organization_admin.last_name %></h3>
+         <p><%= @organization_admin.job_title %></p>
+      </div>
+      <hr/>
+      <ul class="list-unstyled ph-xl">
+         <li>
+            <em class="fa fa-home fa-fw mr-lg"></em><%= @organization_admin.city %>, <%= @organization_admin.state %></li>
+         <li>
+            <em class="fa fa-phone fa-fw mr-lg"></em><%= @organization_admin.phone %>
+         </li>
+         <li>
+            <em class="icon-envelope fa-fw mr-lg"></em><%= @organization_admin.email %></li>
+         <li>
+            <em class="icon-link fa-fw mr-lg"></em><%= @organization.applicant_url %></li>
+      </ul>
+   </div>
+</div>

@@ -73,6 +73,7 @@ module Goodie2
     config.assets.precompile += %w( mailing_subscribers.js )
     config.assets.precompile += %w( release_notes.js )
 
+    config.assets.precompile += %w( custom.css )
     config.assets.precompile += %w( base.css )
     config.assets.precompile += %w( pages.css )
     config.assets.precompile += %w( projects.css )

@@ -11,53 +11,73 @@
     </div>
   <% end %>
 
-<div class="row">
-  <div class="col-xs-12 col-sm-6">
-    <div class="field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name, :class => "form-control" %>
-    </div>
-    <div class="field">
-      <%= f.label :mission %> <%= mission_helper %><br>
-      <%= f.text_field :mission, :class => "form-control" %>
-    </div>
-    <div class="field">
-      <%= f.label :cycle_budget %> <%= cycle_budget_helper %><br>
-      <%= f.number_field :cycle_budget, :class => "form-control", :step =>'any' %>
-    </div>
-    <div class="field">
-      <%= f.label :repeat_type %> <%= repeat_helper %>
-          <%= f.select(:repeat_type, project_repeat, {}, { :class => 'form-control' }) %>
-    </div>
-  
-    <div class="field hidden" style="">
-      <%= f.label :organization %><br>
-      <%= f.text_field :organization_id, :class => "form-control", :value => Organization.where(:_id => current_user.organization_id).first.id %>
-    </div>
-  
-  
-    <!--<div class="" id="cycle" style="margin-top:15px;">
-      <fieldset>
-        <h4>
-          Cycle
-        </h4>
-        <%= f.fields_for :cycle do |cycle| %>
-          <%= render 'cycle_fields', f: cycle %>
-        <% end %>
-              
-        <div class="links">
-          <%= link_to_add_association 'Add Cycle', f, :cycle, :class => "btn btn-default" %>
-        </div>
-      </fieldset>
-    </div>-->
-    
-    <div class="actions" style="margin-top:15px;">
-      <% if params[:action] != "edit" %>
-        <%= f.submit 'Create Project', :class => 'btn btn-success', :id => "create_project" %>
-      <% else %>
-        <%= f.submit 'Edit Project', :class => 'btn btn-success', :id => "edit_project" %>
-      <% end %>
-    </div>
+  <div class="field" style="display:none;">
+    <%= f.label :organization_id %><br>
+    <%= f.text_field :organization_id, :value => current_user.organization_id, :class => "form-control" %>
   </div>
-</div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :annual_budget %><br>
+    <%= f.number_field :annual_budget, :class => "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mission %><br>
+    <%= f.text_field :mission, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :cycle_budget %><br>
+    <%= f.text_field :cycle_budget, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :repeat_type %><br>
+    <%= f.select(:repeat_type, project_repeat, {}, { :class => 'form-control' }) %>
+  </div>
+
+  <style>
+    .nested_table {display:table;}
+    .nested_field {display: table-cell;}
+  </style>
+  <div class="" id="questions">
+    <fieldset>
+      <h4>Questions</h4>
+      <div class="nested_table">
+        <div style="display: table-row">
+          <div class="nested_field">
+            Question Label
+          </div>
+
+          <div class="nested_field">
+            Question Type
+          </div>
+          
+          <div class="nested_field">
+            Question Matcher
+          </div>
+          
+          <div class="nested_field">
+            Actions
+          </div>
+        </div>
+      </div>
+      <div style="display:table-row">
+        <%= f.fields_for :questions do |question| %>
+          <%= render 'question_fields', f: question %>
+        <% end %>
+      </div>
+      <div class="links">
+          <%= link_to_add_association '<i class="br-plus"></i> Add question'.html_safe, f, :questions, :class => "btn btn-default" %>
+        </div>
+    </fieldset>
+  </div>
+
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>

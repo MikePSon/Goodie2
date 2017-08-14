@@ -1,71 +1,87 @@
 class Cycle
   include Mongoid::Document
-  # Associations
+  field :name,    type: String
+  field :status,  type: String
+  field :open,    type: Time
+  field :close,   type: Time
+  field :budget,  type: Float
+
+  field :is_cycle,        type: Boolean, default: true
+  field :is_project,      type: Boolean, default: false
+
   belongs_to :project
-  has_many :request
   belongs_to :organization
-  has_many :review
+  has_many :questions
+  accepts_nested_attributes_for :questions, reject_if: :all_blank, allow_destroy: true
 
-  # Data
-  field :admin_note,            type: String
-  field :instructions,          type: String
-  field :name, 					        type: String
-  field :status,				        type: String
-  field :open,                  type: DateTime
-  field :close,                 type: DateTime
-  field :created_at,            type: DateTime, default: DateTime.now
-  field :one_application,       type: Boolean, default: true
-
-  #Basic Level, Questions Asked
-    # Request Basics
-    field :amount_requested,    type: Boolean
-    field :project_summary,     type: Boolean
-    field :project_start,       type: Boolean
-    field :project_end,         type: Boolean
-
-    #Organization
-    field :organization_name,   type: Boolean
-    field :ein_taxID,           type: Boolean
-    field :org_address_1,       type: Boolean
-    field :org_address_2,       type: Boolean
-    field :org_city,            type: Boolean
-    field :org_state,           type: Boolean
-    field :org_zip,             type: Boolean
-    field :org_mission,         type: Boolean
-    field :form990,             type: Boolean
-    field :board_members,       type: Boolean
-
-    #Request Details
-    field :description,         type: Boolean
-    field :other_funding,       type: Boolean
-    field :total_budget,        type: Boolean
-    field :target_demo,         type: Boolean
-
-
-  # Field for timeline. Array contains multiple objects
-  field :is_cycle,      type: Boolean, default: true
-  field :is_project,    type: Boolean, default: false
-
-
-  def self.open_close_cycles
-    Rails.logger.debug "*********** OPEN/CLOSE CYCLES AUTO RUN ***********"
-    date_time_now = Time.now
-
-    Cycle.all.each do |thisCycle|
-      thisOpenDate = thisCycle.open
-      thisCloseDate = thisCycle.close
-      thisStatus = thisCycle.status
-
-      if (thisStatus == 'Planned') && (thisOpenDate < date_time_now)
-        thisCycle.update(status:"Open")
-        #FIXME: Need better debug message
-        Rails.logger.debug "Cycle has been opened"
-      elsif (thisStatus == 'Open') && (thisCloseDate < date_time_now)
-        thisCycle.update(status:"Closed")
-        #FIXME: Need better debug message
-        Rails.logger.debug "Cycle has been closed"
-      end
-    end
-  end
-
+  field :cycle_string_1,         type: String
+  field :cycle_string_2,         type: String
+  field :cycle_string_3,         type: String
+  field :cycle_string_4,         type: String
+  field :cycle_string_5,         type: String
+  field :cycle_string_6,         type: String
+  field :cycle_string_7,         type: String
+  field :cycle_string_8,         type: String
+  field :cycle_string_9,         type: String
+  field :cycle_string_10,        type: String
+  field :cycle_boolean_1,        type: Boolean
+  field :cycle_boolean_2,        type: Boolean
+  field :cycle_boolean_3,        type: Boolean
+  field :cycle_boolean_4,        type: Boolean
+  field :cycle_boolean_5,        type: Boolean
+  field :cycle_boolean_6,        type: Boolean
+  field :cycle_boolean_7,        type: Boolean
+  field :cycle_boolean_8,        type: Boolean
+  field :cycle_boolean_9,        type: Boolean
+  field :cycle_boolean_10,       type: Boolean
+  field :cycle_date_1,           type: Date
+  field :cycle_date_2,           type: Date
+  field :cycle_date_3,           type: Date
+  field :cycle_date_4,           type: Date
+  field :cycle_date_5,           type: Date
+  field :cycle_date_6,           type: Date
+  field :cycle_date_7,           type: Date
+  field :cycle_date_8,           type: Date
+  field :cycle_date_9,           type: Date
+  field :cycle_date_10,          type: Date
+  field :cycle_datetime_1,       type: DateTime
+  field :cycle_datetime_2,       type: DateTime
+  field :cycle_datetime_3,       type: DateTime
+  field :cycle_datetime_4,       type: DateTime
+  field :cycle_datetime_5,       type: DateTime
+  field :cycle_datetime_6,       type: DateTime
+  field :cycle_datetime_7,       type: DateTime
+  field :cycle_datetime_8,       type: DateTime
+  field :cycle_datetime_9,       type: DateTime
+  field :cycle_datetime_10,      type: DateTime
+  field :cycle_time_1,           type: Time
+  field :cycle_time_2,           type: Time
+  field :cycle_time_3,           type: Time
+  field :cycle_time_4,           type: Time
+  field :cycle_time_5,           type: Time
+  field :cycle_time_6,           type: Time
+  field :cycle_time_7,           type: Time
+  field :cycle_time_8,           type: Time
+  field :cycle_time_9,           type: Time
+  field :cycle_time_10,          type: Time
+  field :cycle_integer_1,        type: Integer
+  field :cycle_integer_2,        type: Integer
+  field :cycle_integer_3,        type: Integer
+  field :cycle_integer_4,        type: Integer
+  field :cycle_integer_5,        type: Integer
+  field :cycle_integer_6,        type: Integer
+  field :cycle_integer_7,        type: Integer
+  field :cycle_integer_8,        type: Integer
+  field :cycle_integer_9,        type: Integer
+  field :cycle_integer_10,       type: Integer
+  field :cycle_float_1,          type: Float
+  field :cycle_float_2,          type: Float
+  field :cycle_float_3,          type: Float
+  field :cycle_float_4,          type: Float
+  field :cycle_float_5,          type: Float
+  field :cycle_float_6,          type: Float
+  field :cycle_float_7,          type: Float
+  field :cycle_float_8,          type: Float
+  field :cycle_float_9,          type: Float
+  field :cycle_float_10,         type: Float
 end

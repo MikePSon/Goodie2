@@ -1,101 +1,151 @@
 class Request
   include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
-  include Mongoid::Paperclip
-
-  # Associations
+  field :name, type: String
+  belongs_to :cycle 
   belongs_to :project
-  belongs_to :cycle
-  has_one :user
-  has_one :organization
-  has_many :review
-  
-  # Data
-  field :status,                  type: String,   default: "Created"
-  field :title,                   type: String
-  field :amount_requested,        type: Float
-  field :other_funding,           type: Boolean
-  field :total_budget,            type: Float
-  field :detailed_description,    type: String
-  field :project_summary,         type: String
-  field :project_start,           type: Date
-  field :project_end,             type: Date
-  field :app_complete,            type: Boolean
-  field :submitted_date,          type: DateTime
+  belongs_to :organization
 
-  field :amount_awarded,          type: Float
-  field :decision_made,           type: Boolean
-  field :awarded,                 type: Boolean
-  field :rejected,                type: Boolean
+  field :cycle_string_1,		     type: String
+  field :cycle_string_2,		     type: String
+  field :cycle_string_3,         type: String
+  field :cycle_string_4,         type: String
+  field :cycle_string_5,         type: String
+  field :cycle_string_6,         type: String
+  field :cycle_string_7,         type: String
+  field :cycle_string_8,         type: String
+  field :cycle_string_9,         type: String
+  field :cycle_string_10,        type: String
+  field :cycle_boolean_1,		     type: Boolean
+  field :cycle_boolean_2,		     type: Boolean
+  field :cycle_boolean_3,        type: Boolean
+  field :cycle_boolean_4,        type: Boolean
+  field :cycle_boolean_5,        type: Boolean
+  field :cycle_boolean_6,        type: Boolean
+  field :cycle_boolean_7,        type: Boolean
+  field :cycle_boolean_8,        type: Boolean
+  field :cycle_boolean_9,        type: Boolean
+  field :cycle_boolean_10,       type: Boolean
+  field :cycle_date_1,           type: Date
+  field :cycle_date_2,           type: Date
+  field :cycle_date_3,           type: Date
+  field :cycle_date_4,           type: Date
+  field :cycle_date_5,           type: Date
+  field :cycle_date_6,           type: Date
+  field :cycle_date_7,           type: Date
+  field :cycle_date_8,           type: Date
+  field :cycle_date_9,           type: Date
+  field :cycle_date_10,          type: Date
+  field :cycle_datetime_1,       type: DateTime
+  field :cycle_datetime_2,       type: DateTime
+  field :cycle_datetime_3,       type: DateTime
+  field :cycle_datetime_4,       type: DateTime
+  field :cycle_datetime_5,       type: DateTime
+  field :cycle_datetime_6,       type: DateTime
+  field :cycle_datetime_7,       type: DateTime
+  field :cycle_datetime_8,       type: DateTime
+  field :cycle_datetime_9,       type: DateTime
+  field :cycle_datetime_10,      type: DateTime
+  field :cycle_time_1,           type: Time
+  field :cycle_time_2,           type: Time
+  field :cycle_time_3,           type: Time
+  field :cycle_time_4,           type: Time
+  field :cycle_time_5,           type: Time
+  field :cycle_time_6,           type: Time
+  field :cycle_time_7,           type: Time
+  field :cycle_time_8,           type: Time
+  field :cycle_time_9,           type: Time
+  field :cycle_time_10,          type: Time
+  field :cycle_integer_1,        type: Integer
+  field :cycle_integer_2,        type: Integer
+  field :cycle_integer_3,        type: Integer
+  field :cycle_integer_4,        type: Integer
+  field :cycle_integer_5,        type: Integer
+  field :cycle_integer_6,        type: Integer
+  field :cycle_integer_7,        type: Integer
+  field :cycle_integer_8,        type: Integer
+  field :cycle_integer_9,        type: Integer
+  field :cycle_integer_10,       type: Integer
+  field :cycle_float_1,          type: Float
+  field :cycle_float_2,          type: Float
+  field :cycle_float_3,          type: Float
+  field :cycle_float_4,          type: Float
+  field :cycle_float_5,          type: Float
+  field :cycle_float_6,          type: Float
+  field :cycle_float_7,          type: Float
+  field :cycle_float_8,          type: Float
+  field :cycle_float_9,          type: Float
+  field :cycle_float_10,         type: Float
 
-  #Standard Form Questions
-  field :organization_name,       type: String
-  field :organization_ein,        type: String
-  field :org_address_1,           type: String
-  field :org_address_2,           type: String
-  field :org_city,                type: String
-  field :org_state,               type: String
-  field :org_zip,                 type: String
-  field :org_mission,             type: String
-  field :target_demo,             type: String
-  has_mongoid_attached_file :form990_1
-  validates_attachment_content_type :form990_1, :content_type => ["application/pdf","application/vnd.ms-excel",     
-             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-             "application/msword", 
-             "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-             "text/plain"]
-  has_mongoid_attached_file :form990_2
-  validates_attachment_content_type :form990_2, :content_type => ["application/pdf","application/vnd.ms-excel",     
-             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-             "application/msword", 
-             "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-             "text/plain"]
-  has_mongoid_attached_file :form990_3
-  validates_attachment_content_type :form990_3, :content_type => ["application/pdf","application/vnd.ms-excel",     
-             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-             "application/msword", 
-             "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-             "text/plain"]
-  has_mongoid_attached_file :board_chair_board_members
 
-  #Fiscal Agent Questions
-  field :fiscal_agent,            type: Boolean
-  field :fiscal_agent_name,       type: String
-  field :fiscal_agent_ein,        type: String
-
-
-
-  # Validate Submitted Status
-  before_save :check_submitted
-
-
-  def self.close_incomplete_apps
-    # May need refactoring...
-    Cycle.where(:status => "Closed").each do |thisCycle|
-      all_created_requests = Request.where(:cycle_id => thisCycle.id.to_s).where(:status => "Created")
-      all_created_requests.each do |thisCreated|
-        thisCreated.update(status:"Incomplete")
-      end
-    end
-  end
-
-  def self.review_complete_apps
-    # May need refactoring...
-    Cycle.where(:status => "Closed").each do |thisCycle|
-      all_created_requests = Request.where(:cycle_id => thisCycle.id.to_s).where(:status => "Submitted")
-      all_created_requests.each do |thisCreated|
-        thisCreated.update(status:"Under Review")
-      end
-    end
-  end
-
-  protected
-  def check_submitted
-    if self.app_complete? && self.status == "Submitted"
-      self.status = "Submitted"
-      self.submitted_date = DateTime.now.in_time_zone
-    end
-  end
-
+  field :project_string_1,         type: String
+  field :project_string_2,         type: String
+  field :project_string_3,         type: String
+  field :project_string_4,         type: String
+  field :project_string_5,         type: String
+  field :project_string_6,         type: String
+  field :project_string_7,         type: String
+  field :project_string_8,         type: String
+  field :project_string_9,         type: String
+  field :project_string_10,        type: String
+  field :project_boolean_1,        type: Boolean
+  field :project_boolean_2,        type: Boolean
+  field :project_boolean_3,        type: Boolean
+  field :project_boolean_4,        type: Boolean
+  field :project_boolean_5,        type: Boolean
+  field :project_boolean_6,        type: Boolean
+  field :project_boolean_7,        type: Boolean
+  field :project_boolean_8,        type: Boolean
+  field :project_boolean_9,        type: Boolean
+  field :project_boolean_10,       type: Boolean
+  field :project_date_1,           type: Date
+  field :project_date_2,           type: Date
+  field :project_date_3,           type: Date
+  field :project_date_4,           type: Date
+  field :project_date_5,           type: Date
+  field :project_date_6,           type: Date
+  field :project_date_7,           type: Date
+  field :project_date_8,           type: Date
+  field :project_date_9,           type: Date
+  field :project_date_10,          type: Date
+  field :project_datetime_1,       type: DateTime
+  field :project_datetime_2,       type: DateTime
+  field :project_datetime_3,       type: DateTime
+  field :project_datetime_4,       type: DateTime
+  field :project_datetime_5,       type: DateTime
+  field :project_datetime_6,       type: DateTime
+  field :project_datetime_7,       type: DateTime
+  field :project_datetime_8,       type: DateTime
+  field :project_datetime_9,       type: DateTime
+  field :project_datetime_10,      type: DateTime
+  field :project_time_1,           type: Time
+  field :project_time_2,           type: Time
+  field :project_time_3,           type: Time
+  field :project_time_4,           type: Time
+  field :project_time_5,           type: Time
+  field :project_time_6,           type: Time
+  field :project_time_7,           type: Time
+  field :project_time_8,           type: Time
+  field :project_time_9,           type: Time
+  field :project_time_10,          type: Time
+  field :project_integer_1,        type: Integer
+  field :project_integer_2,        type: Integer
+  field :project_integer_3,        type: Integer
+  field :project_integer_4,        type: Integer
+  field :project_integer_5,        type: Integer
+  field :project_integer_6,        type: Integer
+  field :project_integer_7,        type: Integer
+  field :project_integer_8,        type: Integer
+  field :project_integer_9,        type: Integer
+  field :project_integer_10,       type: Integer
+  field :project_float_1,          type: Float
+  field :project_float_2,          type: Float
+  field :project_float_3,          type: Float
+  field :project_float_4,          type: Float
+  field :project_float_5,          type: Float
+  field :project_float_6,          type: Float
+  field :project_float_7,          type: Float
+  field :project_float_8,          type: Float
+  field :project_float_9,          type: Float
+  field :project_float_10,         type: Float
 
 end

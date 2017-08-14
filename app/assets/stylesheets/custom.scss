@@ -1,0 +1,39 @@
+// Custom HR
+hr.star-light,
+hr.star-primary {
+    margin: 25px auto 30px;
+    padding: 0;
+    max-width: 250px;
+    border: 0;
+    border-top: solid 5px;
+    text-align: center;
+}
+
+hr.star-light:after,
+hr.star-primary:after {
+    content: "\f006";
+    display: inline-block;
+    position: relative;
+    top: -.8em;
+    padding: 0 .25em;
+    font-family: FontAwesome;
+    font-size: 2em;
+}
+
+hr.star-light {
+    border-color: #2DC3E8;
+}
+
+hr.star-light:after {
+    color: #f5f7fa;
+    background-color: #2DC3E8;
+}
+
+hr.star-primary {
+    border-color: #2DC3E8;
+}
+
+hr.star-primary:after {
+    color: #2DC3E8;
+    background-color: #f5f7fa;
+}

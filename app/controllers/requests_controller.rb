@@ -1,120 +1,52 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :edit, :update, :destroy]
-  before_action :get_relations, only: [:show]
 
   # GET /requests
   # GET /requests.json
   def index
-    if !current_user.admin || !current_user.applicant
-      @thisPage = "ORGREQUESTS"
-      @organization_requests = Request.where(:organization_id => current_user.organization_id.to_s)
-      @all_projects = Project.where(:organization_id => current_user.organization_id.to_s)
-      @planned_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Planned").order(created_at: :desc)
-      @open_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open").order(open: :asc)
-      @closed_cycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Closed").order(close: :desc) 
-    end #End Program Admin/Mgr Stuff
-    if current_user.admin?
-      @thisPage = "ALLREQUESTS"
-      @organization_requests = Request.all
-    end
+    @requests = Request.where(:organization_id => current_user.organization_id)
   end
 
   # GET /requests/1
   # GET /requests/1.json
   def show
-    @thisPage = "REQUEST"
-    if @request.title != ""
-      @title = @request.title.to_s
-    else
-      @title = "Your Request"
-    end
-    
-    if @request.project_summary != ""
-      @subtitle = @request.project_summary.to_s
-    else
-      @subtitle = "Edit this request, make it awesome"
-    end
-
-    if current_user.applicant? && (@request.status == "Created" || @request.status == "Re-Opened")
-      @primaryAction = true
-      @primaryActionText = "Edit"
-      @primaryActionPath = edit_request_path(@request)
-    end
-
-
-    # FIXME: REVIEW THIS LOGIC
-    if (@request.status == "Under Review" && !current_user.applicant?)
-      @requestReviews = Review.where(:request_id => @request.id).where(:review_complete => true)
-      mgrDecision = Organization.where(:id => @request.organization_id).first.manager_decision
-      @myReview = @requestReviews.where(:user_id => current_user.id)
-
-      if @myReview.count == 0
-        @primaryAction = true
-        @primaryActionText = "Review"
-        @primaryActionPath = new_review_path(:organization_id => @current_user.organization_id, :project_id => @project.id, :cycle_id => @cycle.id, :request_id => @request.id)
-      elsif @myReview.count == 1 && !@myReview.first.review_complete
-        @primaryAction = true
-        @primaryActionText = "Review"
-        @primaryActionPath = edit_review_path(myReview.first)
-      elsif @myReview.count == 1 && @myReview.first.review_complete
-        if (current_user.program_admin? || mgrDecision)
-          @primaryAction = true
-          @acceptReject = true
-        end
-      end
-    end
-
-    if (@request.status == "Accepted" && current_user.program_admin?)
-      
-    end
-
+    @cycle_questions = Question.where(:cycle_id => @request.cycle_id)
+    @project_questions = Question.where(:project_id => @request.project_id)
   end
 
   # GET /requests/new
   def new
     @request = Request.new
 
-    @primaryAction = true
-    @primaryActionText = "Back"
-    @primaryActionPath = requests_path
-
-    @thisPage = "REQUEST"
-    @title = "New request"
-    @subtitle = "Get started on a new project!"
-
-    @yourProjects = Project.where(:organization_id => current_user.organization_id.to_s)
-    @yourOpenCycles = Cycle.where(:organization_id => current_user.organization_id.to_s).where(:status => "Open")
-
     if params[:cycle_id]
+      @cycle_questions = Question.where(:cycle_id => params[:cycle_id]);
       @cycleID = params[:cycle_id]
-      @cycle = Cycle.where(:id => @cycleID).first
-      @show_organization = show_org_test(@cycle)
-      @show_details= show_req_details(@cycle)
+    else
+      @cycle_questions = Question.where(:cycle_id => @request.cycle_id);
     end
     if params[:project_id]
+      @project_questions = Question.where(:project_id => params[:project_id]);
       @projectID = params[:project_id]
+    else
+      @project_questions = Question.where(:project_id => @request.project_id);
     end
+
   end
 
   # GET /requests/1/edit
   def edit
-    @thisPage = "REQUEST"
-    if @request.title != ""
-      @title = "Edit: " + @request.title.to_s
+    if params[:cycle_id]
+      @cycle_questions = Question.where(:cycle_id => params[:cycle_id]);
+      @cycleID = params[:cycle_id]
     else
-      @title = "Your Request"
+      @cycle_questions = Question.where(:cycle_id => @request.cycle_id);
     end
-    if @request.project_summary != ""
-      @subtitle = @request.project_summary.to_s
+    if params[:project_id]
+      @project_questions = Question.where(:project_id => params[:project_id]);
+      @projectID = params[:project_id]
     else
-      @subtitle = "Edit this request, make it awesome"
+      @project_questions = Question.where(:project_id => @request.project_id);
     end
-    @myProject = Project.where(:id => @request.project_id).first.id
-    @cycle = Cycle.where(:id => @request.cycle_id).first
-
-    @show_organization = show_org_test(@cycle)
-    @show_details= show_req_details(@cycle)
-
 
   end
 
@@ -122,25 +54,14 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @request = Request.new(request_params)
-    puts "CREATED FUNCTION ABOUT TO RUN"
-    isSubmitted = application_submitted(request_params)
-    if isSubmitted
-      @request[:status] = "Submitted"
-    end
 
     respond_to do |format|
       if @request.save
-        format.html { redirect_to @request }
+        format.html { redirect_to @request, notice: 'Request was successfully created.' }
         format.json { render :show, status: :created, location: @request }
-        if isSubmitted
-          flash[:success] = "Application complete!"
-        else
-          flash[:warning] = "Application saved, but not complete."
-        end
       else
         format.html { render :new }
         format.json { render json: @request.errors, status: :unprocessable_entity }
-        flash[:danger] = "Whoops! There was an error."
       end
     end
   end
@@ -148,11 +69,6 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1
   # PATCH/PUT /requests/1.json
   def update
-    isSubmitted = application_submitted(request_params)
-    if isSubmitted
-      @request[:status] = "Submitted"
-    end
-
     respond_to do |format|
       if @request.update(request_params)
         format.html { redirect_to @request, notice: 'Request was successfully updated.' }
@@ -169,11 +85,7 @@ class RequestsController < ApplicationController
   def destroy
     @request.destroy
     respond_to do |format|
-      if current_user.applicant?
-        format.html { redirect_to applicant_requests_path, notice: 'Request was successfully destroyed.' }
-      else
-        format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
-      end
+      format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -186,48 +98,22 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      #To whoever fixes this, I know it's not ideal, but I'm hacking. Same thing is in reviews.
-      params.require(:request).permit!
-    end
-    
-    def show_org_test cycle
-      cycle = Cycle.where(:id => cycle).first
-      if cycle.organization_name? || cycle.ein_taxID? || cycle.org_address_1? || cycle.org_address_2? || cycle.org_city? || cycle.org_state? || cycle.org_zip? || cycle.org_mission?
-        return true
-      else
-        return false
-      end
-    end
-    def show_req_details cycle
-     if cycle.target_demo? || cycle.amount_requested? || cycle.instructions? || cycle.detailed_description? || cycle.project_start? || cycle.project_end? || cycle.other_funding? || cycle.instructions_entry?
-        return true
-      else
-        return false
-      end
-    end
+      params.require(:request).permit(:name, :cycle, :project_id, :organization_id,
+        :project_string_1, :project_string_2, :project_string_3, :project_string_4, :project_string_5, :project_string_6, :project_string_7, :project_string_8, :project_string_9, :project_string_10,
+        :project_boolean_1, :project_boolean_2, :project_boolean_3, :project_boolean_4, :project_boolean_5, :project_boolean_6, :project_boolean_7, :project_boolean_8, :project_boolean_9, :project_boolean_10,
+        :project_date_1, :project_date_2, :project_date_3, :project_date_4, :project_date_5, :project_date_6, :project_date_7, :project_date_8, :project_date_9, :project_date_10,
+        :project_datetime_1, :project_datetime_2, :project_datetime_3, :project_datetime_4, :project_datetime_5, :project_datetime_6, :project_datetime_7, :project_datetime_8, :project_datetime_9, :project_datetime_10,
+        :project_time_1, :project_time_2, :project_time_3, :project_time_4, :project_time_5, :project_time_6, :project_time_7, :project_time_8, :project_time_9, :project_time_10,
+        :project_integer_1, :project_integer_2, :project_integer_3, :project_integer_4, :project_integer_5, :project_integer_6, :project_integer_7, :project_integer_8, :project_integer_9, :project_integer_10,
+        :project_float_1, :project_float_2, :project_float_3, :project_float_4, :project_float_5, :project_float_6, :project_float_7, :project_float_8, :project_float_9, :project_float_10,
 
-    def get_relations
-      @organization = Organization.where(:id => @request.organization_id).first
-      @applicant = User.where(:id => @request.user_id).first
-      @project = Project.where(:id => @request.project_id).first
-      @cycle = Cycle.where(:id => @request.cycle_id).first
-    end
-
-    def application_submitted request
-      requestComplete = request[:app_complete]
-      if requestComplete == "1"
-        return true
-      else
-        return false
-      end
-    end
-
-    def get_completion_rate cycle
-      requests_all = @organization_requests.where(:cycle_id => cycle.id)
-      requests_incomplete = requests_all.where(:status => "Incomplete").count
-      requests_all_count = requests_all.count
-      completion_rate = ((requests_all_count - requests_incomplete).to_f / requests_all_count.to_f).round(2)
-      completion_rate = (completion_rate * 100).to_i
-      return completion_rate
+        :cycle_string_1, :cycle_string_2, :cycle_string_3, :cycle_string_4, :cycle_string_5, :cycle_string_6, :cycle_string_7, :cycle_string_8, :cycle_string_9, :cycle_string_10,
+        :cycle_boolean_1, :cycle_boolean_2, :cycle_boolean_3, :cycle_boolean_4, :cycle_boolean_5, :cycle_boolean_6, :cycle_boolean_7, :cycle_boolean_8, :cycle_boolean_9, :cycle_boolean_10,
+        :cycle_date_1, :cycle_date_2, :cycle_date_3, :cycle_date_4, :cycle_date_5, :cycle_date_6, :cycle_date_7, :cycle_date_8, :cycle_date_9, :cycle_date_10,
+        :cycle_datetime_1, :cycle_datetime_2, :cycle_datetime_3, :cycle_datetime_4, :cycle_datetime_5, :cycle_datetime_6, :cycle_datetime_7, :cycle_datetime_8, :cycle_datetime_9, :cycle_datetime_10,
+        :cycle_time_1, :cycle_time_2, :cycle_time_3, :cycle_time_4, :cycle_time_5, :cycle_time_6, :cycle_time_7, :cycle_time_8, :cycle_time_9, :cycle_time_10,
+        :cycle_integer_1, :cycle_integer_2, :cycle_integer_3, :cycle_integer_4, :cycle_integer_5, :cycle_integer_6, :cycle_integer_7, :cycle_integer_8, :cycle_integer_9, :cycle_integer_10,
+        :cycle_float_1, :cycle_float_2, :cycle_float_3, :cycle_float_4, :cycle_float_5, :cycle_float_6, :cycle_float_7, :cycle_float_8, :cycle_float_9, :cycle_float_10
+      )
     end
 end

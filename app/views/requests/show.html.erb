@@ -1,11 +1,56 @@
-<%= render 'status_change_header' %>
+<p id="notice"><%= notice %></p>
 
-<% if !current_user.applicant? %>
-  <div class="row" id="non_applicant_show_request">
-    <%= render 'requests/show_request/non_applicant_view' %>
+<h4>Base</h4>
+<p>
+  <strong>Name:</strong>
+  <%= @request.name %>
+</p>
+
+<p>
+  <strong>Cycle:</strong>
+  <%= @request.cycle.name %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @request.project.name %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @request.organization.name %>
+</p>
+
+
+<hr class="star-primary">
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <h4>Project Questions</h4>
+    <% @project_questions.each do |this_project_question| %>
+      <p>
+        <strong><%= this_project_question.label %>:</strong>
+        <% display = this_project_question.question_matcher %>
+        <%= @request.send(display) %>
+      </p>
+    <% end %>
   </div>
-<% else %>
-  <div class="row" id="applicant_show_request">
-    <%= render 'requests/show_request/applicant_view' %>
+
+  <div class="col-xs-12 col-sm-6">
+    <h4>Cycle Questions</h4>
+    <% @cycle_questions.each do |this_cycle_question| %>
+      <p>
+        <strong><%= this_cycle_question.label %>:</strong>
+        <% display = this_cycle_question.question_matcher %>
+        <%= @request.send(display) %>
+      </p>
+    <% end %>
   </div>
-<% end %>
+</div>
+
+
+
+
+
+
+<%= link_to 'Edit', edit_request_path(@request,:cycle_id => @request.cycle.id, :project_id => @request.project.id) %> |
+<%= link_to 'Back', requests_path %>

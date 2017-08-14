@@ -1,0 +1,85 @@
+<div class="panel b">
+   <div class="panel-body bb">
+      <div class="clearfix">
+         <div class="pull-left">
+
+            <button type="button" class="btn btn-default btn-oval">
+               <em class="fa fa-play fa-fw text-muted"></em>
+               <span>Start</span>
+            </button>
+            <button type="button" class="btn btn-default btn-oval">
+               <em class="fa fa-pause fa-fw text-muted"></em>
+               <span>Pause</span>
+            </button>
+         </div>
+         <div class="pull-right">
+            <%= link_to 'New Cycle', new_cycle_path(:project_id => @project.id), :class => "btn btn-success btn-oval" %>
+         </div>
+      </div>
+   </div>
+   <div class="panel-body bb">
+      <div class="table-grid table-grid-align-middle mv">
+         <div class="col">
+              <div class="progress progress-xs m0">
+                  <div class="progress-bar progress-bar-info" style="width:48%"></div>
+              </div>
+         </div>
+         <div class="col wd-xxs text-right">
+            <div class="text-bold text-muted">48%</div>
+         </div>
+      </div>
+   </div>
+   <table class="table bb">
+      <tbody>
+         <tr>
+            <td>
+               <strong>Next Open</strong>
+            </td>
+            <td>02/01/2016</td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Total Applications</strong>
+            </td>
+            <td><%= @all_requests.count %></td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Total Applicants</strong>
+            </td>
+            <td><%= @all_applicants.count %></td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Amount Requested</strong>
+            </td>
+            <td><%= number_to_currency(@total_requested) %></td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Amount Awarded</strong>
+            </td>
+            <td><%= number_to_currency(@amount_given) %></td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Number Awarded</strong>
+            </td>
+            <td><%= @all_awarded.count %></td>
+         </tr>
+         <tr>
+            <td>
+               <strong>Questions</strong>
+            </td>
+            <td>
+               <% @questions.each do |this_question| %>
+                  <p><%= this_question.label %> - <%= this_question.type %></p>
+               <% end %>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <p class="text-right">
+      <%= link_to 'View Requests', requests_path(:project_id => @project.id), :class => "btn btn-link" %>
+   </p>
+</div>

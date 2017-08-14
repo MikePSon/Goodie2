@@ -44,6 +44,8 @@
 //= require datatables-colvis/js/dataTables.colVis
 //= require datatables/media/js/dataTables.bootstrap
 
+//= require cocoon
+
 
 (function(window, document, $, undefined){
 

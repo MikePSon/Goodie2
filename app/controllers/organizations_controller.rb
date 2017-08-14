@@ -22,44 +22,30 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
+    @title = @organization.name
     
-    @profile_complete = get_completion_rate(@organization)
-    if @profile_complete < 59
-      @complete_color = "danger"
-    elsif @profile_complete <79
-      @complete_color = "warning"
-    elsif @profile_complete < 95
-      @complete_color = "info"
-    else
-      @complete_color = "success"
-    end
+    @primaryAction = true
+    @primaryActionText = "Edit organization!"
+    @primaryActionPath = edit_organization_path(@organization)
 
+    @organization_admin = User.where(:organization_id => @organization.id).where(:program_admin => true).first
+    @all_requests = Request.where(:organization_id => @organization.id)
+    @all_cycles = Cycle.where(:organization_id => @organization.id)
+      @open_cycles = @all_cycles.where(:status => "Open")
+      @closed_cycles = @all_cycles.where(:status => "Closed")
+    
+    @all_projects = Project.where(:organization_id => @organization.id)
 
-    if !current_user.admin?
-      @programAdmin = User.where(:organization_id => @organization.id).where(:program_admin => true).first
-    else
-      @programAdmin = User.where(:organization_id => @organization.id).where(:id => @organization.created_by).first
-    end
+    @all_applicants = User.where(:organization_id => @organization.id).where(:applicant => true)
 
-    @organizationApplicants = User.where(:organization_id => @organization.id).where(:applicant => true)
-    @organizationRequests = Request.where(:organization_id => @organization.id.to_s)
-    @organizationProjects = Project.where(:organization_id => @organization.id.to_s)
-    @awarded_requests = @organizationRequests.where(:accepted => true)
-    @organizationTeam = User.where(:organization_id => @organization.id).where(:applicant => false)
-    @openCycles = Cycle.where(:organization_id => @organization.id).where(:status => "Open")
-
-    @total_amount_awarded = 0.0
-    @awarded_requests.each do |this_request|
-      @total_amount_awarded += this_request.amount_awarded
-    end
-
-    @timelineItems = get_timeline(@organization)
+    @timeline_items = get_timeline_items(@all_cycles, @all_projects)
     
   end
 
   # GET /organizations/new
   def new
     @organization = Organization.new
+    @thisPage ="NEWORGANIZATION"
   end
 
   # GET /organizations/1/edit
@@ -132,41 +118,6 @@ class OrganizationsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-
-  def get_timeline this_organization
-
-    opened_cycles = Cycle.where(:organization_id => current_user.organization_id).where(open: (Time.now..(Time.now + 24.hours)))
-    closed_cycles = Cycle.where(:organization_id => current_user.organization_id).where(:status => "Closed")
-    closing_cycles = Cycle.where(:organization_id => current_user.organization_id).where(close: (Time.now - 24.hours)..Time.now)
-    new_projects = Project.where(:organization_id => current_user.organization_id).order(created_at: :desc).limit(5)
-
-    @timeline = []
-
-    if opened_cycles.count > 0
-      opened_cycles.each do |this_cycle|
-        @timeline << this_cycle
-      end
-    end
-    if closed_cycles.count > 0
-      closed_cycles.each do |this_cycle|
-        @timeline << this_cycle
-      end
-    end
-    if closing_cycles.count > 0
-      closing_cycles.each do |this_cycle|
-        @timeline << this_cycle
-      end
-    end
-    if new_projects.count > 0
-      new_projects.each do |thisProject|
-        @timeline << thisProject
-      end
-    end
-    @timeline.sort_by{|e| e[:created_at]}
-
-    return @timeline
-  end 
   
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -197,43 +148,32 @@ class OrganizationsController < ApplicationController
       thisUser.update(organization_id: @organization.id)
     end
 
-    def get_completion_rate(org)
-      net_amt = 0.0
-
-      if !org.name.blank?
-        net_amt += 1
-      end
-      if !org.motto.blank?
-        net_amt += 1
-      end
-      if !org.url.blank?
-        net_amt += 1
-      end
-      if !org.address_1.blank?
-        net_amt += 1
-      end
-      if !org.city.blank?
-        net_amt += 1
-      end
-      if !org.state.blank?
-        net_amt += 1
-      end
-      if !org.zip.blank?
-        net_amt += 1
-      end
-      if !org.annual_giving_goal.blank?
-        net_amt += 1
-      end
-      rate = (net_amt / 8.0)*100
-      return rate
-    end
-
     def set_applicant_url(org)
       if Rails.env.production?
         return "http://applicant.goodie2.com/new_applicant?organization_id=" + org.id.to_s
       else
         return "http://localhost:3000/new_applicant?organization_id=" + org.id.to_s
       end
+    end
+
+    def get_timeline_items(cycles, projects)
+      @test = "HELLO"
+      timelineitems = []
+
       
+      # Cycle created
+      cycles.each do |this_cycle|
+        timelineitems << this_cycle
+      end
+      # Cycle open
+      # Cycle closed
+      # Project created
+      projects.each do |this_project|
+        timelineitems << this_project
+      end
+
+      timelineitems.sort_by{|e| e[:created_at]}
+
+      return timelineitems
     end
 end
